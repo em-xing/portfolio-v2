@@ -54,31 +54,29 @@
     }
 
     /* Social icons stacked manually around center */
-    .social-link {
-      position: fixed;
-      right: 8px;
-      max-width: 600%;    /* icon size */
-      height: auto;
-      z-index: 10;
-    }
-    /* top icon: one icon-height above center */
-    .social-link.linkedin {
-      top: calc(50% - 80px);
-    }
-    /* middle icon: exactly center */
-    .social-link.mail {
-      top: 50%;
-      transform: translateY(-50%);
-    }
-    /* bottom icon: one icon-height below center */
-    .social-link.star {
-      top: calc(50% + 80px);
-    }
-    .social-link img {
-      display: block;
-      max-width: 600%;
-      height: auto;
-    }
+    .social-sidebar {
+    position: fixed;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* no gap: we’ll control spacing manually */
+    z-index: 10;
+  }
+
+  /* Scale icons to 80% of their native size */
+  .social-sidebar img {
+    display: block;
+    transform: scale(0.8);
+    transform-origin: center center;
+  }
+
+  /* Tweak this margin to move top/bottom icons closer or farther */
+  .social-sidebar a + a {
+    margin-top: 12px; /* one icon worth apart? adjust as needed */
+  }
   </style>
 </head>
 
@@ -92,17 +90,19 @@
   </aside>
 
   <!-- LinkedIn (top) -->
-  <a class="social-link linkedin" href="https://www.linkedin.com/in/emily-xing-5663ab266/" target="_blank">
-    <img src="images/icon_linkedin.PNG" alt="LinkedIn icon"/>
-  </a>
-  <!-- Email (middle) -->
-  <a class="social-link mail" href="mailto:emletxing@gmail.com">
-    <img src="images/icon_mail.PNG" alt="Email icon"/>
-  </a>
-  <!-- Star (bottom) -->
-  <a class="social-link star" href="#">
-    <img src="images/icon_shooting_star.PNG" alt="Shooting star icon"/>
-  </a>
+  <!-- replace your three <a> tags with this -->
+  <aside class="social-sidebar">
+    <a href="https://www.linkedin.com/in/emily-xing-5663ab266/" target="_blank">
+      <img src="images/icon_linkedin.PNG" alt="LinkedIn icon">
+    </a>
+    <a href="mailto:emletxing@gmail.com">
+      <img src="images/icon_mail.PNG" alt="Email icon">
+    </a>
+    <a href="#">
+      <img src="images/icon_shooting_star.PNG" alt="Star icon">
+    </a>
+  </aside>
+
 
   <!-- Your other content… -->
 
