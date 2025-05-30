@@ -74,6 +74,38 @@
   .social-sidebar a + a {
     margin-top: 1px; /* one icon worth apart? adjust as needed */
   }
+
+
+
+  /* Container to stack or grid your flower-image buttons */
+.flower-buttons {
+  display: flex;
+  flex-wrap: wrap;       /* lets them wrap if the screen is narrow */
+  justify-content: center;
+  gap: 1rem;             /* space between each button */
+  padding: 2rem 1rem;
+}
+
+/* Style each image-link as a “button” */
+.flower-btn {
+  display: block;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none; /* remove underline if any */
+}
+
+/* Ensure each image sits at its natural (full-screen) dimensions */
+.flower-btn img {
+  display: block;
+  width: 100vw;          /* full viewport width */
+  height: auto;
+  max-width: 600px;      /* cap to whatever max makes sense */
+}
+
+/* If you want them truly full-screen, replace width:100vw with width:100% and wrap .flower-buttons around body */
+
   </style>
 </head>
 
@@ -99,6 +131,20 @@
       <img src="images/icon_shooting_star.PNG" alt="Star icon">
     </a>
   </aside>
+
+  <!-- Flower Buttons Container -->
+<section class="flower-buttons">
+  <a href="flower_research.html" class="flower-btn">
+    <img src="images/flower_research.PNG" alt="flower research">
+  </a>
+  <a href="flower_writing.html" class="flower-btn">
+    <img src="images/flower_writing.PNG" alt="flower writing">
+  </a>
+  <a href="flower_scrapbook.html" class="flower-btn">
+    <img src="images/flower_scrapbook.PNG" alt="flower scrapbook">
+  </a>
+</section>
+
 
 
   <!-- Your other content… -->
