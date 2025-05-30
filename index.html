@@ -47,20 +47,18 @@
     }
     .social-sidebar {
   position: fixed;
-  top: 50%;                      /* center vertically */
-  right: 10px;                   /* keep it near the right edge */
-  transform: translateY(-50%);   /* offset the 50% top to truly center */
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  justify-content: center;       /* stack them tightly in the middle */
+  gap: 64px;        /* one icon height between each */
   align-items: center;
-  gap: 0.2rem;                     /* space between icons */
-  width: auto;                   /* shrink wrap to icon width */
-  z-index: 10;
+  /* remove bottom, width:auto stays */
 }
 
 .social-sidebar img {
-  width: 804px;                   /* bump this up or down as desired */
+  width: 64px;      /* whatever size you settled on */
   height: auto;
   display: block;
 }
