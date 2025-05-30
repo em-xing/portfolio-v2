@@ -78,31 +78,43 @@
 
 
   /* Container to stack or grid your flower-image buttons */
-.flower-buttons {
+/* Styles to place your flowers below full screen, staggered, between sidebar & icons */
+.flowers-row {
+  position: absolute;
+  top: 100vh;                   /* just below the bottom of the viewport */
+  left: 220px;                  /* account for your 200px sidebar + 20px gutter */
+  right: 220px;                 /* account for your social icons width + gutter */
   display: flex;
-  flex-wrap: wrap;       /* lets them wrap if the screen is narrow */
-  justify-content: center;
-  gap: 1rem;             /* space between each button */
-  padding: 2rem 1rem;
+  justify-content: space-between;
+  align-items: flex-start;      /* so we can nudge each one individually */
+  padding: 1rem 0;
+  pointer-events: auto;
+  z-index: 5;
 }
 
-/* Style each image-link as a “button” */
-.flower-btn {
+.flowers-row a {
   display: block;
-  border: none;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-  text-decoration: none; /* remove underline if any */
 }
 
-/* Ensure each image sits at its natural (full-screen) dimensions */
-.flower-btn img {
+/* Ensure the images render at their natural (cropped) size */
+.flowers-row img {
   display: block;
-  width: 100vw;          /* full viewport width */
+  width: auto;
   height: auto;
-  max-width: 600px;      /* cap to whatever max makes sense */
+  max-height: 200px;            /* adjust so they don’t overwhelm */
 }
+
+/* Stagger them using nth-child offsets */
+.flowers-row a:nth-child(1) img {
+  margin-top: 20px;
+}
+.flowers-row a:nth-child(2) img {
+  margin-top: 0;
+}
+.flowers-row a:nth-child(3) img {
+  margin-top: 40px;
+}
+
 
 /* If you want them truly full-screen, replace width:100vw with width:100% and wrap .flower-buttons around body */
 
@@ -133,17 +145,17 @@
   </aside>
 
   <!-- Flower Buttons Container -->
-<section class="flower-buttons">
-  <a href="flower_research.html" class="flower-btn">
-    <img src="images/flower_research.PNG" alt="flower research">
-  </a>
-  <a href="flower_writing.html" class="flower-btn">
-    <img src="images/flower_writing.PNG" alt="flower writing">
-  </a>
-  <a href="flower_scrapbook.html" class="flower-btn">
-    <img src="images/flower_scrapbook.PNG" alt="flower scrapbook">
-  </a>
-</section>
+<section class="flowers-row">
+    <a href="flower_research.html">
+      <img src="images/flower_research.PNG" alt="Flower Research">
+    </a>
+    <a href="flower_writing.html">
+      <img src="images/flower_writing.PNG" alt="Flower Writing">
+    </a>
+    <a href="flower_scrapbook.html">
+      <img src="images/flower_scrapbook.PNG" alt="Flower Scrapbook">
+    </a>
+  </section>
 
 
 
