@@ -46,24 +46,26 @@
       height: auto;
     }
     .social-sidebar {
-      position: fixed;
-      top: 600px;     
-      bottom: 600px;  
-      right: 80px;      
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between; 
-      align-items: center;            
-      width: 1000px;                 
-      z-index: 10;
-    }
-    
-    .social-sidebar img {
-    display: block;
-    width: 608px;         /* this sets the width */
-    height: auto;        /* keeps the aspect ratio */
-    }
+  position: fixed;
+  top: 50%;                      /* center vertically */
+  right: 10px;                   /* keep it near the right edge */
+  transform: translateY(-50%);   /* offset the 50% top to truly center */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;       /* stack them tightly in the middle */
+  align-items: center;
+  gap: 1rem;                     /* space between icons */
+  width: auto;                   /* shrink wrap to icon width */
+  z-index: 10;
+}
 
+.social-sidebar img {
+  width: 304px;                   /* bump this up or down as desired */
+  height: auto;
+  display: block;
+}
+
+    
     
 
 
