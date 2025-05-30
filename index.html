@@ -126,6 +126,25 @@
   margin-top: 40px;
 }
 
+    /* Footer styling */
+.site-footer {
+  position: fixed;       /* stick to the bottom of the viewport */
+  bottom: 0;
+  left: 0;
+  width: 100%;           /* span the full width */
+  background: rgba(0,0,0,0.8); /* semi-transparent background */
+  text-align: center;    /* center the image */
+  padding: 0.5rem 0;     /* some vertical breathing room */
+  z-index: 50;           /* above content but below header */
+}
+
+.site-footer img {
+  max-height: 40px;      /* adjust so it’s not too large */
+  height: auto;
+  display: inline-block;
+}
+
+
 
 /* If you want them truly full-screen, replace width:100vw with width:100% and wrap .flower-buttons around body */
 
@@ -167,6 +186,15 @@
       <img src="images/flower_scrapbook.PNG" alt="Flower Scrapbook">
     </a>
   </section>
+
+
+  <!-- Footer with copyright image -->
+  <footer class="site-footer">
+    <img src="images/copyright.PNG" alt="Copyright ©" />
+  </footer>
+
+
+  
 <script>
     document.addEventListener('DOMContentLoaded', () => {
       const header = document.querySelector('header');
