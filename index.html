@@ -26,10 +26,29 @@
     .logo {
     display: block;          
     margin: 0 auto; 
-    width: 80%;            
-    max-width: 80%;  
-    transform: translateY(-10px); 
-  }
+    width: 60%;            
+    max-width: 60%;  
+    transform: translateY(-40px); 
+    }
+    
+    body {
+      margin-left: 220px; 
+    }
+    
+    .sidebar {
+      position: fixed;     
+      top: 150px;       
+      left: 0;
+      width: 200px;        
+      z-index: 10;          
+    }
+  
+    .sidebar img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
 
   </style>
 </head>
@@ -38,6 +57,11 @@
   <header>
     <img src="images/name.gif" alt="name logo">
   </header>
+  
+  <aside class="sidebar">
+    <img src="images/sidebar_art.png" alt="sidebar art">
+  </aside>
+
   
 
   <!-- other content… -->
