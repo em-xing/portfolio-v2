@@ -34,7 +34,7 @@
     
     .sidebar {
       position: fixed;     
-      top: 50px;       
+      top: 10px;       
       left: 8;
       width: 200px;        
       z-index: 10;          
@@ -45,6 +45,25 @@
       max-width: 600%;
       height: auto;
     }
+    .social-sidebar {
+      position: fixed;
+      top: 10px;     
+      bottom: 10px;  
+      right: 8px;      
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; 
+      align-items: center;            
+      width: 40px;                 
+      z-index: 10;
+    }
+    
+    .social-sidebar img {
+      display: block;
+      width: 24px;   
+      height: auto;
+    }
+
 
 
   </style>
@@ -55,10 +74,22 @@
   <img src="images/name.gif" alt="name logo" class="logo">
   </header>
 
-  
   <aside class="sidebar">
     <img src="images/sidebar_art.PNG" alt="sidebar art">
   </aside>
+  
+  <aside class="social-sidebar">
+  <a href="https://linkedin.com/in/yourprofile" target="_blank">
+    <img src="images/icon_linkedin.PNG" alt="icon LinkedIn">
+  </a>
+  <a href="mailto:emletxing@gmail.com">
+    <img src="images/icon_mail.PNG" alt="icon email">
+  </a>
+  <a href="placeholder">
+    <img src="images/icon_shooting_star.PNG" alt="icon star">
+  </a>
+</aside>
+
 
   
 
