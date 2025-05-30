@@ -1,121 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My Portfolio</title>
-  <!-- importing font PT sans -->
+
+  <!-- PT Sans -->
   <link
     href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap"
     rel="stylesheet"
-  >
+  />
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/favicon.PNG" type="image/png" />
+
   <style>
     body {
       background-color: #241d18;
       margin: 0;
       font-family: 'PT Sans', sans-serif;
-    }
-
-    <link rel="icon" href="images/favicon.PNG" type="image/png">
-
-    /* default cursor */
-    .body {
+      /* default cursor */
       cursor: url("images/cursor_normal.PNG") 0 0, auto;
     }
-
     a:hover,
     button:hover {
       cursor: url("images/cursor_hover.PNG") 0 0, pointer;
     }
 
-    /* or more specifically for your social icons */
-    .social-sidebar a:hover img {
-      cursor: url("images/cursor_hover.png") 0 0, pointer;
-    }
-    
     header {
       text-align: center;
       padding: 2rem 0;
     }
-    header img {
-      max-width: 100%;
-      height: auto;
-    }
-    .logo {
-    display: block;          
-    margin: 0 auto; 
-    width: 65%;            
-    max-width: 65%;  
-    transform: translateY(-10px); 
+    header img.logo {
+      display: block;
+      margin: 0 auto;
+      width: 65%;
+      max-width: 65%;
+      transform: translateY(-10px);
     }
 
-    
     .sidebar {
-      position: fixed;     
-      top: 10px;       
+      position: fixed;
+      top: 10px;
       left: 8px;
-      width: 200px;        
-      z-index: 10;          
+      width: 200px;
+      z-index: 10;
     }
-  
     .sidebar img {
       display: block;
-      max-width: 600%;
+      width: 100%;
       height: auto;
     }
-    .social-sidebar {
-  position: fixed;
-  top: 50%;                      /* center vertically */
-  right: 8px;                   /* keep it near the right edge */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;       /* stack them tightly in the middle */
-  align-items: center;
-  gap: 8px;                     /* space between icons */
-  width: 200px;                   /* shrink wrap to icon width */
-  z-index: 10;
-}
 
-.social-sidebar img {
-  display: block;
-  max-width: 600%;
-  height: auto;
-}
-    
-
-
-
-
-
-
+    /* Social icons stacked manually around center */
+    .social-link {
+      position: fixed;
+      right: 8px;
+      width: 64px;    /* icon size */
+      height: auto;
+      z-index: 10;
+    }
+    /* top icon: one icon-height above center */
+    .social-link.linkedin {
+      top: calc(50% - 80px);
+    }
+    /* middle icon: exactly center */
+    .social-link.mail {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    /* bottom icon: one icon-height below center */
+    .social-link.star {
+      top: calc(50% + 80px);
+    }
+    .social-link img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
   </style>
 </head>
+
 <body>
-  <!-- header: name GIF -->
   <header>
-  <img src="images/name.gif" alt="name logo" class="logo">
+    <img src="images/name.gif" alt="name logo" class="logo"/>
   </header>
 
   <aside class="sidebar">
-    <img src="images/sidebar_art.PNG" alt="sidebar art">
+    <img src="images/sidebar_art.PNG" alt="sidebar art"/>
   </aside>
-  
-  <aside class="social-sidebar">
-  <a href="https://www.linkedin.com/in/emily-xing-5663ab266/" target="_blank">
-    <img src="images/icon_linkedin.PNG" alt="icon LinkedIn">
-  </a>
-  <a href="mailto:emletxing@gmail.com">
-    <img src="images/icon_mail.PNG" alt="icon email">
-  </a>
-  <a href="placeholder">
-    <img src="images/icon_shooting_star.PNG" alt="icon star">
-  </a>
-</aside>
 
+  <!-- LinkedIn (top) -->
+  <a class="social-link linkedin" href="https://www.linkedin.com/in/emily-xing-5663ab266/" target="_blank">
+    <img src="images/icon_linkedin.PNG" alt="LinkedIn icon"/>
+  </a>
+  <!-- Email (middle) -->
+  <a class="social-link mail" href="mailto:emletxing@gmail.com">
+    <img src="images/icon_mail.PNG" alt="Email icon"/>
+  </a>
+  <!-- Star (bottom) -->
+  <a class="social-link star" href="#">
+    <img src="images/icon_shooting_star.PNG" alt="Shooting star icon"/>
+  </a>
 
-
-  
+  <!-- Your other content… -->
 
 </body>
 </html>
-
