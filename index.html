@@ -49,12 +49,12 @@
   position: fixed;
   top: 50%;                      /* center vertically */
   right: 10px;                   /* keep it near the right edge */
-  transform: translateY(-50%);   /* offset the 50% top to truly center */
+  transform: translateY(-10%);   /* offset the 50% top to truly center */
   display: flex;
   flex-direction: column;
   justify-content: center;       /* stack them tightly in the middle */
   align-items: center;
-  gap: 200px;                     /* space between icons */
+  gap: 1px;                     /* space between icons */
   width: auto;                   /* shrink wrap to icon width */
   z-index: 10;
 }
@@ -66,25 +66,7 @@
 }
     
 
-  <link rel="icon" href="images/favicon.PNG" type="image/png">
 
-  <style>
-    /* default cursor */
-    body {
-      cursor: url("images/cursor_normal.png") 0 0, auto;
-    }
-
-    /* hover cursor on any link or interactive element */
-    a:hover,
-    button:hover {
-      cursor: url("images/cursor_hover.png") 0 0, pointer;
-    }
-
-    /* or more specifically for your social icons */
-    .social-sidebar a:hover img {
-      cursor: url("images/cursor_hover.png") 0 0, pointer;
-    }
-  </style>
 
 
 
@@ -116,7 +98,26 @@
 
   
 
-  <!-- other content… -->
+    <link rel="icon" href="images/favicon.PNG" type="image/png">
+
+  <style>
+    /* default cursor */
+    body {
+      cursor: url("images/cursor_normal.png") 0 0, auto;
+    }
+
+    /* hover cursor on any link or interactive element */
+    a:hover,
+    button:hover {
+      cursor: url("images/cursor_hover.png") 0 0, pointer;
+    }
+
+    /* or more specifically for your social icons */
+    .social-sidebar a:hover img {
+      cursor: url("images/cursor_hover.png") 0 0, pointer;
+    }
+  </style>
+  
 
 </body>
 </html>
