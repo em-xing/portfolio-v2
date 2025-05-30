@@ -127,22 +127,27 @@
 }
 
     /* Footer styling */
+/* in your existing <style> block: */
+
+/* FOOTER */
 .site-footer {
-  position: fixed;       /* stick to the bottom of the viewport */
-  bottom: 0;
-  left: 0;
-  width: 100%;           /* span the full width */
-  background: rgba(0,0,0,0.8); /* semi-transparent background */
-  text-align: center;    /* center the image */
-  padding: 0.5rem 0;     /* some vertical breathing room */
-  z-index: 50;           /* above content but below header */
+  position: fixed;
+  bottom: 10px;                   /* float a little above the very bottom */
+  left: 50%;                      /* center horizontally */
+  transform: translateX(-50%);    /* adjust for left:50% */
+  background: rgba(0, 0, 0, 0.2); /* lighter transparency */
+  display: inline-block;          /* shrink-wrap to content */
+  padding: 0.2rem 0.5rem;         /* small padding around the image */
+  border-radius: 4px;             /* slightly rounded corners */
+  z-index: 50;
 }
 
 .site-footer img {
-  max-height: 40px;      /* adjust so it’s not too large */
+  max-height: 24px;   /* adjust as needed */
   height: auto;
-  display: inline-block;
+  display: block;
 }
+
 
 
 
