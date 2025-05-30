@@ -48,21 +48,21 @@
     .social-sidebar {
   position: fixed;
   top: 50%;                      /* center vertically */
-  right: 10px;                   /* keep it near the right edge */
-  transform: translateY(-40%);   /* offset the 50% top to truly center */
+  right: 8px;                   /* keep it near the right edge */
   display: flex;
   flex-direction: column;
   justify-content: center;       /* stack them tightly in the middle */
   align-items: center;
   gap: 8px;                     /* space between icons */
-  width: auto;                   /* shrink wrap to icon width */
+  width: 200px;                   /* shrink wrap to icon width */
+  height: 800px;
   z-index: 10;
 }
 
 .social-sidebar img {
-  width: 200px;                   /* bump this up or down as desired */
-  height: auto;
   display: block;
+  max-width: 600%;
+  height: auto;
 }
     
 
@@ -103,13 +103,13 @@
   <style>
     /* default cursor */
     body {
-      cursor: url("images/cursor_normal.png") 0 0, auto;
+      cursor: url("images/cursor_normal.PNG") 0 0, auto;
     }
 
     /* hover cursor on any link or interactive element */
     a:hover,
     button:hover {
-      cursor: url("images/cursor_hover.png") 0 0, pointer;
+      cursor: url("images/cursor_hover.PNG") 0 0, pointer;
     }
 
     /* or more specifically for your social icons */
