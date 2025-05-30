@@ -28,18 +28,10 @@
       text-align: center;
       padding: 2rem 0;
       
-    
-  position: sticky;
-  top: 100px;            /* start 100px below the top */
-  transition: top 0.3s ease;
-  z-index: 100;
-}
-
-/* when “scrolled” kicks in: flush to the very top */
-header.scrolled {
-  top: 0;
-}
-
+      position: sticky;
+      top: 20px;                  /* start 20px below the top */
+      transition: top 0.3s ease;  /* animate the shift */
+      z-index: 100;               /* sit above other content */
     }
     header img.logo {
       display: block;
@@ -50,9 +42,10 @@ header.scrolled {
     }
    
     /* 2) When scrolled, move it up to flush with the top */
-   header.scrolled {
-  top: 0;
-}
+    header.scrolled {
+      top: 15px;
+    }
+
     .sidebar {
       position: fixed;     
       top: 10px;       
@@ -174,22 +167,17 @@ header.scrolled {
       <img src="images/flower_scrapbook.PNG" alt="Flower Scrapbook">
     </a>
   </section>
-<!-- in your <script> just before </body> -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('header');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
+    document.addEventListener('DOMContentLoaded', () => {
+      const header = document.querySelector('header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 15) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
     });
-  });
-</script>
-
+  </script>
 </body>
 </html>
-
-
-
