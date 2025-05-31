@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Emily Xing</title>
 
-  <!-- Load Tinos from Google Fonts -->
+  <!-- Load PT Sans from Google Fonts -->
   <link
-    href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap"
+    href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap"
     rel="stylesheet"
   />
 
@@ -16,7 +16,7 @@
 
   <style>
     /* ─────────────────────────────────────────────────────
-       RESET + BODY (use Tinos everywhere by default)
+       RESET + BODY (use PT Sans everywhere by default)
        ───────────────────────────────────────────────────── */
     body {
       background-color: #241d18;
@@ -35,13 +35,20 @@
       position: fixed;
       top: 30px;
       left: 50%;
+      transform: translateX(-50%);
       display: inline-block;
+
       /* 
-         1rem top, (2rem + 100px) right, 1rem bottom, 2rem left 
-         → this makes the header’s colored “box” extend 100px farther to the right 
+         1rem top, (2rem + 100px) right, 4rem bottom, 2rem left 
+         ↑      ↑                ↑           ↑
+         ↑      ↑                ↑           └─ left padding 2rem
+         ↑      ↑                └─ bottom padding raised to 4rem
+         ↑      └─ right padding: 2rem + 100px
+         └─ top padding: 1rem
       */
-      padding: 1rem calc(2rem + 100px) 1rem 2rem;
-      /* Replace solid color with a top→bottom opacity gradient */
+      padding: 1rem calc(2rem + 100px) 4rem 2rem;
+
+      /* Make the top of the header fully opaque, bottom fully transparent */
       background: linear-gradient(
         to bottom,
         rgba(36, 29, 24, 1) 0%,
@@ -50,12 +57,13 @@
       border-radius: 2px;
       z-index: 100;
     }
+
+    /* Center the logo within that padded box—but keep it above the gradient */
     header img.logo {
       display: block;
       margin: 0 auto;
       width: 80%;
       max-width: 80%;
-      transform: translateX(-30px);
       transform: translateY(-10px);
     }
 
@@ -65,8 +73,8 @@
     .intro-text {
       position: absolute;
       top: 55%;
-      left: 370px;    /* adjust if your left-sidebar changes */
-      right: 270px;   /* adjust if your social-sidebar changes */
+      left: 370px;    /* keep it between left‐sidebar and right‐sidebar */
+      right: 270px;
       transform: translateY(-50%);
       text-align: center;
       font-size: 1.3rem;
@@ -74,7 +82,7 @@
       z-index: 5;
     }
 
-    /* Remove any “fade-out on scroll”—we’ll keep the intro at full opacity */
+    /* No fade-out on scroll—always fully opaque */
     .intro-line {
       display: block;
       opacity: 1;
@@ -84,20 +92,17 @@
        TYPEWRITER EFFECT ON THE FIRST LINE
        ───────────────────────────────────────────────────── */
 
-    /*
-     “hi, i’m emily!” has 14 characters total. 
-     We animate width from 0 → 12ch in 12 discrete steps (so it jumps one character at a time).
-    */
+    /* “hi, i’m emily!” = 14 characters total, so we use 12ch to reveal them in 12 steps */
     .typewriter-line {
       display: inline-block;
-      font-family: 'Tinos', serif;
+      font-family: 'PT Sans', sans-serif;
       font-weight: 700;
       font-size: 2.2rem;
       color: white;
       overflow: hidden;             
       white-space: nowrap;          
       border-right: 0.1em solid #bdeafe; /* blinking caret */
-      width: 0;                     
+      width: 0;                      /* start hidden */
 
       animation:
         typing 2.5s steps(12, end) forwards,
@@ -117,14 +122,14 @@
        ───────────────────────────────────────────────────── */
     .fadein-line {
       display: inline-block;
-      font-family: 'Tinos', serif;
+      font-family: 'PT Sans', sans-serif;
       font-weight: 400;
       font-size: 1.3rem;
       color: #ffffff;
       opacity: 0;
       animation:
         fadeIn 1s ease-in-out forwards;
-      animation-delay: 2.5s; /* wait until typing is finished (2.5s) */
+      animation-delay: 2.5s; /* wait until the typewriter is done */
     }
     @keyframes fadeIn {
       from { opacity: 0; }
@@ -219,7 +224,7 @@
 
 <body>
   <!-- ─────────────────────────────────────────────────────
-       HEADER (now wider on the right + vertical opacity gradient)
+       HEADER (wider on the right + gradient starts below the image)
        ───────────────────────────────────────────────────── -->
   <header>
     <img src="images/name.gif" alt="name logo" class="logo"/>
@@ -248,7 +253,7 @@
   </aside>
 
   <!-- ─────────────────────────────────────────────────────
-       INTRO TEXT (typewriter + fade‐in on page load only)
+       INTRO TEXT (typewriter + fade-in on page load only)
        ───────────────────────────────────────────────────── -->
   <div class="intro-text">
     <div class="intro-line typewriter-line">
@@ -262,6 +267,7 @@
       <span class="highlight">tell me about:</span> your matcha &amp; music recs, fave chess gambits, takes on “making impact” &amp; “being human.”
     </div>
   </div>
+
   <!-- ─────────────────────────────────────────────────────
        FLOWER BUTTONS ROW
        ───────────────────────────────────────────────────── -->
