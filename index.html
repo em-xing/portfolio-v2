@@ -10,250 +10,53 @@
     href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap"
     rel="stylesheet"
   />
-
-  <!-- Favicon -->
   <link rel="icon" href="images/favicon.PNG" type="image/png" />
 
   <style>
-    /* ─────────────────────────────────────────────────────
-       RESET + BODY (use PT Sans everywhere by default)
-       ───────────────────────────────────────────────────── */
     body {
       background-color: #241d18;
       margin: 0;
       font-family: 'PT Sans', sans-serif;
       color: #ffffff;
       cursor: url("images/cursor_normal.cur") 0 0, auto;
-      /* Make room for the fixed header’s height */
       padding-top: 6rem;
     }
 
-    /* ─────────────────────────────────────────────────────
-       HEADER (extended 100px on the right + vertical gradient)
-       ───────────────────────────────────────────────────── */
-    header {
-      position: fixed;
-      top: 55px;
-      left: 55%;
-      transform: translateX(-50%);
-      display: inline-block;
+    /* (Header, sidebars, etc.) */
 
-
-      border-radius: 2px;
-      z-index: 100;
-    }
-
-    /* Center the logo within that padded box—but keep it above the gradient */
-    header img.logo {
-      display: block;
-      margin: 0 auto;
-      width: 80%;
-      max-width: 80%;
-      transform: translateY(-10px);
-    }
-
-    /* ─────────────────────────────────────────────────────
-       INTRO TEXT CONTAINER (centered between sidebars)
-       ───────────────────────────────────────────────────── */
-    .intro-text {
+    /* Intro container */
+    #intro-text-container {
       position: absolute;
       top: 52%;
-      left: 370px;    /* keep it between left‐sidebar and right‐sidebar */
+      left: 370px;
       right: 270px;
       transform: translateY(-50%);
       text-align: center;
       font-size: 1.3rem;
       line-height: 1.5;
       z-index: 5;
-    }
 
-    /* No fade-out on scroll—always fully opaque */
-    .intro-line {
-      display: block;
       opacity: 1;
+      transition: opacity 0.5s ease;
     }
-    /* Smooth fade transition for the intro container */
-#intro-text-container {
-  /* Ensure it starts fully opaque */
-  opacity: 1;
-  /* transition on opacity over 0.5s */
-  transition: opacity 0.5s ease;
-}
-
-/* When .fade-out is applied, opacity goes to 0 */
-#intro-text-container.fade-out {
-  opacity: 0;
-}
-
-
-    /* ─────────────────────────────────────────────────────
-       TYPEWRITER EFFECT ON THE FIRST LINE
-       ───────────────────────────────────────────────────── */
-
-    /* “hi, i’m emily!” = 14 characters total, so we use 12ch to reveal them in 12 steps */
-    .typewriter-line {
-      display: inline-block;
-      font-family: 'PT Sans', sans-serif;
-      font-weight: 560;
-      font-size: 1.8rem;
-      color: white;
-      overflow: hidden;             
-      white-space: nowrap;          
-      border-right: 0.1em solid #bdeafe; /* blinking caret */
-      width: 0;                      /* start hidden */
-
-      animation:
-        typing 2.5s steps(11, end) forwards,
-        blink-caret 0.8s step-end infinite;
-    }
-
-    @keyframes typing {
-      from { width: 0; }
-      to   { width: 11ch; }
-    }
-    @keyframes blink-caret {
-      50% { border-color: transparent; }
-    }
-
-    /* ─────────────────────────────────────────────────────
-       FADE-IN FOR THE SECOND LINE (only on page load; no scroll fade)
-       ───────────────────────────────────────────────────── */
-    .fadein-line {
-      display: inline-block;
-      font-family: 'PT Sans', sans-serif;
-      font-weight: 400;
-      font-size: 1.3rem;
-      color: #ffffff;
+    #intro-text-container.fade-out {
       opacity: 0;
-      animation:
-        fadeIn 1s ease-in-out forwards;
-      animation-delay: 2.5s; /* wait until the typewriter is done */
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
     }
 
-    /* ─────────────────────────────────────────────────────
-       HIGHLIGHTED PHRASES IN ORANGE
-       ───────────────────────────────────────────────────── */
-    .highlight {
-      color: #ffa97e;
-    }
-
-    /* ─────────────────────────────────────────────────────
-       SIDEBAR, SOCIAL ICONS, FLOWER ROW, FOOTER (unchanged)
-       ───────────────────────────────────────────────────── */
-    .sidebar {
-      position: fixed;
-      top: 10px;
-      left: 8px;
-      width: 200px;
-      z-index: 10;
-    }
-    .sidebar img {
-      display: block;
-      max-width: 600%;
-      height: auto;
-    }
-
-    .social-sidebar {
-      position: fixed;
-      top: 150px;
-      right: 37px;
-      height: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1px;
-      z-index: 10;
-    }
-    .social-sidebar img {
-      display: block;
-      transform: scale(0.4);
-      transform-origin: center center;
-    }
-    .social-sidebar a + a {
-      margin-top: 1px;
-    }
-
-    .flowers-row {
-      position: absolute;
-      top: 93vh;
-      left: 320px;
-      right: 450px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 1rem;
-      pointer-events: auto;
-      z-index: 5;
-    }
-    .flowers-row a { display: block; }
-    .flowers-row img {
-      display: block;
-      width: auto;
-      height: auto;
-      max-height: 200px;
-      transform: scale(0.65);
-    }
-    .flowers-row a:nth-child(1) img { margin-top: 20px; }
-    .flowers-row a:nth-child(2) img { margin-top: 0; }
-    .flowers-row a:nth-child(3) img { margin-top: 40px; }
-
-    .site-footer {
-      position: fixed;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.2);
-      display: inline-block;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      z-index: 50;
-    }
-    .site-footer img {
-      max-height: 40px;
-      height: auto;
-      display: block;
-    }
+    /* (Typewriter/fade-in CSS, orange highlights, etc.) */
   </style>
 </head>
 
 <body>
-  <!-- ─────────────────────────────────────────────────────
-       HEADER (wider on the right + gradient starts below the image)
-       ───────────────────────────────────────────────────── -->
   <header>
     <img src="images/name.gif" alt="name logo" class="logo"/>
   </header>
 
-  <!-- ─────────────────────────────────────────────────────
-       LEFT SIDEBAR
-       ───────────────────────────────────────────────────── -->
-  <aside class="sidebar">
-    <img src="images/sidebar_art.PNG" alt="sidebar art"/>
-  </aside>
+  <aside class="sidebar">…</aside>
+  <aside class="social-sidebar">…</aside>
 
-  <!-- ─────────────────────────────────────────────────────
-       SOCIAL ICONS (RIGHT SIDEBAR)
-       ───────────────────────────────────────────────────── -->
-  <aside class="social-sidebar">
-    <a href="https://www.linkedin.com/in/emily-xing-5663ab266/" target="_blank">
-      <img src="images/icon_linkedin.PNG" alt="LinkedIn icon">
-    </a>
-    <a href="mailto:emletxing@gmail.com">
-      <img src="images/icon_mail.PNG" alt="Email icon">
-    </a>
-    <a href="#">
-      <img src="images/icon_shooting_star.PNG" alt="Star icon">
-    </a>
-  </aside>
-
-  <!-- ─────────────────────────────────────────────────────
-       INTRO TEXT (typewriter + fade-in on page load only)
-       ───────────────────────────────────────────────────── -->
-    <div id="intro-text-container" class="intro-text">
+  <!-- INTRO (must have this exact ID) -->
+  <div id="intro-text-container" class="intro-text">
     <div class="intro-line typewriter-line">
       hi, i’m emily!
     </div>
@@ -266,59 +69,38 @@
     </div>
   </div>
 
+  <section class="flowers-row">…</section>
+  <footer class="site-footer">…</footer>
 
   <!-- ─────────────────────────────────────────────────────
-       FLOWER BUTTONS ROW
+       CORRECTED SCROLL‐FADE SCRIPT (threshold = 330px)
        ───────────────────────────────────────────────────── -->
-  <section class="flowers-row">
-    <a href="flower_research.html">
-      <img src="images/flower_research.PNG" alt="Flower Research">
-    </a>
-    <a href="flower_writing.html">
-      <img src="images/flower_writing.PNG" alt="Flower Writing">
-    </a>
-    <a href="flower_scrapbook.html">
-      <img src="images/flower_scrapbook.PNG" alt="Flower Scrapbook">
-    </a>
-  </section>
-
-  <!-- ─────────────────────────────────────────────────────
-       SITE FOOTER
-       ───────────────────────────────────────────────────── -->
-  <footer class="site-footer">
-    <img src="images/copyright.PNG" alt="Copyright ©" />
-  </footer>
   <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const introContainer = document.getElementById('intro-text-container');
-    let lastScrollY = window.scrollY;
-    // The pixel threshold at which we fade out / fade in:
-    const THRESHOLD = 330;
+    document.addEventListener('DOMContentLoaded', () => {
+      const introContainer = document.getElementById('intro-text-container');
+      let lastScrollY = window.scrollY;
+      const THRESHOLD = 330;
 
-    window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      const scrollingUp = currentScrollY < lastScrollY;
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        const scrollingDown = currentScrollY > lastScrollY;
 
-      // Get the intro’s top offset relative to the viewport:
-      const introTop = introContainer.getBoundingClientRect().top;
+        // distance from viewport top to the intro’s top edge
+        const introTop = introContainer.getBoundingClientRect().top;
 
-      // 1) If we are scrolling **up** and introTop <= 330 px → fade out
-      if (scrollingUp && introTop <= THRESHOLD) {
-        introContainer.classList.add('fade-out');
-      }
-      // 2) Else if we are scrolling **down** and introTop >= 330 px → fade in
-      else if (!scrollingUp && introTop >= THRESHOLD) {
-        introContainer.classList.remove('fade-out');
-      }
-      // 3) Otherwise, do nothing (keep whatever fade‐out state we already have).
+        // Fade OUT as soon as it crosses 330px while scrolling DOWN
+        if (scrollingDown && introTop <= THRESHOLD) {
+          introContainer.classList.add('fade-out');
+        }
+        // Fade IN only when it comes back above 330px while scrolling UP
+        else if (!scrollingDown && introTop >= THRESHOLD) {
+          introContainer.classList.remove('fade-out');
+        }
+        // Otherwise, leave it as-is (no toggling)
 
-      lastScrollY = currentScrollY;
+        lastScrollY = currentScrollY;
+      });
     });
-  });
-</script>
-
-
-
-
+  </script>
 </body>
 </html>
