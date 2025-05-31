@@ -292,29 +292,31 @@
   document.addEventListener('DOMContentLoaded', () => {
     const introContainer = document.getElementById('intro-text-container');
     let lastScrollY = window.scrollY;
+    // The pixel threshold at which we fade out / fade in:
+    const THRESHOLD = 330;
 
     window.addEventListener('scroll', () => {
       const currentScrollY = window.scrollY;
       const scrollingUp = currentScrollY < lastScrollY;
 
-      // top edge of #intro-text-container (relative to viewport)
+      // Get the intro’s top offset relative to the viewport:
       const introTop = introContainer.getBoundingClientRect().top;
 
-      // When introTop <= 330px AND scrolling up → fade out
-      if (introTop <= 330 && scrollingUp) {
+      // 1) If we are scrolling **up** and introTop <= 330 px → fade out
+      if (scrollingUp && introTop <= THRESHOLD) {
         introContainer.classList.add('fade-out');
       }
-      // When introTop > 330px AND scrolling down → fade in
-      else if (introTop > 330 && !scrollingUp) {
+      // 2) Else if we are scrolling **down** and introTop >= 330 px → fade in
+      else if (!scrollingUp && introTop >= THRESHOLD) {
         introContainer.classList.remove('fade-out');
       }
-      // Otherwise (introTop <= 330 & scrolling down, or introTop > 330 & scrolling up),
-      // do nothing—preserve the current fade state.
+      // 3) Otherwise, do nothing (keep whatever fade‐out state we already have).
 
       lastScrollY = currentScrollY;
     });
   });
 </script>
+
 
 
 
