@@ -28,6 +28,18 @@ body {
      You may need to tweak this value to match your logo’s rendered height + padding. */
   padding-top: 6rem;
 }
+    .intro-text {
+  position: absolute;
+  top: 50%;                   /* vertically center */
+  left: 220px;                /* move in from the left-sidebar’s right edge (8px + 200px + small buffer) */
+  right: 60px;                /* leave room for the social‐sidebar on the right (37px + buffer) */
+  transform: translateY(-50%);/* shift up by half its own height to truly center vertically */
+  text-align: center;         
+  color: white;
+  font-size: 2rem;            /* larger text—tweak up/down as desired */
+  line-height: 1.4;
+  z-index: 5;
+}
 
 /* 2) Shrink-wrap header into a small box, fix it to the top center */
 header {
@@ -99,7 +111,7 @@ header img.logo {
 
 .flowers-row {
   position: absolute;
-  top: 88vh;
+  top: 93vh;
   left: 320px;
   right: 450px;
   display: flex;
