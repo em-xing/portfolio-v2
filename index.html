@@ -71,9 +71,7 @@
     #intro-text-container.fade-out {
       opacity: 0;
     }
-    #intro-text-container.fade-in {
-      opacity: 1;
-    }
+    
 
     /* ─────────────────────────────────────────────────────
        TYPEWRITER EFFECT ON THE FIRST LINE
@@ -230,11 +228,11 @@
   </aside>
 
   <!-- INTRO TEXT (typewriter + fade-in on page load only) -->
-  <div id="intro-text-container" class="intro-text">
-    <div class="intro-line typewriter-line">
-      hi, i’m emily!
-    </div>
-    <div class="intro-line fadein-line">
+ <div id="intro-text-container" class="intro-text">
+  <div class="intro-line typewriter-line">
+    hi, i’m emily!
+  </div>
+  <div class="intro-line fadein-line">
       i'm a student @ harvard studying 
       <span class="highlight">applied math &amp; global health</span>. 
       i spend my time thinking about 
@@ -273,24 +271,27 @@
       const currentScrollY = window.scrollY;
       const scrollingDown = currentScrollY > lastScrollY;
 
-      // Distance from viewport top to the intro’s top edge
+      // Distance from viewport top to the intro’s top edge:
       const introTop = introContainer.getBoundingClientRect().top;
 
       if (scrollingDown && introTop <= THRESHOLD) {
-        // We’re scrolling down past the threshold → fade out
-        introContainer.classList.remove('fade-in');
-        introContainer.classList.add('fade-out');
+        // Scrolling down past 330px → add the fade-out class:
+        if (!introContainer.classList.contains('fade-out')) {
+          introContainer.classList.add('fade-out');
+        }
       }
-      else if (!scrollingDown && introTop >= THRESHOLD) {
-        // We’re scrolling up above the threshold → fade in
-        introContainer.classList.remove('fade-out');
-        introContainer.classList.add('fade-in');
+      else if (!scrollingDown && introTop > THRESHOLD) {
+        // Scrolling up above 330px → remove the fade-out class:
+        if (introContainer.classList.contains('fade-out')) {
+          introContainer.classList.remove('fade-out');
+        }
       }
 
       lastScrollY = currentScrollY;
     });
   });
 </script>
+
 
 </body>
 </html>
