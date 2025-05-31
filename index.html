@@ -25,24 +25,22 @@
     
 
     header {
-      position: sticky;
-      top: 20px;                  /* initial offset */
-      transition: top 0.2s ease;
-      z-index: 100;
-      text-align: center;
-      padding: 2rem 0;
-      background: #241d18;        /* cover underlying content */
-    }
-    header.scrolled {
-      top: 0;                     /* snapped to very top */
-    }
-    header img.logo {
-      display: block;
-      margin: 0 auto;
-      width: 30%;
-      transform: translateY(-10px);
-    }
+  position: sticky;
+  top: 0;                      /* pin to the very top as soon as any scroll occurs */
+  background: #241d18;         /* same as page background so it “covers” whatever is behind */
+  padding: 1.5rem 0;           /* you can tweak this for vertical height */
+  text-align: center;
+  z-index: 100;
+}
 
+header img.logo {
+  display: block;
+  margin: 0 auto;
+  width: 30%;
+  transform: translateY(-10px); /* if you still want that upward nudge */
+}
+
+  
     .sidebar {
       position: fixed;     
       top: 10px;       
