@@ -1,227 +1,240 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Portfolio</title>
+  <title>Emily Xing</title>
 
-  <!-- PT Sans -->
-  <!-- ...other <meta> tags... -->
-<link
-  href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400&display=swap"
-  rel="stylesheet"
-/>
+  <!-- Load Tinos from Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet"
+  />
 
   <!-- Favicon -->
   <link rel="icon" href="images/favicon.PNG" type="image/png" />
 
   <style>
- /* 1) Reset body so content isn’t hidden under the header */
-body {
-  background-color: #241d18;
-  margin: 0;
-  font-family: 'Tinos', serif;   /* ← use Tinos everywhere by default */
-  color: #ffffff;
-  cursor: url("images/cursor_normal.cur") 0 0, auto;
-  padding-top: 6rem;
-}
+    /* ─────────────────────────────────────────────────────
+       RESET + BODY (use Tinos everywhere by default)
+       ───────────────────────────────────────────────────── */
+    body {
+      background-color: #241d18;
+      margin: 0;
+      font-family: 'Tinos', serif;
+      color: #ffffff;
+      cursor: url("images/cursor_normal.cur") 0 0, auto;
+      /* Make room for the fixed header’s height */
+      padding-top: 6rem;
+    }
 
-/* ─────────────────────────────────────────────────────
-  INTRO TEXT CONTAINER (centered between sidebars)
-  ───────────────────────────────────────────────────── */
-.intro-text {
-  position: absolute;
-  top: 55%;
-  left: 370px;    /* adjust if your left-sidebar width changes */
-  right: 270px;   /* adjust if your social-sidebar width changes */
-  transform: translateY(-50%);
-  text-align: center;
-  color: white;
-  font-size: 1.5rem;
-  line-height: 1.6;
-  z-index: 5;
-}
+    /* ─────────────────────────────────────────────────────
+       HEADER (extended 100px on the right + vertical gradient)
+       ───────────────────────────────────────────────────── */
+    header {
+      position: fixed;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-block;
+      /* 
+         1rem top, (2rem + 100px) right, 1rem bottom, 2rem left 
+         → this makes the header’s colored “box” extend 100px farther to the right 
+      */
+      padding: 1rem calc(2rem + 100px) 1rem 2rem;
+      /* Replace solid color with a top→bottom opacity gradient */
+      background: linear-gradient(
+        to bottom,
+        rgba(36, 29, 24, 1) 0%,
+        rgba(36, 29, 24, 0) 100%
+      );
+      border-radius: 2px;
+      z-index: 100;
+    }
+    header img.logo {
+      display: block;
+      margin: 0 auto;
+      width: 80%;
+      max-width: 80%;
+      transform: translateY(-10px);
+    }
 
-/* Each line in the intro sits in its own block so we can fade it individually: */
-.intro-line {
-  display: block;
-  opacity: 1;  /* start fully visible; JS will override as you scroll */
-}
+    /* ─────────────────────────────────────────────────────
+       INTRO TEXT CONTAINER (centered between sidebars)
+       ───────────────────────────────────────────────────── */
+    .intro-text {
+      position: absolute;
+      top: 55%;
+      left: 370px;    /* adjust if your left-sidebar changes */
+      right: 270px;   /* adjust if your social-sidebar changes */
+      transform: translateY(-50%);
+      text-align: center;
+      font-size: 1.3rem;
+      line-height: 1.5;
+      z-index: 5;
+    }
 
-/* ─────────────────────────────────────────────────────
-  TYPEWRITER EFFECT ON THE FIRST LINE
-  ───────────────────────────────────────────────────── */
+    /* Remove any “fade-out on scroll”—we’ll keep the intro at full opacity */
+    .intro-line {
+      display: block;
+      opacity: 1;
+    }
 
-/*
- “hi, i’m emily!” has 14 characters (including punctuation and the space). 
- So we animate width from 0 → 14ch in exactly 14 discrete steps.
- */
-.typewriter-line {
-  display: inline-block;
-  overflow: hidden;             /* hide characters until “revealed” */
-  white-space: nowrap;          /* keep the text on one line */
-  border-right: 0.1em solid white; /* blinking caret */
-  width: 0;                     /* start at zero width */
+    /* ─────────────────────────────────────────────────────
+       TYPEWRITER EFFECT ON THE FIRST LINE
+       ───────────────────────────────────────────────────── */
 
-  animation:
-    typing 2.5s steps(12, end) forwards,  /* 14 steps over 3 seconds */
-    blink-caret 0.8s step-end infinite;  /* blinking caret */
-}
+    /*
+     “hi, i’m emily!” has 14 characters total. 
+     We animate width from 0 → 12ch in 12 discrete steps (so it jumps one character at a time).
+    */
+    .typewriter-line {
+      display: inline-block;
+      font-family: 'Tinos', serif;
+      font-weight: 700;
+      font-size: 2.2rem;
+      color: #bdeafe;
+      overflow: hidden;             
+      white-space: nowrap;          
+      border-right: 0.1em solid #bdeafe; /* blinking caret */
+      width: 0;                     
 
-/* Keyframes to grow width from 0 → 14ch, one character at a time */
-@keyframes typing {
-  from { width: 0; }
-  to   { width: 12ch; }
-}
+      animation:
+        typing 2.5s steps(12, end) forwards,
+        blink-caret 0.8s step-end infinite;
+    }
 
-/* Blink the caret by toggling border-color */
-@keyframes blink-caret {
-  50% { border-color: transparent; }
-}
+    @keyframes typing {
+      from { width: 0; }
+      to   { width: 12ch; }
+    }
+    @keyframes blink-caret {
+      50% { border-color: transparent; }
+    }
 
-/* ─────────────────────────────────────────────────────
-  FADE-IN FOR THE SECOND LINE
-  ───────────────────────────────────────────────────── */
+    /* ─────────────────────────────────────────────────────
+       FADE-IN FOR THE SECOND LINE (only on page load; no scroll fade)
+       ───────────────────────────────────────────────────── */
+    .fadein-line {
+      display: inline-block;
+      font-family: 'Tinos', serif;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: #ffffff;
+      opacity: 0;
+      animation:
+        fadeIn 1s ease-in-out forwards;
+      animation-delay: 2.5s; /* wait until typing is finished (2.5s) */
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
 
-/*
- We delay this fade‐in by 3s so that the typewriter finishes first.
- */
-.fadein-line {
-  display: inline-block;
-  opacity: 0;  /* hidden at first */
-
-  animation:
-    fadeIn 1s ease-in-out forwards;  /* 1s fade‐in */
-  animation-delay: 3s;               /* start fade after typewriter ends */
-}
-
-/* Keyframes for fade from 0 → 1 opacity */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
+    /* ─────────────────────────────────────────────────────
+       HIGHLIGHTED PHRASES IN ORANGE
+       ───────────────────────────────────────────────────── */
     .highlight {
-  color: #ffa97e;
-}
+      color: #ffa97e;
+    }
 
-/* ─────────────────────────────────────────────────────
-  HEADER, SIDEBARS, ETC. (unchanged from before)
-  ───────────────────────────────────────────────────── */
+    /* ─────────────────────────────────────────────────────
+       SIDEBAR, SOCIAL ICONS, FLOWER ROW, FOOTER (unchanged)
+       ───────────────────────────────────────────────────── */
+    .sidebar {
+      position: fixed;
+      top: 10px;
+      left: 8px;
+      width: 200px;
+      z-index: 10;
+    }
+    .sidebar img {
+      display: block;
+      max-width: 600%;
+      height: auto;
+    }
 
-header {
-  position: fixed;
-  top: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: inline-block;
-  background-color: #241d18;
-  padding: 1rem 2rem;
-  border-radius: 2px;
-  z-index: 100;
-}
-header img.logo {
-  display: block;
-  margin: 0 auto;
-  width: 80%;
-  max-width: 80%;
-  transform: translateY(-10px);
-}
+    .social-sidebar {
+      position: fixed;
+      top: 150px;
+      right: 37px;
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+      z-index: 10;
+    }
+    .social-sidebar img {
+      display: block;
+      transform: scale(0.4);
+      transform-origin: center center;
+    }
+    .social-sidebar a + a {
+      margin-top: 1px;
+    }
 
-.sidebar {
-  position: fixed;
-  top: 10px;
-  left: 8px;
-  width: 200px;
-  z-index: 10;
-}
-.sidebar img {
-  display: block;
-  max-width: 600%;
-  height: auto;
-}
+    .flowers-row {
+      position: absolute;
+      top: 93vh;
+      left: 320px;
+      right: 450px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 1rem;
+      pointer-events: auto;
+      z-index: 5;
+    }
+    .flowers-row a { display: block; }
+    .flowers-row img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-height: 200px;
+      transform: scale(0.65);
+    }
+    .flowers-row a:nth-child(1) img { margin-top: 20px; }
+    .flowers-row a:nth-child(2) img { margin-top: 0; }
+    .flowers-row a:nth-child(3) img { margin-top: 40px; }
 
-.social-sidebar {
-  position: fixed;
-  top: 150px;
-  right: 37px;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1px;
-  z-index: 10;
-}
-.social-sidebar img {
-  display: block;
-  transform: scale(0.4);
-  transform-origin: center center;
-}
-.social-sidebar a + a {
-  margin-top: 1px;
-}
-
-.flowers-row {
-  position: absolute;
-  top: 93vh;
-  left: 320px;
-  right: 450px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 1rem;
-  pointer-events: auto;
-  z-index: 5;
-}
-.flowers-row a { display: block; }
-.flowers-row img {
-  display: block;
-  width: auto;
-  height: auto;
-  max-height: 200px;
-  transform: scale(0.65);
-}
-.flowers-row a:nth-child(1) img { margin-top: 20px; }
-.flowers-row a:nth-child(2) img { margin-top: 0; }
-.flowers-row a:nth-child(3) img { margin-top: 40px; }
-
-.site-footer {
-  position: fixed;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.2);
-  display: inline-block;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  z-index: 50;
-}
-.site-footer img {
-  max-height: 40px;
-  height: auto;
-  display: block;
-}
-
-
-
-
-/* If you want them truly full-screen, replace width:100vw with width:100% and wrap .flower-buttons around body */
-
+    .site-footer {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.2);
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      z-index: 50;
+    }
+    .site-footer img {
+      max-height: 40px;
+      height: auto;
+      display: block;
+    }
   </style>
 </head>
 
 <body>
+  <!-- ─────────────────────────────────────────────────────
+       HEADER (now wider on the right + vertical opacity gradient)
+       ───────────────────────────────────────────────────── -->
   <header>
     <img src="images/name.gif" alt="name logo" class="logo"/>
   </header>
 
+  <!-- ─────────────────────────────────────────────────────
+       LEFT SIDEBAR
+       ───────────────────────────────────────────────────── -->
   <aside class="sidebar">
     <img src="images/sidebar_art.PNG" alt="sidebar art"/>
   </aside>
 
-  <!-- LinkedIn (top) -->
-  <!-- replace your three <a> tags with this -->
+  <!-- ─────────────────────────────────────────────────────
+       SOCIAL ICONS (RIGHT SIDEBAR)
+       ───────────────────────────────────────────────────── -->
   <aside class="social-sidebar">
     <a href="https://www.linkedin.com/in/emily-xing-5663ab266/" target="_blank">
       <img src="images/icon_linkedin.PNG" alt="LinkedIn icon">
@@ -234,33 +247,25 @@ header img.logo {
     </a>
   </aside>
 
-  <body>
-  <header>
-    <img src="images/name.gif" alt="name logo" class="logo"/>
-  </header>
-
-  <!-- ↓ Insert this new div right after the header: ↓ -->
- <div class="intro-text">
-  <div class="intro-line typewriter-line">
-    hi, i’m emily!
+  <!-- ─────────────────────────────────────────────────────
+       INTRO TEXT (typewriter + fade‐in on page load only)
+       ───────────────────────────────────────────────────── -->
+  <div class="intro-text">
+    <div class="intro-line typewriter-line">
+      hi, i’m emily!
+    </div>
+    <div class="intro-line fadein-line">
+      i'm a student @ harvard studying 
+      <span class="highlight">applied math &amp; global health</span>. 
+      i spend my time thinking about 
+      <span class="highlight">things we’ve built</span>—urban &amp; digital spaces, social infrastructure, art.<br><br>
+      <span class="highlight">tell me about:</span> your matcha &amp; music recs, fave chess gambits, takes on “making impact” &amp; “being human.”
+    </div>
   </div>
-  <div class="intro-line fadein-line">
-    i'm a student @ harvard studying 
-    <span class="highlight">applied math &amp; global health</span>. 
-    i spend my time thinking about 
-    <span class="highlight">things we’ve built</span>—urban &amp; digital spaces, social infrastructure, art. <br><br>
-    <span class="highlight">tell me about:</span> your matcha &amp; music recs, fave chess gambits, takes on “making impact” &amp; “being human.”
-  </div>
-</div>
-
-
-
-
-  <!-- ↑ End of intro-text ↑ -->
-
-
-  <!-- Flower Buttons Container -->
-<section class="flowers-row">
+  <!-- ─────────────────────────────────────────────────────
+       FLOWER BUTTONS ROW
+       ───────────────────────────────────────────────────── -->
+  <section class="flowers-row">
     <a href="flower_research.html">
       <img src="images/flower_research.PNG" alt="Flower Research">
     </a>
@@ -272,38 +277,11 @@ header img.logo {
     </a>
   </section>
 
-
-  <!-- Footer with copyright image -->
+  <!-- ─────────────────────────────────────────────────────
+       SITE FOOTER
+       ───────────────────────────────────────────────────── -->
   <footer class="site-footer">
     <img src="images/copyright.PNG" alt="Copyright ©" />
   </footer>
-
-
-  
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const line1 = document.querySelector('.typewriter-line');
-    const line2 = document.querySelector('.fadein-line');
-
-    // How many pixels of upward scroll until line1 is fully invisible:
-    const fadeDistance1 = 100; 
-    // How many more pixels, after that, until line2 is fully invisible:
-    const fadeDistance2 = 10; 
-
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-
-      // Fade line1: from scrollY=0 → fadeDistance1
-      let op1 = 1 - Math.min(scrollY / fadeDistance1, 1);
-      line1.style.opacity = op1;
-
-      // Fade line2: start after fadeDistance1, end at fadeDistance1+fadeDistance2
-      let raw = scrollY - fadeDistance1;
-      let op2 = 1 - Math.min(Math.max(raw / fadeDistance2, 0), 1);
-      line2.style.opacity = op2;
-    });
-  });
-</script>
-
 </body>
 </html>
