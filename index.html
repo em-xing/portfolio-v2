@@ -8,10 +8,11 @@
   <title>My Portfolio</title>
 
   <!-- PT Sans -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap"
-    rel="stylesheet"
-  />
+  <!-- ...other <meta> tags... -->
+<link
+  href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400&display=swap"
+  rel="stylesheet"
+/>
 
   <!-- Favicon -->
   <link rel="icon" href="images/favicon.PNG" type="image/png" />
@@ -21,13 +22,12 @@
 body {
   background-color: #241d18;
   margin: 0;
-  font-family: 'PT Sans', sans-serif;
+  font-family: 'Tinos', serif;   /* ← use Tinos everywhere by default */
+  color: #ffffff;
   cursor: url("images/cursor_normal.cur") 0 0, auto;
-
-  /* Make room for the fixed header’s total height.
-     You may need to tweak this value to match your logo’s rendered height + padding. */
   padding-top: 6rem;
 }
+
 /* 1) Reset body so content isn’t hidden under the header */
 body {
   background-color: #241d18;
@@ -258,7 +258,7 @@ header img.logo {
     i'm a student @ harvard studying 
     <span class="highlight">applied math &amp; global health</span>. 
     i spend my time thinking about 
-    <span class="highlight">things we’ve built</span>—urban &amp; digital spaces, social infrastructure, art. 
+    <span class="highlight">things we’ve built</span>—urban &amp; digital spaces, social infrastructure, art. <br><br>
     <span class="highlight">tell me about:</span> your matcha &amp; music recs, fave chess gambits, takes on “making impact” &amp; “being human.”
   </div>
 </div>
