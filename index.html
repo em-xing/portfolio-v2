@@ -300,7 +300,7 @@
 
         // 2) Flowers fade‐in at 670px, fade‐out above 670px
         const flowersTop = flowersRow.getBoundingClientRect().top;
-        if (flowersTop <= FLOWERS_THRESHOLD) {
+        if (flowersTop >= FLOWERS_THRESHOLD) {
           if (!flowersRow.classList.contains('visible')) {
             flowersRow.classList.add('visible');
           }
