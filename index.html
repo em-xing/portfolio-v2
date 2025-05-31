@@ -17,141 +17,126 @@
   <link rel="icon" href="images/favicon.PNG" type="image/png" />
 
   <style>
-    body {
-      background-color: #241d18;
-      margin: 0;
-      font-family: 'PT Sans', sans-serif;
-      /* default cursor */
-      cursor: url("images/cursor_normal.cur") 0 0, auto;
-    }
-    
+ /* 1) Reset body so content isn’t hidden under the header */
+body {
+  background-color: #241d18;
+  margin: 0;
+  font-family: 'PT Sans', sans-serif;
+  cursor: url("images/cursor_normal.cur") 0 0, auto;
 
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      padding: 1.5rem 0;
-      background-color: #241d18; /* or whatever background you want */
-      z-index: 100;
-    }
+  /* Make room for the fixed header’s total height.
+     You may need to tweak this value to match your logo’s rendered height + padding. */
+  padding-top: 6rem;
+}
 
-    header img.logo {
-      display: block;
-      margin: 0 auto;
-      width: 35%;
-      max-width: 35%;
-      transform: translateY(-10px);
-    }
-   
-    /* 2) When scrolled, move it up to flush with the top */
-    header.scrolled {
-      top: 15px;
-    }
-
-    .sidebar {
-      position: fixed;     
-      top: 10px;       
-      left: 8px;
-      width: 200px;        
-      z-index: 10;          
-    }
+/* 2) Shrink-wrap header into a small box, fix it to the top center */
+header {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-block;             /* lets the box size itself to its contents */
+  background-color: #241d18;          /* ~same as body, or use rgba(...) if you want it slightly translucent */
+  padding: 1rem 2rem;                 /* adjust these values so the box is the right height/width */
+  border-radius: 6px;                 /* optional: give it rounded corners */
+  z-index: 100;                       /* keep it above everything else */
   
-    .sidebar img {
-      display: block;
-      max-width: 600%;
-      height: auto;
-    }
+  /* If you prefer a border or drop-shadow instead of a solid background:
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  border: 1px solid #333;
+  background-color: rgba(36,29,24,0.9);
+  */
+}
 
-    /* Social icons stacked manually around center */
-    .social-sidebar {
-    position: fixed;
-    top: 150px;
-    right: 37px;
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1px;
-    z-index: 10;
-  }
+/* 3) Logo inside header: you can keep your existing sizing */
+header img.logo {
+  display: block;
+  margin: 0 auto;
+  width: 35%;
+  max-width: 35%;
+  transform: translateY(-10px);
+}
 
-  /* Scale icons to 80% of their native size */
-  .social-sidebar img {
-    display: block;
-    transform: scale(0.4);
-    transform-origin: center center;
-  }
+/* 4) Remove any “sticky” behavior or scroll‐class rules */
+/*    In other words, comment out or delete:
+      header.scrolled { top: 15px; }
+      and also remove the JS that toggles .scrolled. */
 
-  /* Tweak this margin to move top/bottom icons closer or farther */
-  .social-sidebar a + a {
-    margin-top: 1px; /* one icon worth apart? adjust as needed */
-  }
+/* 5) Sidebar, social icons, footer, etc., stay as before. */
+/*    Example: */
+.sidebar {
+  position: fixed;
+  top: 10px;
+  left: 8px;
+  width: 200px;
+  z-index: 10;
+}
+.sidebar img {
+  display: block;
+  max-width: 600%;
+  height: auto;
+}
 
+.social-sidebar {
+  position: fixed;
+  top: 150px;
+  right: 37px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  z-index: 10;
+}
+.social-sidebar img {
+  display: block;
+  transform: scale(0.4);
+  transform-origin: center center;
+}
+.social-sidebar a + a {
+  margin-top: 1px;
+}
 
-
-  /* Container to stack or grid your flower-image buttons */
-/* Styles to place your flowers below full screen, staggered, between sidebar & icons */
 .flowers-row {
   position: absolute;
-  top: 100vh;                   /* just below the bottom of the viewport */
-  left: 320px;                  /* account for your 200px sidebar + 20px gutter */
-  right: 450px;                 /* account for your social icons width + gutter */
+  top: 100vh;
+  left: 320px;
+  right: 450px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;      /* so we can nudge each one individually */
+  align-items: flex-start;
   padding: 1rem;
   pointer-events: auto;
   z-index: 5;
 }
-
-.flowers-row a {
-  display: block;
-}
-
-/* Ensure the images render at their natural (cropped) size */
+.flowers-row a { display: block; }
 .flowers-row img {
   display: block;
   width: auto;
   height: auto;
   max-height: 200px;
-  transform: scale(0.65);/* adjust so they don’t overwhelm */
+  transform: scale(0.65);
 }
+.flowers-row a:nth-child(1) img { margin-top: 20px; }
+.flowers-row a:nth-child(2) img { margin-top: 0; }
+.flowers-row a:nth-child(3) img { margin-top: 40px; }
 
-/* Stagger them using nth-child offsets */
-.flowers-row a:nth-child(1) img {
-  margin-top: 20px;
-}
-.flowers-row a:nth-child(2) img {
-  margin-top: 0;
-}
-.flowers-row a:nth-child(3) img {
-  margin-top: 40px;
-}
-
-    /* Footer styling */
-/* in your existing <style> block: */
-
-/* FOOTER */
 .site-footer {
   position: fixed;
-  bottom: 10px;                   /* float a little above the very bottom */
-  left: 50%;                      /* center horizontally */
-  transform: translateX(-50%);    /* adjust for left:50% */
-  background: rgba(0, 0, 0, 0.2); /* lighter transparency */
-  display: inline-block;          /* shrink-wrap to content */
-  padding: 0.2rem 0.5rem;         /* small padding around the image */
-  border-radius: 4px;             /* slightly rounded corners */
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
   z-index: 50;
 }
-
 .site-footer img {
-  max-height: 40px;   /* adjust as needed */
+  max-height: 40px;
   height: auto;
   display: block;
 }
-
 
 
 
