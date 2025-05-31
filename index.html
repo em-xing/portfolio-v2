@@ -57,7 +57,7 @@
        ───────────────────────────────────────────────────── */
     .intro-text {
       position: absolute;
-      top: 55%;
+      top: 52%;
       left: 370px;    /* keep it between left‐sidebar and right‐sidebar */
       right: 270px;
       transform: translateY(-50%);
@@ -291,44 +291,31 @@
   <script>
   document.addEventListener('DOMContentLoaded', () => {
     const introContainer = document.getElementById('intro-text-container');
-    const header = document.querySelector('header');
     let lastScrollY = window.scrollY;
 
     window.addEventListener('scroll', () => {
       const currentScrollY = window.scrollY;
       const scrollingUp = currentScrollY < lastScrollY;
 
-      // headerBottom = distance from viewport top to the bottom edge of <header>
-      const headerBottom = header.getBoundingClientRect().bottom;
-      // introTop = distance from viewport top to the top edge of #intro-text-container
+      // top edge of #intro-text-container (relative to viewport)
       const introTop = introContainer.getBoundingClientRect().top;
 
-      // CASE 1: Intro is fully below header (introTop > headerBottom)
-      if (introTop > headerBottom) {
-        // Always keep it fully visible when it's below the header
-        introContainer.classList.remove('fade-out');
-      }
-      // CASE 2: Intro is under header AND you're scrolling up:
-      else if (introTop <= headerBottom && scrollingUp) {
-        // Fade it out
+      // When introTop <= 330px AND scrolling up → fade out
+      if (introTop <= 330 && scrollingUp) {
         introContainer.classList.add('fade-out');
       }
-      // CASE 3: Intro is under header but you're scrolling down:
-      else if (introTop <= headerBottom && !scrollingUp) {
-        // Keep it faded out (do nothing)
-        // i.e. we do NOT call remove('fade-out') here because it's still under header
-      }
-      // CASE 4: Intro has just come down below the header and you're scrolling down
-      // (This can only happen when introTop crosses from <= headerBottom to > headerBottom)
-      else {
-        // Fade it back in
+      // When introTop > 330px AND scrolling down → fade in
+      else if (introTop > 330 && !scrollingUp) {
         introContainer.classList.remove('fade-out');
       }
+      // Otherwise (introTop <= 330 & scrolling down, or introTop > 330 & scrolling up),
+      // do nothing—preserve the current fade state.
 
       lastScrollY = currentScrollY;
     });
   });
 </script>
+
 
 
 </body>
