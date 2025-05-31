@@ -163,24 +163,25 @@
        FLOWER BUTTONS ROW
        ───────────────────────────────────────────────────── */
     .flowers-row {
-      position: absolute;
-      top: 90vh;
-      left: 320px;
-      right: 450px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 1rem;
-      pointer-events: auto;
-      z-index: 5;
+  position: absolute;
+  top: 90vh;
+  left: 320px;
+  right: 450px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem;
+  pointer-events: auto;
+  z-index: 5;
 
-      /* Start fully transparent */
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .flowers-row.visible {
-      opacity: 1;
-    }
+  /* Start fully transparent (no .visible class) */
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.flowers-row.visible {
+  opacity: 1;
+}
+
     .flowers-row a { display: block; }
     .flowers-row img {
       display: block;
@@ -247,7 +248,7 @@
     <div class="intro-line fadein-line">
       i'm a student @ harvard studying 
       <span class="highlight">applied math &amp; global health</span>. 
-      i spend my time thinking about 
+      i spend my time exploring 
       <span class="highlight">things we’ve built</span>—urban &amp; digital spaces, social infrastructure, art.<br><br>
       <span class="highlight">tell me about:</span> your matcha &amp; music recs, fave chess gambits, takes on “making impact” &amp; “being human.”
     </div>
@@ -275,44 +276,30 @@
        fade FLOWERS when its top edge hits 670px. -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const introContainer = document.getElementById('intro-text-container');
-      const flowersRow    = document.querySelector('.flowers-row');
-      let lastScrollY = window.scrollY;
+  const flowersRow = document.querySelector('.flowers-row');
+  let lastScrollY = window.scrollY;
+  const FLOWERS_THRESHOLD = 670;
 
-      const INTRO_THRESHOLD   = 330;
-      const FLOWERS_THRESHOLD = 670;
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    const flowersTop = flowersRow.getBoundingClientRect().top;
 
-      window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
-        const scrollingDown = currentScrollY > lastScrollY;
+    // When flowers' top is at or above 670px, add .visible
+    if (flowersTop <= FLOWERS_THRESHOLD) {
+      if (!flowersRow.classList.contains('visible')) {
+        flowersRow.classList.add('visible');
+      }
+    } else {
+      // When flowers' top is below 670px again, remove .visible
+      if (flowersRow.classList.contains('visible')) {
+        flowersRow.classList.remove('visible');
+      }
+    }
 
-        // 1) Intro fade (unchanged)
-        const introTop = introContainer.getBoundingClientRect().top;
-        if (scrollingDown && introTop <= INTRO_THRESHOLD) {
-          if (!introContainer.classList.contains('fade-out')) {
-            introContainer.classList.add('fade-out');
-          }
-        } else if (!scrollingDown && introTop <= INTRO_THRESHOLD) {
-          if (introContainer.classList.contains('fade-out')) {
-            introContainer.classList.remove('fade-out');
-          }
-        }
+    lastScrollY = currentScrollY;
+  });
+});
 
-        // 2) Flowers fade‐in at 670px, fade‐out above 670px
-        const flowersTop = flowersRow.getBoundingClientRect().top;
-        if (flowersTop >= FLOWERS_THRESHOLD) {
-          if (!flowersRow.classList.contains('visible')) {
-            flowersRow.classList.add('visible');
-          }
-        } else {
-          if (flowersRow.classList.contains('visible')) {
-            flowersRow.classList.remove('visible');
-          }
-        }
-
-        lastScrollY = currentScrollY;
-      });
-    });
   </script>
 </body>
 </html>
