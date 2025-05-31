@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,22 +27,27 @@
     
 
     header {
-  position: sticky;
-  top: 0;                      /* pin to the very top as soon as any scroll occurs */
-  background: #241d18;         /* same as page background so it “covers” whatever is behind */
-  padding: 1.5rem 0;           /* you can tweak this for vertical height */
-  text-align: center;
-  z-index: 100;
-}
+      text-align: center;
+      padding: 2rem 0;
+      
+      position: sticky;
+      top: 20px;                  /* start 20px below the top */
+      transition: top 0.3s ease;  /* animate the shift */
+      z-index: 100;               /* sit above other content */
+    }
+    header img.logo {
+      display: block;
+      margin: 0 auto;
+      width: 65%;
+      max-width: 65%;
+      transform: translateY(-10px);
+    }
+   
+    /* 2) When scrolled, move it up to flush with the top */
+    header.scrolled {
+      top: 15px;
+    }
 
-header img.logo {
-  display: block;
-  margin: 0 auto;
-  width: 30%;
-  transform: translateY(-10px); /* if you still want that upward nudge */
-}
-
-  
     .sidebar {
       position: fixed;     
       top: 10px;       
@@ -195,30 +202,17 @@ header img.logo {
 
 
   
- <script>
+<script>
     document.addEventListener('DOMContentLoaded', () => {
       const header = document.querySelector('header');
-      if (!header) {
-        console.error("😭 Couldn't find <header>!");
-        return;
-      }
       window.addEventListener('scroll', () => {
-        console.log("scrollY:", window.scrollY);
-        if (window.scrollY > 20) {
-          if (!header.classList.contains('scrolled')) {
-            console.log("➕ adding .scrolled");
-            header.classList.add('scrolled');
-          }
+        if (window.scrollY > 15) {
+          header.classList.add('scrolled');
         } else {
-          if (header.classList.contains('scrolled')) {
-            console.log("➖ removing .scrolled");
-            header.classList.remove('scrolled');
-          }
+          header.classList.remove('scrolled');
         }
       });
-      console.log("🎉 Scroll handler attached");
     });
   </script>
 </body>
 </html>
-
