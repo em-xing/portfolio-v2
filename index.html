@@ -71,7 +71,6 @@
     #intro-text-container.fade-out {
       opacity: 0;
     }
-    
 
     /* ─────────────────────────────────────────────────────
        TYPEWRITER EFFECT ON THE FIRST LINE
@@ -125,7 +124,7 @@
     }
 
     /* ─────────────────────────────────────────────────────
-       SIDEBAR, SOCIAL ICONS, FLOWER ROW, FOOTER
+       SIDEBAR, SOCIAL ICONS, HOVER STYLES
        ───────────────────────────────────────────────────── */
     .sidebar {
       position: fixed;
@@ -160,9 +159,12 @@
       margin-top: 1px;
     }
 
+    /* ─────────────────────────────────────────────────────
+       FLOWER BUTTONS ROW
+       ───────────────────────────────────────────────────── */
     .flowers-row {
       position: absolute;
-      top: 85vh;
+      top: 90vh;
       left: 320px;
       right: 450px;
       display: flex;
@@ -171,7 +173,16 @@
       padding: 1rem;
       pointer-events: auto;
       z-index: 5;
+
+      /* Add fade‐in/out behavior */
+      opacity: 1;
+      transition: opacity 0.5s ease;
     }
+    .flowers-row.fade-out {
+      opacity: 0;
+    }
+
+    /* You already had these slight vertical offsets */
     .flowers-row a { display: block; }
     .flowers-row img {
       display: block;
@@ -184,6 +195,9 @@
     .flowers-row a:nth-child(2) img { margin-top: 0; }
     .flowers-row a:nth-child(3) img { margin-top: 40px; }
 
+    /* ─────────────────────────────────────────────────────
+       SITE FOOTER
+       ───────────────────────────────────────────────────── */
     .site-footer {
       position: fixed;
       bottom: 10px;
@@ -228,11 +242,11 @@
   </aside>
 
   <!-- INTRO TEXT (typewriter + fade-in on page load only) -->
- <div id="intro-text-container" class="intro-text">
-  <div class="intro-line typewriter-line">
-    hi, i’m emily!
-  </div>
-  <div class="intro-line fadein-line">
+  <div id="intro-text-container" class="intro-text">
+    <div class="intro-line typewriter-line">
+      hi, i’m emily!
+    </div>
+    <div class="intro-line fadein-line">
       i'm a student @ harvard studying 
       <span class="highlight">applied math &amp; global health</span>. 
       i spend my time thinking about 
@@ -260,38 +274,47 @@
   </footer>
 
   <!-- JAVASCRIPT: fade INTRO when its top edge hits 330px while scrolling DOWN,
-       and fade back in when it rises above 330px while scrolling UP -->
+       fade FLOWERS when its top edge hits 670px. -->
   <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const introContainer = document.getElementById('intro-text-container');
-    let lastScrollY = window.scrollY;
-    const THRESHOLD = 330;
+    document.addEventListener('DOMContentLoaded', () => {
+      const introContainer = document.getElementById('intro-text-container');
+      const flowersRow = document.querySelector('.flowers-row');
+      let lastScrollY = window.scrollY;
 
-    window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      const scrollingDown = currentScrollY > lastScrollY;
+      const INTRO_THRESHOLD = 330;
+      const FLOWERS_THRESHOLD = 670;
 
-      // Distance from viewport top to the intro’s top edge:
-      const introTop = introContainer.getBoundingClientRect().top;
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        const scrollingDown = currentScrollY > lastScrollY;
 
-      if (scrollingDown && introTop <= THRESHOLD) {
-        // Scrolling down past 330px → add the fade-out class:
-        if (!introContainer.classList.contains('fade-out')) {
-          introContainer.classList.add('fade-out');
+        // 1) Fade-out / fade-in intro at 330px
+        const introTop = introContainer.getBoundingClientRect().top;
+        if (scrollingDown && introTop <= INTRO_THRESHOLD) {
+          if (!introContainer.classList.contains('fade-out')) {
+            introContainer.classList.add('fade-out');
+          }
+        } else if (!scrollingDown && introTop <= INTRO_THRESHOLD) {
+          if (introContainer.classList.contains('fade-out')) {
+            introContainer.classList.remove('fade-out');
+          }
         }
-      }
-      else if (!scrollingDown && introTop <= THRESHOLD) {
-        // Scrolling up above 330px → remove the fade-out class:
-        if (introContainer.classList.contains('fade-out')) {
-          introContainer.classList.remove('fade-out');
-        }
-      }
 
-      lastScrollY = currentScrollY;
+        // 2) Fade-out / fade-in flowers-row at 670px
+        const flowersTop = flowersRow.getBoundingClientRect().top;
+        if (scrollingDown && flowersTop <= FLOWERS_THRESHOLD) {
+          if (!flowersRow.classList.contains('fade-out')) {
+            flowersRow.classList.add('fade-out');
+          }
+        } else if (!scrollingDown && flowersTop <= FLOWERS_THRESHOLD) {
+          if (flowersRow.classList.contains('fade-out')) {
+            flowersRow.classList.remove('fade-out');
+          }
+        }
+
+        lastScrollY = currentScrollY;
+      });
     });
-  });
-</script>
-
-
+  </script>
 </body>
 </html>
