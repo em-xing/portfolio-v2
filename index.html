@@ -280,7 +280,7 @@
           introContainer.classList.add('fade-out');
         }
       }
-      else if (!scrollingDown && introTop > THRESHOLD) {
+      else if (!scrollingDown && introTop <= THRESHOLD) {
         // Scrolling up above 330px → remove the fade-out class:
         if (introContainer.classList.contains('fade-out')) {
           introContainer.classList.remove('fade-out');
