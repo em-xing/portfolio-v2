@@ -28,16 +28,24 @@ body {
      You may need to tweak this value to match your logo’s rendered height + padding. */
   padding-top: 6rem;
 }
-    /* ─────────────────────────────────────────────────────────
-   TYPEWRITER + FADE-IN ANIMATIONS FOR INTRO TEXT
-   ───────────────────────────────────────────────────────── */
+/* 1) Reset body so content isn’t hidden under the header */
+body {
+  background-color: #241d18;
+  margin: 0;
+  font-family: 'PT Sans', sans-serif;
+  cursor: url("images/cursor_normal.cur") 0 0, auto;
+  /* Make room for the fixed header’s total height */
+  padding-top: 6rem;
+}
 
-/* 1) Container still uses absolute centering */
+/* ─────────────────────────────────────────────────────
+  INTRO TEXT CONTAINER (centered between sidebars)
+  ───────────────────────────────────────────────────── */
 .intro-text {
   position: absolute;
   top: 50%;
-  left: 370px;   /* adjust if your sidebar widths change */
-  right: 270px;  /* adjust if your social-sidebar changes */
+  left: 370px;    /* adjust if your left-sidebar width changes */
+  right: 270px;   /* adjust if your social-sidebar width changes */
   transform: translateY(-50%);
   text-align: center;
   color: white;
@@ -46,68 +54,80 @@ body {
   z-index: 5;
 }
 
-/* 2) TYPEWRITER SPELLING-OUT EFFECT */
-.typewriter {
-  display: inline-block;
-  overflow: hidden;                     /* hide overflowing text until “typed” */
-  white-space: nowrap;                  /* keep the sentence on one line */
-  border-right: 0.1em solid white;      /* caret (blinking bar) */
-  /* start with width: 0 to reveal each character via the steps() function */
-  width: 0;                             
-  animation:
-    typing 3s steps(25, end) forwards, /* type at ~40 “steps” (characters) over 3 seconds */
-    blink-caret 0.8s step-end infinite; /* blinking caret */
+/* Each line in the intro sits in its own block so we can fade it individually: */
+.intro-line {
+  display: block;
+  opacity: 1;  /* start fully visible; JS will override as you scroll */
 }
 
-/* 3) FADE-IN FOR THE REMAINING TEXT */
-.fade-in {
+/* ─────────────────────────────────────────────────────
+  TYPEWRITER EFFECT ON THE FIRST LINE
+  ───────────────────────────────────────────────────── */
+
+/*
+ “hi, i’m emily!” has 14 characters (including punctuation and the space). 
+ So we animate width from 0 → 14ch in exactly 14 discrete steps.
+ */
+.typewriter-line {
   display: inline-block;
-  opacity: 0;                           /* hidden until animation plays */
+  overflow: hidden;             /* hide characters until “revealed” */
+  white-space: nowrap;          /* keep the text on one line */
+  border-right: 0.1em solid white; /* blinking caret */
+  width: 0;                     /* start at zero width */
+
   animation:
-    fadeIn 1s ease-in-out forwards;    /* fade in over 1s */
-  animation-delay: 3s;                  /* start fade-in exactly when typing ends */
+    typing 3s steps(14, end) forwards,  /* 14 steps over 3 seconds */
+    blink-caret 0.8s step-end infinite;  /* blinking caret */
 }
 
-/* ─── KEYFRAME DEFINITIONS ───────────────────────────────────────── */
-
-/* TYPEWRITER: increase width from 0 → 100% in discrete steps */
+/* Keyframes to grow width from 0 → 14ch, one character at a time */
 @keyframes typing {
   from { width: 0; }
-  to   { width: 140px; }
+  to   { width: 14ch; }
 }
 
-/* BLINK-CARET: toggle border-right color to simulate blinking */
+/* Blink the caret by toggling border-color */
 @keyframes blink-caret {
   50% { border-color: transparent; }
 }
 
-/* FADE-IN: simple opacity transition */
+/* ─────────────────────────────────────────────────────
+  FADE-IN FOR THE SECOND LINE
+  ───────────────────────────────────────────────────── */
+
+/*
+ We delay this fade‐in by 3s so that the typewriter finishes first.
+ */
+.fadein-line {
+  display: inline-block;
+  opacity: 0;  /* hidden at first */
+
+  animation:
+    fadeIn 1s ease-in-out forwards;  /* 1s fade‐in */
+  animation-delay: 3s;               /* start fade after typewriter ends */
+}
+
+/* Keyframes for fade from 0 → 1 opacity */
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
 
+/* ─────────────────────────────────────────────────────
+  HEADER, SIDEBARS, ETC. (unchanged from before)
+  ───────────────────────────────────────────────────── */
 
-/* 2) Shrink-wrap header into a small box, fix it to the top center */
 header {
   position: fixed;
   top: 30px;
   left: 50%;
   transform: translateX(-50%);
-  display: inline-block;             /* lets the box size itself to its contents */
-  background-color: #241d18;          /* ~same as body, or use rgba(...) if you want it slightly translucent */
-  padding: 1rem 2rem;                 /* adjust these values so the box is the right height/width */
-  border-radius: 6px;                 /* optional: give it rounded corners */
-  z-index: 100;                       /* keep it above everything else */
-  
-  /* If you prefer a border or drop-shadow instead of a solid background:
-  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-  border: 1px solid #333;
-  background-color: rgba(36,29,24,0.9);
-  */
+  display: inline-block;
+  background-color: #241d18;
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  z-index: 100;
 }
-
-/* 3) Logo inside header: you can keep your existing sizing */
 header img.logo {
   display: block;
   margin: 0 auto;
@@ -116,13 +136,6 @@ header img.logo {
   transform: translateY(-10px);
 }
 
-/* 4) Remove any “sticky” behavior or scroll‐class rules */
-/*    In other words, comment out or delete:
-      header.scrolled { top: 15px; }
-      and also remove the JS that toggles .scrolled. */
-
-/* 5) Sidebar, social icons, footer, etc., stay as before. */
-/*    Example: */
 .sidebar {
   position: fixed;
   top: 10px;
@@ -199,6 +212,7 @@ header img.logo {
 
 
 
+
 /* If you want them truly full-screen, replace width:100vw with width:100% and wrap .flower-buttons around body */
 
   </style>
@@ -233,14 +247,16 @@ header img.logo {
   </header>
 
   <!-- ↓ Insert this new div right after the header: ↓ -->
-  <div class="intro-text">
-  <span class="typewriter">
+ <div class="intro-text">
+  <div class="intro-line typewriter-line">
     hi, i’m emily!
-  </span>
-  <span class="fade-in">
+  </div>
+  <div class="intro-line fadein-line">
     i'm a student @ harvard studying applied math &amp; global health. i spend my time thinking about things we’ve built—cities, digital spaces, social infrastructure, art. tell me about your matcha &amp; music recs, fave chess gambits, and takes on “making impact” &amp; “being human.”
-  </span>
+  </div>
 </div>
+
+
 
   <!-- ↑ End of intro-text ↑ -->
 
@@ -267,16 +283,29 @@ header img.logo {
 
   
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const header = document.querySelector('header');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 15) {
-          header.classList.add('scrolled');
-        } else {
-          header.classList.remove('scrolled');
-        }
-      });
+  document.addEventListener('DOMContentLoaded', () => {
+    const line1 = document.querySelector('.typewriter-line');
+    const line2 = document.querySelector('.fadein-line');
+
+    // How many pixels of upward scroll until line1 is fully invisible:
+    const fadeDistance1 = 100; 
+    // How many more pixels, after that, until line2 is fully invisible:
+    const fadeDistance2 = 100; 
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+
+      // Fade line1: from scrollY=0 → fadeDistance1
+      let op1 = 1 - Math.min(scrollY / fadeDistance1, 1);
+      line1.style.opacity = op1;
+
+      // Fade line2: start after fadeDistance1, end at fadeDistance1+fadeDistance2
+      let raw = scrollY - fadeDistance1;
+      let op2 = 1 - Math.min(Math.max(raw / fadeDistance2, 0), 1);
+      line2.style.opacity = op2;
     });
-  </script>
+  });
+</script>
+
 </body>
 </html>
