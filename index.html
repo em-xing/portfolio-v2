@@ -298,16 +298,30 @@
       const currentScrollY = window.scrollY;
       const scrollingUp = currentScrollY < lastScrollY;
 
-      // Get the bottom edge of the header (in viewport coordinates)
+      // headerBottom = distance from viewport top to the bottom edge of <header>
       const headerBottom = header.getBoundingClientRect().bottom;
-      // Get the top edge of the intro container (in viewport coordinates)
+      // introTop = distance from viewport top to the top edge of #intro-text-container
       const introTop = introContainer.getBoundingClientRect().top;
 
-      // If we are scrolling up AND the intro's top is at-or-above header bottom,
-      // add the fade-out class. Otherwise, remove it.
-      if (scrollingUp && introTop <= headerBottom) {
+      // CASE 1: Intro is fully below header (introTop > headerBottom)
+      if (introTop > headerBottom) {
+        // Always keep it fully visible when it's below the header
+        introContainer.classList.remove('fade-out');
+      }
+      // CASE 2: Intro is under header AND you're scrolling up:
+      else if (introTop <= headerBottom && scrollingUp) {
+        // Fade it out
         introContainer.classList.add('fade-out');
-      } else {
+      }
+      // CASE 3: Intro is under header but you're scrolling down:
+      else if (introTop <= headerBottom && !scrollingUp) {
+        // Keep it faded out (do nothing)
+        // i.e. we do NOT call remove('fade-out') here because it's still under header
+      }
+      // CASE 4: Intro has just come down below the header and you're scrolling down
+      // (This can only happen when introTop crosses from <= headerBottom to > headerBottom)
+      else {
+        // Fade it back in
         introContainer.classList.remove('fade-out');
       }
 
@@ -315,6 +329,7 @@
     });
   });
 </script>
+
 
 </body>
 </html>
