@@ -28,16 +28,6 @@ body {
   padding-top: 6rem;
 }
 
-/* 1) Reset body so content isn’t hidden under the header */
-body {
-  background-color: #241d18;
-  margin: 0;
-  font-family: 'PT Sans', sans-serif;
-  cursor: url("images/cursor_normal.cur") 0 0, auto;
-  /* Make room for the fixed header’s total height */
-  padding-top: 6rem;
-}
-
 /* ─────────────────────────────────────────────────────
   INTRO TEXT CONTAINER (centered between sidebars)
   ───────────────────────────────────────────────────── */
@@ -298,7 +288,7 @@ header img.logo {
     // How many pixels of upward scroll until line1 is fully invisible:
     const fadeDistance1 = 100; 
     // How many more pixels, after that, until line2 is fully invisible:
-    const fadeDistance2 = 100; 
+    const fadeDistance2 = 10; 
 
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
