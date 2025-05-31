@@ -55,7 +55,7 @@ body {
   /* start with width: 0 to reveal each character via the steps() function */
   width: 0;                             
   animation:
-    typing 2s steps(12, end) forwards, /* type at ~40 “steps” (characters) over 3 seconds */
+    typing 3s steps(40, end) forwards, /* type at ~40 “steps” (characters) over 3 seconds */
     blink-caret 0.8s step-end infinite; /* blinking caret */
 }
 
@@ -73,7 +73,7 @@ body {
 /* TYPEWRITER: increase width from 0 → 100% in discrete steps */
 @keyframes typing {
   from { width: 0; }
-  to   { width: 100%; }
+  to   { width: 140px; }
 }
 
 /* BLINK-CARET: toggle border-right color to simulate blinking */
