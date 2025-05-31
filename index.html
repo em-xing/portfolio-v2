@@ -28,18 +28,65 @@ body {
      You may need to tweak this value to match your logo’s rendered height + padding. */
   padding-top: 6rem;
 }
-    .intro-text {
+    /* ─────────────────────────────────────────────────────────
+   TYPEWRITER + FADE-IN ANIMATIONS FOR INTRO TEXT
+   ───────────────────────────────────────────────────────── */
+
+/* 1) Container still uses absolute centering */
+.intro-text {
   position: absolute;
-  top: 50%;                   /* vertically center */
-  left: 370px;                /* move in from the left-sidebar’s right edge (8px + 200px + small buffer) */
-  right: 270px;                /* leave room for the social‐sidebar on the right (37px + buffer) */
-  transform: translateY(-50%);/* shift up by half its own height to truly center vertically */
-  text-align: center;         
+  top: 50%;
+  left: 370px;   /* adjust if your sidebar widths change */
+  right: 270px;  /* adjust if your social-sidebar changes */
+  transform: translateY(-50%);
+  text-align: center;
   color: white;
-  font-size: 1.5rem;            /* larger text—tweak up/down as desired */
+  font-size: 1.5rem;
   line-height: 1.6;
   z-index: 5;
 }
+
+/* 2) TYPEWRITER SPELLING-OUT EFFECT */
+.typewriter {
+  display: inline-block;
+  overflow: hidden;                     /* hide overflowing text until “typed” */
+  white-space: nowrap;                  /* keep the sentence on one line */
+  border-right: 0.1em solid white;      /* caret (blinking bar) */
+  /* start with width: 0 to reveal each character via the steps() function */
+  width: 0;                             
+  animation:
+    typing 3s steps(40, end) forwards, /* type at ~40 “steps” (characters) over 3 seconds */
+    blink-caret 0.8s step-end infinite; /* blinking caret */
+}
+
+/* 3) FADE-IN FOR THE REMAINING TEXT */
+.fade-in {
+  display: inline-block;
+  opacity: 0;                           /* hidden until animation plays */
+  animation:
+    fadeIn 1s ease-in-out forwards;    /* fade in over 1s */
+  animation-delay: 3s;                  /* start fade-in exactly when typing ends */
+}
+
+/* ─── KEYFRAME DEFINITIONS ───────────────────────────────────────── */
+
+/* TYPEWRITER: increase width from 0 → 100% in discrete steps */
+@keyframes typing {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+/* BLINK-CARET: toggle border-right color to simulate blinking */
+@keyframes blink-caret {
+  50% { border-color: transparent; }
+}
+
+/* FADE-IN: simple opacity transition */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 
 /* 2) Shrink-wrap header into a small box, fix it to the top center */
 header {
@@ -187,8 +234,14 @@ header img.logo {
 
   <!-- ↓ Insert this new div right after the header: ↓ -->
   <div class="intro-text">
-    hi! i’m emily, a student @ harvard studying applied math &amp; global health. i spend my time thinking about things we’ve built—cities, digital spaces, social infrastructure, art. tell me about your matcha &amp; music recs, fave chess gambits, and takes on “making impact” &amp; “being human.”
-  </div>
+  <span class="typewriter">
+    hi! i’m emily, a student @ harvard studying applied math &amp; global health.
+  </span>
+  <span class="fade-in">
+    i spend my time thinking about things we’ve built—cities, digital spaces, social infrastructure, art. tell me about your matcha &amp; music recs, fave chess gambits, and takes on “making impact” &amp; “being human.”
+  </span>
+</div>
+
   <!-- ↑ End of intro-text ↑ -->
 
 
