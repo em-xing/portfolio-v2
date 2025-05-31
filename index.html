@@ -72,6 +72,19 @@
       display: block;
       opacity: 1;
     }
+    /* Smooth fade transition for the intro container */
+#intro-text-container {
+  /* Ensure it starts fully opaque */
+  opacity: 1;
+  /* transition on opacity over 0.5s */
+  transition: opacity 0.5s ease;
+}
+
+/* When .fade-out is applied, opacity goes to 0 */
+#intro-text-container.fade-out {
+  opacity: 0;
+}
+
 
     /* ─────────────────────────────────────────────────────
        TYPEWRITER EFFECT ON THE FIRST LINE
@@ -240,7 +253,7 @@
   <!-- ─────────────────────────────────────────────────────
        INTRO TEXT (typewriter + fade-in on page load only)
        ───────────────────────────────────────────────────── -->
-  <div class="intro-text">
+    <div id="intro-text-container" class="intro-text">
     <div class="intro-line typewriter-line">
       hi, i’m emily!
     </div>
@@ -249,9 +262,10 @@
       <span class="highlight">applied math &amp; global health</span>. 
       i spend my time thinking about 
       <span class="highlight">things we’ve built</span>—urban &amp; digital spaces, social infrastructure, art.<br><br>
-      <span class="highlight">tell me about:</span> your matcha &amp; music recs, fave chess gambits, takes on “making impact” &amp; “being human”
+      <span class="highlight">tell me about:</span> your matcha &amp; music recs, fave chess gambits, takes on “making impact” &amp; “being human.”
     </div>
   </div>
+
 
   <!-- ─────────────────────────────────────────────────────
        FLOWER BUTTONS ROW
@@ -274,5 +288,33 @@
   <footer class="site-footer">
     <img src="images/copyright.PNG" alt="Copyright ©" />
   </footer>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const introContainer = document.getElementById('intro-text-container');
+    const header = document.querySelector('header');
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      const scrollingUp = currentScrollY < lastScrollY;
+
+      // Get the bottom edge of the header (in viewport coordinates)
+      const headerBottom = header.getBoundingClientRect().bottom;
+      // Get the top edge of the intro container (in viewport coordinates)
+      const introTop = introContainer.getBoundingClientRect().top;
+
+      // If we are scrolling up AND the intro's top is at-or-above header bottom,
+      // add the fade-out class. Otherwise, remove it.
+      if (scrollingUp && introTop <= headerBottom) {
+        introContainer.classList.add('fade-out');
+      } else {
+        introContainer.classList.remove('fade-out');
+      }
+
+      lastScrollY = currentScrollY;
+    });
+  });
+</script>
+
 </body>
 </html>
