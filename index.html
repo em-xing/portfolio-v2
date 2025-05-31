@@ -174,15 +174,13 @@
       pointer-events: auto;
       z-index: 5;
 
-      /* Add fade‐in/out behavior */
-      opacity: 1;
+      /* Start fully transparent */
+      opacity: 0;
       transition: opacity 0.5s ease;
     }
-    .flowers-row.fade-out {
-      opacity: 0;
+    .flowers-row.visible {
+      opacity: 1;
     }
-
-    /* You already had these slight vertical offsets */
     .flowers-row a { display: block; }
     .flowers-row img {
       display: block;
@@ -278,17 +276,17 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const introContainer = document.getElementById('intro-text-container');
-      const flowersRow = document.querySelector('.flowers-row');
+      const flowersRow    = document.querySelector('.flowers-row');
       let lastScrollY = window.scrollY;
 
-      const INTRO_THRESHOLD = 330;
+      const INTRO_THRESHOLD   = 330;
       const FLOWERS_THRESHOLD = 670;
 
       window.addEventListener('scroll', () => {
         const currentScrollY = window.scrollY;
         const scrollingDown = currentScrollY > lastScrollY;
 
-        // 1) Fade-out / fade-in intro at 330px
+        // 1) Intro fade (unchanged)
         const introTop = introContainer.getBoundingClientRect().top;
         if (scrollingDown && introTop <= INTRO_THRESHOLD) {
           if (!introContainer.classList.contains('fade-out')) {
@@ -300,15 +298,15 @@
           }
         }
 
-        // 2) Fade-out / fade-in flowers-row at 670px
+        // 2) Flowers fade‐in at 670px, fade‐out above 670px
         const flowersTop = flowersRow.getBoundingClientRect().top;
-        if (scrollingDown && flowersTop >= FLOWERS_THRESHOLD) {
-          if (!flowersRow.classList.contains('fade-out')) {
-            flowersRow.classList.add('fade-out');
+        if (flowersTop <= FLOWERS_THRESHOLD) {
+          if (!flowersRow.classList.contains('visible')) {
+            flowersRow.classList.add('visible');
           }
-        } else if (!scrollingDown && flowersTop >= FLOWERS_THRESHOLD) {
-          if (flowersRow.classList.contains('fade-out')) {
-            flowersRow.classList.remove('fade-out');
+        } else {
+          if (flowersRow.classList.contains('visible')) {
+            flowersRow.classList.remove('visible');
           }
         }
 
