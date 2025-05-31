@@ -24,23 +24,20 @@
     }
     
 
-   header {
+    header {
   position: sticky;
-  top: 0;                    /* “stick” to the very top immediately */
-  background: rgba(36, 29, 24, 0.9);  
-    /* Slightly translucent so you see a hint of content beneath. 
-       Or use a solid #241d18 if you truly want it camouflaged. */
+  top: 0;                      /* pin to the very top as soon as any scroll occurs */
+  background: #241d18;         /* same as page background so it “covers” whatever is behind */
+  padding: 1.5rem 0;           /* you can tweak this for vertical height */
   text-align: center;
-  padding: 0.5rem 0;         /* just enough vertical space—no huge gaps */
-  z-index: 100;              /* above everything else */
+  z-index: 100;
 }
 
 header img.logo {
   display: block;
   margin: 0 auto;
-  width: 30%;                /* keep the same width you liked */
-  transform: translateY(-10px); 
-    /* if you still want that 10px upward nudge for the image */
+  width: 30%;
+  transform: translateY(-10px); /* if you still want that upward nudge */
 }
 
   
@@ -198,6 +195,30 @@ header img.logo {
 
 
   
-
+ <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const header = document.querySelector('header');
+      if (!header) {
+        console.error("😭 Couldn't find <header>!");
+        return;
+      }
+      window.addEventListener('scroll', () => {
+        console.log("scrollY:", window.scrollY);
+        if (window.scrollY > 20) {
+          if (!header.classList.contains('scrolled')) {
+            console.log("➕ adding .scrolled");
+            header.classList.add('scrolled');
+          }
+        } else {
+          if (header.classList.contains('scrolled')) {
+            console.log("➖ removing .scrolled");
+            header.classList.remove('scrolled');
+          }
+        }
+      });
+      console.log("🎉 Scroll handler attached");
+    });
+  </script>
 </body>
 </html>
+
