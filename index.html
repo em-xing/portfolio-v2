@@ -72,7 +72,7 @@
       opacity: 0;
     }
     #intro-text-container.fade-in {
-      opacity: 100;
+      opacity: 1;
     }
 
     /* ─────────────────────────────────────────────────────
@@ -264,31 +264,33 @@
   <!-- JAVASCRIPT: fade INTRO when its top edge hits 330px while scrolling DOWN,
        and fade back in when it rises above 330px while scrolling UP -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const introContainer = document.getElementById('intro-text-container');
-      let lastScrollY = window.scrollY;
-      const THRESHOLD = 330;
+  document.addEventListener('DOMContentLoaded', () => {
+    const introContainer = document.getElementById('intro-text-container');
+    let lastScrollY = window.scrollY;
+    const THRESHOLD = 330;
 
-      window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
-        const scrollingDown = currentScrollY > lastScrollY;
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      const scrollingDown = currentScrollY > lastScrollY;
 
-        // Distance from viewport top to the intro’s top edge
-        const introTop = introContainer.getBoundingClientRect().top;
+      // Distance from viewport top to the intro’s top edge
+      const introTop = introContainer.getBoundingClientRect().top;
 
-        // 1) Fade OUT as soon as introTop ≤ 330px while scrolling DOWN
-        if (scrollingDown && introTop <= THRESHOLD) {
-          introContainer.classList.add('fade-out');
-        }
-        // 2) Fade IN as soon as introTop ≥ 330px while scrolling UP
-        if (!scrollingDown && introTop >= THRESHOLD) {
-          introContainer.classList.add('fade-in');
-        }
-        // 3) Otherwise, keep the current fade-out state
+      if (scrollingDown && introTop <= THRESHOLD) {
+        // We’re scrolling down past the threshold → fade out
+        introContainer.classList.remove('fade-in');
+        introContainer.classList.add('fade-out');
+      }
+      else if (!scrollingDown && introTop >= THRESHOLD) {
+        // We’re scrolling up above the threshold → fade in
+        introContainer.classList.remove('fade-out');
+        introContainer.classList.add('fade-in');
+      }
 
-        lastScrollY = currentScrollY;
-      });
+      lastScrollY = currentScrollY;
     });
-  </script>
+  });
+</script>
+
 </body>
 </html>
