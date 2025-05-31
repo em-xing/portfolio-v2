@@ -302,11 +302,11 @@
 
         // 2) Fade-out / fade-in flowers-row at 670px
         const flowersTop = flowersRow.getBoundingClientRect().top;
-        if (scrollingDown && flowersTop <= FLOWERS_THRESHOLD) {
+        if (scrollingDown && flowersTop >= FLOWERS_THRESHOLD) {
           if (!flowersRow.classList.contains('fade-out')) {
             flowersRow.classList.add('fade-out');
           }
-        } else if (!scrollingDown && flowersTop <= FLOWERS_THRESHOLD) {
+        } else if (!scrollingDown && flowersTop >= FLOWERS_THRESHOLD) {
           if (flowersRow.classList.contains('fade-out')) {
             flowersRow.classList.remove('fade-out');
           }
