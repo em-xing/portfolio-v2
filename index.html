@@ -550,6 +550,7 @@
   <footer class="site-footer">
     <img src="images/copyright.PNG" alt="Copyright ©" />
   </footer>
+  
   <script>
   document.addEventListener('DOMContentLoaded', () => {
     const introContainer = document.getElementById('intro-text-container');
@@ -566,11 +567,11 @@
       // ─── 1) HANDLE INTRO TEXT ─────────────────────────────────────────────
       const introTop = introContainer.getBoundingClientRect().top;
 
-      if (!scrollingDown && introTop >= INTRO_THRESHOLD) {
+      if (!scrollingDown && introTop <= INTRO_THRESHOLD) {
         // Scrolling UP & intro is still below (or at) 330px → fade OUT
         introContainer.classList.add('fade-out');
       }
-      else if (scrollingDown && introTop <= INTRO_THRESHOLD) {
+      else if (scrollingDown && introTop >= INTRO_THRESHOLD) {
         // Scrolling DOWN & intro is now above (or at) 330px → fade IN
         introContainer.classList.remove('fade-out');
       }
@@ -578,11 +579,11 @@
       // ─── 2) HANDLE FLOWERS ROW (OPPOSITE) ─────────────────────────────────
       const flowersTop = flowersRow.getBoundingClientRect().top;
 
-      if (scrollingDown && flowersTop >= FLOWERS_THRESHOLD) {
+      if (scrollingDown && flowersTop <= FLOWERS_THRESHOLD) {
         // Scrolling DOWN & flowers row top is still ≥ 670px → fade IN (.visible)
         flowersRow.classList.add('visible');
       }
-      else if (!scrollingDown && flowersTop <= FLOWERS_THRESHOLD) {
+      else if (!scrollingDown && flowersTop >= FLOWERS_THRESHOLD) {
         // Scrolling UP & flowers row top is now ≤ 670px → fade OUT (remove .visible)
         flowersRow.classList.remove('visible');
       }
