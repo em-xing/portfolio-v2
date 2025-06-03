@@ -88,10 +88,29 @@
     }
     @keyframes typing {
       from { width: 0; }
-      to   { width: 12ch; }
+      to   { width: 12ch; } /* adjust length to match "hi, i’m emily!" */
     }
     @keyframes blink-caret {
       50% { border-color: transparent; }
+    }
+
+    /* ─────────────────────────────────────────────────────
+       FADE-IN FOR THE SECOND LINE (only on page load; no scroll fade)
+       ───────────────────────────────────────────────────── */
+    .fadein-line {
+      display: inline-block;
+      font-family: 'PT Sans', sans-serif;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: #ffffff;
+      opacity: 0;
+      animation:
+        fadeIn 1s ease-in-out forwards;
+      animation-delay: 2.5s; /* wait until typing animation finishes */
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
     }
 
     /* ─────────────────────────────────────────────────────
@@ -224,12 +243,12 @@
     </a>
   </aside>
 
-  <!-- INTRO TEXT (with typewriter on first line) -->
+  <!-- INTRO TEXT (with typewriter + fade-in on page load on second line) -->
   <div id="intro-text-container" class="intro-text">
     <div class="intro-line typewriter-line">
       hi, i’m emily!
     </div>
-    <div class="intro-line">
+    <div class="intro-line fadein-line">
       i'm a student @ harvard studying 
       <span class="highlight">applied math &amp; global health</span>. 
       i spend my time exploring 
@@ -260,19 +279,22 @@
     document.addEventListener('DOMContentLoaded', () => {
       const introContainer = document.getElementById('intro-text-container');
       const flowersRow     = document.querySelector('.flowers-row');
+      const INTRO_THRESHOLD   = 330; // px from viewport top
+      const FLOWERS_THRESHOLD = 670; // px from viewport top
 
       window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
+        const introTop    = introContainer.getBoundingClientRect().top;
+        const flowersTop  = flowersRow.getBoundingClientRect().top;
 
-        // Intro text: fade out when scrollY ≥ 330, fade back in if < 330
-        if (scrollY >= 330) {
+        // Intro text: fade out when its top is at or above threshold, fade back in if below threshold
+        if (introTop <= INTRO_THRESHOLD) {
           introContainer.classList.add('fade-out');
         } else {
           introContainer.classList.remove('fade-out');
         }
 
-        // Flowers row: fade in when scrollY ≥ 670, fade out if < 670
-        if (scrollY >= 670) {
+        // Flowers row: fade in when its top is at or below threshold, fade out if above threshold
+        if (flowersTop <= FLOWERS_THRESHOLD) {
           flowersRow.classList.add('visible');
         } else {
           flowersRow.classList.remove('visible');
