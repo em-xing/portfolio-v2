@@ -213,6 +213,24 @@
       height: auto;
       display: block;
     }
+    /* intro container */
+#intro-text-container {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+#intro-text-container.fade-out {
+  opacity: 0;
+}
+
+/* flowers row */
+.flowers-row {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.flowers-row.visible {
+  opacity: 1;
+}
+
   </style>
 </head>
 
@@ -551,40 +569,40 @@
     <img src="images/copyright.PNG" alt="Copyright ©" />
   </footer>
   
-  <script>
+ <script>
   document.addEventListener('DOMContentLoaded', () => {
     const introContainer = document.getElementById('intro-text-container');
     const flowersRow     = document.querySelector('.flowers-row');
     let lastScrollY      = window.scrollY;
 
-    const INTRO_THRESHOLD   = 330; // same 330px as before
-    const FLOWERS_THRESHOLD = 670; // same 670px as before
+    const INTRO_THRESHOLD   = 330; // px
+    const FLOWERS_THRESHOLD = 670; // px
 
     window.addEventListener('scroll', () => {
       const currentScrollY = window.scrollY;
       const scrollingDown  = currentScrollY > lastScrollY;
 
-      // ─── 1) HANDLE INTRO TEXT ─────────────────────────────────────────────
+      // ─── 1) INTRO TEXT ───────────────────────────────────────────────────
       const introTop = introContainer.getBoundingClientRect().top;
 
-      if (!scrollingDown && introTop <= INTRO_THRESHOLD) {
-        // Scrolling UP & intro is still below (or at) 330px → fade OUT
+      if (!scrollingDown && introTop >= INTRO_THRESHOLD) {
+        // Scrolling UP & intro’s top is at or below 330px → fade OUT
         introContainer.classList.add('fade-out');
       }
-      else if (scrollingDown && introTop >= INTRO_THRESHOLD) {
-        // Scrolling DOWN & intro is now above (or at) 330px → fade IN
+      else if (scrollingDown && introTop <= INTRO_THRESHOLD) {
+        // Scrolling DOWN & intro’s top is at or above 330px → fade IN
         introContainer.classList.remove('fade-out');
       }
 
-      // ─── 2) HANDLE FLOWERS ROW (OPPOSITE) ─────────────────────────────────
+      // ─── 2) FLOWERS ROW (OPPOSITE) ───────────────────────────────────────
       const flowersTop = flowersRow.getBoundingClientRect().top;
 
-      if (scrollingDown && flowersTop <= FLOWERS_THRESHOLD) {
-        // Scrolling DOWN & flowers row top is still ≥ 670px → fade IN (.visible)
+      if (flowersTop >= FLOWERS_THRESHOLD) {
+        // flowers’ top is at or below 670px → fade IN
         flowersRow.classList.add('visible');
       }
-      else if (!scrollingDown && flowersTop >= FLOWERS_THRESHOLD) {
-        // Scrolling UP & flowers row top is now ≤ 670px → fade OUT (remove .visible)
+      else if (flowersTop <= FLOWERS_THRESHOLD) {
+        // flowers’ top is at or above 670px → fade OUT
         flowersRow.classList.remove('visible');
       }
 
@@ -592,7 +610,6 @@
     });
   });
 </script>
-
 
 
 </body>
