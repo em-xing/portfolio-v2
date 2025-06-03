@@ -282,18 +282,26 @@
       const INTRO_THRESHOLD   = 330; // px from viewport top
       const FLOWERS_THRESHOLD = 670; // px from viewport top
 
-      window.addEventListener('scroll', () => {
-        const introTop    = introContainer.getBoundingClientRect().top;
-        const flowersTop  = flowersRow.getBoundingClientRect().top;
+      function fadeOutIntro() {
+        introContainer.classList.add('fade-out');
+      }
 
-        // Intro text: fade out when its top is at or above threshold, fade back in if below threshold
+      function fadeInIntro() {
+        introContainer.classList.remove('fade-out');
+      }
+
+      window.addEventListener('scroll', () => {
+        const introTop   = introContainer.getBoundingClientRect().top;
+        const flowersTop = flowersRow.getBoundingClientRect().top;
+
+        // Intro text fade-out / fade-in commands
         if (introTop <= INTRO_THRESHOLD) {
-          introContainer.classList.add('fade-out');
-        } else if ((introTop >= INTRO_THRESHOLD){
-          introContainer.classList.remove('fade-out');
+          fadeOutIntro();
+        } else {
+          fadeInIntro();
         }
 
-        // Flowers row: fade in when its top is at or below threshold, fade out if above threshold
+        // Flowers row: fade in when its top is at or below threshold, fade out if above
         if (flowersTop <= FLOWERS_THRESHOLD) {
           flowersRow.classList.add('visible');
         } else {
