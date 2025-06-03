@@ -103,6 +103,9 @@
     /* ─────────────────────────────────────────────────────
        INTRO TEXT CONTAINER (centered between sidebars)
        ───────────────────────────────────────────────────── */
+   /* ─────────────────────────────────────────────────────
+       INTRO TEXT CONTAINER (centered between sidebars)
+       ───────────────────────────────────────────────────── */
     .intro-text {
       position: absolute;
       top: 52%;
@@ -119,6 +122,38 @@
     /* When this class is added, intro text fades out */
     .fade-out {
       opacity: 0;
+    }
+
+    /* ─────────────────────────────────────────────────────
+       SCROLL ARROW (stays visible, positioned below intro text)
+       ───────────────────────────────────────────────────── */
+    .scroll-arrow {
+      position: absolute;
+      top: 72%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #ffff64;
+      font-size: 2rem;
+      z-index: 6;
+      animation: bounce 2s ease-in-out infinite;
+      cursor: pointer;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+    .scroll-arrow:hover {
+      opacity: 0.8;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      40% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+      60% {
+        transform: translateX(-50%) translateY(-5px);
+      }
     }
 
     /* ─────────────────────────────────────────────────────
