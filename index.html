@@ -61,59 +61,12 @@
       font-size: 1.3rem;
       line-height: 1.5;
       z-index: 5;
-    }
-
-    /* Smooth fade transition for the intro container */
-    #intro-text-container {
       opacity: 1;
       transition: opacity 0.5s ease;
     }
-    #intro-text-container.fade-out {
+    /* When this class is added, intro text fades out */
+    .fade-out {
       opacity: 0;
-    }
-
-    /* ─────────────────────────────────────────────────────
-       TYPEWRITER EFFECT ON THE FIRST LINE
-       ───────────────────────────────────────────────────── */
-    .typewriter-line {
-      display: inline-block;
-      font-family: 'PT Sans', sans-serif;
-      font-weight: 560;
-      font-size: 1.8rem;
-      color: white;
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 0.1em solid #bdeafe;
-      width: 0;
-      animation:
-        typing 2.25s steps(12, end) forwards,
-        blink-caret 0.8s step-end infinite;
-    }
-    @keyframes typing {
-      from { width: 0; }
-      to   { width: 12ch; }
-    }
-    @keyframes blink-caret {
-      50% { border-color: transparent; }
-    }
-
-    /* ─────────────────────────────────────────────────────
-       FADE-IN FOR THE SECOND LINE (only on page load; no scroll fade)
-       ───────────────────────────────────────────────────── */
-    .fadein-line {
-      display: inline-block;
-      font-family: 'PT Sans', sans-serif;
-      font-weight: 400;
-      font-size: 1.3rem;
-      color: #ffffff;
-      opacity: 0;
-      animation:
-        fadeIn 1s ease-in-out forwards;
-      animation-delay: 2.5s; /* wait until the typewriter is done */
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
     }
 
     /* ─────────────────────────────────────────────────────
@@ -163,320 +116,26 @@
        FLOWER BUTTONS ROW
        ───────────────────────────────────────────────────── */
     .flowers-row {
-  position: absolute;
-  top: 90vh;
-  left: 320px;
-  right: 450px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 1rem;
-  pointer-events: auto;
-  z-index: 5;
-
-  /* Start fully transparent (no .visible class) */
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-.flowers-row.visible {
-  opacity: 1;
-}
-
-    .flowers-row a { display: block; }
-    .flowers-row img {
-      display: block;
-      width: auto;
-      height: auto;
-      max-height: 200px;
-      transform: scale(0.65);
-    }
-    .flowers-row a:nth-child(1) img { margin-top: 20px; }
-    .flowers-row a:nth-child(2) img { margin-top: 0; }
-    .flowers-row a:nth-child(3) img { margin-top: 40px; }
-
-    /* ─────────────────────────────────────────────────────
-       SITE FOOTER
-       ───────────────────────────────────────────────────── */
-    .site-footer {
-      position: fixed;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.2);
-      display: inline-block;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      z-index: 50;
-    }
-    .site-footer img {
-      max-height: 40px;
-      height: auto;
-      display: block;
-    }
-    /* intro container */
-#intro-text-container {
-  opacity: 1;
-  transition: opacity 0.5s ease;
-}
-#intro-text-container.fade-out {
-  opacity: 0;
-}
-
-/* flowers row */
-.flowers-row {
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-.flowers-row.visible {
-  opacity: 1;
-}
-
-  </style>
-</head>
-
-<body>
-  <!-- HEADER -->
-  <header>
-    <img src="images/name.gif" alt="name logo" class="logo"/>
-  </header>
-
-  <!-- LEFT SIDEBAR -->
-  <aside class="sidebar">
-    <img src="images/sidebar_art.PNG" alt="sidebar art"/>
-  </aside>
-
-  <!-- RIGHT SOCIAL ICONS -->
-  <aside class="social-sidebar">
-    <a href="https://www.linkedin.com/in/emily-xing-5663ab266/" target="_blank">
-      <img src="images/icon_linkedin.PNG" alt="LinkedIn icon">
-    </a>
-    <a href="mailto:emletxing@gmail.com">
-      <img src="images/icon_mail.PNG" alt="Email icon">
-    </a>
-    <a href="#">
-      <img src="images/icon_shooting_star.PNG" alt="Star icon">
-    </a>
-  </aside>
-
-  <!-- INTRO TEXT (typewriter + fade-in on page load only) -->
-  <div id="intro-text-container" class="intro-text">
-    <div class="intro-line typewriter-line">
-      hi, i’m emily!
-    </div>
-    <div class="intro-line fadein-line">
-      i'm a student @ harvard studying 
-      <span class="highlight">applied math &amp; global health</span>. 
-      i spend my time exploring 
-      <span class="highlight">things we’ve built</span>—urban &amp; digital spaces, social infrastructure, art.<br><br>
-      <span class="highlight">tell me about:</span> your matcha &amp; music recs, fave chess gambits, takes on “making impact” &amp; “being human.”
-    </div>
-  </div>
-
-  <!-- FLOWER BUTTONS ROW -->
-    <!-- ... your HTML ... -->
-
-  <!-- FLOWER BUTTONS ROW -->
-  <section class="flowers-row">
-    <a href="flower_research.html">
-      <img src="images/flower_research.PNG" alt="Flower Research">
-    </a>
-    <a href="flower_writing.html">
-      <img src="images/flower_writing.PNG" alt="Flower Writing">
-    </a>
-    <a href="flower_scrapbook.html">
-      <img src="images/flower_scrapbook.PNG" alt="Flower Scrapbook">
-    </a>
-  </section>
-
-  <!-- SITE FOOTER -->
-  <footer class="site-footer">
-    <img src="images/copyright.PNG" alt="Copyright ©" />
-  </footer>
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Emily Xing</title>
-
-  <!-- Load PT Sans from Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- Favicon -->
-  <link rel="icon" href="images/favicon.PNG" type="image/png" />
-
-  <style>
-    /* ─────────────────────────────────────────────────────
-       RESET + BODY (use PT Sans everywhere by default)
-       ───────────────────────────────────────────────────── */
-    body {
-      background-color: #241d18;
-      margin: 0;
-      font-family: 'PT Sans', sans-serif;
-      color: #ffffff;
-      cursor: url("images/cursor_normal.cur") 0 0, auto;
-      /* Make room for the fixed header’s height */
-      padding-top: 6rem;
-    }
-
-    /* ─────────────────────────────────────────────────────
-       HEADER
-       ───────────────────────────────────────────────────── */
-    header {
-      position: fixed;
-      top: 55px;
-      left: 55%;
-      transform: translateX(-50%);
-      display: inline-block;
-      border-radius: 2px;
-      z-index: 100;
-    }
-    header img.logo {
-      display: block;
-      margin: 0 auto;
-      width: 80%;
-      max-width: 80%;
-      transform: translateY(-10px);
-    }
-
-    /* ─────────────────────────────────────────────────────
-       INTRO TEXT CONTAINER (centered between sidebars)
-       ───────────────────────────────────────────────────── */
-    .intro-text {
       position: absolute;
-      top: 52%;
-      left: 370px;    /* keep it between left-sidebar and right-sidebar */
-      right: 270px;
-      transform: translateY(-50%);
-      text-align: center;
-      font-size: 1.3rem;
-      line-height: 1.5;
+      top: 90vh;
+      left: 320px;
+      right: 450px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 1rem;
+      pointer-events: auto;
       z-index: 5;
-    }
-
-    /* Smooth fade transition for the intro container */
-    #intro-text-container {
-      opacity: 1;
+      opacity: 0; /* start invisible */
       transition: opacity 0.5s ease;
     }
-    #intro-text-container.fade-out {
-      opacity: 0;
+    /* When this class is added, flowers fade in */
+    .visible {
+      opacity: 1;
     }
-
-    /* ─────────────────────────────────────────────────────
-       TYPEWRITER EFFECT ON THE FIRST LINE
-       ───────────────────────────────────────────────────── */
-    .typewriter-line {
-      display: inline-block;
-      font-family: 'PT Sans', sans-serif;
-      font-weight: 560;
-      font-size: 1.8rem;
-      color: white;
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 0.1em solid #bdeafe;
-      width: 0;
-      animation:
-        typing 2.25s steps(12, end) forwards,
-        blink-caret 0.8s step-end infinite;
-    }
-    @keyframes typing {
-      from { width: 0; }
-      to   { width: 12ch; }
-    }
-    @keyframes blink-caret {
-      50% { border-color: transparent; }
-    }
-
-    /* ─────────────────────────────────────────────────────
-       FADE-IN FOR THE SECOND LINE (only on page load; no scroll fade)
-       ───────────────────────────────────────────────────── */
-    .fadein-line {
-      display: inline-block;
-      font-family: 'PT Sans', sans-serif;
-      font-weight: 400;
-      font-size: 1.3rem;
-      color: #ffffff;
-      opacity: 0;
-      animation:
-        fadeIn 1s ease-in-out forwards;
-      animation-delay: 2.5s; /* wait until the typewriter is done */
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    /* ─────────────────────────────────────────────────────
-       HIGHLIGHTED PHRASES IN ORANGE
-       ───────────────────────────────────────────────────── */
-    .highlight {
-      color: #ffa97e;
-    }
-
-    /* ─────────────────────────────────────────────────────
-       SIDEBAR, SOCIAL ICONS, HOVER STYLES
-       ───────────────────────────────────────────────────── */
-    .sidebar {
-      position: fixed;
-      top: 10px;
-      left: 8px;
-      width: 200px;
-      z-index: 10;
-    }
-    .sidebar img {
+    .flowers-row a {
       display: block;
-      max-width: 600%;
-      height: auto;
     }
-
-    .social-sidebar {
-      position: fixed;
-      top: 150px;
-      right: 37px;
-      height: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1px;
-      z-index: 10;
-    }
-    .social-sidebar img {
-      display: block;
-      transform: scale(0.4);
-      transform-origin: center center;
-    }
-    .social-sidebar a + a {
-      margin-top: 1px;
-    }
-
-    /* ─────────────────────────────────────────────────────
-       FLOWER BUTTONS ROW
-       ───────────────────────────────────────────────────── */
-    .flowers-row {
-  position: absolute;
-  top: 90vh;
-  left: 320px;
-  right: 450px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 1rem;
-  pointer-events: auto;
-  z-index: 5;
-
-  /* Start fully transparent (no .visible class) */
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-.flowers-row.visible {
-  opacity: 1;
-}
-
-    .flowers-row a { display: block; }
     .flowers-row img {
       display: block;
       width: auto;
@@ -484,9 +143,15 @@
       max-height: 200px;
       transform: scale(0.65);
     }
-    .flowers-row a:nth-child(1) img { margin-top: 20px; }
-    .flowers-row a:nth-child(2) img { margin-top: 0; }
-    .flowers-row a:nth-child(3) img { margin-top: 40px; }
+    .flowers-row a:nth-child(1) img {
+      margin-top: 20px;
+    }
+    .flowers-row a:nth-child(2) img {
+      margin-top: 0;
+    }
+    .flowers-row a:nth-child(3) img {
+      margin-top: 40px;
+    }
 
     /* ─────────────────────────────────────────────────────
        SITE FOOTER
@@ -534,12 +199,12 @@
     </a>
   </aside>
 
-  <!-- INTRO TEXT (typewriter + fade-in on page load only) -->
+  <!-- INTRO TEXT (no typewriter or fade-in on load) -->
   <div id="intro-text-container" class="intro-text">
-    <div class="intro-line typewriter-line">
+    <div class="intro-line">
       hi, i’m emily!
     </div>
-    <div class="intro-line fadein-line">
+    <div class="intro-line">
       i'm a student @ harvard studying 
       <span class="highlight">applied math &amp; global health</span>. 
       i spend my time exploring 
@@ -547,9 +212,6 @@
       <span class="highlight">tell me about:</span> your matcha &amp; music recs, fave chess gambits, takes on “making impact” &amp; “being human.”
     </div>
   </div>
-
-  <!-- FLOWER BUTTONS ROW -->
-    <!-- ... your HTML ... -->
 
   <!-- FLOWER BUTTONS ROW -->
   <section class="flowers-row">
@@ -568,50 +230,31 @@
   <footer class="site-footer">
     <img src="images/copyright.PNG" alt="Copyright ©" />
   </footer>
-  
- <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const introContainer = document.getElementById('intro-text-container');
-    const flowersRow     = document.querySelector('.flowers-row');
-    let lastScrollY      = window.scrollY;
 
-    const INTRO_THRESHOLD   = 330; // px
-    const FLOWERS_THRESHOLD = 670; // px
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const introContainer = document.getElementById('intro-text-container');
+      const flowersRow     = document.querySelector('.flowers-row');
 
-    window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      const scrollingDown  = currentScrollY > lastScrollY;
+      window.addEventListener('scroll', () => {
+        const introTop    = introContainer.getBoundingClientRect().top;
+        const flowersTop  = flowersRow.getBoundingClientRect().top;
 
-      // ─── 1) INTRO TEXT ───────────────────────────────────────────────────
-      const introTop = introContainer.getBoundingClientRect().top;
+        // Intro text: fade out when its top is above 330px, fade back in otherwise
+        if (introTop <= 330) {
+          introContainer.classList.add('fade-out');
+        } else {
+          introContainer.classList.remove('fade-out');
+        }
 
-      if (!scrollingDown && introTop >= INTRO_THRESHOLD) {
-        // Scrolling UP & intro’s top is at or below 330px → fade OUT
-        introContainer.classList.add('fade-out');
-      }
-      else if (scrollingDown && introTop <= INTRO_THRESHOLD) {
-        // Scrolling DOWN & intro’s top is at or above 330px → fade IN
-        introContainer.classList.remove('fade-out');
-      }
-
-      // ─── 2) FLOWERS ROW (OPPOSITE) ───────────────────────────────────────
-      const flowersTop = flowersRow.getBoundingClientRect().top;
-
-      if (flowersTop >= FLOWERS_THRESHOLD) {
-        // flowers’ top is at or below 670px → fade IN
-        flowersRow.classList.add('visible');
-      }
-      else if (flowersTop <= FLOWERS_THRESHOLD) {
-        // flowers’ top is at or above 670px → fade OUT
-        flowersRow.classList.remove('visible');
-      }
-
-      lastScrollY = currentScrollY;
+        // Flowers row: fade in when its top is below or at 670px, fade out otherwise
+        if (flowersTop <= 670) {
+          flowersRow.classList.add('visible');
+        } else {
+          flowersRow.classList.remove('visible');
+        }
+      });
     });
-  });
-</script>
-
-
+  </script>
 </body>
 </html>
-
