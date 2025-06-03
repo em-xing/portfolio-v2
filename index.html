@@ -274,34 +274,37 @@
   <footer class="site-footer">
     <img src="images/copyright.PNG" alt="Copyright ©" />
   </footer>
+  <script>
 
   <!-- JAVASCRIPT: -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // 1) Query flowers-row **after** it exists in the DOM
-      const flowersRow = document.querySelector(".flowers-row");
-      const FLOWERS_THRESHOLD = 670;
+  document.addEventListener('DOMContentLoaded', () => {
+  // 1) Grab the .flowers-row element from the page
+  const flowersRow = document.querySelector('.flowers-row');
+  const FLOWERS_THRESHOLD = 670;
 
-      // 2) If the element is not found, bail out
-      if (!flowersRow) {
-        console.error("Could not find .flowers-row in the DOM.");
-        return;
-      }
+  if (!flowersRow) {
+    console.error("Could not find .flowers-row in the DOM.");
+    return;
+  }
 
-      // 3) Attach the scroll listener
-      window.addEventListener("scroll", function() {
-        const flowersTop = flowersRow.getBoundingClientRect().top;
-        if (flowersTop <= FLOWERS_THRESHOLD) {
-          flowersRow.classList.add("visible");
-        } else {
-          flowersRow.classList.remove("visible");
-        }
-      });
+  // 2) Attach a scroll handler to window
+  window.addEventListener('scroll', () => {
+    // 3) On every scroll, compute how far .flowers-row is from the top of the viewport
+    const flowersTop = flowersRow.getBoundingClientRect().top;
 
-      // (Optional debug)
-      console.log("Scroll listener attached. .flowers-row top =", flowersRow.getBoundingClientRect().top);
-    });
-  </script>
+    // 4) If that “distance from top” is less than or equal to 670px, add the "visible" class.
+    //    Otherwise, remove it.
+    if (flowersTop <= FLOWERS_THRESHOLD) {
+      flowersRow.classList.add('visible');
+    } else {
+      flowersRow.classList.remove('visible');
+    }
+  });
+
+  // (Optional debug) 
+  console.log("Scroll listener attached. .flowers-row top =", flowersRow.getBoundingClientRect().top);
+});
+    </script>
 </body>
 </html>
 
