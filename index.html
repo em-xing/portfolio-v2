@@ -54,7 +54,7 @@
        INTRO TEXT CONTAINER (centered between sidebars)
        ───────────────────────────────────────────────────── */
     .intro-text {
-      position: fixed;
+      position: absolute;
       top: 52%;
       left: 370px;    /* keep it between left-sidebar and right-sidebar */
       right: 270px;
@@ -162,8 +162,8 @@
        FLOWER BUTTONS ROW
        ───────────────────────────────────────────────────── */
     .flowers-row {
-      position: relative;
-      top: 70vh;
+      position: absolute;
+      top: 90vh;
       left: 320px;
       right: 450px;
       display: flex;
@@ -174,7 +174,6 @@
       z-index: 5;
       opacity: 0; /* start invisible */
       transition: opacity 0.5s ease;
-      margin-bottom: 20vh; /* Add some space at the bottom */
     }
     /* When this class is added, flowers fade in */
     .visible {
@@ -293,19 +292,18 @@
 
       window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
+        const introRect = introContainer.getBoundingClientRect();
+        const flowersRect = flowersRow.getBoundingClientRect();
         
-        // Intro text: fade out when scrolled past 300px, fade back in when scrolled back up
-        if (scrollY > 300) {
+        // Intro text: fade out when it reaches near the top of viewport
+        if (introRect.top <= 200) {
           fadeOutIntro();
         } else {
           fadeInIntro();
         }
 
-        // Flowers row: fade in when scrolled past 400px
-        const flowersTop = flowersRow.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        
-        if (flowersTop < windowHeight * 0.8) {
+        // Flowers row: fade in when it comes into view
+        if (flowersRect.top <= window.innerHeight * 0.8) {
           flowersRow.classList.add('visible');
         } else {
           flowersRow.classList.remove('visible');
