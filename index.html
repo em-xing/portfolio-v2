@@ -26,8 +26,8 @@
       cursor: url("images/cursor_normal.cur") 0 0, auto;
       /* Make room for the fixed header's height */
       padding-top: 6rem;
-      /* Add enough height for scrolling */
-      min-height: 200vh;
+      /* Adjust height so scrolling naturally stops when flowers are at 500px */
+      min-height: 140vh;
     }
 
     /* ─────────────────────────────────────────────────────
@@ -281,7 +281,6 @@
     document.addEventListener('DOMContentLoaded', () => {
       const introContainer = document.getElementById('intro-text-container');
       const flowersRow     = document.querySelector('.flowers-row');
-      let maxScrollReached = false;
       
       function fadeOutIntro() {
         introContainer.classList.add('fade-out');
@@ -308,19 +307,6 @@
           flowersRow.classList.add('visible');
         } else {
           flowersRow.classList.remove('visible');
-        }
-
-        // Stop scrolling when flowers hit 500px from top
-        if (flowersRect.top <= 500 && !maxScrollReached) {
-          maxScrollReached = true;
-          document.body.style.overflow = 'hidden';
-          window.scrollTo(0, scrollY); // Lock scroll position
-        }
-        
-        // Allow scrolling back up
-        if (flowersRect.top > 500 && maxScrollReached) {
-          maxScrollReached = false;
-          document.body.style.overflow = 'auto';
         }
       });
     });
