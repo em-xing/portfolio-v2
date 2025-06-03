@@ -289,11 +289,11 @@
         const introTop = introContainer.getBoundingClientRect().top;
 
         // 1) Fade OUT as soon as introTop ≤ 330px while scrolling DOWN
-        if (scrollingDown && introTop <= THRESHOLD) {
+        if (scrollingUp && introTop <= THRESHOLD) {
           introContainer.classList.add('fade-out');
         }
         // 2) Fade IN as soon as introTop ≥ 330px while scrolling UP
-        if (!scrollingDown && introTop <= THRESHOLD) {
+        if (!scrollingDown && introTop >= THRESHOLD) {
           introContainer.classList.add('fade-in');
         }
         // 3) Otherwise, keep the current fade-out state
