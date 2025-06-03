@@ -27,7 +27,7 @@
       /* Make room for the fixed header's height */
       padding-top: 6rem;
       /* Adjust height so scrolling naturally stops when flowers are at 500px */
-      min-height: 120vh;
+      min-height: 110vh;
     }
 
     /* ─────────────────────────────────────────────────────
@@ -126,11 +126,11 @@
        ───────────────────────────────────────────────────── */
     .scroll-arrow {
       position: absolute;
-      top: calc(52% + 160px);
+      top: calc(52% + 200px);
       left: 370px;
       right: 270px;
       text-align: center;
-      color: #709fd3;
+      color: #ffa97e;
       font-size: 1.8rem;
       z-index: 5;
       cursor: pointer;
@@ -229,6 +229,26 @@
     }
     .social-sidebar a + a {
       margin-top: 1px;
+    }
+
+    /* ─────────────────────────────────────────────────────
+       FLOWERS SECTION TITLE
+       ───────────────────────────────────────────────────── */
+    .flowers-title {
+      position: absolute;
+      top: calc(90vh - 80px);
+      left: 370px;
+      right: 270px;
+      text-align: center;
+      font-family: 'PT Sans', sans-serif;
+      font-size: 1.4rem;
+      color: #ffffff;
+      z-index: 5;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .flowers-title.visible {
+      opacity: 1;
     }
 
     /* ─────────────────────────────────────────────────────
@@ -379,6 +399,11 @@
     ↓
   </div>
 
+  <!-- FLOWERS SECTION TITLE -->
+  <div class="flowers-title" id="flowers-title">
+    flowers i'm growing ❀༉‧₊˚
+  </div>
+
   <!-- FLOWER BUTTONS ROW -->
   <section class="flowers-row">
     <a href="flower_research.html">
@@ -401,6 +426,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       const introContainer = document.getElementById('intro-text-container');
       const flowersRow     = document.querySelector('.flowers-row');
+      const flowersTitle   = document.getElementById('flowers-title');
       const cursorGlow     = document.getElementById('cursor-glow');
       const scrollArrow    = document.getElementById('scroll-arrow');
       
@@ -469,11 +495,13 @@
           fadeInIntro();
         }
 
-        // Flowers row: fade in when it comes into view
+        // Flowers row & title: fade in when they come into view
         if (flowersRect.top <= window.innerHeight * 0.8) {
           flowersRow.classList.add('visible');
+          flowersTitle.classList.add('visible');
         } else {
           flowersRow.classList.remove('visible');
+          flowersTitle.classList.remove('visible');
         }
       });
     });
