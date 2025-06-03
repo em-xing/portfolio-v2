@@ -24,8 +24,10 @@
       font-family: 'PT Sans', sans-serif;
       color: #ffffff;
       cursor: url("images/cursor_normal.cur") 0 0, auto;
-      /* Make room for the fixed header’s height */
+      /* Make room for the fixed header's height */
       padding-top: 6rem;
+      /* Add enough height for scrolling */
+      min-height: 200vh;
     }
 
     /* ─────────────────────────────────────────────────────
@@ -52,7 +54,7 @@
        INTRO TEXT CONTAINER (centered between sidebars)
        ───────────────────────────────────────────────────── */
     .intro-text {
-      position: absolute;
+      position: fixed;
       top: 52%;
       left: 370px;    /* keep it between left-sidebar and right-sidebar */
       right: 270px;
@@ -88,7 +90,7 @@
     }
     @keyframes typing {
       from { width: 0; }
-      to   { width: 12ch; } /* adjust length to match "hi, i’m emily!" */
+      to   { width: 12ch; } /* adjust length to match "hi, i'm emily!" */
     }
     @keyframes blink-caret {
       50% { border-color: transparent; }
@@ -160,8 +162,8 @@
        FLOWER BUTTONS ROW
        ───────────────────────────────────────────────────── */
     .flowers-row {
-      position: absolute;
-      top: 90vh;
+      position: relative;
+      top: 70vh;
       left: 320px;
       right: 450px;
       display: flex;
@@ -172,6 +174,7 @@
       z-index: 5;
       opacity: 0; /* start invisible */
       transition: opacity 0.5s ease;
+      margin-bottom: 20vh; /* Add some space at the bottom */
     }
     /* When this class is added, flowers fade in */
     .visible {
@@ -246,14 +249,14 @@
   <!-- INTRO TEXT (with typewriter + fade-in on page load on second line) -->
   <div id="intro-text-container" class="intro-text">
     <div class="intro-line typewriter-line">
-      hi, i’m emily!
+      hi, i'm emily!
     </div>
     <div class="intro-line fadein-line">
       i'm a student @ harvard studying 
       <span class="highlight">applied math &amp; global health</span>. 
       i spend my time exploring 
-      <span class="highlight">things we’ve built</span>—urban &amp; digital spaces, social infrastructure, art.<br><br>
-      <span class="highlight">tell me about:</span> your matcha &amp; music recs, fave chess gambits, takes on “making impact” &amp; “being human.”
+      <span class="highlight">things we've built</span>—urban &amp; digital spaces, social infrastructure, art.<br><br>
+      <span class="highlight">tell me about:</span> your matcha &amp; music recs, fave chess gambits, takes on "making impact" &amp; "being human."
     </div>
   </div>
 
@@ -279,9 +282,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       const introContainer = document.getElementById('intro-text-container');
       const flowersRow     = document.querySelector('.flowers-row');
-      const INTRO_THRESHOLD   = 330; // px from viewport top
-      const FLOWERS_THRESHOLD = 670; // px from viewport top
-
+      
       function fadeOutIntro() {
         introContainer.classList.add('fade-out');
       }
@@ -291,18 +292,20 @@
       }
 
       window.addEventListener('scroll', () => {
-        const introTop   = introContainer.getBoundingClientRect().top;
-        const flowersTop = flowersRow.getBoundingClientRect().top;
-
-        // Intro text fade-out / fade-in commands
-        if (introTop <= INTRO_THRESHOLD) {
+        const scrollY = window.scrollY;
+        
+        // Intro text: fade out when scrolled past 300px, fade back in when scrolled back up
+        if (scrollY > 300) {
           fadeOutIntro();
         } else {
           fadeInIntro();
         }
 
-        // Flowers row: fade in when its top is at or below threshold, fade out if above
-        if (flowersTop <= FLOWERS_THRESHOLD) {
+        // Flowers row: fade in when scrolled past 400px
+        const flowersTop = flowersRow.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (flowersTop < windowHeight * 0.8) {
           flowersRow.classList.add('visible');
         } else {
           flowersRow.classList.remove('visible');
