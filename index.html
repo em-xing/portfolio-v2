@@ -276,7 +276,32 @@
   </footer>
   <script>
 
-  <!-- JAVASCRIPT: -->
+    document.addEventListener('DOMContentLoaded', () => {
+      const introContainer = document.getElementById('intro-text-container');
+      let lastScrollY = window.scrollY;
+      const THRESHOLD = 330;
+
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        const scrollingDown = currentScrollY > lastScrollY;
+
+        // Distance from viewport top to the intro’s top edge
+        const introTop = introContainer.getBoundingClientRect().top;
+
+        // 1) Fade OUT as soon as introTop ≤ 330px while scrolling DOWN
+        if (scrollingDown && introTop <= THRESHOLD) {
+          introContainer.classList.add('fade-out');
+        }
+        // 2) Fade IN as soon as introTop ≥ 330px while scrolling UP
+        if (!scrollingDown && introTop >= THRESHOLD) {
+          introContainer.classList.add('fade-in');
+        }
+        // 3) Otherwise, keep the current fade-out state
+
+        lastScrollY = currentScrollY;
+      });
+    });
+
   document.addEventListener('DOMContentLoaded', () => {
   // 1) Grab the .flowers-row element from the page
   const flowersRow = document.querySelector('.flowers-row');
