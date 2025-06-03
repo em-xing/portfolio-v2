@@ -294,7 +294,7 @@
 
     // 4) If that “distance from top” is less than or equal to 670px, add the "visible" class.
     //    Otherwise, remove it.
-    if (flowersTop <= FLOWERS_THRESHOLD) {
+    if (flowersTop >= FLOWERS_THRESHOLD) {
       flowersRow.classList.add('visible');
     } else {
       flowersRow.classList.remove('visible');
