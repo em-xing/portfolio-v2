@@ -255,6 +255,9 @@
   </div>
 
   <!-- FLOWER BUTTONS ROW -->
+    <!-- ... your HTML ... -->
+
+  <!-- FLOWER BUTTONS ROW -->
   <section class="flowers-row">
     <a href="flower_research.html">
       <img src="images/flower_research.PNG" alt="Flower Research">
@@ -272,39 +275,33 @@
     <img src="images/copyright.PNG" alt="Copyright ©" />
   </footer>
 
-  <!-- JAVASCRIPT: fade INTRO when its top edge hits 330px while scrolling DOWN,
-       fade FLOWERS when its top edge hits 670px. -->
+  <!-- JAVASCRIPT: -->
   <script>
-    window.addEventListener("scroll", () => {
-  console.log("📜 scroll handler running, flowersRow.top =", flowersRow.getBoundingClientRect().top);
-  // …rest of your code…
-});
+    document.addEventListener("DOMContentLoaded", function() {
+      // 1) Query flowers-row **after** it exists in the DOM
+      const flowersRow = document.querySelector(".flowers-row");
+      const FLOWERS_THRESHOLD = 670;
 
-    document.addEventListener('DOMContentLoaded', () => {
-  const flowersRow = document.querySelector('.flowers-row');
-  let lastScrollY = window.scrollY;
-  const FLOWERS_THRESHOLD = 670;
-
-  window.addEventListener('scroll', () => {
-    const currentScrollY = window.scrollY;
-    const flowersTop = flowersRow.getBoundingClientRect().top;
-
-    // When flowers' top is at or above 670px, add .visible
-    if (flowersTop <= FLOWERS_THRESHOLD) {
-      if (!flowersRow.classList.contains('visible')) {
-        flowersRow.classList.add('visible');
+      // 2) If the element is not found, bail out
+      if (!flowersRow) {
+        console.error("Could not find .flowers-row in the DOM.");
+        return;
       }
-    } else {
-      // When flowers' top is below 670px again, remove .visible
-      if (flowersRow.classList.contains('visible')) {
-        flowersRow.classList.remove('visible');
-      }
-    }
 
-    lastScrollY = currentScrollY;
-  });
-});
+      // 3) Attach the scroll listener
+      window.addEventListener("scroll", function() {
+        const flowersTop = flowersRow.getBoundingClientRect().top;
+        if (flowersTop <= FLOWERS_THRESHOLD) {
+          flowersRow.classList.add("visible");
+        } else {
+          flowersRow.classList.remove("visible");
+        }
+      });
 
+      // (Optional debug)
+      console.log("Scroll listener attached. .flowers-row top =", flowersRow.getBoundingClientRect().top);
+    });
   </script>
 </body>
 </html>
+
