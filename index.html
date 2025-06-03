@@ -289,7 +289,7 @@
         // Intro text: fade out when its top is at or above threshold, fade back in if below threshold
         if (introTop <= INTRO_THRESHOLD) {
           introContainer.classList.add('fade-out');
-        } else {
+        } else if ((introTop >= INTRO_THRESHOLD){
           introContainer.classList.remove('fade-out');
         }
 
