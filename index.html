@@ -275,6 +275,11 @@
   <!-- JAVASCRIPT: fade INTRO when its top edge hits 330px while scrolling DOWN,
        fade FLOWERS when its top edge hits 670px. -->
   <script>
+    window.addEventListener("scroll", () => {
+  console.log("📜 scroll handler running, flowersRow.top =", flowersRow.getBoundingClientRect().top);
+  // …rest of your code…
+});
+
     document.addEventListener('DOMContentLoaded', () => {
   const flowersRow = document.querySelector('.flowers-row');
   let lastScrollY = window.scrollY;
