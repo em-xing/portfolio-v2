@@ -27,7 +27,7 @@
       /* Make room for the fixed header's height */
       padding-top: 6rem;
       /* Adjust height so scrolling naturally stops when flowers are at 500px */
-      min-height: 140vh;
+      min-height: 110vh;
     }
 
     /* ─────────────────────────────────────────────────────
@@ -296,7 +296,7 @@
         const flowersRect = flowersRow.getBoundingClientRect();
         
         // Intro text: fade out when it reaches near the top of viewport
-        if (introRect.top <= 200) {
+        if (introRect.top <= 370) {
           fadeOutIntro();
         } else {
           fadeInIntro();
