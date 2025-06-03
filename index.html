@@ -103,9 +103,6 @@
     /* ─────────────────────────────────────────────────────
        INTRO TEXT CONTAINER (centered between sidebars)
        ───────────────────────────────────────────────────── */
-   /* ─────────────────────────────────────────────────────
-       INTRO TEXT CONTAINER (centered between sidebars)
-       ───────────────────────────────────────────────────── */
     .intro-text {
       position: absolute;
       top: 52%;
@@ -386,6 +383,11 @@
     </div>
   </div>
 
+  <!-- SCROLL ARROW -->
+  <div class="scroll-arrow" id="scroll-arrow" title="Scroll to explore">
+    ↓
+  </div>
+
   <!-- FLOWER BUTTONS ROW -->
   <section class="flowers-row">
     <a href="flower_research.html">
@@ -409,6 +411,7 @@
       const introContainer = document.getElementById('intro-text-container');
       const flowersRow     = document.querySelector('.flowers-row');
       const cursorGlow     = document.getElementById('cursor-glow');
+      const scrollArrow    = document.getElementById('scroll-arrow');
       
       let lastSparkleTime = 0;
       const sparkleInterval = 150; // milliseconds between sparkles
@@ -424,6 +427,14 @@
           createSparkle(e.clientX, e.clientY);
           lastSparkleTime = now;
         }
+      });
+      
+      // Smooth scroll to flowers when arrow is clicked
+      scrollArrow.addEventListener('click', () => {
+        flowersRow.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'center'
+        });
       });
       
       function createSparkle(x, y) {
