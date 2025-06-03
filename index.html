@@ -122,35 +122,26 @@
     }
 
     /* ─────────────────────────────────────────────────────
-       SCROLL ARROW (stays visible, positioned below intro text)
+       SCROLL ARROW (positioned below intro text, fades with intro)
        ───────────────────────────────────────────────────── */
     .scroll-arrow {
       position: absolute;
-      top: 72%;
-      left: 50%;
-      transform: translateX(-50%);
-      color: #ffff64;
-      font-size: 2rem;
-      z-index: 6;
-      animation: bounce 2s ease-in-out infinite;
+      top: calc(52% + 200px);
+      left: 370px;
+      right: 270px;
+      text-align: center;
+      color: #ffed98;
+      font-size: 1.8rem;
+      z-index: 5;
       cursor: pointer;
-      opacity: 1;
-      transition: opacity 0.3s ease;
+      opacity: 0;
+      transition: all 0.3s ease;
+      animation: fadeIn 1s ease-in-out forwards;
+      animation-delay: 3.5s;
     }
     .scroll-arrow:hover {
-      opacity: 0.8;
-    }
-    
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateX(-50%) translateY(0);
-      }
-      40% {
-        transform: translateX(-50%) translateY(-10px);
-      }
-      60% {
-        transform: translateX(-50%) translateY(-5px);
-      }
+      color: #ffb896;
+      transform: translateY(-3px);
     }
 
     /* ─────────────────────────────────────────────────────
