@@ -24,8 +24,60 @@
       font-family: 'PT Sans', sans-serif;
       color: #ffffff;
       cursor: url("images/cursor_normal.cur") 0 0, auto;
-      /* Make room for the fixed header’s height */
+      /* Make room for the fixed header's height */
       padding-top: 6rem;
+      /* Adjust height so scrolling naturally stops when flowers are at 500px */
+      min-height: 120vh;
+    }
+
+    /* ─────────────────────────────────────────────────────
+       GLOWING CURSOR CIRCLE (FIREFLY EFFECT) + SPARKLE TRAIL
+       ───────────────────────────────────────────────────── */
+    .cursor-glow {
+      position: fixed;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 100, 0.5) 0%, rgba(255, 255, 150, 0.2) 60%, transparent 100%);
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: left 0.1s ease-out, top 0.1s ease-out;
+      box-shadow: 0 0 15px rgba(255, 255, 100, 0.4);
+      animation: firefly-glow 2.5s ease-in-out infinite;
+    }
+    
+    .sparkle {
+      position: fixed;
+      width: 3px;
+      height: 3px;
+      background: rgba(255, 255, 120, 0.8);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      animation: sparkle-fade 1.2s ease-out forwards;
+    }
+    
+    @keyframes firefly-glow {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.15);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes sparkle-fade {
+      0% {
+        opacity: 0.8;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
     }
 
     /* ─────────────────────────────────────────────────────
@@ -61,15 +113,35 @@
       font-size: 1.3rem;
       line-height: 1.5;
       z-index: 5;
-    }
-
-    /* Smooth fade transition for the intro container */
-    #intro-text-container {
       opacity: 1;
       transition: opacity 0.5s ease;
     }
-    #intro-text-container.fade-out {
+    /* When this class is added, intro text fades out */
+    .fade-out {
       opacity: 0;
+    }
+
+    /* ─────────────────────────────────────────────────────
+       SCROLL ARROW (positioned below intro text, fades with intro)
+       ───────────────────────────────────────────────────── */
+    .scroll-arrow {
+      position: absolute;
+      top: calc(52% + 150px);
+      left: 370px;
+      right: 270px;
+      text-align: center;
+      color: #709fd3;
+      font-size: 1.8rem;
+      z-index: 5;
+      cursor: pointer;
+      opacity: 0;
+      transition: all 0.3s ease;
+      animation: fadeIn 1s ease-in-out forwards;
+      animation-delay: 3.5s;
+    }
+    .scroll-arrow:hover {
+      color: #ffb896;
+      transform: translateY(-3px);
     }
 
     /* ─────────────────────────────────────────────────────
@@ -91,7 +163,7 @@
     }
     @keyframes typing {
       from { width: 0; }
-      to   { width: 12ch; }
+      to   { width: 12ch; } /* adjust length to match "hi, i'm emily!" */
     }
     @keyframes blink-caret {
       50% { border-color: transparent; }
@@ -109,7 +181,7 @@
       opacity: 0;
       animation:
         fadeIn 1s ease-in-out forwards;
-      animation-delay: 2.5s; /* wait until the typewriter is done */
+      animation-delay: 2.5s; /* wait until typing animation finishes */
     }
     @keyframes fadeIn {
       from { opacity: 0; }
@@ -160,39 +232,104 @@
     }
 
     /* ─────────────────────────────────────────────────────
-       FLOWER BUTTONS ROW
+       FLOWERS SECTION TITLE
+       ───────────────────────────────────────────────────── */
+    .flowers-title {
+      position: absolute;
+      top: calc(90vh - 28px);
+      left: 370px;
+      right: 270px;
+      text-align: center;
+      font-family: 'PT Sans', sans-serif;
+      font-size: 1.4rem;
+      color: #ffffff;
+      z-index: 5;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .flowers-title.visible {
+      opacity: 1;
+    }
+
+    /* ─────────────────────────────────────────────────────
+       FLOWER BUTTONS ROW WITH GLOW EFFECTS
        ───────────────────────────────────────────────────── */
     .flowers-row {
-  position: absolute;
-  top: 90vh;
-  left: 320px;
-  right: 450px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 1rem;
-  pointer-events: auto;
-  z-index: 5;
-
-  /* Start fully transparent (no .visible class) */
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-.flowers-row.visible {
-  opacity: 1;
-}
-
-    .flowers-row a { display: block; }
+      position: absolute;
+      top: 90vh;
+      left: 320px;
+      right: 450px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 1rem;
+      pointer-events: auto;
+      z-index: 5;
+      opacity: 0; /* start invisible */
+      transition: opacity 0.5s ease;
+    }
+    /* When this class is added, flowers fade in */
+    .visible {
+      opacity: 1;
+    }
+    .flowers-row a {
+      display: block;
+      position: relative;
+      transition: all 0.3s ease;
+      border-radius: 50px;
+    }
     .flowers-row img {
       display: block;
       width: auto;
       height: auto;
       max-height: 200px;
       transform: scale(0.65);
+      transition: all 0.3s ease;
+      filter: brightness(1);
     }
-    .flowers-row a:nth-child(1) img { margin-top: 20px; }
-    .flowers-row a:nth-child(2) img { margin-top: 0; }
-    .flowers-row a:nth-child(3) img { margin-top: 40px; }
+    
+    /* Hover effects for flower buttons */
+    .flowers-row a:hover {
+      transform: translateY(-5px);
+    }
+    .flowers-row a:hover img {
+      filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 169, 126, 0.6));
+      transform: scale(0.7);
+    }
+    .flowers-row a:hover::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120%;
+      height: 120%;
+      background: radial-gradient(circle, rgba(255, 169, 126, 0.15) 0%, rgba(255, 169, 126, 0.05) 50%, transparent 100%);
+      border-radius: 50%;
+      z-index: -1;
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.7;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 1;
+      }
+    }
+    
+    .flowers-row a:nth-child(1) img {
+      margin-top: 20px;
+    }
+    .flowers-row a:nth-child(2) img {
+      margin-top: 0;
+    }
+    .flowers-row a:nth-child(3) img {
+      margin-top: 40px;
+    }
 
     /* ─────────────────────────────────────────────────────
        SITE FOOTER
@@ -217,6 +354,9 @@
 </head>
 
 <body>
+  <!-- GLOWING CURSOR -->
+  <div class="cursor-glow" id="cursor-glow"></div>
+
   <!-- HEADER -->
   <header>
     <img src="images/name.gif" alt="name logo" class="logo"/>
@@ -240,18 +380,28 @@
     </a>
   </aside>
 
-  <!-- INTRO TEXT (typewriter + fade-in on page load only) -->
+  <!-- INTRO TEXT (with typewriter + fade-in on page load on second line) -->
   <div id="intro-text-container" class="intro-text">
     <div class="intro-line typewriter-line">
-      hi, i’m emily!
+      hi, i'm emily!
     </div>
     <div class="intro-line fadein-line">
       i'm a student @ harvard studying 
       <span class="highlight">applied math &amp; global health</span>. 
       i spend my time exploring 
-      <span class="highlight">things we’ve built</span>—urban &amp; digital spaces, social infrastructure, art.<br><br>
-      <span class="highlight">tell me about:</span> your matcha &amp; music recs, fave chess gambits, takes on “making impact” &amp; “being human.”
+      <span class="highlight">things we've built</span>—urban &amp; digital spaces, social infrastructure, art.<br><br>
+      <span class="highlight">tell me about:</span> your matcha &amp; music recs, fave chess gambits, takes on "making impact" &amp; "being human."
     </div>
+  </div>
+
+  <!-- SCROLL ARROW -->
+  <div class="scroll-arrow" id="scroll-arrow" title="Scroll to explore">
+    ↓
+  </div>
+
+  <!-- FLOWERS SECTION TITLE -->
+  <div class="flowers-title" id="flowers-title">
+    flowers i'm growing ❀༉‧₊˚
   </div>
 
   <!-- FLOWER BUTTONS ROW -->
@@ -272,34 +422,89 @@
     <img src="images/copyright.PNG" alt="Copyright ©" />
   </footer>
 
-  <!-- JAVASCRIPT: fade INTRO when its top edge hits 330px while scrolling DOWN,
-       fade FLOWERS when its top edge hits 670px. -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-  const flowersRow = document.querySelector('.flowers-row');
-  let lastScrollY = window.scrollY;
-  const FLOWERS_THRESHOLD = 670;
-
-  window.addEventListener('scroll', () => {
-    const currentScrollY = window.scrollY;
-    const flowersTop = flowersRow.getBoundingClientRect().top;
-
-    // When flowers' top is at or above 670px, add .visible
-    if (flowersTop <= FLOWERS_THRESHOLD) {
-      if (!flowersRow.classList.contains('visible')) {
-        flowersRow.classList.add('visible');
+      const introContainer = document.getElementById('intro-text-container');
+      const flowersRow     = document.querySelector('.flowers-row');
+      const flowersTitle   = document.getElementById('flowers-title');
+      const cursorGlow     = document.getElementById('cursor-glow');
+      const scrollArrow    = document.getElementById('scroll-arrow');
+      
+      let lastSparkleTime = 0;
+      const sparkleInterval = 150; // milliseconds between sparkles
+      
+      // Cursor glow following mouse movement with sparkle trail
+      document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
+        
+        // Create sparkle trail - but not too frequently
+        const now = Date.now();
+        if (now - lastSparkleTime > sparkleInterval) {
+          createSparkle(e.clientX, e.clientY);
+          lastSparkleTime = now;
+        }
+      });
+      
+      // Smooth scroll to flowers when arrow is clicked
+      scrollArrow.addEventListener('click', () => {
+        flowersRow.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'center'
+        });
+      });
+      
+      function createSparkle(x, y) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        
+        // Add slight random offset so sparkles don't all appear in exact same spot
+        const offsetX = (Math.random() - 0.5) * 20;
+        const offsetY = (Math.random() - 0.5) * 20;
+        
+        sparkle.style.left = (x + offsetX) + 'px';
+        sparkle.style.top = (y + offsetY) + 'px';
+        
+        document.body.appendChild(sparkle);
+        
+        // Remove sparkle after animation completes
+        setTimeout(() => {
+          if (sparkle.parentNode) {
+            sparkle.parentNode.removeChild(sparkle);
+          }
+        }, 1200);
       }
-    } else {
-      // When flowers' top is below 670px again, remove .visible
-      if (flowersRow.classList.contains('visible')) {
-        flowersRow.classList.remove('visible');
+      
+      function fadeOutIntro() {
+        introContainer.classList.add('fade-out');
       }
-    }
 
-    lastScrollY = currentScrollY;
-  });
-});
+      function fadeInIntro() {
+        introContainer.classList.remove('fade-out');
+      }
 
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const introRect = introContainer.getBoundingClientRect();
+        const flowersRect = flowersRow.getBoundingClientRect();
+        
+        // Intro text: fade out when it reaches near the top of viewport
+        if (introRect.top <= 200) {
+          fadeOutIntro();
+        } else {
+          fadeInIntro();
+        }
+
+        // Flowers row & title: fade in when they come into view
+        if (flowersRect.top <= window.innerHeight * 0.8) {
+          flowersRow.classList.add('visible');
+          flowersTitle.classList.add('visible');
+        } else {
+          flowersRow.classList.remove('visible');
+          flowersTitle.classList.remove('visible');
+        }
+      });
+    });
   </script>
 </body>
 </html>
