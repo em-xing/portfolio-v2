@@ -24,7 +24,7 @@
       font-family: 'PT Sans', sans-serif;
       color: #ffffff;
       cursor: url("images/cursor_normal.cur") 0 0, auto;
-      /* Make room for the fixed header's height */
+      /* Make room for the fixed header’s height */
       padding-top: 6rem;
     }
 
@@ -163,163 +163,36 @@
        FLOWER BUTTONS ROW
        ───────────────────────────────────────────────────── */
     .flowers-row {
-      position: absolute;
-      top: 90vh;
-      left: 320px;
-      right: 450px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 1rem;
-      pointer-events: auto;
-      z-index: 5;
+  position: absolute;
+  top: 90vh;
+  left: 320px;
+  right: 450px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem;
+  pointer-events: auto;
+  z-index: 5;
 
-      /* Start fully transparent (no .visible class) */
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .flowers-row.visible {
-      opacity: 1;
-    }
+  /* Start fully transparent (no .visible class) */
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.flowers-row.visible {
+  opacity: 1;
+}
 
-    .flowers-row a { 
-      display: block; 
-      cursor: pointer;
-    }
+    .flowers-row a { display: block; }
     .flowers-row img {
       display: block;
       width: auto;
       height: auto;
       max-height: 200px;
       transform: scale(0.65);
-      transition: transform 0.3s ease;
-    }
-    .flowers-row a:hover img {
-      transform: scale(0.7);
     }
     .flowers-row a:nth-child(1) img { margin-top: 20px; }
     .flowers-row a:nth-child(2) img { margin-top: 0; }
     .flowers-row a:nth-child(3) img { margin-top: 40px; }
-
-    /* ─────────────────────────────────────────────────────
-       RESEARCH TAB
-       ───────────────────────────────────────────────────── */
-    .research-tab {
-      position: absolute;
-      top: calc(90vh + 250px);
-      left: 320px;
-      right: 270px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-radius: 15px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.6s ease-in-out, padding 0.3s ease;
-      z-index: 4;
-      color: #241d18;
-    }
-
-    .research-tab.active {
-      max-height: 1200px;
-      padding: 40px;
-    }
-
-    .research-tab h2 {
-      color: #ffa97e;
-      font-size: 1.8rem;
-      margin-bottom: 30px;
-      text-align: center;
-      font-weight: 700;
-    }
-
-    .research-section {
-      margin-bottom: 35px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    .research-tab.active .research-section {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .research-tab.active .research-section:nth-child(2) { transition-delay: 0.1s; }
-    .research-tab.active .research-section:nth-child(3) { transition-delay: 0.2s; }
-    .research-tab.active .research-section:nth-child(4) { transition-delay: 0.3s; }
-
-    .research-item {
-      margin-bottom: 20px;
-      padding: 15px;
-      background: rgba(255, 169, 126, 0.1);
-      border-radius: 10px;
-      border-left: 4px solid #ffa97e;
-    }
-
-    .research-item h3 {
-      color: #241d18;
-      font-size: 1.1rem;
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
-
-    .research-item p {
-      color: #4a4a4a;
-      line-height: 1.4;
-      margin: 0;
-      font-size: 0.95rem;
-    }
-
-    .lab-name {
-      color: #ffa97e;
-      font-weight: 600;
-    }
-
-    .awards-section h3,
-    .publications-section h3 {
-      color: #ffa97e;
-      font-size: 1.4rem;
-      margin-bottom: 20px;
-      font-weight: 700;
-    }
-
-    .award-item,
-    .publication-item {
-      margin-bottom: 15px;
-      padding: 12px;
-      background: rgba(189, 234, 254, 0.1);
-      border-radius: 8px;
-      border-left: 3px solid #bdeafe;
-    }
-
-    .publication-item {
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    .author-name {
-      font-weight: 600;
-      color: #241d18;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      background: none;
-      border: none;
-      font-size: 24px;
-      color: #ffa97e;
-      cursor: pointer;
-      padding: 5px;
-      border-radius: 50%;
-      transition: background-color 0.3s ease;
-    }
-
-    .close-btn:hover {
-      background: rgba(255, 169, 126, 0.2);
-    }
 
     /* ─────────────────────────────────────────────────────
        SITE FOOTER
@@ -370,20 +243,20 @@
   <!-- INTRO TEXT (typewriter + fade-in on page load only) -->
   <div id="intro-text-container" class="intro-text">
     <div class="intro-line typewriter-line">
-      hi, i'm emily!
+      hi, i’m emily!
     </div>
     <div class="intro-line fadein-line">
       i'm a student @ harvard studying 
       <span class="highlight">applied math &amp; global health</span>. 
       i spend my time exploring 
-      <span class="highlight">things we've built</span>—urban &amp; digital spaces, social infrastructure, art.<br><br>
-      <span class="highlight">tell me about:</span> your matcha &amp; music recs, fave chess gambits, takes on "making impact" &amp; "being human."
+      <span class="highlight">things we’ve built</span>—urban &amp; digital spaces, social infrastructure, art.<br><br>
+      <span class="highlight">tell me about:</span> your matcha &amp; music recs, fave chess gambits, takes on “making impact” &amp; “being human.”
     </div>
   </div>
 
   <!-- FLOWER BUTTONS ROW -->
   <section class="flowers-row">
-    <a href="#" id="flower-research-btn">
+    <a href="flower_research.html">
       <img src="images/flower_research.PNG" alt="Flower Research">
     </a>
     <a href="flower_writing.html">
@@ -394,140 +267,39 @@
     </a>
   </section>
 
-  <!-- RESEARCH TAB -->
-  <div class="research-tab" id="research-tab">
-    <button class="close-btn" id="close-research-tab">&times;</button>
-    <h2>Research & Publications</h2>
-    
-    <div class="research-section">
-      <div class="research-item">
-        <h3>Digital Well-being & Social Media Design</h3>
-        <p>Are recent design changes on big social media actually improving user <strong>digital well-being</strong>? ➤ <span class="lab-name">Viswanath Lab</span> @ Harvard T.H. Chan School of Public Health</p>
-      </div>
-      
-      <div class="research-item">
-        <h3>Tobacco Control Policy</h3>
-        <p>How do we close <strong>tobacco control policy gaps</strong> in media, packaging, and enforcement? ➤ <span class="lab-name">Institute for Global Tobacco Control</span> @ Johns Hopkins Bloomberg School of Public Health</p>
-      </div>
-      
-      <div class="research-item">
-        <h3>Human-Computer Interaction & Urban Justice</h3>
-        <p>How can <strong>human-computer interaction</strong> restore <strong>urban justice</strong> in New York's marginalized communities? ➤ <span class="lab-name">Computer-Enabled Abilities Laboratory</span> @ Columbia School of Engineering</p>
-      </div>
-    </div>
-
-    <div class="research-section awards-section">
-      <h3>Awards & Fellowships</h3>
-      <div class="award-item">2025 Columbia-Amazon Summer Research Undergraduate Experience (SURE) Fellow</div>
-      <div class="award-item">2023 Regeneron Talent Search Scholar</div>
-      <div class="award-item">2023 Institute for Global Tobacco Control Distinguished Student Researcher</div>
-      <div class="award-item">2023, 2022 NSF Research Experience & Mentoring (REM) Program Fellow @ Johns Hopkins University</div>
-    </div>
-
-    <div class="research-section publications-section">
-      <h3>Publications</h3>
-      
-      <div class="publication-item">
-        <span class="author-name">Xing, E.</span> et al (2023). <strong>The problematic use of cultural symbols on Chinese cigarette packs</strong>. <em>Tobacco-Induced Diseases</em>
-      </div>
-      
-      <div class="publication-item">
-        <span class="author-name">Xing, E.</span> et al (2025). Content Analysis of Media Coverage on Smoke-Free Policy Implementation in Ten LMICs [Conference presentation]. <em>World Conference on Tobacco Control</em>.
-      </div>
-      
-      <div class="publication-item">
-        Liu, Y., <span class="author-name">Xing, E.</span>, Huang, S., Kasisomayajula, V. (2025). The content, impact, and coverage of social media platform-led digital well-being design changes [Conference presentation]. <em>International Conference on Computational Social Science.</em>
-      </div>
-      
-      <div class="publication-item">
-        Nian, Q., Kennedy, R., Schotte, K., Gouda, H., Kataria, S., <span class="author-name">Xing, E.</span>, Welding, K. (2025). State of the evidence on economic impacts of smoke-free policies in the tourism sector: A narrative literature review. Under review @ <em>Tobacco-Induced Diseases</em>
-      </div>
-      
-      <div class="publication-item">
-        (2025) Challenging the Consideration of Immediate Coal Phase-Out: Dual Imperatives of Coal Power Control and Renewable Energy Acceleration in China's Carbon Neutral Pathway
-      </div>
-      
-      <div class="publication-item">
-        Lu, X., Yin, Z., Nielsen, C., Cui, R. Y., Ou, Y., <span class="author-name">Xing, E.</span>, Han, M., Shi, M., Ruan, Z., Wang, J., Su, Y., Zhang, C., Bian, S., Zhou, W., Li, J., He, K., McElroy, M. B. (2025). Mitigating Inequity Risks in China's Net-Zero Energy Transition via an Enhanced Renewable-Guided Industrial Spatial Reconfiguration. Under review @ <em>National Science Review</em>
-      </div>
-      
-      <div class="publication-item">
-        Wang, J., Lu, X., Wang, H., Ou, Y., Wang, J., Tong, D., Li, Y., Ruan, Z., Yin, Z., Zhou, W., McLellan, B., <span class="author-name">Xing, E.</span>, MacLennan, A. M., Fan, J., Zhang, X., McElroy, M. B., He, K. (2025). Reassessing Immediate Coal Phase-Out: Dual Imperatives of Capacity Control and Renewables Expansion in China's Carbon Neutral Strategy. Under review @ <em>Nexus</em>
-      </div>
-    </div>
-  </div>
-
   <!-- SITE FOOTER -->
   <footer class="site-footer">
     <img src="images/copyright.PNG" alt="Copyright ©" />
   </footer>
 
-  <!-- JAVASCRIPT -->
+  <!-- JAVASCRIPT: fade INTRO when its top edge hits 330px while scrolling DOWN,
+       fade FLOWERS when its top edge hits 670px. -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const flowersRow = document.querySelector('.flowers-row');
-      const researchTab = document.getElementById('research-tab');
-      const flowerResearchBtn = document.getElementById('flower-research-btn');
-      const closeResearchTab = document.getElementById('close-research-tab');
-      
-      let lastScrollY = window.scrollY;
-      const FLOWERS_THRESHOLD = 670;
+  const flowersRow = document.querySelector('.flowers-row');
+  let lastScrollY = window.scrollY;
+  const FLOWERS_THRESHOLD = 670;
 
-      // Scroll handler for flowers visibility
-      window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
-        const flowersTop = flowersRow.getBoundingClientRect().top;
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    const flowersTop = flowersRow.getBoundingClientRect().top;
 
-        // When flowers' top is at or above 670px, add .visible
-        if (flowersTop <= FLOWERS_THRESHOLD) {
-          if (!flowersRow.classList.contains('visible')) {
-            flowersRow.classList.add('visible');
-          }
-        } else {
-          // When flowers' top is below 670px again, remove .visible
-          if (flowersRow.classList.contains('visible')) {
-            flowersRow.classList.remove('visible');
-          }
-        }
+    // When flowers' top is at or above 670px, add .visible
+    if (flowersTop <= FLOWERS_THRESHOLD) {
+      if (!flowersRow.classList.contains('visible')) {
+        flowersRow.classList.add('visible');
+      }
+    } else {
+      // When flowers' top is below 670px again, remove .visible
+      if (flowersRow.classList.contains('visible')) {
+        flowersRow.classList.remove('visible');
+      }
+    }
 
-        lastScrollY = currentScrollY;
-      });
+    lastScrollY = currentScrollY;
+  });
+});
 
-      // Research tab toggle
-      flowerResearchBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        researchTab.classList.add('active');
-        
-        // Smooth scroll to show the tab
-        setTimeout(() => {
-          researchTab.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }, 100);
-      });
-
-      closeResearchTab.addEventListener('click', () => {
-        researchTab.classList.remove('active');
-        
-        // Scroll back to flowers
-        setTimeout(() => {
-          flowersRow.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center'
-          });
-        }, 300);
-      });
-
-      // Close tab when clicking outside
-      document.addEventListener('click', (e) => {
-        if (researchTab.classList.contains('active') && 
-            !researchTab.contains(e.target) && 
-            !flowerResearchBtn.contains(e.target)) {
-          researchTab.classList.remove('active');
-        }
-      });
-    });
   </script>
 </body>
 </html>
