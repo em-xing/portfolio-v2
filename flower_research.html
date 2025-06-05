@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Research – Emily Xing</title>
+  <title>Emily's Research!</title>
   <link
     href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap"
     rel="stylesheet"
@@ -29,6 +29,12 @@
     a.lab-link {
       color: #ffa97e; /* lab name in orange */
       font-weight: 600;
+      transition: color 0.3s;
+    }
+    /* Underline and change to blue on hover */
+    a.lab-link:hover {
+      color: #1e90ff; /* blue on hover */
+      text-decoration: underline;
     }
     a.uni-link {
       color: #fff;   /* university in white */
@@ -133,21 +139,34 @@
       color: #fff; font-weight: 400; margin-left: 0.25rem;
     }
 
-    /* ─── AWARDS & PUBLICATIONS ────────────────────── */
+    /* ─── AWARDS & SCHOLARSHIPS ───────────────────── */
     .awards-section {
       padding: 1.5rem; background: rgba(255,255,255,0.05);
       border-radius: 12px; border: 1px solid rgba(112,159,211,0.3);
+      color: #fff;
     }
     .section-title {
       font-size: 1.8rem; font-weight: 700; color: #709fd3;
       text-align: center; margin-bottom: 0.5rem;
     }
-    .award-item, .publication-item {
-      margin-bottom: 0.5rem; font-size: 0.95rem; color: #fff; line-height: 1.4;
+    .award-list {
+      list-style-type: disc;
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
     }
-    .award-item { margin-left: 0.5rem; }
-    .publication-item { margin-left: 0.5rem; }
-
+    .award-list li {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+    .publication-list {
+      list-style-type: none;
+      margin-left: 0;
+      padding-left: 0;
+    }
+    .publication-item {
+      margin-bottom: 0.5rem; font-size: 0.95rem; line-height: 1.4;
+    }
     .author-name {
       font-weight: 700; color: #ffa97e;
     }
@@ -160,7 +179,7 @@
       h1.page-title { font-size: 2rem; }
       .research-question { font-size: 1rem; }
       .lab-info { font-size: 0.9rem; }
-      .award-item, .publication-item { font-size: 0.9rem; }
+      .award-list li, .publication-item { font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -216,64 +235,63 @@
         </div>
       </div>
 
-      <!-- RIGHT COLUMN: Awards & Publications -->
+      <!-- RIGHT COLUMN: Awards & Scholarships and Publications -->
       <div class="awards-section">
-        <h2 class="section-title">Awards & Publications</h2>
-        <div class="divider"></div> <!-- thin orange line below “Awards & Publications” -->
+        <!-- Awards & Scholarships Heading -->
+        <h2 class="section-title">Awards & Scholarships</h2>
+        <div class="divider"></div>
 
-        <!-- Awards -->
-        <div class="award-item">
-          2025 Columbia-Amazon Summer Research Undergraduate Experience (SURE) Fellow
-        </div>
-        <div class="award-item">
-          2024 Harvard-China Project Summer Undergraduate Research Assistantship @ Tsinghua University
-        </div>
-        <div class="award-item">
-          2023 Regeneron Talent Search Scholar
-        </div>
-        <div class="award-item">
-          2023 Institute for Global Tobacco Control Distinguished Student Researcher
-        </div>
-        <div class="award-item">
-          2023, 2022 NSF Research Experience & Mentoring (REM) Program Fellow @ Johns Hopkins University
-        </div>
+        <!-- Awards as Bullet Points -->
+        <ul class="award-list">
+          <li>2025 Columbia-Amazon Summer Research Undergraduate Experience (SURE) Fellow</li>
+          <li>2024 Harvard-China Project Summer Undergraduate Research Assistantship @ Tsinghua University</li>
+          <li>2023 Regeneron Talent Search Scholar</li>
+          <li>2023 Institute for Global Tobacco Control Distinguished Student Researcher</li>
+          <li>2023, 2022 NSF Research Experience & Mentoring (REM) Program Fellow @ Johns Hopkins University</li>
+        </ul>
 
-        <!-- Publications -->
-        <div class="publication-item">
-          <span class="author-name">Xing, E.</span> et al. (2023). 
-          <span style="color:#ffa97e;font-weight:600;">
-            The problematic use of cultural symbols on Chinese cigarette packs
-          </span>. 
-          <span class="journal-name">Tobacco-Induced Diseases</span>.
-        </div>
-        <div class="publication-item">
-          <span class="author-name">Xing, E.</span> et al. (2025). 
-          Content Analysis of Media Coverage on Smoke-Free Policy Implementation in Ten LMICs [Conference]. 
-          <span class="journal-name">World Conference on Tobacco Control</span>.
-        </div>
-        <div class="publication-item">
-          Liu, Y., <span class="author-name">Xing, E.</span>, Huang, S., Kasisomayajula, V. (2025). 
-          The content, impact, and coverage of social media platform-led digital well-being design changes [Conference]. 
-          <span class="journal-name">International Conference on Computational Social Science</span>.
-        </div>
-        <div class="publication-item">
-          Nian, Q., Kennedy, R., Schotte, K., Gouda, H., Kataria, S., <span class="author-name">Xing, E.</span>, Welding, K. (2025). 
-          State of the evidence on economic impacts of smoke-free policies in the tourism sector: A narrative literature review. Under review @ 
-          <span class="journal-name">Tobacco-Induced Diseases</span>.
-        </div>
-        <div class="publication-item">
-          (2025) Challenging the Consideration of Immediate Coal Phase-Out: Dual Imperatives of Coal Power Control and Renewable Energy Acceleration in China's Carbon Neutral Pathway.
-        </div>
-        <div class="publication-item">
-          Lu, X., Yin, Z., Nielsen, C., Cui, R. Y., Ou, Y., <span class="author-name">Xing, E.</span>, Han, M., Shi, M., Ruan, Z., Wang, J., Su, Y., Zhang, C., Bian, S., Zhou, W., Li, J., He, K., McElroy, M. B. (2025). 
-          Mitigating Inequity Risks in China’s Net-Zero Energy Transition via an Enhanced Renewable-Guided Industrial Spatial Reconfiguration. Under review @ 
-          <span class="journal-name">National Science Review</span>.
-        </div>
-        <div class="publication-item">
-          Wang, J., Lu, X., Wang, H., Ou, Y., Wang, J., Tong, D., Li, Y., Ruan, Z., Yin, Z., Zhou, W., McLellan, B., <span class="author-name">Xing, E.</span>, MacLennan, A. M., Fan, J., Zhang, X., McElroy, M. B., He, K. (2025). 
-          Reassessing Immediate Coal Phase-Out: Dual Imperatives of Capacity Control and Renewables Expansion in China’s Carbon Neutral Strategy. Under review @ 
-          <span class="journal-name">Nexus</span>.
-        </div>
+        <!-- Publications Heading -->
+        <h2 class="section-title">Publications</h2>
+        <div class="divider"></div>
+
+        <!-- Publications List -->
+        <ul class="publication-list">
+          <li class="publication-item">
+            <span class="author-name">Xing, E.</span> et al. (2023). 
+            <span style="color:#ffa97e;font-weight:600;">
+              The problematic use of cultural symbols on Chinese cigarette packs
+            </span>. 
+            <span class="journal-name">Tobacco-Induced Diseases</span>.
+          </li>
+          <li class="publication-item">
+            <span class="author-name">Xing, E.</span> et al. (2025). 
+            Content Analysis of Media Coverage on Smoke-Free Policy Implementation in Ten LMICs [Conference]. 
+            <span class="journal-name">World Conference on Tobacco Control</span>.
+          </li>
+          <li class="publication-item">
+            Liu, Y., <span class="author-name">Xing, E.</span>, Huang, S., Kasisomayajula, V. (2025). 
+            The content, impact, and coverage of social media platform-led digital well-being design changes [Conference]. 
+            <span class="journal-name">International Conference on Computational Social Science</span>.
+          </li>
+          <li class="publication-item">
+            Nian, Q., Kennedy, R., Schotte, K., Gouda, H., Kataria, S., <span class="author-name">Xing, E.</span>, Welding, K. (2025). 
+            State of the evidence on economic impacts of smoke-free policies in the tourism sector: A narrative literature review. Under review @ 
+            <span class="journal-name">Tobacco-Induced Diseases</span>.
+          </li>
+          <li class="publication-item">
+            (2025) Challenging the Consideration of Immediate Coal Phase-Out: Dual Imperatives of Coal Power Control and Renewable Energy Acceleration in China's Carbon Neutral Pathway.
+          </li>
+          <li class="publication-item">
+            Lu, X., Yin, Z., Nielsen, C., Cui, R. Y., Ou, Y., <span class="author-name">Xing, E.</span>, Han, M., Shi, M., Ruan, Z., Wang, J., Su, Y., Zhang, C., Bian, S., Zhou, W., Li, J., He, K., McElroy, M. B. (2025). 
+            Mitigating Inequity Risks in China’s Net-Zero Energy Transition via an Enhanced Renewable-Guided Industrial Spatial Reconfiguration. Under review @ 
+            <span class="journal-name">National Science Review</span>.
+          </li>
+          <li class="publication-item">
+            Wang, J., Lu, X., Wang, H., Ou, Y., Wang, J., Tong, D., Li, Y., Ruan, Z., Yin, Z., Zhou, W., McLellan, B., <span class="author-name">Xing, E.</span>, MacLennan, A. M., Fan, J., Zhang, X., McElroy, M. B., He, K. (2025). 
+            Reassessing Immediate Coal Phase-Out: Dual Imperatives of Capacity Control and Renewables Expansion in China’s Carbon Neutral Strategy. Under review @ 
+            <span class="journal-name">Nexus</span>.
+          </li>
+        </ul>
       </div>
     </div>
   </div>
