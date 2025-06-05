@@ -72,29 +72,29 @@
     header {
       position: fixed;
       top: 55px;
-      left: 50%;
+      left: 55%;
       transform: translateX(-50%);
+      display: inline-block;
+      border-radius: 2px;
       z-index: 100;
     }
     header img.logo {
       display: block;
       margin: 0 auto;
-      width: 200px;
+      width: 80%;
       max-width: 80%;
+      transform: translateY(-10px);
     }
-
-    /* ─── LEFT SIDEBAR ───────────────────────────────── */
-    .sidebar {
+    /* Gradient overlay under header for fade effect */
+    .header-fade {
       position: fixed;
-      top: 10px;
-      left: 8px;
-      width: 200px;
-      z-index: 10;
-    }
-    .sidebar img {
-      display: block;
-      max-width: 100%;
-      height: auto;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 120px; /* covers header + a bit of content */
+      background: linear-gradient(to bottom, #241d18 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 90;
     }
 
     /* ─── RIGHT SOCIAL ICONS ────────────────────────── */
@@ -282,16 +282,13 @@
 <body>
   <!-- Glowing cursor effect -->
   <div class="cursor-glow" id="cursor-glow"></div>
+  <!-- Gradient overlay for fade effect -->
+  <div class="header-fade"></div>
 
   <!-- Fixed header (logo) -->
   <header>
     <img src="images/name.gif" alt="name logo" class="logo"/>
   </header>
-
-  <!-- Left sidebar art -->
-  <aside class="sidebar">
-    <img src="images/sidebar_art.PNG" alt="sidebar art"/>
-  </aside>
 
   <!-- Right social icons -->
   <aside class="social-sidebar">
@@ -321,8 +318,7 @@
           </div>
           <div class="lab-info">
             <a href="https://hsph.harvard.edu/research/health-happiness/" class="lab-link" target="_blank">
-              Viswanath Lab
-            </a>
+              Viswanath Lab</a>
             <span class="uni">@ Harvard T.H. Chan SPH</span>
           </div>
         </div>
@@ -335,8 +331,7 @@
           </div>
           <div class="lab-info">
             <a href="https://publichealth.jhu.edu/institute-for-global-tobacco-control" class="lab-link" target="_blank">
-              Institute for Global Tobacco Control
-            </a>
+              Institute for Global Tobacco Control</a>
             <span class="uni">@ JHU Bloomberg SPH</span>
           </div>
         </div>
@@ -349,8 +344,7 @@
           </div>
           <div class="lab-info">
             <a href="https://ceal.cs.columbia.edu/people/" class="lab-link" target="_blank">
-              Computer-Enabled Abilities Lab
-            </a>
+              Computer-Enabled Abilities Lab</a>
             <span class="uni">@ Columbia SEAS</span>
           </div>
         </div>
@@ -376,17 +370,17 @@
       <h2>Publications</h2>
       <ul class="publication-list">
         <li class="publication-item">
-          <span class="author-name">Xing, E.</span> et al. (2023). 
+          <span class="author-name">Xing, E.</span>, Dai, Z., Madar, A., Welding, K., Clegg Smith, K., Cohen, J. (2023). 
           The problematic use of cultural symbols on Chinese cigarette packs. 
           <span class="journal-name">Tobacco-Induced Diseases</span>.
         </li>
         <li class="publication-item">
-          <span class="author-name">Xing, E.</span> et al. (2025). 
+          <span class="author-name">Xing, E.</span>, Kim, S., Cohen, J., Tseng, T.Y. (2025). 
           Content Analysis of Media Coverage on Smoke-Free Policy Implementation in Ten LMICs [Conference]. 
           <span class="journal-name">World Conference on Tobacco Control</span>.
         </li>
         <li class="publication-item">
-          Liu, Y., <span class="author-name">Xing, E.</span>, Huang, S., Kasisomayajula, V. (2025). 
+          Liu, Y., <span class="author-name">Xing, E.</span>*, Huang, S.*, Kasisomayajula, V. (2025). 
           The content, impact, and coverage of social media platform-led digital well-being design changes [Conference]. 
           <span class="journal-name">International Conference on Computational Social Science</span>.
         </li>
@@ -394,9 +388,6 @@
           Nian, Q., Kennedy, R., Schotte, K., Gouda, H., Kataria, S., <span class="author-name">Xing, E.</span>, Welding, K. (2025). 
           State of the evidence on economic impacts of smoke-free policies in the tourism sector: A narrative literature review. Under review @ 
           <span class="journal-name">Tobacco-Induced Diseases</span>.
-        </li>
-        <li class="publication-item">
-          (2025) Challenging the Consideration of Immediate Coal Phase-Out: Dual Imperatives of Coal Power Control and Renewable Energy Acceleration in China's Carbon Neutral Pathway.
         </li>
         <li class="publication-item">
           Lu, X., Yin, Z., Nielsen, C., Cui, R. Y., Ou, Y., <span class="author-name">Xing, E.</span>, Han, M., Shi, M., Ruan, Z., Wang, J., Su, Y., Zhang, C., Bian, S., Zhou, W., Li, J., He, K., McElroy, M. B. (2025). 
