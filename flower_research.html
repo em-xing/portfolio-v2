@@ -99,20 +99,24 @@
       font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 2rem;
       color: #fff; position: relative;
     }
-    /* ── Replace gradient bar with a thin 2px line ── */
-    h1.page-title + .divider,
-    .section-title + .divider {
+    /* ── Simple orange line below page title ── */
+    h1.page-title + .divider {
       width: 60px; height: 2px; margin: 0.5rem auto 2rem;
-      background: #ffa97e; /* simple orange line */
+      background: #ffa97e;
     }
 
-    /* ─── TWO-COLUMN MAIN ──────────────────────────── */
+    /* ─── TWO-COLUMN MAIN (flex to equalize heights) ──────────────────────────── */
     .main-content {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .left-column, .right-column {
+      flex: 1;
     }
     @media (max-width: 700px) {
       .main-content {
-        grid-template-columns: 1fr;
+        display: block;
       }
     }
 
@@ -142,9 +146,13 @@
 
     /* ─── AWARDS & SCHOLARSHIPS ───────────────────── */
     .awards-section {
-      padding: 1.5rem; background: rgba(255,255,255,0.05);
+      padding: 1.5rem; /* same padding to match research boxes height-wise */
+      background: rgba(255,255,255,0.05);
       border-radius: 12px; border: 1px solid rgba(112,159,211,0.3);
       color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .section-title {
       font-size: 1.8rem; font-weight: 700; color: #709fd3;
@@ -153,7 +161,6 @@
     .award-list {
       list-style-type: disc;
       margin-left: 1.5rem;
-      margin-bottom: 1.5rem;
     }
     .award-list li {
       margin-bottom: 0.5rem;
@@ -163,9 +170,11 @@
 
     /* ─── PUBLICATIONS ─────────────────────────────── */
     .publications-section {
-      padding: 1.5rem; background: rgba(255,255,255,0.05);
-      border-radius: 12px; border: 1px solid rgba(112,159,211,0.3);
-      color: #fff; margin-top: 2rem;
+      margin-top: 2rem;
+    }
+    .publications-section h2 {
+      font-size: 1.8rem; font-weight: 700; color: #709fd3;
+      text-align: center; margin-bottom: 0.5rem;
     }
     .publication-list {
       list-style-type: none;
@@ -198,15 +207,15 @@
   <div class="container">
     <a href="javascript:history.back()" class="back-link">← back to garden</a>
     <h1 class="page-title">Research</h1>
-    <div class="divider"></div> <!-- thin orange line below title -->
+    <div class="divider"></div> <!-- orange line below page title -->
 
     <div class="main-content">
       <!-- LEFT COLUMN: Research Topics -->
-      <div>
+      <div class="left-column">
         <div class="research-section">
           <div class="research-question">
             Are recent design changes on big social media actually improving user 
-            <span style="color:#ffa97e;font-weight:600;">digital well-being</span>?
+            digital well-being?
           </div>
           <div class="lab-info">
             <a href="https://hsph.harvard.edu/research/health-happiness/" class="lab-link" target="_blank">
@@ -218,9 +227,7 @@
 
         <div class="research-section">
           <div class="research-question">
-            How do we close 
-            <span style="color:#ffa97e;font-weight:600;">tobacco control policy gaps</span> 
-            in media, packaging, and enforcement?
+            How do we close tobacco control policy gaps in media, packaging, and enforcement?
           </div>
           <div class="lab-info">
             <a href="https://publichealth.jhu.edu/institute-for-global-tobacco-control" class="lab-link" target="_blank">
@@ -244,29 +251,27 @@
       </div>
 
       <!-- RIGHT COLUMN: Awards & Scholarships -->
-      <div class="awards-section">
-        <h2 class="section-title">Awards & Scholarships</h2>
-        <div class="divider"></div>
-        <ul class="award-list">
-          <li>2025 Columbia-Amazon Summer Research Undergraduate Experience (SURE) Fellow</li>
-          <li>2024 Harvard-China Project Summer Undergraduate Research Assistantship @ Tsinghua University</li>
-          <li>2023 Regeneron Talent Search Scholar</li>
-          <li>2023 Institute for Global Tobacco Control Distinguished Student Researcher</li>
-          <li>2023, 2022 NSF Research Experience & Mentoring (REM) Program Fellow @ Johns Hopkins University</li>
-        </ul>
+      <div class="right-column">
+        <div class="awards-section">
+          <h2 class="section-title">Awards & Scholarships</h2>
+          <ul class="award-list">
+            <li>2025 Columbia-Amazon Summer Research Undergraduate Experience (SURE) Fellow</li>
+            <li>2024 Harvard-China Project Summer Undergraduate Research Assistantship @ Tsinghua University</li>
+            <li>2023 Regeneron Talent Search Scholar</li>
+            <li>2023 Institute for Global Tobacco Control Distinguished Student Researcher</li>
+            <li>2023, 2022 NSF Research Experience & Mentoring (REM) Program Fellow @ Johns Hopkins University</li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <!-- PUBLICATIONS SECTION (full-width below both columns) -->
     <div class="publications-section">
-      <h2 class="section-title">Publications</h2>
-      <div class="divider"></div>
+      <h2>Publications</h2>
       <ul class="publication-list">
         <li class="publication-item">
           <span class="author-name">Xing, E.</span> et al. (2023). 
-          <span style="color:#ffa97e;font-weight:600;">
-            The problematic use of cultural symbols on Chinese cigarette packs
-          </span>. 
+          The problematic use of cultural symbols on Chinese cigarette packs. 
           <span class="journal-name">Tobacco-Induced Diseases</span>.
         </li>
         <li class="publication-item">
