@@ -24,8 +24,15 @@
       padding: 2rem;
     }
     a {
-      color: #ffa97e;
       text-decoration: none;
+    }
+    a.lab-link {
+      color: #ffa97e; /* lab name in orange */
+      font-weight: 600;
+    }
+    a.uni-link {
+      color: #fff;   /* university in white */
+      font-weight: 400;
     }
     a:hover {
       text-decoration: underline;
@@ -34,99 +41,67 @@
     /* ─── CURSOR GLOW & SPARKLES ───────────────────── */
     .cursor-glow {
       position: fixed;
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
+      width: 15px; height: 15px; border-radius: 50%;
       background: radial-gradient(circle, rgba(255,255,100,0.5) 0%, rgba(255,255,150,0.2) 60%, transparent 100%);
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
+      pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
       box-shadow: 0 0 15px rgba(255,255,100,0.4);
       animation: firefly 2.5s ease-in-out infinite;
     }
     .sparkle {
-      position: fixed;
-      width: 3px;
-      height: 3px;
-      background: rgba(255,255,120,0.8);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
+      position: fixed; width: 3px; height: 3px; background: rgba(255,255,120,0.8);
+      border-radius: 50%; pointer-events: none; z-index: 9998;
       animation: sparkle-fade 1.2s ease-out forwards;
     }
     @keyframes firefly {
-      0%, 100% {
-        opacity: 0.8;
-        transform: translate(-50%, -50%) scale(1);
+      0%,100% {
+        opacity: 0.8; transform: translate(-50%, -50%) scale(1);
       }
       50% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.15);
+        opacity: 1; transform: translate(-50%, -50%) scale(1.15);
       }
     }
     @keyframes sparkle-fade {
       to {
-        opacity: 0;
-        transform: scale(0.3);
+        opacity: 0; transform: scale(0.3);
       }
     }
 
     /* ─── LAYOUT ───────────────────────────────────── */
     .container {
-      max-width: 900px;
-      margin: 0 auto;
+      max-width: 900px; margin: 0 auto;
       animation: fadeIn 1s ease;
     }
     @keyframes fadeIn {
       from {
-        opacity: 0;
-        transform: translateY(20px);
+        opacity: 0; transform: translateY(20px);
       }
       to {
-        opacity: 1;
-        transform: translateY(0);
+        opacity: 1; transform: translateY(0);
       }
     }
     .back-link {
-      display: inline-block;
-      margin-bottom: 2rem;
-      padding: 0.5rem 1rem;
-      border: 1px solid transparent;
-      border-radius: 25px;
-      color: #709fd3;
-      transition: 0.3s;
+      display: inline-block; margin-bottom: 2rem;
+      padding: 0.5rem 1rem; border: 1px solid transparent; border-radius: 25px;
+      color: #709fd3; transition: 0.3s;
     }
     .back-link:hover {
-      color: #ffa97e;
-      border-color: #ffa97e;
-      background: rgba(255,169,126,0.1);
-      transform: translateX(-5px);
+      color: #ffa97e; border-color: #ffa97e;
+      background: rgba(255,169,126,0.1); transform: translateX(-5px);
     }
     h1.page-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 2rem;
-      position: relative;
-      color: #fff;
+      font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 2rem;
+      color: #fff; position: relative;
     }
-    h1.page-title::after {
-      content: "";
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #ffa97e, transparent);
+    /* ── Replace gradient bar with a thin 2px line ── */
+    h1.page-title + .divider,
+    .section-title + .divider {
+      width: 60px; height: 2px; margin: 0.5rem auto 2rem;
+      background: #ffa97e; /* simple orange line */
     }
 
     /* ─── TWO-COLUMN MAIN ──────────────────────────── */
     .main-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-bottom: 3rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;
     }
     @media (max-width: 700px) {
       .main-content {
@@ -136,91 +111,51 @@
 
     /* ─── RESEARCH BOXES ───────────────────────────── */
     .research-section {
-      margin-bottom: 1.5rem;
-      padding: 1.2rem;
-      background: rgba(255,255,255,0.03);
-      border-radius: 12px;
+      margin-bottom: 1.2rem; padding: 1rem;
+      background: rgba(255,255,255,0.03); border-radius: 12px;
       border: 1px solid rgba(255,169,126,0.2);
-      position: relative;
-      transition: 0.3s;
+      position: relative; transition: 0.3s;
     }
     .research-section:hover {
       transform: translateY(-3px);
       border-color: rgba(255,169,126,0.4);
       box-shadow: 0 8px 20px rgba(255,169,126,0.1);
     }
-    .research-section:hover::before {
-      opacity: 1;
-    }
-    .research-section::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #709fd3, #ffa97e, #709fd3);
-      opacity: 0;
-      transition: 0.3s;
-    }
     .research-question {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 0.8rem;
-      color: #fff;
-      line-height: 1.4;
+      font-size: 1.2rem; font-weight: 600; margin-bottom: 0.6rem;
+      color: #fff; line-height: 1.4;
     }
     .lab-info {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #ffa97e;
+      font-size: 0.95rem; font-weight: 600; color: #ffa97e;
+      line-height: 1.3;
+    }
+    .lab-info span.uni {
+      color: #fff; font-weight: 400; margin-left: 0.25rem;
     }
 
     /* ─── AWARDS & PUBLICATIONS ────────────────────── */
     .awards-section {
-      padding: 1.5rem;
-      background: rgba(255,255,255,0.05);
-      border-radius: 12px;
-      border: 1px solid rgba(112,159,211,0.3);
+      padding: 1.5rem; background: rgba(255,255,255,0.05);
+      border-radius: 12px; border: 1px solid rgba(112,159,211,0.3);
     }
     .section-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #709fd3;
-      text-align: center;
-      margin-bottom: 1.5rem;
-      position: relative;
-    }
-    .section-title::after {
-      content: "";
-      position: absolute;
-      bottom: -6px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #709fd3, transparent);
+      font-size: 1.8rem; font-weight: 700; color: #709fd3;
+      text-align: center; margin-bottom: 0.5rem;
     }
     .award-item, .publication-item {
-      margin-bottom: 0.6rem;
-      padding-left: 0; /* no bullet */
-      font-size: 0.95rem;
-      color: #fff;
-      line-height: 1.4;
+      margin-bottom: 0.5rem; font-size: 0.95rem; color: #fff; line-height: 1.4;
     }
-    .award-item { margin-left: 0.5rem; } /* slight indent */
+    .award-item { margin-left: 0.5rem; }
     .publication-item { margin-left: 0.5rem; }
 
     .author-name {
-      font-weight: 700;
-      color: #ffa97e;
+      font-weight: 700; color: #ffa97e;
     }
     .journal-name {
-      font-style: italic;
-      color: #709fd3;
+      font-style: italic; color: #709fd3;
     }
 
-    /* ─── RESPONSIVE ADJUSTMENTS ───────────────────── */
+    /* ─── RESPONSIVE ───────────────────────────────── */
     @media (max-width: 480px) {
       h1.page-title { font-size: 2rem; }
       .research-question { font-size: 1rem; }
@@ -236,9 +171,10 @@
   <div class="container">
     <a href="javascript:history.back()" class="back-link">← back to garden</a>
     <h1 class="page-title">Research</h1>
+    <div class="divider"></div> <!-- thin orange line below title -->
 
     <div class="main-content">
-      <!-- LEFT COLUMN: Three Research Boxes -->
+      <!-- LEFT COLUMN: Research Topics -->
       <div>
         <div class="research-section">
           <div class="research-question">
@@ -246,9 +182,10 @@
             <span style="color:#ffa97e;font-weight:600;">digital well-being</span>?
           </div>
           <div class="lab-info">
-            ➤ <a href="https://hsph.harvard.edu/research/health-happiness/" target="_blank">
+            <a href="https://hsph.harvard.edu/research/health-happiness/" class="lab-link" target="_blank">
               Viswanath Lab
             </a>
+            <span class="uni">@ Harvard T.H. Chan SPH</span>
           </div>
         </div>
 
@@ -259,9 +196,10 @@
             in media, packaging, and enforcement?
           </div>
           <div class="lab-info">
-            ➤ <a href="https://publichealth.jhu.edu/institute-for-global-tobacco-control" target="_blank">
+            <a href="https://publichealth.jhu.edu/institute-for-global-tobacco-control" class="lab-link" target="_blank">
               Institute for Global Tobacco Control
             </a>
+            <span class="uni">@ JHU Bloomberg SPH</span>
           </div>
         </div>
 
@@ -270,9 +208,10 @@
             How can human-computer interaction restore urban justice in New York's marginalized communities?
           </div>
           <div class="lab-info">
-            ➤ <a href="https://ceal.cs.columbia.edu/people/" target="_blank">
-              Computer-Enabled Abilities Laboratory
+            <a href="https://ceal.cs.columbia.edu/people/" class="lab-link" target="_blank">
+              Computer-Enabled Abilities Lab
             </a>
+            <span class="uni">@ Columbia SEAS</span>
           </div>
         </div>
       </div>
@@ -280,6 +219,7 @@
       <!-- RIGHT COLUMN: Awards & Publications -->
       <div class="awards-section">
         <h2 class="section-title">Awards & Publications</h2>
+        <div class="divider"></div> <!-- thin orange line below “Awards & Publications” -->
 
         <!-- Awards -->
         <div class="award-item">
@@ -304,16 +244,16 @@
           <span style="color:#ffa97e;font-weight:600;">
             The problematic use of cultural symbols on Chinese cigarette packs
           </span>. 
-          <span class="journal-name">Tobacco-Induced Diseases</span>
+          <span class="journal-name">Tobacco-Induced Diseases</span>.
         </div>
         <div class="publication-item">
           <span class="author-name">Xing, E.</span> et al. (2025). 
-          Content Analysis of Media Coverage on Smoke-Free Policy Implementation in Ten LMICs [Conference presentation]. 
+          Content Analysis of Media Coverage on Smoke-Free Policy Implementation in Ten LMICs [Conference]. 
           <span class="journal-name">World Conference on Tobacco Control</span>.
         </div>
         <div class="publication-item">
           Liu, Y., <span class="author-name">Xing, E.</span>, Huang, S., Kasisomayajula, V. (2025). 
-          The content, impact, and coverage of social media platform-led digital well-being design changes [Conference presentation]. 
+          The content, impact, and coverage of social media platform-led digital well-being design changes [Conference]. 
           <span class="journal-name">International Conference on Computational Social Science</span>.
         </div>
         <div class="publication-item">
@@ -322,7 +262,7 @@
           <span class="journal-name">Tobacco-Induced Diseases</span>.
         </div>
         <div class="publication-item">
-          (2025) Challenging the Consideration of Immediate Coal Phase-Out: Dual Imperatives of Coal Power Control and Renewable Energy Acceleration in China's Carbon Neutral Pathway
+          (2025) Challenging the Consideration of Immediate Coal Phase-Out: Dual Imperatives of Coal Power Control and Renewable Energy Acceleration in China's Carbon Neutral Pathway.
         </div>
         <div class="publication-item">
           Lu, X., Yin, Z., Nielsen, C., Cui, R. Y., Ou, Y., <span class="author-name">Xing, E.</span>, Han, M., Shi, M., Ruan, Z., Wang, J., Su, Y., Zhang, C., Bian, S., Zhou, W., Li, J., He, K., McElroy, M. B. (2025). 
@@ -341,22 +281,23 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const cursorGlow = document.getElementById('cursor-glow');
-      let lastSparkle = 0, interval = 150;
+      let lastTime = 0, interval = 150;
 
       document.addEventListener('mousemove', e => {
         cursorGlow.style.left = e.clientX + 'px';
-        cursorGlow.style.top = e.clientY + 'px';
+        cursorGlow.style.top  = e.clientY + 'px';
+
         const now = Date.now();
-        if (now - lastSparkle > interval) {
-          const s = document.createElement('div');
-          s.className = 'sparkle';
+        if (now - lastTime > interval) {
+          const sparkle = document.createElement('div');
+          sparkle.className = 'sparkle';
           const offsetX = (Math.random() - 0.5) * 20;
           const offsetY = (Math.random() - 0.5) * 20;
-          s.style.left = (e.clientX + offsetX) + 'px';
-          s.style.top  = (e.clientY + offsetY) + 'px';
-          document.body.appendChild(s);
-          setTimeout(() => s.remove(), 1200);
-          lastSparkle = now;
+          sparkle.style.left = (e.clientX + offsetX) + 'px';
+          sparkle.style.top  = (e.clientY + offsetY) + 'px';
+          document.body.appendChild(sparkle);
+          setTimeout(() => sparkle.remove(), 1200);
+          lastTime = now;
         }
       });
     });
