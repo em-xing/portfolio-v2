@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Flower Research – Emily Xing</title>
+  <title>Research – Emily Xing</title>
 
-  <!-- PT Sans from Google Fonts -->
+  <!-- Load PT Sans from Google Fonts -->
   <link
     href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap"
     rel="stylesheet"
@@ -26,14 +26,14 @@
       line-height: 1.6;
       cursor: url("images/cursor_normal.cur") 0 0, auto;
       padding: 2rem;
-      padding-top: 6rem; /* make room for fixed header */
+      padding-top: 6rem; /* space for fixed header */
       min-height: 120vh;
     }
     a {
       text-decoration: none;
     }
 
-    /* ─── CURSOR GLOW & SPARKLES ───────────────────── */
+    /* ─── GLOWING CURSOR & SPARKLES ──────────────────── */
     .cursor-glow {
       position: fixed;
       width: 15px; height: 15px; border-radius: 50%;
@@ -121,71 +121,179 @@
       filter: brightness(1.2) drop-shadow(0 0 10px rgba(255,169,126,0.6));
     }
 
-    /* ─── CONTENT CONTAINER ────────────────────────── */
-    .content-container {
-      max-width: 800px;
+    /* ─── RESEARCH PAGE CONTENT ─────────────────────── */
+    .container {
+      max-width: 900px;
       margin: 0 auto;
-      margin-top: 1rem;
-      padding: 2rem;
+      animation: fadeIn 1s ease;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0; transform: translateY(20px);
+      }
+      to {
+        opacity: 1; transform: translateY(0);
+      }
+    }
+    h1.page-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #fff;
+      position: relative;
+    }
+    /* Orange line below page title */
+    h1.page-title + .divider {
+      width: 60px;
+      height: 2px;
+      margin: 0.5rem auto 2rem;
+      background: #ffa97e;
+    }
+
+    /* Two-column layout (labs and awards) */
+    .main-content {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .left-column, .right-column {
+      flex: 1;
+    }
+    @media (max-width: 700px) {
+      .main-content {
+        display: block;
+      }
+    }
+
+    /* Research section boxes */
+    .research-section {
+      margin-bottom: 1.2rem;
+      padding: 1rem;
       background: rgba(255,255,255,0.03);
       border-radius: 12px;
       border: 1px solid rgba(255,169,126,0.2);
+      transition: 0.3s;
     }
-    .content-container h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 1.5rem;
+    .research-section:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255,169,126,0.4);
+      box-shadow: 0 8px 20px rgba(255,169,126,0.1);
+    }
+    .research-question {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
       color: #fff;
+      line-height: 1.4;
     }
-    .content-container p {
-      font-size: 1rem;
-      line-height: 1.5;
-      margin-bottom: 1rem;
-      color: #ddd;
+    .research-question .highlight {
+      color: #ffa97e;
+      font-weight: 600;
+    }
+    .lab-info {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #ffa97e;
+      line-height: 1.3;
+    }
+    .lab-info a.lab-link {
+      color: #ffa97e;
+      font-weight: 600;
+      text-decoration: underline;
+      transition: color 0.3s;
+    }
+    .lab-info a.lab-link:hover {
+      color: #1e90ff;
+    }
+    .lab-info span.uni {
+      color: #fff;
+      font-weight: 400;
+      margin-left: 0.25rem;
     }
 
-    /* ─── RESPONSIVE ───────────────────────────────── */
-    @media (max-width: 700px) {
-      .content-container {
-        padding: 1rem;
-      }
-      header img.logo {
-        width: 150px;
-      }
-      .sidebar {
-        display: none;
-      }
-      .social-sidebar {
-        right: 10px;
-      }
+    /* Awards & Scholarships box (match height to research boxes) */
+    .awards-section {
+      padding: 1.5rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      border: 1px solid rgba(112,159,211,0.3);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #709fd3;
+      text-align: center;
+      margin-bottom: 1rem; /* spacing below heading */
+    }
+    .award-list {
+      list-style-type: disc;
+      margin-left: 1.5rem;
+    }
+    .award-list li {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    /* Publications section (full-width below both columns) */
+    .publications-section {
+      margin-top: 2rem;
+    }
+    .publications-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #709fd3;
+      text-align: center;
+      margin-bottom: 1rem; /* spacing below heading */
+    }
+    .publication-list {
+      list-style-type: none;
+      margin-left: 0;
+      padding-left: 0;
+    }
+    .publication-item {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+    .publication-item .author-name {
+      font-weight: 700;
+      color: #ffa97e;
+    }
+    .publication-item .journal-name {
+      font-style: italic;
+      color: #709fd3;
+    }
+
+    /* Responsive adjustments */
     @media (max-width: 480px) {
-      .content-container h1 {
-        font-size: 1.5rem;
-      }
-      .content-container p {
-        font-size: 0.9rem;
-      }
+      h1.page-title { font-size: 2rem; }
+      .research-question { font-size: 1rem; }
+      .lab-info, .award-list li, .publication-item { font-size: 0.9rem; }
     }
   </style>
 </head>
 
 <body>
-  <!-- GLOWING CURSOR -->
+  <!-- Glowing cursor effect -->
   <div class="cursor-glow" id="cursor-glow"></div>
 
-  <!-- HEADER (logo remains) -->
+  <!-- Fixed header (logo) -->
   <header>
     <img src="images/name.gif" alt="name logo" class="logo"/>
   </header>
 
-  <!-- LEFT SIDEBAR -->
+  <!-- Left sidebar art -->
   <aside class="sidebar">
     <img src="images/sidebar_art.PNG" alt="sidebar art"/>
   </aside>
 
-  <!-- RIGHT SOCIAL ICONS -->
+  <!-- Right social icons -->
   <aside class="social-sidebar">
     <a href="https://www.linkedin.com/in/emily-xing-5663ab266/" target="_blank">
       <img src="images/icon_linkedin.PNG" alt="LinkedIn icon">
@@ -198,27 +306,110 @@
     </a>
   </aside>
 
-  <!-- MAIN CONTENT FOR flower_research.html -->
-  <div class="content-container">
-    <h1>Flower Research</h1>
-    <p>
-      <!-- Placeholder text. Replace with actual content. -->
-      Welcome to the Flower Research page! Here, we delve into the details of our latest studies on urban floriculture, 
-      digital art inspired by botanical forms, and interactive installations that combine nature and technology.
-    </p>
-    <p>
-      Feel free to explore the sections below:
-    </p>
-    <ul>
-      <li>Project Overview & Goals</li>
-      <li>Methodology & Data Collection</li>
-      <li>Preliminary Findings & Visualizations</li>
-      <li>Future Directions & Collaborations</li>
-    </ul>
-    <p>
-      <!-- Additional content can go here -->
-      For more details, check out our GitHub repository or reach out via email.
-    </p>
+  <!-- Research page content -->
+  <div class="container">
+    <h1 class="page-title">Research</h1>
+    <div class="divider"></div>
+
+    <div class="main-content">
+      <!-- LEFT COLUMN: Research Topics -->
+      <div class="left-column">
+        <div class="research-section">
+          <div class="research-question">
+            Are recent design changes on big social media actually improving user 
+            <span class="highlight">digital well-being</span>?
+          </div>
+          <div class="lab-info">
+            <a href="https://hsph.harvard.edu/research/health-happiness/" class="lab-link" target="_blank">
+              Viswanath Lab
+            </a>
+            <span class="uni">@ Harvard T.H. Chan SPH</span>
+          </div>
+        </div>
+
+        <div class="research-section">
+          <div class="research-question">
+            How do we close 
+            <span class="highlight">tobacco control policy gaps</span> 
+            in media, packaging, and enforcement?
+          </div>
+          <div class="lab-info">
+            <a href="https://publichealth.jhu.edu/institute-for-global-tobacco-control" class="lab-link" target="_blank">
+              Institute for Global Tobacco Control
+            </a>
+            <span class="uni">@ JHU Bloomberg SPH</span>
+          </div>
+        </div>
+
+        <div class="research-section">
+          <div class="research-question">
+            How can 
+            <span class="highlight">human-computer interaction</span> 
+            restore urban justice in New York's marginalized communities?
+          </div>
+          <div class="lab-info">
+            <a href="https://ceal.cs.columbia.edu/people/" class="lab-link" target="_blank">
+              Computer-Enabled Abilities Lab
+            </a>
+            <span class="uni">@ Columbia SEAS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Awards & Scholarships -->
+      <div class="right-column">
+        <div class="awards-section">
+          <h2 class="section-title">Awards &amp; Scholarships</h2>
+          <ul class="award-list">
+            <li>2025 Columbia-Amazon Summer Research Undergraduate Experience (SURE) Fellow</li>
+            <li>2024 Harvard-China Project Summer Undergraduate Research Assistantship @ Tsinghua University</li>
+            <li>2023 Regeneron Talent Search Scholar</li>
+            <li>2023 Institute for Global Tobacco Control Distinguished Student Researcher</li>
+            <li>2023, 2022 NSF Research Experience & Mentoring (REM) Program Fellow @ Johns Hopkins University</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PUBLICATIONS SECTION (full-width below both columns) -->
+    <div class="publications-section">
+      <h2>Publications</h2>
+      <ul class="publication-list">
+        <li class="publication-item">
+          <span class="author-name">Xing, E.</span> et al. (2023). 
+          The problematic use of cultural symbols on Chinese cigarette packs. 
+          <span class="journal-name">Tobacco-Induced Diseases</span>.
+        </li>
+        <li class="publication-item">
+          <span class="author-name">Xing, E.</span> et al. (2025). 
+          Content Analysis of Media Coverage on Smoke-Free Policy Implementation in Ten LMICs [Conference]. 
+          <span class="journal-name">World Conference on Tobacco Control</span>.
+        </li>
+        <li class="publication-item">
+          Liu, Y., <span class="author-name">Xing, E.</span>, Huang, S., Kasisomayajula, V. (2025). 
+          The content, impact, and coverage of social media platform-led digital well-being design changes [Conference]. 
+          <span class="journal-name">International Conference on Computational Social Science</span>.
+        </li>
+        <li class="publication-item">
+          Nian, Q., Kennedy, R., Schotte, K., Gouda, H., Kataria, S., <span class="author-name">Xing, E.</span>, Welding, K. (2025). 
+          State of the evidence on economic impacts of smoke-free policies in the tourism sector: A narrative literature review. Under review @ 
+          <span class="journal-name">Tobacco-Induced Diseases</span>.
+        </li>
+        <li class="publication-item">
+          (2025) Challenging the Consideration of Immediate Coal Phase-Out: Dual Imperatives of Coal Power Control and Renewable Energy Acceleration in China's Carbon Neutral Pathway.
+        </li>
+        <li class="publication-item">
+          Lu, X., Yin, Z., Nielsen, C., Cui, R. Y., Ou, Y., <span class="author-name">Xing, E.</span>, Han, M., Shi, M., Ruan, Z., Wang, J., Su, Y., Zhang, C., Bian, S., Zhou, W., Li, J., He, K., McElroy, M. B. (2025). 
+          Mitigating Inequity Risks in China’s Net-Zero Energy Transition via an Enhanced Renewable-Guided Industrial Spatial Reconfiguration. Under review @ 
+          <span class="journal-name">National Science Review</span>.
+        </li>
+        <li class="publication-item">
+          Wang, J., Lu, X., Wang, H., Ou, Y., Wang, J., Tong, D., Li, Y., Ruan, Z., Yin, Z., Zhou, W., McLellan, B., <span class="author-name">Xing, E.</span>, MacLennan, A. M., Fan, J., Zhang, X., McElroy, M. B., He, K. (2025). 
+          Reassessing Immediate Coal Phase-Out: Dual Imperatives of Capacity Control and Renewables Expansion in China’s Carbon Neutral Strategy. Under review @ 
+          <span class="journal-name">Nexus</span>.
+        </li>
+      </ul>
+    </div>
   </div>
 
   <script>
