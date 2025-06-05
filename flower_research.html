@@ -27,12 +27,13 @@
       text-decoration: none;
     }
     a.lab-link {
-      color: #ffa97e; /* lab name in orange */
+      color: #ffa97e;      /* Lab name in muted orange */
       font-weight: 600;
     }
     a.uni-link {
-      color: #fff;   /* university in white */
+      color: #fff;         /* University in white */
       font-weight: 400;
+      margin-left: 0.25rem;
     }
     a:hover {
       text-decoration: underline;
@@ -42,34 +43,49 @@
     .cursor-glow {
       position: fixed;
       width: 15px; height: 15px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,100,0.5) 0%, rgba(255,255,150,0.2) 60%, transparent 100%);
-      pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+      background: radial-gradient(
+        circle,
+        rgba(255,255,100,0.5) 0%,
+        rgba(255,255,150,0.2) 60%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
       box-shadow: 0 0 15px rgba(255,255,100,0.4);
       animation: firefly 2.5s ease-in-out infinite;
     }
     .sparkle {
-      position: fixed; width: 3px; height: 3px; background: rgba(255,255,120,0.8);
-      border-radius: 50%; pointer-events: none; z-index: 9998;
+      position: fixed;
+      width: 3px; height: 3px;
+      background: rgba(255,255,120,0.8);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
       animation: sparkle-fade 1.2s ease-out forwards;
     }
     @keyframes firefly {
-      0%,100% {
-        opacity: 0.8; transform: translate(-50%, -50%) scale(1);
+      0%, 100% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1);
       }
       50% {
-        opacity: 1; transform: translate(-50%, -50%) scale(1.15);
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.15);
       }
     }
     @keyframes sparkle-fade {
       to {
-        opacity: 0; transform: scale(0.3);
+        opacity: 0;
+        transform: scale(0.3);
       }
     }
 
     /* ─── LAYOUT ───────────────────────────────────── */
     .container {
-      max-width: 900px; margin: 0 auto;
-      animation: fadeIn 1s ease;
+      max-width: 900px;
+      margin: 0 auto;
+      animation: fadeIn 0.8s ease;
     }
     @keyframes fadeIn {
       from {
@@ -80,79 +96,110 @@
       }
     }
     .back-link {
-      display: inline-block; margin-bottom: 2rem;
-      padding: 0.5rem 1rem; border: 1px solid transparent; border-radius: 25px;
-      color: #709fd3; transition: 0.3s;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid transparent;
+      border-radius: 25px;
+      color: #709fd3;
+      transition: 0.3s;
     }
     .back-link:hover {
-      color: #ffa97e; border-color: #ffa97e;
-      background: rgba(255,169,126,0.1); transform: translateX(-5px);
-    }
-    h1.page-title {
-      font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 2rem;
-      color: #fff; position: relative;
-    }
-    /* ── Replace gradient bar with a thin 2px line ── */
-    h1.page-title + .divider,
-    .section-title + .divider {
-      width: 60px; height: 2px; margin: 0.5rem auto 2rem;
-      background: #ffa97e; /* simple orange line */
+      color: #ffa97e;
+      border-color: #ffa97e;
+      background: rgba(255,169,126,0.1);
+      transform: translateX(-5px);
     }
 
-    /* ─── TWO-COLUMN MAIN ──────────────────────────── */
-    .main-content {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;
+    h1.page-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #fff;
     }
-    @media (max-width: 700px) {
-      .main-content {
+
+    /* ── Thin divider under title ───────────────────── */
+    .divider {
+      height: 2px;
+      width: 80px;
+      background: #ffa97e;
+      margin: 0 auto 2rem;
+    }
+
+    /* ─── RESEARCH CARDS GRID ───────────────────────── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 720px) {
+      .cards-grid {
         grid-template-columns: 1fr;
       }
     }
-
-    /* ─── RESEARCH BOXES ───────────────────────────── */
-    .research-section {
-      margin-bottom: 1.2rem; padding: 1rem;
-      background: rgba(255,255,255,0.03); border-radius: 12px;
+    .research-card {
+      background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,169,126,0.2);
-      position: relative; transition: 0.3s;
+      border-radius: 12px;
+      padding: 1rem;
+      transition: 0.3s;
     }
-    .research-section:hover {
+    .research-card:hover {
       transform: translateY(-3px);
       border-color: rgba(255,169,126,0.4);
       box-shadow: 0 8px 20px rgba(255,169,126,0.1);
     }
     .research-question {
-      font-size: 1.2rem; font-weight: 600; margin-bottom: 0.6rem;
-      color: #fff; line-height: 1.4;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: #fff;
+      line-height: 1.4;
     }
     .lab-info {
-      font-size: 0.95rem; font-weight: 600; color: #ffa97e;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #ffa97e;
       line-height: 1.3;
     }
-    .lab-info span.uni {
-      color: #fff; font-weight: 400; margin-left: 0.25rem;
+    .lab-info .uni-link {
+      color: #fff;
+      font-weight: 400;
+    }
+
+    /* ─── SECTION SPLITTER ──────────────────────────── */
+    .section-divider {
+      border-top: 2px solid #ffa97e;
+      margin: 0 0 2rem;
     }
 
     /* ─── AWARDS & PUBLICATIONS ────────────────────── */
     .awards-section {
-      padding: 1.5rem; background: rgba(255,255,255,0.05);
-      border-radius: 12px; border: 1px solid rgba(112,159,211,0.3);
+      margin-bottom: 3rem;
     }
     .section-title {
-      font-size: 1.8rem; font-weight: 700; color: #709fd3;
-      text-align: center; margin-bottom: 0.5rem;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #709fd3;
+      text-align: center;
+      margin-bottom: 0.5rem;
     }
     .award-item, .publication-item {
-      margin-bottom: 0.5rem; font-size: 0.95rem; color: #fff; line-height: 1.4;
+      margin-left: 0.5rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
+      color: #fff;
+      line-height: 1.4;
     }
-    .award-item { margin-left: 0.5rem; }
-    .publication-item { margin-left: 0.5rem; }
-
     .author-name {
-      font-weight: 700; color: #ffa97e;
+      font-weight: 700;
+      color: #ffa97e;
     }
     .journal-name {
-      font-style: italic; color: #709fd3;
+      font-style: italic;
+      color: #709fd3;
     }
 
     /* ─── RESPONSIVE ───────────────────────────────── */
@@ -169,111 +216,119 @@
   <div class="cursor-glow" id="cursor-glow"></div>
 
   <div class="container">
+    <!-- BACK LINK -->
     <a href="javascript:history.back()" class="back-link">← back to garden</a>
+
+    <!-- PAGE TITLE -->
     <h1 class="page-title">Research</h1>
-    <div class="divider"></div> <!-- thin orange line below title -->
+    <div class="divider"></div>
 
-    <div class="main-content">
-      <!-- LEFT COLUMN: Research Topics -->
-      <div>
-        <div class="research-section">
-          <div class="research-question">
-            Are recent design changes on big social media actually improving user 
-            <span style="color:#ffa97e;font-weight:600;">digital well-being</span>?
-          </div>
-          <div class="lab-info">
-            <a href="https://hsph.harvard.edu/research/health-happiness/" class="lab-link" target="_blank">
-              Viswanath Lab
-            </a>
-            <span class="uni">@ Harvard T.H. Chan SPH</span>
-          </div>
+    <!-- RESEARCH CARDS -->
+    <div class="cards-grid">
+      <!-- Card 1 -->
+      <div class="research-card">
+        <div class="research-question">
+          Are recent design changes on big social media actually improving user 
+          <span style="color:#ffa97e; font-weight:600;">digital well-being</span>?
         </div>
-
-        <div class="research-section">
-          <div class="research-question">
-            How do we close 
-            <span style="color:#ffa97e;font-weight:600;">tobacco control policy gaps</span> 
-            in media, packaging, and enforcement?
-          </div>
-          <div class="lab-info">
-            <a href="https://publichealth.jhu.edu/institute-for-global-tobacco-control" class="lab-link" target="_blank">
-              Institute for Global Tobacco Control
-            </a>
-            <span class="uni">@ JHU Bloomberg SPH</span>
-          </div>
-        </div>
-
-        <div class="research-section">
-          <div class="research-question">
-            How can human-computer interaction restore urban justice in New York's marginalized communities?
-          </div>
-          <div class="lab-info">
-            <a href="https://ceal.cs.columbia.edu/people/" class="lab-link" target="_blank">
-              Computer-Enabled Abilities Lab
-            </a>
-            <span class="uni">@ Columbia SEAS</span>
-          </div>
+        <div class="lab-info">
+          <a href="https://hsph.harvard.edu/research/health-happiness/" class="lab-link" target="_blank">
+            Viswanath Lab
+          </a>
+          <a href="https://hsph.harvard.edu/research/health-happiness/" class="uni-link" target="_blank">
+            @ Harvard T.H. Chan SPH
+          </a>
         </div>
       </div>
 
-      <!-- RIGHT COLUMN: Awards & Publications -->
-      <div class="awards-section">
-        <h2 class="section-title">Awards & Publications</h2>
-        <div class="divider"></div> <!-- thin orange line below “Awards & Publications” -->
+      <!-- Card 2 -->
+      <div class="research-card">
+        <div class="research-question">
+          How do we close 
+          <span style="color:#ffa97e; font-weight:600;">tobacco control policy gaps</span> 
+          in media, packaging, and enforcement?
+        </div>
+        <div class="lab-info">
+          <a href="https://publichealth.jhu.edu/institute-for-global-tobacco-control" class="lab-link" target="_blank">
+            Institute for Global Tobacco Control
+          </a>
+          <a href="https://publichealth.jhu.edu/institute-for-global-tobacco-control" class="uni-link" target="_blank">
+            @ JHU Bloomberg SPH
+          </a>
+        </div>
+      </div>
 
-        <!-- Awards -->
-        <div class="award-item">
-          2025 Columbia-Amazon Summer Research Undergraduate Experience (SURE) Fellow
+      <!-- Card 3 -->
+      <div class="research-card">
+        <div class="research-question">
+          How can human-computer interaction restore urban justice in New York’s marginalized communities?
         </div>
-        <div class="award-item">
-          2024 Harvard-China Project Summer Undergraduate Research Assistantship @ Tsinghua University
+        <div class="lab-info">
+          <a href="https://ceal.cs.columbia.edu/people/" class="lab-link" target="_blank">
+            Computer-Enabled Abilities Lab
+          </a>
+          <a href="https://ceal.cs.columbia.edu/people/" class="uni-link" target="_blank">
+            @ Columbia SEAS
+          </a>
         </div>
-        <div class="award-item">
-          2023 Regeneron Talent Search Scholar
-        </div>
-        <div class="award-item">
-          2023 Institute for Global Tobacco Control Distinguished Student Researcher
-        </div>
-        <div class="award-item">
-          2023, 2022 NSF Research Experience & Mentoring (REM) Program Fellow @ Johns Hopkins University
-        </div>
+      </div>
+    </div>
 
-        <!-- Publications -->
-        <div class="publication-item">
-          <span class="author-name">Xing, E.</span> et al. (2023). 
-          <span style="color:#ffa97e;font-weight:600;">
-            The problematic use of cultural symbols on Chinese cigarette packs
-          </span>. 
-          <span class="journal-name">Tobacco-Induced Diseases</span>.
-        </div>
-        <div class="publication-item">
-          <span class="author-name">Xing, E.</span> et al. (2025). 
-          Content Analysis of Media Coverage on Smoke-Free Policy Implementation in Ten LMICs [Conference]. 
-          <span class="journal-name">World Conference on Tobacco Control</span>.
-        </div>
-        <div class="publication-item">
-          Liu, Y., <span class="author-name">Xing, E.</span>, Huang, S., Kasisomayajula, V. (2025). 
-          The content, impact, and coverage of social media platform-led digital well-being design changes [Conference]. 
-          <span class="journal-name">International Conference on Computational Social Science</span>.
-        </div>
-        <div class="publication-item">
-          Nian, Q., Kennedy, R., Schotte, K., Gouda, H., Kataria, S., <span class="author-name">Xing, E.</span>, Welding, K. (2025). 
-          State of the evidence on economic impacts of smoke-free policies in the tourism sector: A narrative literature review. Under review @ 
-          <span class="journal-name">Tobacco-Induced Diseases</span>.
-        </div>
-        <div class="publication-item">
-          (2025) Challenging the Consideration of Immediate Coal Phase-Out: Dual Imperatives of Coal Power Control and Renewable Energy Acceleration in China's Carbon Neutral Pathway.
-        </div>
-        <div class="publication-item">
-          Lu, X., Yin, Z., Nielsen, C., Cui, R. Y., Ou, Y., <span class="author-name">Xing, E.</span>, Han, M., Shi, M., Ruan, Z., Wang, J., Su, Y., Zhang, C., Bian, S., Zhou, W., Li, J., He, K., McElroy, M. B. (2025). 
-          Mitigating Inequity Risks in China’s Net-Zero Energy Transition via an Enhanced Renewable-Guided Industrial Spatial Reconfiguration. Under review @ 
-          <span class="journal-name">National Science Review</span>.
-        </div>
-        <div class="publication-item">
-          Wang, J., Lu, X., Wang, H., Ou, Y., Wang, J., Tong, D., Li, Y., Ruan, Z., Yin, Z., Zhou, W., McLellan, B., <span class="author-name">Xing, E.</span>, MacLennan, A. M., Fan, J., Zhang, X., McElroy, M. B., He, K. (2025). 
-          Reassessing Immediate Coal Phase-Out: Dual Imperatives of Capacity Control and Renewables Expansion in China’s Carbon Neutral Strategy. Under review @ 
-          <span class="journal-name">Nexus</span>.
-        </div>
+    <!-- SECTION DIVIDER BEFORE AWARDS -->
+    <div class="section-divider"></div>
+
+    <!-- AWARDS & PUBLICATIONS -->
+    <div class="awards-section">
+      <h2 class="section-title">Awards & Publications</h2>
+      <div class="section-divider"></div>
+
+      <!-- Awards List -->
+      <div class="award-item">
+        2025 Columbia–Amazon Summer Research Undergraduate Experience (SURE) Fellow
+      </div>
+      <div class="award-item">
+        2024 Harvard–China Project Summer URA @ Tsinghua University
+      </div>
+      <div class="award-item">
+        2023 Regeneron Talent Search Scholar
+      </div>
+      <div class="award-item">
+        2023 Institute for Global Tobacco Control Distinguished Student Researcher
+      </div>
+      <div class="award-item">
+        2023 & 2022 NSF Research Experience & Mentoring (REM) Program Fellow @ JHU
+      </div>
+
+      <!-- Publications List -->
+      <div class="publication-item">
+        <span class="author-name">Xing, E.</span> et al. (2023). 
+        <span style="color:#ffa97e; font-weight:600;">
+          The problematic use of cultural symbols on Chinese cigarette packs
+        </span>. 
+        <span class="journal-name">Tobacco-Induced Diseases</span>.
+      </div>
+      <div class="publication-item">
+        <span class="author-name">Xing, E.</span> et al. (2025). Content Analysis of Media Coverage on Smoke-Free Policy Implementation in Ten LMICs [Conference]. 
+        <span class="journal-name">World Conference on Tobacco Control</span>.
+      </div>
+      <div class="publication-item">
+        Liu, Y., <span class="author-name">Xing, E.</span>, Huang, S., Kasisomayajula, V. (2025). The content, impact, and coverage of social media platform-led digital well-being design changes [Conference]. 
+        <span class="journal-name">International Conference on Computational Social Science</span>.
+      </div>
+      <div class="publication-item">
+        Nian, Q., Kennedy, R., Schotte, K., Gouda, H., Kataria, S., <span class="author-name">Xing, E.</span>, Welding, K. (2025). State of the evidence on economic impacts of smoke-free policies in the tourism sector: A narrative literature review. Under review @ 
+        <span class="journal-name">Tobacco-Induced Diseases</span>.
+      </div>
+      <div class="publication-item">
+        (2025) Challenging the Consideration of Immediate Coal Phase-Out: Dual Imperatives of Coal Power Control and Renewable Energy Acceleration in China’s Carbon Neutral Pathway.
+      </div>
+      <div class="publication-item">
+        Lu, X., Yin, Z., Nielsen, C., Cui, R. Y., Ou, Y., <span class="author-name">Xing, E.</span>, Han, M., Shi, M., Ruan, Z., Wang, J., Su, Y., Zhang, C., Bian, S., Zhou, W., Li, J., He, K., McElroy, M. B. (2025). Mitigating Inequity Risks in China’s Net-Zero Energy Transition via an Enhanced Renewable-Guided Industrial Spatial Reconfiguration. Under review @ 
+        <span class="journal-name">National Science Review</span>.
+      </div>
+      <div class="publication-item">
+        Wang, J., Lu, X., Wang, H., Ou, Y., Wang, J., Tong, D., Li, Y., Ruan, Z., Yin, Z., Zhou, W., McLellan, B., <span class="author-name">Xing, E.</span>, MacLennan, A. M., Fan, J., Zhang, X., McElroy, M. B., He, K. (2025). Reassessing Immediate Coal Phase-Out: Dual Imperatives of Capacity Control and Renewables Expansion in China’s Carbon Neutral Strategy. Under review @ 
+        <span class="journal-name">Nexus</span>.
       </div>
     </div>
   </div>
@@ -281,12 +336,12 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const cursorGlow = document.getElementById('cursor-glow');
-      let lastTime = 0, interval = 150;
+      let lastTime = 0;
+      const interval = 150;
 
       document.addEventListener('mousemove', e => {
         cursorGlow.style.left = e.clientX + 'px';
         cursorGlow.style.top  = e.clientY + 'px';
-
         const now = Date.now();
         if (now - lastTime > interval) {
           const sparkle = document.createElement('div');
