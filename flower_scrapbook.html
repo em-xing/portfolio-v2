@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Works - Emily Xing</title>
+    
+    <!-- Load PT Sans from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.PNG" type="image/png" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'PT Sans', sans-serif;
+            background-color: #241d18;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 40px 20px;
+            cursor: url("images/cursor_normal.cur") 0 0, auto;
+            overflow-x: hidden;
+        }
+        
+        /* ─────────────────────────────────────────────────────
+           GLOWING CURSOR CIRCLE (matching homepage)
+           ───────────────────────────────────────────────────── */
+        .cursor-glow {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 100, 0.5) 0%, rgba(255, 255, 150, 0.2) 60%, transparent 100%);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: left 0.1s ease-out, top 0.1s ease-out;
+            box-shadow: 0 0 15px rgba(255, 255, 100, 0.4);
+            animation: firefly-glow 2.5s ease-in-out infinite;
+        }
+        
+        .sparkle {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 255, 120, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            animation: sparkle-fade 1.2s ease-out forwards;
+        }
+        
+        @keyframes firefly-glow {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.15);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes sparkle-fade {
+            0% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+        }
+        
+        .header {
+            text-align: center;
+            margin: 0 0 60px 0;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 3rem;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+        
+        .header p {
+            color: #bdeafe;
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+        
+        .back-button {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'PT Sans', sans-serif;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            font-size: 0.9rem;
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .portfolio-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            columns: 4;
+            column-gap: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        @media (max-width: 1024px) {
+            .portfolio-container {
+                columns: 3;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-container {
+                columns: 2;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .portfolio-container {
+                columns: 1;
+            }
+        }
+        
+        .portfolio-item {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Project Items */
+        .project-item {
+            padding: 24px;
+        }
+        
+        .project-item .title {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+        
+        .project-item .webtoon-image {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+        
+        .project-item .description {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 16px;
+        }
+        
+        .project-item .link {
+            color: #ffa97e;
+            text-decoration: none;
+            background: rgba(255, 169, 126, 0.1);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 169, 126, 0.2);
+        }
+        
+        .project-item .link:hover {
+            background: rgba(255, 169, 126, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        /* Music Items */
+        .music-item {
+            padding: 20px;
+        }
+        
+        .music-item audio {
+            width: 100%;
+            height: 40px;
+        }
+        
+        /* Artwork Items */
+        .artwork-item {
+            padding: 0;
+        }
+        
+        .artwork-item .image-placeholder {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.9rem;
+        }
+        
+        /* Site footer matching homepage */
+        .site-footer {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            z-index: 50;
+        }
+        
+        .site-footer img {
+            max-height: 40px;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- GLOWING CURSOR -->
+    <div class="cursor-glow" id="cursor-glow"></div>
+    
+    <!-- BACK BUTTON -->
+    <a href="index.html" class="back-button">← back home</a>
+    
+    <div class="header">
+        <h1>creative works</h1>
+        <p>digital stories, music, and visual art</p>
+    </div>
+    
+    <div class="portfolio-container">
+        <!-- Webtoon Project -->
+        <div class="portfolio-item project-item">
+            <div class="title">Our Place, Our Photo</div>
+            <img src="images/image_webtoon.jpg" alt="Our Place, Our Photo" class="webtoon-image">
+            <a href="#" class="link" target="_blank">read webtoon</a>
+        </div>
+        
+        <!-- YouTube -->
+        <div class="portfolio-item project-item">
+            <div class="title">silly YouTube chronicles</div>
+            <a href="https://www.youtube.com/watch?v=oBNqQ22c4Ww&t=307s" class="link" target="_blank">watch</a>
+        </div>
+        
+        <!-- Substack -->
+        <div class="portfolio-item project-item">
+            <a href="https://substack.com/@emxing" class="link" target="_blank">poetry on substack</a>
+        </div>
+        
+        <!-- Magazine Feature -->
+        <div class="portfolio-item project-item">
+            <div class="description">featured in House House Magazine</div>
+            <a href="http://www.househousemagazine.com/" class="link" target="_blank">view publication</a>
+        </div>
+        
+        <!-- Music Items -->
+        <div class="portfolio-item music-item">
+            <audio controls>
+                <source src="songs/Untitled song-1.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        
+        <div class="portfolio-item music-item">
+            <audio controls>
+                <source src="songs/Untitled song-2.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        
+        <div class="portfolio-item music-item">
+            <audio controls>
+                <source src="songs/Untitled song-3.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        
+        <div class="portfolio-item music-item">
+            <audio controls>
+                <source src="songs/Untitled song-4.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        
+        <div class="portfolio-item music-item">
+            <audio controls>
+                <source src="songs/Untitled song-5.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        
+        <!-- Artworks -->
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">2012 Halloween</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">A Field of Wishes</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">An Old Neighborhood</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">Astronomy Dreams</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">Blossom</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">Cables, Casettes</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">Feathers, Fly Freely</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">Let's Explore, Tonight, Together</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">Midwinter</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">Morning Reads</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">Mother</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">My Grandpa, the Engineer</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">My Guardian Reef</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">My Mom's Childhood</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">One Thousand Paper Cranes</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">Partners in Crime</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">Spring, I Love You</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">Sundays in the Kitchen</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">The Bothriolepis and Me</div>
+        </div>
+        
+        <div class="portfolio-item artwork-item">
+            <div class="image-placeholder">Two Flowers</div>
+        </div>
+    </div>
+    
+    <!-- SITE FOOTER -->
+    <footer class="site-footer">
+        <img src="images/copyright.PNG" alt="Copyright ©" />
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cursorGlow = document.getElementById('cursor-glow');
+            let lastSparkleTime = 0;
+            const sparkleInterval = 150;
+            
+            // Cursor glow following mouse movement with sparkle trail (matching homepage)
+            document.addEventListener('mousemove', (e) => {
+                cursorGlow.style.left = e.clientX + 'px';
+                cursorGlow.style.top = e.clientY + 'px';
+                
+                const now = Date.now();
+                if (now - lastSparkleTime > sparkleInterval) {
+                    createSparkle(e.clientX, e.clientY);
+                    lastSparkleTime = now;
+                }
+            });
+            
+            function createSparkle(x, y) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                
+                const offsetX = (Math.random() - 0.5) * 20;
+                const offsetY = (Math.random() - 0.5) * 20;
+                
+                sparkle.style.left = (x + offsetX) + 'px';
+                sparkle.style.top = (y + offsetY) + 'px';
+                
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    if (sparkle.parentNode) {
+                        sparkle.parentNode.removeChild(sparkle);
+                    }
+                }, 1200);
+            }
+            
+            // Add gentle hover effects
+            document.querySelectorAll('.portfolio-item').forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    item.style.transform = 'translateY(-3px)';
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    item.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
