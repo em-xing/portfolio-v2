@@ -97,7 +97,44 @@
       z-index: 90;
     }
 
-    /* ─── TYPEWRITER FOR “Research” ─────────────────── */
+    /* ─── HOME NAVIGATION ARROW ─────────────────────── */
+    .home-nav {
+      position: fixed;
+      top: 150px;
+      left: 37px;
+      z-index: 100;
+      background: rgba(112, 159, 211, 0.1);
+      border: 2px solid #709fd3;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    .home-nav:hover {
+      background: rgba(112, 159, 211, 0.2);
+      border-color: #87ceeb;
+      box-shadow: 0 0 20px rgba(112, 159, 211, 0.4);
+      transform: translateX(-5px);
+    }
+    .home-nav::before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-right: 12px solid #709fd3;
+      transition: border-right-color 0.3s ease;
+    }
+    .home-nav:hover::before {
+      border-right-color: #87ceeb;
+    }
+
+    /* ─── TYPEWRITER FOR "Research" ─────────────────── */
     .typewriter-line {
       display: inline-block;
       font-family: 'PT Sans', sans-serif;
@@ -112,7 +149,7 @@
     }
     @keyframes typing {
       from { width: 0; }
-      to   { width: 8ch; } /* “Research” is 8 characters */
+      to   { width: 8ch; } /* "Research" is 8 characters */
     }
     @keyframes blink-caret {
       50% { border-color: transparent; }
@@ -149,7 +186,7 @@
     /* ─── RESEARCH PAGE CONTENT ─────────────────────── */
     .container {
       max-width: 900px;
-      margin: 150px auto 0 auto; /* push content down so typewriter shows */
+      margin: 120px auto 0 auto; /* push content down so typewriter shows */
       animation: fadeIn 1s ease;
     }
     @keyframes fadeIn {
@@ -299,6 +336,7 @@
       .typewriter-line { font-size: 2rem; }
       .research-question { font-size: 1rem; }
       .lab-info, .award-list li, .publication-item { font-size: 0.9rem; }
+      .home-nav { left: 20px; width: 45px; height: 45px; }
     }
   </style>
 </head>
@@ -313,6 +351,10 @@
   <header>
     <img src="images/name.gif" alt="name logo" class="logo"/>
   </header>
+
+  <!-- Home navigation arrow -->
+  <div class="home-nav" onclick="window.location.href='index.html'" title="Return to Home">
+  </div>
 
   <!-- Right social icons -->
   <aside class="social-sidebar">
@@ -417,12 +459,12 @@
         </li>
         <li class="publication-item">
           Lu, X., Yin, Z., Nielsen, C., Cui, R. Y., Ou, Y., <span class="author-name">Xing, E.</span>, Han, M., Shi, M., Ruan, Z>, Wang, J>, Su, Y>, Zhang, C>, Bian, S>, Zhou, W>, Li, J>, He, K>, McElroy, M. B. (2025). 
-          Mitigating Inequity Risks in China’s Net-Zero Energy Transition via an Enhanced Renewable-Guided Industrial Spatial Reconfiguration. Under review @ 
+          Mitigating Inequity Risks in China's Net-Zero Energy Transition via an Enhanced Renewable-Guided Industrial Spatial Reconfiguration. Under review @ 
           <span class="journal-name">National Science Review</span>.
         </li>
         <li class="publication-item">
           Wang, J>, Lu, X>, Wang, H>, Ou, Y>, Wang, J>, Tong, D>, Li, Y>, Ruan, Z>, Yin, Z>, Zhou, W>, McLellan, B>, <span class="author-name">Xing, E.</span>, MacLennan, A. M., Fan, J>, Zhang, X>, McElroy, M. B>, He, K> (2025). 
-          Reassessing Immediate Coal Phase-Out: Dual Imperatives of Capacity Control and Renewables Expansion in China’s Carbon Neutral Strategy. Under review @ 
+          Reassessing Immediate Coal Phase-Out: Dual Imperatives of Capacity Control and Renewables Expansion in China's Carbon Neutral Strategy. Under review @ 
           <span class="journal-name">Nexus</span>.
         </li>
       </ul>
@@ -455,7 +497,7 @@
         }
       });
 
-      // Fade out the “Research” title on scroll
+      // Fade out the "Research" title on scroll
       window.addEventListener('scroll', () => {
         const titleRect = typewriter.getBoundingClientRect();
         if (titleRect.top <= 100) {
