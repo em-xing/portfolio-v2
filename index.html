@@ -136,9 +136,19 @@
       cursor: pointer;
       opacity: 0;
       transition: all 0.3s ease;
+    }
+    
+    /* Show scroll arrow immediately if animations are skipped */
+    .scroll-arrow.no-animation {
+      opacity: 1;
+    }
+    
+    /* Only animate if first visit */
+    .scroll-arrow.animate {
       animation: fadeIn 1s ease-in-out forwards;
       animation-delay: 3.5s;
     }
+    
     .scroll-arrow:hover {
       color: #ffb896;
       transform: translateY(-3px);
@@ -155,12 +165,23 @@
       color: white;
       overflow: hidden;
       white-space: nowrap;
+    }
+    
+    /* Default state - text visible, no animation */
+    .typewriter-line.no-animation {
+      width: auto;
+      border: none;
+    }
+    
+    /* Animated state - only on first visit */
+    .typewriter-line.animate {
       border-right: 0.1em solid #bdeafe;
       width: 0;
       animation:
         typing 2.25s steps(12, end) forwards,
         blink-caret 0.8s step-end infinite;
     }
+    
     @keyframes typing {
       from { width: 0; }
       to   { width: 12ch; } /* adjust length to match "hi, i'm emily!" */
@@ -178,11 +199,20 @@
       font-weight: 400;
       font-size: 1.3rem;
       color: #ffffff;
+    }
+    
+    /* Default state - text visible, no animation */
+    .fadein-line.no-animation {
+      opacity: 1;
+    }
+    
+    /* Animated state - only on first visit */
+    .fadein-line.animate {
       opacity: 0;
-      animation:
-        fadeIn 1s ease-in-out forwards;
+      animation: fadeIn 1s ease-in-out forwards;
       animation-delay: 2.5s; /* wait until typing animation finishes */
     }
+    
     @keyframes fadeIn {
       from { opacity: 0; }
       to   { opacity: 1; }
@@ -361,10 +391,10 @@
 
   <!-- INTRO TEXT (with typewriter + fade-in on page load on second line) -->
   <div id="intro-text-container" class="intro-text">
-    <div class="intro-line typewriter-line">
+    <div id="typewriter-text" class="intro-line typewriter-line">
       hi, i'm emily!
     </div>
-    <div class="intro-line fadein-line">
+    <div id="fadein-text" class="intro-line fadein-line">
       i'm a student @ harvard studying 
       <span class="highlight">applied math &amp; global health</span>. 
       i spend my time exploring 
@@ -385,13 +415,13 @@
 
   <!-- FLOWER BUTTONS ROW -->
   <section class="flowers-row">
-    <a href="flower_research.html" onclick="console.log('Research flower clicked!'); return true;">
+    <a href="flower_research.html" onclick="markPageVisited(); console.log('Research flower clicked!'); return true;">
       <img src="images/flower_research.PNG" alt="Flower Research">
     </a>
-    <a href="flower_writing.html">
+    <a href="flower_writing.html" onclick="markPageVisited();">
       <img src="images/flower_writing.PNG" alt="Flower Writing">
     </a>
-    <a href="flower_scrapbook.html">
+    <a href="flower_scrapbook.html" onclick="markPageVisited();">
       <img src="images/flower_scrapbook.PNG" alt="Flower Scrapbook">
     </a>
   </section>
@@ -402,12 +432,58 @@
   </footer>
 
   <script>
+    // Function to mark page as visited
+    function markPageVisited() {
+      const visited = JSON.stringify({ visited: true, timestamp: Date.now() });
+      document.cookie = `homepage_visited=${visited}; path=/; max-age=86400`; // 24 hours
+    }
+    
+    // Function to check if page was visited
+    function hasVisited() {
+      const cookies = document.cookie.split(';');
+      for (let cookie of cookies) {
+        const [name, value] = cookie.trim().split('=');
+        if (name === 'homepage_visited') {
+          try {
+            const data = JSON.parse(value);
+            // Check if visit was within last 24 hours
+            return data.visited && (Date.now() - data.timestamp < 86400000);
+          } catch (e) {
+            return false;
+          }
+        }
+      }
+      return false;
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       const introContainer = document.getElementById('intro-text-container');
       const flowersRow     = document.querySelector('.flowers-row');
       const flowersTitle   = document.getElementById('flowers-title');
       const cursorGlow     = document.getElementById('cursor-glow');
       const scrollArrow    = document.getElementById('scroll-arrow');
+      const typewriterText = document.getElementById('typewriter-text');
+      const fadeinText     = document.getElementById('fadein-text');
+      
+      // Check if this is a return visit
+      const isReturnVisit = hasVisited();
+      
+      if (isReturnVisit) {
+        // Skip animations - show everything immediately
+        typewriterText.classList.add('no-animation');
+        fadeinText.classList.add('no-animation');
+        scrollArrow.classList.add('no-animation');
+      } else {
+        // First visit - run animations
+        typewriterText.classList.add('animate');
+        fadeinText.classList.add('animate');
+        scrollArrow.classList.add('animate');
+        
+        // Mark as visited after animations complete
+        setTimeout(() => {
+          markPageVisited();
+        }, 4000);
+      }
       
       let lastSparkleTime = 0;
       const sparkleInterval = 150; // milliseconds between sparkles
