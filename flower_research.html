@@ -143,10 +143,21 @@
       color: white;
       overflow: hidden;
       white-space: nowrap;
+    }
+    
+    /* Default state - text visible, no animation */
+    .typewriter-line.no-animation {
+      width: auto;
+      border: none;
+    }
+    
+    /* Animated state - only on first visit */
+    .typewriter-line.animate {
       border-right: 0.1em solid #bdeafe;
       width: 0;
       animation: typing 2s steps(8, end) forwards, blink-caret 0.8s step-end infinite;
     }
+    
     @keyframes typing {
       from { width: 0; }
       to   { width: 8ch; } /* "Research" is 8 characters */
@@ -187,8 +198,22 @@
     .container {
       max-width: 900px;
       margin: 120px auto 0 auto; /* push content down so typewriter shows */
-      animation: fadeIn 1s ease;
     }
+    
+    /* Default state - content visible immediately */
+    .container.no-animation {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Animated state - only on first visit */
+    .container.animate {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 2.2s; /* wait for typewriter to finish */
+    }
+    
     @keyframes fadeIn {
       from {
         opacity: 0; transform: translateY(20px);
@@ -197,6 +222,7 @@
         opacity: 1; transform: translateY(0);
       }
     }
+    
     h1.page-title {
       text-align: center;
       margin-bottom: 2rem;
@@ -373,7 +399,7 @@
   </header>
 
   <!-- Home navigation arrow -->
-  <div class="home-nav" onclick="window.location.href='index.html'" title="Return to Home">
+  <div class="home-nav" onclick="markPageVisited(); window.location.href='index.html'" title="Return to Home">
   </div>
 
   <!-- Right social icons -->
@@ -390,7 +416,7 @@
   </aside>
 
   <!-- Research page content -->
-  <div class="container">
+  <div class="container" id="main-container">
     <h1 class="page-title">
       <span id="research-typewriter" class="typewriter-line">research</span>
     </h1>
@@ -492,12 +518,60 @@
     </div>
   </div>
 
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <img src="images/copyright.PNG" alt="Copyright ©" />
+  </footer>
+
   <script>
+    // Function to mark page as visited
+    function markPageVisited() {
+      const visited = JSON.stringify({ visited: true, timestamp: Date.now() });
+      document.cookie = `research_page_visited=${visited}; path=/; max-age=86400`; // 24 hours
+    }
+    
+    // Function to check if page was visited
+    function hasVisited() {
+      const cookies = document.cookie.split(';');
+      for (let cookie of cookies) {
+        const [name, value] = cookie.trim().split('=');
+        if (name === 'research_page_visited') {
+          try {
+            const data = JSON.parse(value);
+            // Check if visit was within last 24 hours
+            return data.visited && (Date.now() - data.timestamp < 86400000);
+          } catch (e) {
+            return false;
+          }
+        }
+      }
+      return false;
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       const cursorGlow = document.getElementById('cursor-glow');
       const typewriter = document.getElementById('research-typewriter');
+      const container = document.getElementById('main-container');
       let lastTime = 0;
       const interval = 150;
+
+      // Check if this is a return visit
+      const isReturnVisit = hasVisited();
+      
+      if (isReturnVisit) {
+        // Skip animations - show everything immediately
+        typewriter.classList.add('no-animation');
+        container.classList.add('no-animation');
+      } else {
+        // First visit - run animations
+        typewriter.classList.add('animate');
+        container.classList.add('animate');
+        
+        // Mark as visited after animations complete
+        setTimeout(() => {
+          markPageVisited();
+        }, 3500); // after typewriter (2s) + content fade delay (2.2s) + fade duration (1s)
+      }
 
       // Sparkle trail on mouse move
       document.addEventListener('mousemove', (e) => {
