@@ -103,43 +103,43 @@
     
     .shooting-star {
       position: absolute;
-      width: 2px;
-      height: 2px;
-      background: linear-gradient(45deg, #fff, #87ceeb, #fff);
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(circle, #fff 0%, #87ceeb 70%, transparent 100%);
       border-radius: 50%;
       opacity: 0;
-      animation: shootingStar 2s linear forwards;
-      box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+      animation: shootingStar 1.5s ease-out forwards;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.9), 0 0 24px rgba(135, 206, 235, 0.6);
     }
     
     .shooting-star::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 80px;
+      top: 1px;
+      left: 1px;
+      width: 60px;
       height: 1px;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 30%, rgba(255, 255, 255, 0) 100%);
       transform: rotate(-45deg);
       transform-origin: 0 0;
     }
     
     @keyframes shootingStar {
       0% {
-        opacity: 1;
-        transform: translateX(0) translateY(0) scale(0);
+        opacity: 0;
+        transform: translateX(-50px) translateY(-50px) scale(0.5);
       }
-      10% {
+      20% {
         opacity: 1;
         transform: translateX(0) translateY(0) scale(1);
       }
-      90% {
+      80% {
         opacity: 1;
-        transform: translateX(300px) translateY(300px) scale(1);
+        transform: translateX(400px) translateY(400px) scale(1);
       }
       100% {
         opacity: 0;
-        transform: translateX(400px) translateY(400px) scale(0);
+        transform: translateX(450px) translateY(450px) scale(0.8);
       }
     }
 
@@ -241,13 +241,13 @@
       border-right: 0.1em solid #bdeafe;
       width: 0;
       animation:
-        typing 2.25s steps(12, end) forwards,
+        typing 2.25s steps(13, end) forwards,
         blink-caret 0.8s step-end infinite;
     }
     
     @keyframes typing {
       from { width: 0; }
-      to   { width: 12ch; } /* adjust length to match "hi, i'm emily!" */
+      to   { width: 13ch; } /* adjust length to match "hi, i'm emily!" */
     }
     @keyframes blink-caret {
       50% { border-color: transparent; }
@@ -586,48 +586,37 @@
       function startMeteorShower() {
         meteorOverlay.classList.add('active');
         
-        // Create multiple shooting stars with staggered timing
-        for (let i = 0; i < 15; i++) {
-          setTimeout(() => {
-            createShootingStar();
-          }, i * 200 + Math.random() * 300);
-        }
+        // Create just one elegant shooting star
+        createShootingStar();
         
-        // End the meteor shower after 5 seconds
+        // End the effect after 2 seconds
         setTimeout(() => {
           meteorOverlay.classList.remove('active');
-          // Clean up any remaining shooting stars
+          // Clean up the shooting star
           const stars = meteorOverlay.querySelectorAll('.shooting-star');
           stars.forEach(star => star.remove());
-        }, 5000);
+        }, 2000);
       }
       
       function createShootingStar() {
         const star = document.createElement('div');
         star.className = 'shooting-star';
         
-        // Random starting position (from top and left edges)
-        const startX = Math.random() * window.innerWidth * 0.3;
-        const startY = Math.random() * window.innerHeight * 0.3;
+        // Start from top-left area
+        const startX = Math.random() * 200; // top-left quadrant
+        const startY = Math.random() * 200;
         
         star.style.left = startX + 'px';
         star.style.top = startY + 'px';
         
-        // Add some variation to the animation
-        const duration = 1.5 + Math.random() * 1; // 1.5-2.5 seconds
-        const scale = 0.8 + Math.random() * 0.4; // 0.8-1.2 scale
-        
-        star.style.animationDuration = duration + 's';
-        star.style.transform = `scale(${scale})`;
-        
         meteorOverlay.appendChild(star);
         
-        // Remove star after animation
+        // Remove star after animation (1.5s + buffer)
         setTimeout(() => {
           if (star.parentNode) {
             star.parentNode.removeChild(star);
           }
-        }, duration * 1000 + 100);
+        }, 1600);
       }
       
       // Close meteor shower when clicking the overlay
