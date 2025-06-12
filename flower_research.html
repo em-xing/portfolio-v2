@@ -135,41 +135,38 @@
     }
 
     /* ─── TYPEWRITER FOR "Research" ─────────────────── */
-    .typewriter-line {
-      display: inline-block;
-      font-family: 'Courier Prime', monospace;
-      font-weight: 600;
-      font-size: 1.8rem; /* Reduced from 2.3rem */
-      color: white;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-    
-    /* Start with no width and animate */
-    .typewriter-line.animate {
-      border-right: 0.15em solid #bdeafe;
-      width: 0;
-      animation: typing 2.5s steps(8, end) forwards, blink-caret 1s step-end infinite;
-    }
-    
-    @keyframes typing {
-      from { width: 0; }
-      to   { width: 8.5ch; } /* "research" is 8 characters, adding buffer */
-    }
-    @keyframes blink-caret {
-      50% { border-color: transparent; }
-    }
-    
-    /* Remove the cursor after typing completes */
-    .typewriter-line.typing-complete {
-      border-right: none;
-      animation: none;
-    }
-    
-    .fade-out {
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
+     .typewriter-line {
+            display: inline-block;
+            font-family: 'PT Sans', sans-serif;
+            font-weight: 560;
+            font-size: 1.8rem;
+            color: white;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        /* Default state - text visible, no animation */
+        .typewriter-line.no-animation {
+            width: auto;
+            border: none;
+        }
+        
+        /* Animated state - only on first visit */
+        .typewriter-line.animate {
+            border-right: 0.1em solid #bdeafe;
+            width: 0;
+            animation: typing 2.25s steps(9, end) forwards, blink-caret 0.8s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 7ch; } /* "scrapbook" is 9 characters */
+        }
+        
+        @keyframes blink-caret {
+            50% { border-color: transparent; }
+        }
+        
 
     /* ─── RIGHT SOCIAL ICONS ────────────────────────── */
     .social-sidebar {
