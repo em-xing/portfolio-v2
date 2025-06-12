@@ -139,19 +139,13 @@
       display: inline-block;
       font-family: 'Courier Prime', monospace;
       font-weight: 600;
-      font-size: 2.3rem;
+      font-size: 1.8rem; /* Reduced from 2.3rem */
       color: white;
       overflow: hidden;
       white-space: nowrap;
     }
     
-    /* Default state - text visible, no animation */
-    .typewriter-line.no-animation {
-      width: auto;
-      border: none;
-    }
-    
-    /* Animated state - only on first visit */
+    /* Start with no width and animate */
     .typewriter-line.animate {
       border-right: 0.15em solid #bdeafe;
       width: 0;
@@ -166,8 +160,8 @@
       50% { border-color: transparent; }
     }
     
-    /* Ensure the cursor disappears after typing completes */
-    .typewriter-line.animate.typing-complete {
+    /* Remove the cursor after typing completes */
+    .typewriter-line.typing-complete {
       border-right: none;
       animation: none;
     }
@@ -205,16 +199,6 @@
     .container {
       max-width: 900px;
       margin: 120px auto 0 auto; /* push content down so typewriter shows */
-    }
-    
-    /* Default state - content visible immediately */
-    .container.no-animation {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    /* Animated state - only on first visit */
-    .container.animate {
       opacity: 0;
       transform: translateY(20px);
       animation: fadeIn 1s ease forwards;
@@ -235,7 +219,7 @@
       margin-bottom: 2rem;
       color: #fff;
       position: relative;
-      height: 3.5rem; /* Reserve space for typewriter */
+      height: 2.8rem; /* Reduced from 3.5rem to match smaller font */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -370,7 +354,7 @@
 
     /* Responsive adjustments */
     @media (max-width: 480px) {
-      .typewriter-line { font-size: 2rem; }
+      .typewriter-line { font-size: 1.5rem; } /* Reduced from 2rem */
       .research-question { font-size: 1rem; }
       .lab-info, .award-list li, .publication-item { font-size: 0.9rem; }
       .home-nav { left: 20px; width: 45px; height: 45px; }
@@ -508,7 +492,7 @@
         <li class="publication-item">
           Liu, Y., <span class="author-name">Xing, E.</span>*, Huang, S.*, Kasisomayajula, V. (2025). 
           The content, impact, and coverage of social media platform-led digital well-being design changes [Conference]. 
-          <span class="journal-name">International Conference on Computational Social Science</span>.
+          <span class="journal-name">International Conference on Computational Social Science; Trust and Safety Research Conference; The Society for Personality and Social Psychology’s Annual Convention</span>.
         </li>
         <li class="publication-item">
           Nian, Q., Kennedy, R., Schotte, K., Gouda, H., Kataria, S., <span class="author-name">Xing, E.</span>, Welding, K. (2025). 
@@ -538,13 +522,11 @@
     document.addEventListener('DOMContentLoaded', () => {
       const cursorGlow = document.getElementById('cursor-glow');
       const typewriter = document.getElementById('research-typewriter');
-      const container = document.getElementById('main-container');
       let lastTime = 0;
       const interval = 150;
 
-      // Always run animations on every page load
+      // Always trigger the typewriter animation
       typewriter.classList.add('animate');
-      container.classList.add('animate');
 
       // Sparkle trail on mouse move
       document.addEventListener('mousemove', (e) => {
@@ -564,6 +546,11 @@
           lastTime = now;
         }
       });
+
+      // Remove the cursor after typing animation completes
+      setTimeout(() => {
+        typewriter.classList.add('typing-complete');
+      }, 2500);
 
       // Fade out the "Research" title on scroll
       window.addEventListener('scroll', () => {
