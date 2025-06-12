@@ -135,42 +135,38 @@
     }
 
     /* ─── TYPEWRITER FOR "Writing" ─────────────────── */
-    .typewriter-line {
+   .typewriter-line {
             display: inline-block;
             font-family: 'PT Sans', sans-serif;
             font-weight: 560;
             font-size: 1.8rem;
-            margin: 220px auto 0 auto; /* Increased from 180px to 280px */
             color: white;
             overflow: hidden;
+            margin: 310px 0 60px 0;
             white-space: nowrap;
         }
-
-    /* Default state - text visible, no animation */
+        
+        /* Default state - text visible, no animation */
         .typewriter-line.no-animation {
             width: auto;
             border: none;
         }
-    
-    @keyframes typing {
-      from { width: 0; }
-      to   { width: 17.5ch; } /* "selected writing" is 16 characters, adding buffer */
-    }
-    @keyframes blink-caret {
-      50% { border-color: transparent; }
-    }
-    
-    /* Remove the cursor after typing completes */
-    .typewriter-line.typing-complete {
-      border-right: none;
-      animation: none;
-    }
-    
-    .fade-out {
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
+        
+        /* Animated state - only on first visit */
+        .typewriter-line.animate {
+            border-right: 0.1em solid #bdeafe;
+            width: 0;
+            animation: typing 2.25s steps(9, end) forwards, blink-caret 0.8s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 17ch; } /* "scrapbook" is 9 characters */
+        }
+        
+        @keyframes blink-caret {
+            50% { border-color: transparent; }
+        }
     /* ─── RIGHT SOCIAL ICONS ────────────────────────── */
     .social-sidebar {
       position: fixed;
@@ -570,9 +566,9 @@
   </aside>
 
   <!-- Writing page content -->
-  <h1 class="page-title">
-      <span id="writing-typewriter" class="typewriter-line">selected writings</span>
-    </h1>
+ <div class="typewriter-container">
+   <span id="writing-typewriter" class="typewriter-line">selected writings</span>
+</div>
   <div class="container" id="main-container">
     
     <div class="divider"></div>
@@ -597,7 +593,7 @@
         <div class="writing-grid">
           <div class="writing-item" onclick="window.open('https://www.huusl.org/bulletin/sketches-of-a-re-imagined-mass-and-cass', '_blank')">
             <div class="article-photo">
-              <img src="write_HUUSL.jpg" alt="Mass and Cass article">
+              <img src="writing/write_HUUSL.jpg" alt="Mass and Cass article">
             </div>
             <div class="article-content">
               <div class="writing-title">
@@ -611,7 +607,7 @@
 
           <div class="writing-item" onclick="window.open('https://www.thecrimson.com/article/2024/2/13/clarity-24kgoldn-music-review/', '_blank')">
             <div class="article-photo">
-              <img src="write_Crimson.jpg" alt="24kGoldn review">
+              <img src="writing/write_Crimson.jpg" alt="24kGoldn review">
             </div>
             <div class="article-content">
               <div class="writing-title">
@@ -625,7 +621,7 @@
 
           <div class="writing-item" onclick="window.open('https://mdme.ai/blog/2024/09/18/marias-story', '_blank')">
             <div class="article-photo">
-              <img src="write_MDandMe.jpg" alt="Maria's Story article">
+              <img src="writing/write_MDandMe.jpg" alt="Maria's Story article">
             </div>
             <div class="article-content">
               <div class="writing-title">
@@ -639,7 +635,7 @@
 
           <div class="writing-item" onclick="window.open('https://bowseat.org/news/climate-change-and-effective-altruism-a-cause-worth-fighting-for/', '_blank')">
             <div class="article-photo">
-              <img src="write_BowSeat.jpg" alt="Climate Change and Effective Altruism">
+              <img src="writing/write_BowSeat.jpg" alt="Climate Change and Effective Altruism">
             </div>
             <div class="article-content">
               <div class="writing-title">
@@ -653,7 +649,7 @@
 
           <div class="writing-item" onclick="window.open('https://www.nytimes.com/2022/05/11/learning/from-addiction-to-aviation-tobacco-an-unexpected-fuel-for-the-future.html', '_blank')">
             <div class="article-photo">
-              <img src="write_NewYorkTimes.jpg" alt="Tobacco aviation fuel article">
+              <img src="writing/write_NewYorkTimes.jpg" alt="Tobacco aviation fuel article">
             </div>
             <div class="article-content">
               <div class="writing-title">
@@ -678,13 +674,18 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const cursorGlow = document.getElementById('cursor-glow');
-      const typewriter = document.getElementById('writing-typewriter');
-      let lastTime = 0;
-      const interval = 150;
-
-      // Always run typewriter animation - this was missing!
-      typewriter.classList.add('animate');
+  const typewriter = document.getElementById('writing-typewriter');
+  
+  // Check if this is first visit (you can use localStorage or just always animate)
+  const isFirstVisit = !localStorage.getItem('visited-writing');
+  
+  if (isFirstVisit) {
+    typewriter.classList.add('animate');
+    localStorage.setItem('visited-writing', 'true');
+  } else {
+    typewriter.classList.add('no-animation');
+  }
+  
 
       // Sparkle trail on mouse move
       document.addEventListener('mousemove', (e) => {
