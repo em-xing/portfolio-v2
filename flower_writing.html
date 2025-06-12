@@ -136,22 +136,25 @@
 
     /* ─── TYPEWRITER FOR "Writing" ─────────────────── */
     .typewriter-line {
-      display: inline-block;
-      font-family: 'Courier Prime', monospace;
-      font-weight: 600;
-      font-size: 1.8rem;
-      margin: 210px auto 0 auto;
-      color: white;
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 0.15em solid #bdeafe;
-      width: 0;
-      animation: typing 3s steps(16, end) forwards, blink-caret 1s step-end infinite;
-    }
+            display: inline-block;
+            font-family: 'PT Sans', sans-serif;
+            font-weight: 560;
+            font-size: 1.8rem;
+            margin: 220px auto 0 auto; /* Increased from 180px to 280px */
+            color: white;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+    /* Default state - text visible, no animation */
+        .typewriter-line.no-animation {
+            width: auto;
+            border: none;
+        }
     
     @keyframes typing {
       from { width: 0; }
-      to   { width: 16.5ch; } /* "selected writing" is 16 characters, adding buffer */
+      to   { width: 17.5ch; } /* "selected writing" is 16 characters, adding buffer */
     }
     @keyframes blink-caret {
       50% { border-color: transparent; }
@@ -568,7 +571,7 @@
 
   <!-- Writing page content -->
   <h1 class="page-title">
-      <span id="writing-typewriter" class="typewriter-line">selected writing</span>
+      <span id="writing-typewriter" class="typewriter-line">selected writings</span>
     </h1>
   <div class="container" id="main-container">
     
