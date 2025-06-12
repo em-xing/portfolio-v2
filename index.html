@@ -476,26 +476,7 @@
   </footer>
 
   <script>
-     document.getElementById('shooting-star-button').addEventListener('click', (e) => {
-  e.preventDefault();
-
-  // Create dark overlay
-  const overlay = document.createElement('div');
-  overlay.id = 'star-overlay';
-  document.body.appendChild(overlay);
-  overlay.style.display = 'block';
-
-  // Create small glowing shooting star
-  const star = document.createElement('div');
-  star.className = 'shooting-star';
-  document.body.appendChild(star);
-
-  // Remove after animation
-  setTimeout(() => {
-    star.remove();
-    overlay.remove();
-  }, 1500);
-});
+     
 
     // Function to mark page as visited
     function markPageVisited() {
@@ -626,6 +607,26 @@
           flowersTitle.classList.remove('visible');
         }
       });
+      document.getElementById('shooting-star-button').addEventListener('click', (e) => {
+  e.preventDefault();
+
+  // Create dark overlay
+  const overlay = document.createElement('div');
+  overlay.id = 'star-overlay';
+  document.body.appendChild(overlay);
+  overlay.style.display = 'block';
+
+  // Create small glowing shooting star
+  const star = document.createElement('div');
+  star.className = 'shooting-star';
+  document.body.appendChild(star);
+
+  // Remove after animation
+  setTimeout(() => {
+    star.remove();
+    overlay.remove();
+  }, 1500);
+});
     });
   </script>
 </body>
