@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Research – Emily Xing</title>
 
-  <!-- Load PT Sans from Google Fonts -->
+  <!-- Load PT Sans and Courier Prime from Google Fonts -->
   <link
-    href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Courier+Prime:wght@400;700&display=swap"
     rel="stylesheet"
   />
 
@@ -137,7 +137,7 @@
     /* ─── TYPEWRITER FOR "Research" ─────────────────── */
     .typewriter-line {
       display: inline-block;
-      font-family: 'PT Sans', sans-serif;
+      font-family: 'Courier Prime', monospace;
       font-weight: 600;
       font-size: 2.3rem;
       color: white;
@@ -153,18 +153,25 @@
     
     /* Animated state - only on first visit */
     .typewriter-line.animate {
-      border-right: 0.1em solid #bdeafe;
+      border-right: 0.15em solid #bdeafe;
       width: 0;
-      animation: typing 2s steps(8, end) forwards, blink-caret 0.8s step-end infinite;
+      animation: typing 2.5s steps(8, end) forwards, blink-caret 1s step-end infinite;
     }
     
     @keyframes typing {
       from { width: 0; }
-      to   { width: 8ch; } /* "Research" is 8 characters */
+      to   { width: 8.5ch; } /* "research" is 8 characters, adding buffer */
     }
     @keyframes blink-caret {
       50% { border-color: transparent; }
     }
+    
+    /* Ensure the cursor disappears after typing completes */
+    .typewriter-line.animate.typing-complete {
+      border-right: none;
+      animation: none;
+    }
+    
     .fade-out {
       opacity: 0;
       transition: opacity 0.5s ease;
@@ -211,7 +218,7 @@
       opacity: 0;
       transform: translateY(20px);
       animation: fadeIn 1s ease forwards;
-      animation-delay: 2.2s; /* wait for typewriter to finish */
+      animation-delay: 2.8s; /* wait for typewriter to finish */
     }
     
     @keyframes fadeIn {
@@ -228,8 +235,12 @@
       margin-bottom: 2rem;
       color: #fff;
       position: relative;
-      height: 3rem; /* Reserve space for typewriter */
+      height: 3.5rem; /* Reserve space for typewriter */
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
+    
     /* Orange line below page title */
     h1.page-title + .divider {
       width: 60px;
@@ -567,10 +578,15 @@
         typewriter.classList.add('animate');
         container.classList.add('animate');
         
+        // Remove the blinking cursor after typing completes
+        setTimeout(() => {
+          typewriter.classList.add('typing-complete');
+        }, 2500); // Match the typing animation duration
+        
         // Mark as visited after animations complete
         setTimeout(() => {
           markPageVisited();
-        }, 3500); // after typewriter (2s) + content fade delay (2.2s) + fade duration (1s)
+        }, 4000); // after typewriter (2.5s) + content fade delay (2.8s) + fade duration (1s)
       }
 
       // Sparkle trail on mouse move
