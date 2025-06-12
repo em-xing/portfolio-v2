@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Writing – Emily Xing</title>
+
+  <!-- Load PT Sans from Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/favicon.PNG" type="image/png" />
+
+  <style>
+    /* ─── RESET & BASE ───────────────────────────────── */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      background: #241d18;
+      color: #fff;
+      font-family: 'PT Sans', sans-serif;
+      line-height: 1.6;
+      cursor: url("images/cursor_normal.cur") 0 0, auto;
+      padding: 2rem;
+      padding-top: 6rem; /* space for fixed header */
+      min-height: 120vh;
+    }
+    a {
+      text-decoration: none;
+    }
+
+    /* ─── GLOWING CURSOR & SPARKLES ──────────────────── */
+    .cursor-glow {
+      position: fixed;
+      width: 15px; height: 15px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,100,0.5) 0%, rgba(255,255,150,0.2) 60%, transparent 100%);
+      pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+      box-shadow: 0 0 15px rgba(255,255,100,0.4);
+      animation: firefly-glow 2.5s ease-in-out infinite;
+    }
+    .sparkle {
+      position: fixed; width: 3px; height: 3px; background: rgba(255,255,120,0.8);
+      border-radius: 50%; pointer-events: none; z-index: 9998;
+      animation: sparkle-fade 1.2s ease-out forwards;
+    }
+    @keyframes firefly-glow {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.15);
+        opacity: 1;
+      }
+    }
+    @keyframes sparkle-fade {
+      0% {
+        opacity: 0.8;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+    }
+
+    /* ─── HEADER ────────────────────────────────────── */
+    header {
+      position: fixed;
+      top: 55px;
+      left: 55%;
+      transform: translateX(-50%);
+      display: inline-block;
+      border-radius: 2px;
+      z-index: 100;
+    }
+    header img.logo {
+      display: block;
+      margin: 0 auto;
+      width: 80%;
+      max-width: 80%;
+      transform: translateY(-10px);
+    }
+    /* Gradient overlay under header for fade effect */
+    .header-fade {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 200px; /* covers header + a bit of content */
+      background: linear-gradient(to bottom, #241d18 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 90;
+    }
+
+    /* ─── HOME NAVIGATION ARROW ─────────────────────── */
+    .home-nav {
+      position: fixed;
+      top: 260px;
+      left: 80px;
+      z-index: 100;
+      background: rgba(112, 159, 211, 0.1);
+      border: 2px solid #709fd3;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    .home-nav:hover {
+      background: rgba(112, 159, 211, 0.2);
+      border-color: #87ceeb;
+      box-shadow: 0 0 20px rgba(112, 159, 211, 0.4);
+      transform: translateX(-5px);
+    }
+    .home-nav::before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-right: 12px solid #709fd3;
+      transition: border-right-color 0.3s ease;
+    }
+    .home-nav:hover::before {
+      border-right-color: #87ceeb;
+    }
+
+    /* ─── TYPEWRITER FOR "Writing" ─────────────────── */
+    .typewriter-line {
+      display: inline-block;
+      font-family: 'PT Sans', sans-serif;
+      font-weight: 600;
+      font-size: 2.3rem;
+      color: white;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    
+    /* Default state - text visible, no animation */
+    .typewriter-line.no-animation {
+      width: auto;
+      border: none;
+    }
+    
+    /* Animated state - only on first visit */
+    .typewriter-line.animate {
+      border-right: 0.1em solid #bdeafe;
+      width: 0;
+      animation: typing 2s steps(7, end) forwards, blink-caret 0.8s step-end infinite;
+    }
+    
+    @keyframes typing {
+      from { width: 0; }
+      to   { width: 7ch; } /* "Writing" is 7 characters */
+    }
+    @keyframes blink-caret {
+      50% { border-color: transparent; }
+    }
+    .fade-out {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    /* ─── RIGHT SOCIAL ICONS ────────────────────────── */
+    .social-sidebar {
+      position: fixed;
+      top: 150px;
+      right: 37px;
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+      z-index: 10;
+    }
+    .social-sidebar img {
+      display: block;
+      transform: scale(0.4);
+      transform-origin: center center;
+    }
+    .social-sidebar a + a {
+      margin-top: 1px;
+    }
+    .social-sidebar a:hover img {
+      filter: brightness(1.2) drop-shadow(0 0 10px rgba(255,169,126,0.6));
+    }
+
+    /* ─── WRITING PAGE CONTENT ─────────────────────── */
+    .container {
+      max-width: 900px;
+      margin: 120px auto 0 auto; /* push content down so typewriter shows */
+    }
+    
+    /* Default state - content visible immediately */
+    .container.no-animation {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Animated state - only on first visit */
+    .container.animate {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 2.2s; /* wait for typewriter to finish */
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0; transform: translateY(20px);
+      }
+      to {
+        opacity: 1; transform: translateY(0);
+      }
+    }
+    
+    h1.page-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #fff;
+      position: relative;
+      height: 3rem; /* Reserve space for typewriter */
+    }
+    /* Orange line below page title */
+    h1.page-title + .divider {
+      width: 60px;
+      height: 2px;
+      margin: 0.5rem auto 2rem;
+      background: #ffa97e;
+    }
+
+    /* Main content layout */
+    .main-content {
+      margin-bottom: 3rem;
+    }
+
+    /* Published writing section */
+    .writing-section {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      border: 1px solid rgba(112,159,211,0.3);
+      color: #fff;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #709fd3;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    /* Individual writing pieces */
+    .writing-item {
+      margin-bottom: 1.5rem;
+      padding: 1.2rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      border: 1px solid rgba(255,169,126,0.2);
+      transition: 0.3s;
+    }
+    .writing-item:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255,169,126,0.4);
+      box-shadow: 0 8px 20px rgba(255,169,126,0.1);
+    }
+    .writing-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .writing-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+    .writing-title .highlight {
+      color: #ffa97e;
+      font-weight: 600;
+    }
+    
+    .publication-info {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #ffa97e;
+      line-height: 1.3;
+      margin-bottom: 0.6rem;
+    }
+    .publication-info .year {
+      color: #87ceeb;
+      font-weight: 400;
+    }
+    
+    .writing-link {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      background: rgba(112, 159, 211, 0.1);
+      border: 1px solid #709fd3;
+      border-radius: 20px;
+      color: #87ceeb;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .writing-link:hover {
+      background: rgba(112, 159, 211, 0.2);
+      border-color: #87ceeb;
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* Blog section */
+    .blog-section {
+      padding: 2rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      border: 2px dashed rgba(255,169,126,0.4);
+      color: #fff;
+      text-align: center;
+    }
+    .blog-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #ffa97e;
+      margin-bottom: 1rem;
+    }
+    .blog-description {
+      font-size: 1rem;
+      color: #fff;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+    .blog-description .emoji {
+      font-size: 1.2rem;
+      margin: 0 0.2rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .typewriter-line { font-size: 2rem; }
+      .writing-title { font-size: 1rem; }
+      .publication-info, .writing-link { font-size: 0.85rem; }
+      .home-nav { left: 20px; width: 45px; height: 45px; }
+      .writing-item { padding: 1rem; }
+    }
+
+    /* ─── SITE FOOTER ───────────────────────────────── */
+    .site-footer {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.2);
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      z-index: 50;
+    }
+    .site-footer img {
+      max-height: 40px;
+      height: auto;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Glowing cursor effect -->
+  <div class="cursor-glow" id="cursor-glow"></div>
+  <!-- Gradient overlay for fade effect -->
+  <div class="header-fade"></div>
+
+  <!-- Fixed header (logo) -->
+  <header>
+    <img src="images/name.gif" alt="name logo" class="logo"/>
+  </header>
+
+  <!-- Home navigation arrow -->
+  <div class="home-nav" onclick="markPageVisited(); window.location.href='index.html'" title="Return to Home">
+  </div>
+
+  <!-- Right social icons -->
+  <aside class="social-sidebar">
+    <a href="https://www.linkedin.com/in/emily-xing-5663ab266/" target="_blank">
+      <img src="images/icon_linkedin.PNG" alt="LinkedIn icon">
+    </a>
+    <a href="mailto:emletxing@gmail.com">
+      <img src="images/icon_mail.PNG" alt="Email icon">
+    </a>
+    <a href="#">
+      <img src="images/icon_shooting_star.PNG" alt="Star icon">
+    </a>
+  </aside>
+
+  <!-- Writing page content -->
+  <div class="container" id="main-container">
+    <h1 class="page-title">
+      <span id="writing-typewriter" class="typewriter-line">writing</span>
+    </h1>
+    <div class="divider"></div>
+
+    <div class="main-content">
+      <!-- Published Writing Section -->
+      <div class="writing-section">
+        <h2 class="section-title">Published Writing</h2>
+        
+        <div class="writing-item">
+          <div class="writing-title">
+            Sketches of a <span class="highlight">Re-Imagined Mass. and Cass</span>
+          </div>
+          <div class="publication-info">
+            <em>Harvard Undergraduate Urban Sustainability Lab</em>, <span class="year">2025</span>
+          </div>
+          <a href="https://www.huusl.org/bulletin/sketches-of-a-re-imagined-mass-and-cass" target="_blank" class="writing-link">
+            Read Article →
+          </a>
+        </div>
+
+        <div class="writing-item">
+          <div class="writing-title">
+            'Clarity' Single Review: Notes on <span class="highlight">Introspection and Living</span> From 24kGoldn
+          </div>
+          <div class="publication-info">
+            <em>Harvard Crimson Arts Magazine</em>, <span class="year">2024</span>
+          </div>
+          <a href="https://www.thecrimson.com/article/2024/2/13/clarity-24kgoldn-music-review/" target="_blank" class="writing-link">
+            Read Review →
+          </a>
+        </div>
+
+        <div class="writing-item">
+          <div class="writing-title">
+            Maria's Story: In a household where doctors visits are unaffordable luxuries, <span class="highlight">AI steps up</span>
+          </div>
+          <div class="publication-info">
+            <em>MDandMe</em>, <span class="year">2024</span>
+          </div>
+          <a href="https://mdme.ai/blog/2024/09/18/marias-story" target="_blank" class="writing-link">
+            Read Story →
+          </a>
+        </div>
+
+        <div class="writing-item">
+          <div class="writing-title">
+            Climate Change and <span class="highlight">Effective Altruism</span>: A Cause Worth Fighting For
+          </div>
+          <div class="publication-info">
+            <em>Bow Seat Ocean Awareness Programs</em>, <span class="year">2023</span>
+          </div>
+          <a href="https://bowseat.org/news/climate-change-and-effective-altruism-a-cause-worth-fighting-for/" target="_blank" class="writing-link">
+            Read Article →
+          </a>
+        </div>
+
+        <div class="writing-item">
+          <div class="writing-title">
+            From Addiction to … Aviation? <span class="highlight">Tobacco, an Unexpected Fuel</span> for the Future
+          </div>
+          <div class="publication-info">
+            <em>New York Times</em>, <span class="year">2022</span>
+          </div>
+          <a href="https://www.nytimes.com/2022/05/11/learning/from-addiction-to-aviation-tobacco-an-unexpected-fuel-for-the-future.html" target="_blank" class="writing-link">
+            Read Article →
+          </a>
+        </div>
+      </div>
+
+      <!-- Blog Section -->
+      <div class="blog-section">
+        <h2 class="blog-title">Currently Building a Blog</h2>
+        <p class="blog-description">
+          <span class="emoji">🌸</span>
+          Working on a space for longer-form thoughts, reflections, and stories. 
+          Coming soon with essays on technology, culture, and the spaces in between.
+          <span class="emoji">✨</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <img src="images/copyright.PNG" alt="Copyright ©" />
+  </footer>
+
+  <script>
+    // Function to mark page as visited
+    function markPageVisited() {
+      const visited = JSON.stringify({ visited: true, timestamp: Date.now() });
+      document.cookie = `writing_page_visited=${visited}; path=/; max-age=86400`; // 24 hours
+    }
+    
+    // Function to check if page was visited
+    function hasVisited() {
+      const cookies = document.cookie.split(';');
+      for (let cookie of cookies) {
+        const [name, value] = cookie.trim().split('=');
+        if (name === 'writing_page_visited') {
+          try {
+            const data = JSON.parse(value);
+            // Check if visit was within last 24 hours
+            return data.visited && (Date.now() - data.timestamp < 86400000);
+          } catch (e) {
+            return false;
+          }
+        }
+      }
+      return false;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const cursorGlow = document.getElementById('cursor-glow');
+      const typewriter = document.getElementById('writing-typewriter');
+      const container = document.getElementById('main-container');
+      let lastTime = 0;
+      const interval = 150;
+
+      // Check if this is a return visit
+      const isReturnVisit = hasVisited();
+      
+      if (isReturnVisit) {
+        // Skip animations - show everything immediately
+        typewriter.classList.add('no-animation');
+        container.classList.add('no-animation');
+      } else {
+        // First visit - run animations
+        typewriter.classList.add('animate');
+        container.classList.add('animate');
+        
+        // Mark as visited after animations complete
+        setTimeout(() => {
+          markPageVisited();
+        }, 3500); // after typewriter (2s) + content fade delay (2.2s) + fade duration (1s)
+      }
+
+      // Sparkle trail on mouse move
+      document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
+
+        const now = Date.now();
+        if (now - lastTime > interval) {
+          const sparkle = document.createElement('div');
+          sparkle.className = 'sparkle';
+          const offsetX = (Math.random() - 0.5) * 20;
+          const offsetY = (Math.random() - 0.5) * 20;
+          sparkle.style.left = (e.clientX + offsetX) + 'px';
+          sparkle.style.top = (e.clientY + offsetY) + 'px';
+          document.body.appendChild(sparkle);
+          setTimeout(() => sparkle.remove(), 1200);
+          lastTime = now;
+        }
+      });
+
+      // Fade out the "Writing" title on scroll
+      window.addEventListener('scroll', () => {
+        const titleRect = typewriter.getBoundingClientRect();
+        if (titleRect.top <= 100) {
+          typewriter.classList.add('fade-out');
+        } else {
+          typewriter.classList.remove('fade-out');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
