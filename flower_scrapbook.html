@@ -174,15 +174,53 @@
         
         .page-header h1 {
             font-family: 'PT Sans', sans-serif;
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             color: #ffffff;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
             margin-bottom: 10px;
-            font-weight: 600;
+            font-weight: 560;
+            position: relative;
+            height: 2.5rem; /* Reserve space for typewriter */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* ─── TYPEWRITER FOR "Scrapbook" ─────────────────── */
+        .typewriter-line {
+            display: inline-block;
+            font-family: 'PT Sans', sans-serif;
+            font-weight: 560;
+            font-size: 1.8rem;
+            color: white;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        /* Default state - text visible, no animation */
+        .typewriter-line.no-animation {
+            width: auto;
+            border: none;
+        }
+        
+        /* Animated state - only on first visit */
+        .typewriter-line.animate {
+            border-right: 0.1em solid #bdeafe;
+            width: 0;
+            animation: typing 2.25s steps(9, end) forwards, blink-caret 0.8s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 9ch; } /* "scrapbook" is 9 characters */
+        }
+        
+        @keyframes blink-caret {
+            50% { border-color: transparent; }
         }
         
         .page-header p {
-            color: #ffa97e;
+            color: #bdeafe;
             font-size: 1.1rem;
             font-weight: 300;
             opacity: 0.8;
@@ -196,6 +234,21 @@
             position: relative;
             z-index: 2;
             padding: 0 100px; /* Match writing page spacing */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 2.4s; /* wait for typewriter to finish */
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0; 
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1; 
+                transform: translateY(0);
+            }
         }
         
         @media (max-width: 1024px) {
@@ -292,6 +345,7 @@
             border-radius: 8px;
             display: block;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         
         .artwork-item:hover .artwork-image {
@@ -331,6 +385,34 @@
             height: auto;
             display: block;
         }
+        
+        /* Image Modal Overlay */
+        .image-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+        
+        .image-modal.active {
+            display: flex;
+        }
+        
+        .image-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -362,7 +444,7 @@
     </aside>
     
     <div class="page-header">
-        <h1>scrapbook</h1>
+        <h1><span id="scrapbook-typewriter" class="typewriter-line">scrapbook</span></h1>
         <p>i sometimes write, draw, film, compose; a collection of brainchildren & attempts at trying everything at least once</p>
     </div>
     
@@ -370,7 +452,7 @@
         <!-- Webtoon Project -->
         <div class="portfolio-item project-item">
             <div class="title">Our Place, Our Photo</div>
-            <img src="art/image_webtoon.png" alt="Our Place, Our Photo" class="webtoon-image">
+            <img src="art/image_webtoon.jpg" alt="Our Place, Our Photo" class="webtoon-image">
             <a href="#" class="link" target="_blank">read webtoon</a>
         </div>
         
@@ -391,86 +473,91 @@
             <a href="http://www.househousemagazine.com/" class="link" target="_blank">view publication</a>
         </div>
         
-        <!-- Artworks -->
-        <div class="portfolio-item artwork-item">
-            <img src="art/2012 Halloween.jpg" alt="2012 Halloween" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item">
+        <!-- Artworks - Reordered -->
+        <div class="portfolio-item artwork-item" onclick="openImage('art/A Field of Wishes.JPG')">
             <img src="art/A Field of Wishes.JPG" alt="A Field of Wishes" class="artwork-image">
         </div>
         
-        <div class="portfolio-item artwork-item">
-            <img src="art/An Old Neighborhood.jpg" alt="An Old Neighborhood" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item">
-            <img src="art/Astronomy Dreams.jpg" alt="Astronomy Dreams" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item">
-            <img src="art/Blossom.jpg" alt="Blossom" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item">
-            <img src="art/Cables, Casettes.jpg" alt="Cables, Casettes" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item">
-            <img src="art/Feathers, Fly Freely!.png" alt="Feathers, Fly Freely!" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item">
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Let\'s Explore, Tonight, Together.png')">
             <img src="art/Let's Explore, Tonight, Together.png" alt="Let's Explore, Tonight, Together" class="artwork-image">
         </div>
         
-        <div class="portfolio-item artwork-item">
-            <img src="art/Midwinter.png" alt="Midwinter" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item">
-            <img src="art/Morning Reads.png" alt="Morning Reads" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item">
-            <img src="art/Mother.jpg" alt="Mother" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item">
-            <img src="art/My Grandpa, the Engineer.png" alt="My Grandpa, the Engineer" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item">
-            <img src="art/My Guardian Reef.png" alt="My Guardian Reef" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item">
-            <img src="art/My Mom's Childhood.jpg" alt="My Mom's Childhood" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item">
-            <img src="art/One Thousand Paper Cranes.png" alt="One Thousand Paper Cranes" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item">
-            <img src="art/Partners in Crime.png" alt="Partners in Crime" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item">
-            <img src="art/Spring, I Love You.png" alt="Spring, I Love You" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item">
-            <img src="art/Sundays in the Kitchen.png" alt="Sundays in the Kitchen" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item">
+        <div class="portfolio-item artwork-item" onclick="openImage('art/The Bothriolepis and Me.png')">
             <img src="art/The Bothriolepis and Me.png" alt="The Bothriolepis and Me" class="artwork-image">
         </div>
         
-        <div class="portfolio-item artwork-item">
+        <div class="portfolio-item artwork-item" onclick="openImage('art/2012 Halloween.jpg')">
+            <img src="art/2012 Halloween.jpg" alt="2012 Halloween" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Blossom.jpg')">
+            <img src="art/Blossom.jpg" alt="Blossom" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Cables, Casettes.jpg')">
+            <img src="art/Cables, Casettes.jpg" alt="Cables, Casettes" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Feathers, Fly Freely!.png')">
+            <img src="art/Feathers, Fly Freely!.png" alt="Feathers, Fly Freely!" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Midwinter.png')">
+            <img src="art/Midwinter.png" alt="Midwinter" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Morning Reads.png')">
+            <img src="art/Morning Reads.png" alt="Morning Reads" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Mother.jpg')">
+            <img src="art/Mother.jpg" alt="Mother" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/My Grandpa, the Engineer.png')">
+            <img src="art/My Grandpa, the Engineer.png" alt="My Grandpa, the Engineer" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/My Guardian Reef.png')">
+            <img src="art/My Guardian Reef.png" alt="My Guardian Reef" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/My Mom\'s Childhood.jpg')">
+            <img src="art/My Mom's Childhood.jpg" alt="My Mom's Childhood" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/One Thousand Paper Cranes.png')">
+            <img src="art/One Thousand Paper Cranes.png" alt="One Thousand Paper Cranes" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Partners in Crime.png')">
+            <img src="art/Partners in Crime.png" alt="Partners in Crime" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Spring, I Love You.png')">
+            <img src="art/Spring, I Love You.png" alt="Spring, I Love You" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Sundays in the Kitchen.png')">
+            <img src="art/Sundays in the Kitchen.png" alt="Sundays in the Kitchen" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Two Flowers.png')">
             <img src="art/Two Flowers.png" alt="Two Flowers" class="artwork-image">
         </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/An Old Neighborhood.jpg')">
+            <img src="art/An Old Neighborhood.jpg" alt="An Old Neighborhood" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Astronomy Dreams.jpg')">
+            <img src="art/Astronomy Dreams.jpg" alt="Astronomy Dreams" class="artwork-image">
+        </div>
+    </div>
+    
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal" onclick="closeModal()">
+        <img id="modalImage" src="" alt="">
     </div>
     
     <!-- SITE FOOTER -->
@@ -481,8 +568,12 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const cursorGlow = document.getElementById('cursor-glow');
+            const typewriter = document.getElementById('scrapbook-typewriter');
             let lastSparkleTime = 0;
             const sparkleInterval = 150;
+            
+            // Always run typewriter animation
+            typewriter.classList.add('animate');
             
             // Cursor glow following mouse movement with sparkle trail (matching homepage)
             document.addEventListener('mousemove', (e) => {
@@ -525,6 +616,34 @@
                     item.style.transform = 'translateY(0)';
                 });
             });
+        });
+        
+        // Function to open images in modal overlay
+        function openImage(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            
+            modalImage.src = imageSrc;
+            modal.classList.add('active');
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Function to close modal
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            
+            // Restore body scroll
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
         });
     </script>
 </body>
