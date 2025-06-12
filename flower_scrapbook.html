@@ -23,14 +23,13 @@
             background-color: #241d18;
             color: #ffffff;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 2rem;
+            padding-top: 6rem; /* space for fixed header */
             cursor: url("images/cursor_normal.cur") 0 0, auto;
             overflow-x: hidden;
         }
         
-        /* ─────────────────────────────────────────────────────
-           GLOWING CURSOR CIRCLE (matching homepage)
-           ───────────────────────────────────────────────────── */
+        /* ─── GLOWING CURSOR & SPARKLES ──────────────────── */
         .cursor-glow {
             position: fixed;
             width: 15px;
@@ -40,7 +39,6 @@
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            transition: left 0.1s ease-out, top 0.1s ease-out;
             box-shadow: 0 0 15px rgba(255, 255, 100, 0.4);
             animation: firefly-glow 2.5s ease-in-out infinite;
         }
@@ -77,77 +75,147 @@
                 transform: scale(0.3);
             }
         }
+
+        /* ─── HEADER ────────────────────────────────────── */
+        header {
+            position: fixed;
+            top: 55px;
+            left: 55%;
+            transform: translateX(-50%);
+            display: inline-block;
+            border-radius: 2px;
+            z-index: 100;
+        }
+        header img.logo {
+            display: block;
+            margin: 0 auto;
+            width: 80%;
+            max-width: 80%;
+            transform: translateY(-10px);
+        }
+        /* Gradient overlay under header for fade effect */
+        .header-fade {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px; /* covers header + a bit of content */
+            background: linear-gradient(to bottom, #241d18 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 90;
+        }
+
+        /* ─── HOME NAVIGATION ARROW ─────────────────────── */
+        .home-nav {
+            position: fixed;
+            top: 260px;
+            left: 80px;
+            z-index: 100;
+            background: rgba(112, 159, 211, 0.1);
+            border: 2px solid #709fd3;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .home-nav:hover {
+            background: rgba(112, 159, 211, 0.2);
+            border-color: #87ceeb;
+            box-shadow: 0 0 20px rgba(112, 159, 211, 0.4);
+            transform: translateX(-5px);
+        }
+        .home-nav::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-right: 12px solid #709fd3;
+            transition: border-right-color 0.3s ease;
+        }
+        .home-nav:hover::before {
+            border-right-color: #87ceeb;
+        }
+
+        /* ─── RIGHT SOCIAL ICONS ────────────────────────── */
+        .social-sidebar {
+            position: fixed;
+            top: 150px;
+            right: 37px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1px;
+            z-index: 10;
+        }
+        .social-sidebar img {
+            display: block;
+            transform: scale(0.4);
+            transform-origin: center center;
+        }
+        .social-sidebar a + a {
+            margin-top: 1px;
+        }
+        .social-sidebar a:hover img {
+            filter: brightness(1.2) drop-shadow(0 0 10px rgba(255,169,126,0.6));
+        }
         
-        .header {
+        .page-header {
             text-align: center;
-            margin: 0 0 60px 0;
+            margin: 80px 0 60px 0;
             position: relative;
         }
         
-        .header h1 {
-            font-family: 'Caveat', cursive;
+        .page-header h1 {
+            font-family: 'PT Sans', sans-serif;
             font-size: 3rem;
             color: #ffffff;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
             margin-bottom: 10px;
-            font-weight: 400;
+            font-weight: 600;
         }
         
-        .header p {
+        .page-header p {
             color: #bdeafe;
             font-size: 1.1rem;
             font-weight: 300;
             opacity: 0.8;
         }
         
-        .back-button {
-            position: fixed;
-            top: 30px;
-            left: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-family: 'PT Sans', sans-serif;
-            font-weight: 400;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            font-size: 0.9rem;
-        }
-        
-        .back-button:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-        
         .portfolio-container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             columns: 4;
             column-gap: 20px;
             position: relative;
             z-index: 2;
+            padding: 0 100px; /* Match writing page spacing */
         }
         
         @media (max-width: 1024px) {
             .portfolio-container {
                 columns: 3;
+                padding: 0 50px;
             }
         }
         
         @media (max-width: 768px) {
             .portfolio-container {
                 columns: 2;
+                padding: 0 20px;
             }
         }
         
         @media (max-width: 480px) {
             .portfolio-container {
                 columns: 1;
+                padding: 0 10px;
             }
         }
         
@@ -213,19 +281,21 @@
             transform: translateY(-1px);
         }
         
-        /* Music Items */
-        .music-item {
-            padding: 20px;
-        }
-        
-        .music-item audio {
-            width: 100%;
-            height: 40px;
-        }
-        
         /* Artwork Items */
         .artwork-item {
             padding: 0;
+        }
+        
+        .artwork-item .artwork-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .artwork-item:hover .artwork-image {
+            transform: scale(1.02);
         }
         
         .artwork-item .image-placeholder {
@@ -239,6 +309,8 @@
             border: 1px dashed rgba(255, 255, 255, 0.1);
             color: rgba(255, 255, 255, 0.3);
             font-size: 0.9rem;
+            text-align: center;
+            padding: 20px;
         }
         
         /* Site footer matching homepage */
@@ -262,22 +334,43 @@
     </style>
 </head>
 <body>
-    <!-- GLOWING CURSOR -->
+    <!-- Glowing cursor effect -->
     <div class="cursor-glow" id="cursor-glow"></div>
+    <!-- Gradient overlay for fade effect -->
+    <div class="header-fade"></div>
+
+    <!-- Fixed header (logo) -->
+    <header>
+        <img src="images/name.gif" alt="name logo" class="logo"/>
+    </header>
+
+    <!-- Home navigation arrow -->
+    <div class="home-nav" onclick="window.location.href='index.html'" title="Return to Home">
+    </div>
+
+    <!-- Right social icons -->
+    <aside class="social-sidebar">
+        <a href="https://www.linkedin.com/in/emily-xing-5663ab266/" target="_blank">
+            <img src="images/icon_linkedin.PNG" alt="LinkedIn icon">
+        </a>
+        <a href="mailto:emletxing@gmail.com">
+            <img src="images/icon_mail.PNG" alt="Email icon">
+        </a>
+        <a href="#">
+            <img src="images/icon_shooting_star.PNG" alt="Star icon">
+        </a>
+    </aside>
     
-    <!-- BACK BUTTON -->
-    <a href="index.html" class="back-button">← back home</a>
-    
-    <div class="header">
-        <h1>creative works</h1>
-        <p>digital stories, music, and visual art</p>
+    <div class="page-header">
+        <h1>scrapbook</h1>
+        <p>• ⁃ i sometimes write, draw, film, compose; a collection of brainchildren & attempts at trying everything at least once</p>
     </div>
     
     <div class="portfolio-container">
         <!-- Webtoon Project -->
         <div class="portfolio-item project-item">
             <div class="title">Our Place, Our Photo</div>
-            <img src="images/image_webtoon.jpg" alt="Our Place, Our Photo" class="webtoon-image">
+            <img src="art/image_webtoon.jpg" alt="Our Place, Our Photo" class="webtoon-image">
             <a href="#" class="link" target="_blank">read webtoon</a>
         </div>
         
@@ -298,121 +391,85 @@
             <a href="http://www.househousemagazine.com/" class="link" target="_blank">view publication</a>
         </div>
         
-        <!-- Music Items -->
-        <div class="portfolio-item music-item">
-            <audio controls>
-                <source src="songs/Untitled song-1.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        
-        <div class="portfolio-item music-item">
-            <audio controls>
-                <source src="songs/Untitled song-2.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        
-        <div class="portfolio-item music-item">
-            <audio controls>
-                <source src="songs/Untitled song-3.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        
-        <div class="portfolio-item music-item">
-            <audio controls>
-                <source src="songs/Untitled song-4.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        
-        <div class="portfolio-item music-item">
-            <audio controls>
-                <source src="songs/Untitled song-5.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        
         <!-- Artworks -->
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">2012 Halloween</div>
+            <img src="art/2012 Halloween.jpg" alt="2012 Halloween" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">A Field of Wishes</div>
+            <img src="art/A Field of Wishes.JPG" alt="A Field of Wishes" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">An Old Neighborhood</div>
+            <img src="art/An Old Neighborhood.jpg" alt="An Old Neighborhood" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">Astronomy Dreams</div>
+            <img src="art/Astronomy Dreams.jpg" alt="Astronomy Dreams" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">Blossom</div>
+            <img src="art/Blossom.jpg" alt="Blossom" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">Cables, Casettes</div>
+            <img src="art/Cables, Casettes.jpg" alt="Cables, Casettes" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">Feathers, Fly Freely</div>
+            <img src="art/Feathers, Fly Freely!.png" alt="Feathers, Fly Freely!" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">Let's Explore, Tonight, Together</div>
+            <img src="art/Let's Explore, Tonight, Together.png" alt="Let's Explore, Tonight, Together" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">Midwinter</div>
+            <img src="art/Midwinter.png" alt="Midwinter" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">Morning Reads</div>
+            <img src="art/Morning Reads.png" alt="Morning Reads" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">Mother</div>
+            <img src="art/Mother.jpg" alt="Mother" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">My Grandpa, the Engineer</div>
+            <img src="art/My Grandpa, the Engineer.png" alt="My Grandpa, the Engineer" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">My Guardian Reef</div>
+            <img src="art/My Guardian Reef.png" alt="My Guardian Reef" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">My Mom's Childhood</div>
+            <img src="art/My Mom's Childhood.jpg" alt="My Mom's Childhood" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">One Thousand Paper Cranes</div>
+            <img src="art/One Thousand Paper Cranes.png" alt="One Thousand Paper Cranes" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">Partners in Crime</div>
+            <img src="art/Partners in Crime.png" alt="Partners in Crime" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">Spring, I Love You</div>
+            <img src="art/Spring, I Love You.png" alt="Spring, I Love You" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">Sundays in the Kitchen</div>
+            <img src="art/Sundays in the Kitchen.png" alt="Sundays in the Kitchen" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">The Bothriolepis and Me</div>
+            <img src="art/The Bothriolepis and Me.png" alt="The Bothriolepis and Me" class="artwork-image">
         </div>
         
         <div class="portfolio-item artwork-item">
-            <div class="image-placeholder">Two Flowers</div>
+            <img src="art/Two Flowers.png" alt="Two Flowers" class="artwork-image">
         </div>
     </div>
     
