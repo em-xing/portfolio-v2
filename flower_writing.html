@@ -134,15 +134,33 @@
       border-right-color: #87ceeb;
     }
 
+    .page-header {
+            text-align: center;
+            margin: 110px 0 60px 0;
+            position: relative;
+        }
+        
+        .page-header h1 {
+            font-family: 'PT Sans', sans-serif;
+            font-size: 1.8rem;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            margin-bottom: 10px;
+            font-weight: 560;
+            position: relative;
+            height: 2.5rem; /* Reserve space for typewriter */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     /* ─── TYPEWRITER FOR "Writing" ─────────────────── */
-   .typewriter-line {
+    .typewriter-line {
             display: inline-block;
             font-family: 'PT Sans', sans-serif;
             font-weight: 560;
             font-size: 1.8rem;
             color: white;
             overflow: hidden;
-            margin: 130px 0 60px 0;
             white-space: nowrap;
         }
         
@@ -166,15 +184,15 @@
         
         @keyframes blink-caret {
             50% { border-color: transparent; }
-        }   
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 17ch; } /* "scrapbook" is 9 characters */
+        } white-space: nowrap;
+
+     .page-header p {
+            color: #ffa97e;
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.8;
         }
         
-        @keyframes blink-caret {
-            50% { border-color: transparent; }
-        }
     /* ─── RIGHT SOCIAL ICONS ────────────────────────── */
     .social-sidebar {
       position: fixed;
@@ -574,9 +592,9 @@
   </aside>
 
   <!-- Writing page content -->
- <div class="typewriter-container">
-   <span id="writing-typewriter" class="typewriter-line">selected writings</span>
-</div>
+ <div class="page-header">
+        <h1><span id="scrapbook-typewriter" class="typewriter-line">selected writings</span></h1>
+    </div>
   <div class="container" id="main-container">
     
     <div class="divider"></div>
