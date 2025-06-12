@@ -220,6 +220,8 @@
     /* ─────────────────────────────────────────────────────
        TYPEWRITER EFFECT ON THE FIRST LINE
        ───────────────────────────────────────────────────── */
+   TYPEWRITER EFFECT ON THE FIRST LINE
+       ───────────────────────────────────────────────────── */
     .typewriter-line {
       display: inline-block;
       font-family: 'PT Sans', sans-serif;
@@ -241,13 +243,13 @@
       border-right: 0.1em solid #bdeafe;
       width: 0;
       animation:
-        typing 2.25s steps(13, end) forwards,
+        typing 2.25s steps(12, end) forwards,
         blink-caret 0.8s step-end infinite;
     }
     
     @keyframes typing {
       from { width: 0; }
-      to   { width: 13ch; } /* adjust length to match "hi, i'm emily!" */
+      to   { width: 12ch; } /* adjust length to match "hi, i'm emily!" */
     }
     @keyframes blink-caret {
       50% { border-color: transparent; }
@@ -497,6 +499,10 @@
     <img src="images/copyright.PNG" alt="Copyright ©" />
   </footer>
 
+
+
+
+  
   <script>
     // Function to mark page as visited
     function markPageVisited() {
