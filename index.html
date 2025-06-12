@@ -359,6 +359,50 @@
       height: auto;
       display: block;
     }
+    /* Overlay that briefly darkens the screen */
+#star-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(20, 20, 30, 0.5);
+  z-index: 9998;
+  display: none;
+}
+
+/* Shooting star as a glowing dot */
+.shooting-star {
+  position: fixed;
+  top: -10px;
+  left: -50px;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  z-index: 9999;
+  animation: shoot 1.2s ease-out forwards;
+}
+
+/* Keyframes for flying across screen */
+@keyframes shoot {
+  0% {
+    top: -10px;
+    left: -50px;
+    opacity: 1;
+  }
+  80% {
+    top: 50%;
+    left: 70%;
+    opacity: 1;
+  }
+  100% {
+    top: 65%;
+    left: 100%;
+    opacity: 0;
+  }
+}
+
   </style>
 </head>
 
@@ -508,6 +552,27 @@
           block: 'center'
         });
       });
+      document.getElementById('shooting-star-button').addEventListener('click', (e) => {
+  e.preventDefault();
+
+  // Create dark overlay
+  const overlay = document.createElement('div');
+  overlay.id = 'star-overlay';
+  document.body.appendChild(overlay);
+  overlay.style.display = 'block';
+
+  // Create small glowing shooting star
+  const star = document.createElement('div');
+  star.className = 'shooting-star';
+  document.body.appendChild(star);
+
+  // Remove after animation
+  setTimeout(() => {
+    star.remove();
+    overlay.remove();
+  }, 1500);
+});
+
       
       function createSparkle(x, y) {
         const sparkle = document.createElement('div');
@@ -537,6 +602,7 @@
       function fadeInIntro() {
         introContainer.classList.remove('fade-out');
       }
+      
 
       window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
