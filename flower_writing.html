@@ -136,29 +136,31 @@
 
     /* ─── TYPEWRITER FOR "Writing" ─────────────────── */
    .typewriter-line {
-            display: inline-block;
-            font-family: 'PT Sans', sans-serif;
-            font-weight: 560;
-            font-size: 1.8rem;
-            color: white;
-            overflow: hidden;
-            margin: 310px 0 60px 0;
-            white-space: nowrap;
-        }
-        
-        /* Default state - text visible, no animation */
-        .typewriter-line.no-animation {
-            width: auto;
-            border: none;
-        }
-        
-        /* Animated state - only on first visit */
-        .typewriter-line.animate {
-            border-right: 0.1em solid #bdeafe;
-            width: 0;
-            animation: typing 2.25s steps(9, end) forwards, blink-caret 0.8s step-end infinite;
-        }
-        
+    display: block; /* Change from inline-block */
+    text-align: center; /* Center the text within */
+    font-family: 'PT Sans', sans-serif;
+    font-weight: 560;
+    font-size: 1.8rem;
+    color: white;
+    margin: 310px auto 60px auto; /* Add auto for horizontal centering */
+    width: 100%; /* Full width container */
+}
+
+.typewriter-line.animate {
+    text-align: left; /* During animation, align left */
+    width: 17ch; /* Fixed width during animation */
+    margin: 310px auto 60px auto; /* Keep centered */
+    border-right: 0.1em solid #bdeafe;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 2.25s steps(17, end) forwards, blink-caret 0.8s step-end infinite;
+}
+
+/* After animation completes, return to center */
+.typewriter-line.typing-complete {
+    text-align: center;
+    border-right: none;
+}        
         @keyframes typing {
             from { width: 0; }
             to { width: 17ch; } /* "scrapbook" is 9 characters */
