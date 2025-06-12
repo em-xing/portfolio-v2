@@ -137,40 +137,31 @@
     /* ─── TYPEWRITER FOR "Writing" ─────────────────── */
     .typewriter-line {
       display: inline-block;
-      font-family: 'PT Sans', sans-serif;
+      font-family: 'Courier Prime', monospace;
       font-weight: 600;
-      font-size: 2.3rem;
+      font-size: 1.8rem; /* Reduced from 2.3rem to match research */
       color: white;
       overflow: hidden;
       white-space: nowrap;
-    }
-    
-    /* Default state - text visible, no animation */
-    .typewriter-line.no-animation {
-      width: auto;
-      border: none;
-    }
-    
-    /* Animated state - only on first visit */
-    .typewriter-line.animate {
       border-right: 0.15em solid #bdeafe;
       width: 0;
-      animation: typing 2.5s steps(7, end) forwards, blink-caret 1s step-end infinite;
+      animation: typing 3s steps(16, end) forwards, blink-caret 1s step-end infinite;
     }
     
     @keyframes typing {
       from { width: 0; }
-      to   { width: 7.5ch; } /* "writing" is 7 characters, adding buffer */
+      to   { width: 16.5ch; } /* "selected writing" is 16 characters, adding buffer */
     }
-    /* Ensure the cursor disappears after typing completes */
-    .typewriter-line.animate.typing-complete {
+    @keyframes blink-caret {
+      50% { border-color: transparent; }
+    }
+    
+    /* Remove the cursor after typing completes */
+    .typewriter-line.typing-complete {
       border-right: none;
       animation: none;
     }
     
-    @keyframes blink-caret {
-      50% { border-color: transparent; }
-    }
     .fade-out {
       opacity: 0;
       transition: opacity 0.5s ease;
@@ -205,20 +196,10 @@
       max-width: 900px;
       margin: 120px auto 0 auto; /* push content down so typewriter shows */
       padding: 0 50px; /* Smaller side padding, more content space */
-    }
-    
-    /* Default state - content visible immediately */
-    .container.no-animation {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    /* Animated state - only on first visit */
-    .container.animate {
       opacity: 0;
       transform: translateY(20px);
       animation: fadeIn 1s ease forwards;
-      animation-delay: 2.4s; /* wait for typewriter to finish */
+      animation-delay: 3.5s; /* wait for typewriter to finish */
     }
     
     @keyframes fadeIn {
@@ -232,10 +213,10 @@
     
     h1.page-title {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem; /* Reduced from 2rem */
       color: #fff;
       position: relative;
-      height: 2.5rem; /* Reserve space for typewriter */
+      height: 2.8rem; /* Reduced to match research page */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -244,19 +225,19 @@
     h1.page-title + .divider {
       width: 60px;
       height: 2px;
-      margin: 0.5rem auto 3rem;
+      margin: 0.5rem auto 2rem; /* Reduced bottom margin from 3rem to 2rem */
       background: #ffa97e;
     }
 
     /* Main content layout */
     .main-content {
-      margin-bottom: 3rem;
+      margin-bottom: 2rem; /* Reduced from 3rem */
     }
 
     /* Blog section - enhanced firefly glow effects */
     .blog-section {
       position: relative;
-      padding: 2rem;
+      padding: 1.5rem; /* Reduced from 2rem */
       background: linear-gradient(135deg, 
         rgba(112,159,211,0.08) 0%, 
         rgba(135,206,235,0.05) 25%,
@@ -266,7 +247,7 @@
       border-radius: 16px;
       color: #fff;
       text-align: center;
-      margin: 0 auto 4rem auto;
+      margin: 0 auto 2.5rem auto; /* Reduced from 4rem to 2.5rem */
       max-width: 500px;
       cursor: pointer;
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -390,7 +371,7 @@
       font-size: 1.1rem;
       font-weight: 400;
       color: #fff;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem; /* Reduced from 0.5rem */
       position: relative;
       opacity: 0.8;
     }
@@ -410,58 +391,22 @@
       opacity: 0.6;
       font-style: italic;
     }
-    
-    /* Minimal floating dots on hover */
-    .floating-dot {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      border-radius: 50%;
-      background: rgba(255,169,126,0.4);
-      opacity: 0;
-      transition: all 0.3s ease;
-      pointer-events: none;
-    }
-    
-    .blog-section:hover .floating-dot {
-      opacity: 1;
-      animation: gentle-float 4s ease-in-out infinite;
-    }
-    
-    .dot-1 { top: 20%; left: 15%; animation-delay: 0s; }
-    .dot-2 { top: 30%; right: 20%; animation-delay: 1s; }
-    .dot-3 { bottom: 25%; left: 25%; animation-delay: 2s; }
-    .dot-4 { bottom: 20%; right: 15%; animation-delay: 3s; }
-    
-    @keyframes gentle-float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-    }
 
     /* Writing section */
     .writing-section {
-      margin-bottom: 2rem;
-    }
-    
-    .section-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #709fd3;
-      text-align: center;
-      margin-bottom: 3rem;
-      text-transform: lowercase;
+      margin-bottom: 1.5rem; /* Reduced from 2rem */
     }
     
     /* Single column layout for writing pieces - back to original format */
     .writing-grid {
       display: grid;
-      gap: 3rem;
+      gap: 2rem; /* Reduced from 3rem */
     }
     
     .writing-item {
       display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 2rem;
+      grid-template-columns: 150px 1fr; /* Reduced image width from 180px to 150px */
+      gap: 1.5rem; /* Reduced from 2rem */
       padding: 0;
       background: none;
       border: none;
@@ -477,8 +422,8 @@
     
     /* Photo container - smaller opening */
     .article-photo {
-      width: 180px;
-      height: 120px;
+      width: 150px; /* Reduced from 180px */
+      height: 100px; /* Reduced from 120px */
       border-radius: 12px;
       overflow: hidden;
       background: linear-gradient(135deg, rgba(255,169,126,0.2) 0%, rgba(112,159,211,0.2) 100%);
@@ -501,8 +446,8 @@
     
     /* Placeholder when no image */
     .photo-placeholder {
-      width: 40px;
-      height: 40px;
+      width: 35px; /* Reduced from 40px */
+      height: 35px; /* Reduced from 40px */
       border-radius: 50%;
       background: rgba(255,169,126,0.3);
       border: 2px solid rgba(255,169,126,0.5);
@@ -513,15 +458,15 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      min-height: 140px;
+      min-height: 100px; /* Reduced from 140px */
     }
     
     .writing-title {
-      font-size: 1.3rem;
+      font-size: 1.2rem; /* Reduced from 1.3rem */
       font-weight: 600;
       color: #fff;
       line-height: 1.4;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.6rem; /* Reduced from 0.8rem */
     }
     
     .writing-title .highlight {
@@ -530,7 +475,7 @@
     }
     
     .publication-info {
-      font-size: 1rem;
+      font-size: 0.95rem; /* Reduced from 1rem */
       color: #fff;
       line-height: 1.3;
       font-weight: 400;
@@ -545,104 +490,30 @@
       color: #fff;
       font-weight: 400;
     }
-    
-    .writing-link {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      background: linear-gradient(135deg, rgba(112,159,211,0.1) 0%, rgba(135,206,235,0.1) 100%);
-      border: 1px solid rgba(135,206,235,0.3);
-      border-radius: 6px;
-      color: #87ceeb;
-      font-size: 0.8rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      align-self: flex-start;
-      position: relative;
-      backdrop-filter: blur(10px);
-      overflow: hidden;
-    }
-    
-    /* Elegant border animation on hover */
-    .writing-link::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 8px;
-      padding: 1px;
-      background: linear-gradient(135deg, #87ceeb, #709fd3, #87ceeb);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask-composite: subtract;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    
-    .writing-link:hover {
-      color: #fff;
-      transform: translateY(-2px);
-      background: linear-gradient(135deg, rgba(112,159,211,0.15) 0%, rgba(135,206,235,0.15) 100%);
-      box-shadow: 0 6px 20px rgba(135,206,235,0.2);
-    }
-    
-    .writing-link:hover::before {
-      opacity: 1;
-    }
-    
-    /* Subtle inner glow effect */
-    .writing-link:hover::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(135,206,235,0.3) 0%, transparent 70%);
-      animation: innerGlow 0.6s ease-out;
-      pointer-events: none;
-    }
-    
-    @keyframes innerGlow {
-      0% {
-        width: 0;
-        height: 0;
-        transform: translate(-50%, -50%);
-        opacity: 1;
-      }
-      100% {
-        width: 100px;
-        height: 100px;
-        transform: translate(-50%, -50%);
-        opacity: 0;
-      }
-    }
 
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .writing-item {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 1rem; /* Reduced from 1.5rem */
         text-align: center;
       }
       
       .article-photo {
         width: 100%;
-        max-width: 300px;
+        max-width: 250px; /* Reduced from 300px */
         margin: 0 auto;
       }
       
       .blog-section {
-        padding: 1.5rem;
+        padding: 1.2rem; /* Reduced from 1.5rem */
       }
     }
     
     @media (max-width: 480px) {
-      .typewriter-line { font-size: 2rem; }
-      .writing-title { font-size: 1.1rem; }
-      .publication-info, .writing-link { font-size: 0.85rem; }
+      .typewriter-line { font-size: 1.5rem; } /* Reduced from 2rem */
+      .writing-title { font-size: 1rem; } /* Reduced from 1.1rem */
+      .publication-info { font-size: 0.85rem; }
       .home-nav { left: 20px; width: 45px; height: 45px; }
       .container { max-width: 100%; padding: 0 1rem; }
     }
@@ -679,7 +550,7 @@
   </header>
 
   <!-- Home navigation arrow -->
-  <div class="home-nav" onclick="markPageVisited(); window.location.href='index.html'" title="Return to Home">
+  <div class="home-nav" onclick="window.location.href='index.html'" title="Return to Home">
   </div>
 
   <!-- Right social icons -->
@@ -800,54 +671,11 @@
   </footer>
 
   <script>
-    // Function to mark page as visited
-    function markPageVisited() {
-      const visited = JSON.stringify({ visited: true, timestamp: Date.now() });
-      document.cookie = `writing_page_visited=${visited}; path=/; max-age=86400`; // 24 hours
-    }
-    
-    // Function to check if page was visited
-    function hasVisited() {
-      const cookies = document.cookie.split(';');
-      for (let cookie of cookies) {
-        const [name, value] = cookie.trim().split('=');
-        if (name === 'writing_page_visited') {
-          try {
-            const data = JSON.parse(value);
-            // Check if visit was within last 24 hours
-            return data.visited && (Date.now() - data.timestamp < 86400000);
-          } catch (e) {
-            return false;
-          }
-        }
-      }
-      return false;
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
       const cursorGlow = document.getElementById('cursor-glow');
       const typewriter = document.getElementById('writing-typewriter');
-      const container = document.getElementById('main-container');
       let lastTime = 0;
       const interval = 150;
-
-      // Check if this is a return visit
-      const isReturnVisit = hasVisited();
-      
-      if (isReturnVisit) {
-        // Skip animations - show everything immediately
-        typewriter.classList.add('no-animation');
-        container.classList.add('no-animation');
-      } else {
-        // First visit - run animations
-        typewriter.classList.add('animate');
-        container.classList.add('animate');
-        
-        // Mark as visited after animations complete
-        setTimeout(() => {
-          markPageVisited();
-        }, 3500); // after typewriter (2.25s) + content fade delay (2.4s) + fade duration (1s)
-      }
 
       // Sparkle trail on mouse move
       document.addEventListener('mousemove', (e) => {
@@ -867,6 +695,11 @@
           lastTime = now;
         }
       });
+
+      // Remove the cursor after typing animation completes
+      setTimeout(() => {
+        typewriter.classList.add('typing-complete');
+      }, 4000); // Give more time to see the typed text
 
       // Fade out the "Writing" title on scroll
       window.addEventListener('scroll', () => {
