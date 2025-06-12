@@ -651,4 +651,72 @@
             </div>
           </div>
 
-          <div class="writing-item" onclick="window.open('https://www.nytimes.com/2022/05/11/learning/from-addiction-to-aviation-tobacco-an-unexpected-fuel-for-the-future
+          <div class="writing-item" onclick="window.open('https://www.nytimes.com/2022/05/11/learning/from-addiction-to-aviation-tobacco-an-unexpected-fuel-for-the-future.html', '_blank')">
+            <div class="article-photo">
+              <div class="photo-placeholder"></div>
+            </div>
+            <div class="article-content">
+              <div class="writing-title">
+                From Addiction to … Aviation? Tobacco, an Unexpected Fuel for the Future
+              </div>
+              <div class="publication-info">
+                <em>New York Times</em>, 2022
+              </div>
+            </div>
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <img src="images/copyright.PNG" alt="Copyright ©" />
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cursorGlow = document.getElementById('cursor-glow');
+      const typewriter = document.getElementById('writing-typewriter');
+      let lastTime = 0;
+      const interval = 150;
+
+      // Sparkle trail on mouse move
+      document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
+
+        const now = Date.now();
+        if (now - lastTime > interval) {
+          const sparkle = document.createElement('div');
+          sparkle.className = 'sparkle';
+          const offsetX = (Math.random() - 0.5) * 20;
+          const offsetY = (Math.random() - 0.5) * 20;
+          sparkle.style.left = (e.clientX + offsetX) + 'px';
+          sparkle.style.top = (e.clientY + offsetY) + 'px';
+          document.body.appendChild(sparkle);
+          setTimeout(() => sparkle.remove(), 1200);
+          lastTime = now;
+        }
+      });
+
+      // Remove the cursor after typing animation completes
+      setTimeout(() => {
+        typewriter.classList.add('typing-complete');
+      }, 4000);
+
+      // Fade out the "Writing" title on scroll
+      window.addEventListener('scroll', () => {
+        const titleRect = typewriter.getBoundingClientRect();
+        if (titleRect.top <= 100) {
+          typewriter.classList.add('fade-out');
+        } else {
+          typewriter.classList.remove('fade-out');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
