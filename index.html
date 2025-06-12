@@ -341,6 +341,68 @@
     }
 
     /* ─────────────────────────────────────────────────────
+       SHOOTING STAR METEOR SHOWER EFFECT
+       ───────────────────────────────────────────────────── */
+    .meteor-shower-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    
+    .meteor-shower-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .shooting-star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: linear-gradient(45deg, #fff, #87ceeb, #fff);
+      border-radius: 50%;
+      opacity: 0;
+      animation: shootingStar 2s linear forwards;
+    }
+    
+    .shooting-star::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
+      transform: rotate(-45deg);
+      transform-origin: 0 0;
+    }
+    
+    @keyframes shootingStar {
+      0% {
+        opacity: 1;
+        transform: translateX(0) translateY(0) scale(0);
+      }
+      10% {
+        opacity: 1;
+        transform: translateX(0) translateY(0) scale(1);
+      }
+      90% {
+        opacity: 1;
+        transform: translateX(300px) translateY(300px) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(400px) translateY(400px) scale(0);
+      }
+    }
+
+    /* ─────────────────────────────────────────────────────
        SITE FOOTER
        ───────────────────────────────────────────────────── */
     .site-footer {
