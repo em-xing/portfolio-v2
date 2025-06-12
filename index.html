@@ -81,6 +81,69 @@
     }
 
     /* ─────────────────────────────────────────────────────
+       SHOOTING STAR METEOR SHOWER EFFECT
+       ───────────────────────────────────────────────────── */
+    .meteor-shower-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    
+    .meteor-shower-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .shooting-star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: linear-gradient(45deg, #fff, #87ceeb, #fff);
+      border-radius: 50%;
+      opacity: 0;
+      animation: shootingStar 2s linear forwards;
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+    }
+    
+    .shooting-star::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
+      transform: rotate(-45deg);
+      transform-origin: 0 0;
+    }
+    
+    @keyframes shootingStar {
+      0% {
+        opacity: 1;
+        transform: translateX(0) translateY(0) scale(0);
+      }
+      10% {
+        opacity: 1;
+        transform: translateX(0) translateY(0) scale(1);
+      }
+      90% {
+        opacity: 1;
+        transform: translateX(300px) translateY(300px) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(400px) translateY(400px) scale(0);
+      }
+    }
+
+    /* ─────────────────────────────────────────────────────
        HEADER
        ───────────────────────────────────────────────────── */
     header {
@@ -341,68 +404,6 @@
     }
 
     /* ─────────────────────────────────────────────────────
-       SHOOTING STAR METEOR SHOWER EFFECT
-       ───────────────────────────────────────────────────── */
-    .meteor-shower-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.7);
-      z-index: 9999;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease;
-    }
-    
-    .meteor-shower-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    
-    .shooting-star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: linear-gradient(45deg, #fff, #87ceeb, #fff);
-      border-radius: 50%;
-      opacity: 0;
-      animation: shootingStar 2s linear forwards;
-    }
-    
-    .shooting-star::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100px;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
-      transform: rotate(-45deg);
-      transform-origin: 0 0;
-    }
-    
-    @keyframes shootingStar {
-      0% {
-        opacity: 1;
-        transform: translateX(0) translateY(0) scale(0);
-      }
-      10% {
-        opacity: 1;
-        transform: translateX(0) translateY(0) scale(1);
-      }
-      90% {
-        opacity: 1;
-        transform: translateX(300px) translateY(300px) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: translateX(400px) translateY(400px) scale(0);
-      }
-    }
-
-    /* ─────────────────────────────────────────────────────
        SITE FOOTER
        ───────────────────────────────────────────────────── */
     .site-footer {
@@ -421,56 +422,15 @@
       height: auto;
       display: block;
     }
-    /* Overlay that briefly darkens the screen */
-#star-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(20, 20, 30, 0.5);
-  z-index: 9998;
-  display: none;
-}
-
-/* Shooting star as a glowing dot */
-.shooting-star {
-  position: fixed;
-  top: -10px;
-  left: -50px;
-  width: 6px;
-  height: 6px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-  z-index: 9999;
-  animation: shoot 1.2s ease-out forwards;
-}
-
-/* Keyframes for flying across screen */
-@keyframes shoot {
-  0% {
-    top: -10px;
-    left: -50px;
-    opacity: 1;
-  }
-  80% {
-    top: 50%;
-    left: 70%;
-    opacity: 1;
-  }
-  100% {
-    top: 65%;
-    left: 100%;
-    opacity: 0;
-  }
-}
-
   </style>
 </head>
 
 <body>
   <!-- GLOWING CURSOR -->
   <div class="cursor-glow" id="cursor-glow"></div>
+
+  <!-- METEOR SHOWER OVERLAY -->
+  <div class="meteor-shower-overlay" id="meteor-shower-overlay"></div>
 
   <!-- HEADER -->
   <header>
@@ -490,7 +450,7 @@
     <a href="mailto:emletxing@gmail.com">
       <img src="images/icon_mail.PNG" alt="Email icon">
     </a>
-    <a href="#">
+    <a href="#" id="shooting-star-btn">
       <img src="images/icon_shooting_star.PNG" alt="Star icon">
     </a>
   </aside>
@@ -538,8 +498,6 @@
   </footer>
 
   <script>
-     
-
     // Function to mark page as visited
     function markPageVisited() {
       const visited = JSON.stringify({ visited: true, timestamp: Date.now() });
@@ -572,6 +530,8 @@
       const scrollArrow    = document.getElementById('scroll-arrow');
       const typewriterText = document.getElementById('typewriter-text');
       const fadeinText     = document.getElementById('fadein-text');
+      const shootingStarBtn = document.getElementById('shooting-star-btn');
+      const meteorOverlay  = document.getElementById('meteor-shower-overlay');
       
       // Check if this is a return visit
       const isReturnVisit = hasVisited();
@@ -616,7 +576,66 @@
           block: 'center'
         });
       });
-    
+      
+      // Shooting star meteor shower effect
+      shootingStarBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        startMeteorShower();
+      });
+      
+      function startMeteorShower() {
+        meteorOverlay.classList.add('active');
+        
+        // Create multiple shooting stars with staggered timing
+        for (let i = 0; i < 15; i++) {
+          setTimeout(() => {
+            createShootingStar();
+          }, i * 200 + Math.random() * 300);
+        }
+        
+        // End the meteor shower after 5 seconds
+        setTimeout(() => {
+          meteorOverlay.classList.remove('active');
+          // Clean up any remaining shooting stars
+          const stars = meteorOverlay.querySelectorAll('.shooting-star');
+          stars.forEach(star => star.remove());
+        }, 5000);
+      }
+      
+      function createShootingStar() {
+        const star = document.createElement('div');
+        star.className = 'shooting-star';
+        
+        // Random starting position (from top and left edges)
+        const startX = Math.random() * window.innerWidth * 0.3;
+        const startY = Math.random() * window.innerHeight * 0.3;
+        
+        star.style.left = startX + 'px';
+        star.style.top = startY + 'px';
+        
+        // Add some variation to the animation
+        const duration = 1.5 + Math.random() * 1; // 1.5-2.5 seconds
+        const scale = 0.8 + Math.random() * 0.4; // 0.8-1.2 scale
+        
+        star.style.animationDuration = duration + 's';
+        star.style.transform = `scale(${scale})`;
+        
+        meteorOverlay.appendChild(star);
+        
+        // Remove star after animation
+        setTimeout(() => {
+          if (star.parentNode) {
+            star.parentNode.removeChild(star);
+          }
+        }, duration * 1000 + 100);
+      }
+      
+      // Close meteor shower when clicking the overlay
+      meteorOverlay.addEventListener('click', () => {
+        meteorOverlay.classList.remove('active');
+        const stars = meteorOverlay.querySelectorAll('.shooting-star');
+        stars.forEach(star => star.remove());
+      });
       
       function createSparkle(x, y) {
         const sparkle = document.createElement('div');
@@ -646,7 +665,6 @@
       function fadeInIntro() {
         introContainer.classList.remove('fade-out');
       }
-      
 
       window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
@@ -669,7 +687,6 @@
           flowersTitle.classList.remove('visible');
         }
       });
-      
     });
   </script>
 </body>
