@@ -1,580 +1,652 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Research – Emily Xing</title>
-
-  <!-- Load PT Sans and Courier Prime from Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Courier+Prime:wght@400;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- Favicon -->
-  <link rel="icon" href="images/favicon.PNG" type="image/png" />
-
-  <style>
-    /* ─── RESET & BASE ───────────────────────────────── */
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
-    body {
-      background: #241d18;
-      color: #fff;
-      font-family: 'PT Sans', sans-serif;
-      line-height: 1.6;
-      cursor: url("images/cursor_normal.cur") 0 0, auto;
-      padding: 2rem;
-      padding-top: 6rem; /* space for fixed header */
-      min-height: 120vh;
-    }
-    a {
-      text-decoration: none;
-    }
-
-    /* ─── GLOWING CURSOR & SPARKLES ──────────────────── */
-    .cursor-glow {
-      position: fixed;
-      width: 15px; height: 15px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,100,0.5) 0%, rgba(255,255,150,0.2) 60%, transparent 100%);
-      pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
-      box-shadow: 0 0 15px rgba(255,255,100,0.4);
-      animation: firefly-glow 2.5s ease-in-out infinite;
-    }
-    .sparkle {
-      position: fixed; width: 3px; height: 3px; background: rgba(255,255,120,0.8);
-      border-radius: 50%; pointer-events: none; z-index: 9998;
-      animation: sparkle-fade 1.2s ease-out forwards;
-    }
-    @keyframes firefly-glow {
-      0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.8;
-      }
-      50% {
-        transform: translate(-50%, -50%) scale(1.15);
-        opacity: 1;
-      }
-    }
-    @keyframes sparkle-fade {
-      0% {
-        opacity: 0.8;
-        transform: scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(0.3);
-      }
-    }
-
-    /* ─── HEADER ────────────────────────────────────── */
-    header {
-      position: fixed;
-      top: 55px;
-      left: 55%;
-      transform: translateX(-50%);
-      display: inline-block;
-      border-radius: 2px;
-      z-index: 100;
-    }
-    header img.logo {
-      display: block;
-      margin: 0 auto;
-      width: 80%;
-      max-width: 80%;
-      transform: translateY(-10px);
-    }
-    /* Gradient overlay under header for fade effect */
-    .header-fade {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 200px; /* covers header + a bit of content */
-      background: linear-gradient(to bottom, #241d18 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 90;
-    }
-
-    /* ─── HOME NAVIGATION ARROW ─────────────────────── */
-    .home-nav {
-      position: fixed;
-      top: 260px;
-      left: 80px;
-      z-index: 100;
-      background: rgba(112, 159, 211, 0.1);
-      border: 2px solid #709fd3;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-    .home-nav:hover {
-      background: rgba(112, 159, 211, 0.2);
-      border-color: #87ceeb;
-      box-shadow: 0 0 20px rgba(112, 159, 211, 0.4);
-      transform: translateX(-5px);
-    }
-    .home-nav::before {
-      content: '';
-      width: 0;
-      height: 0;
-      border-top: 8px solid transparent;
-      border-bottom: 8px solid transparent;
-      border-right: 12px solid #709fd3;
-      transition: border-right-color 0.3s ease;
-    }
-    .home-nav:hover::before {
-      border-right-color: #87ceeb;
-    }
-
-    /* ─── TYPEWRITER FOR "Research" ─────────────────── */
-    .typewriter-line {
-      display: inline-block;
-      font-family: 'Courier Prime', monospace;
-      font-weight: 600;
-      font-size: 2.3rem;
-      color: white;
-      overflow: hidden;
-      white-space: nowrap;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Works - Emily Xing</title>
     
-    /* Default state - text visible, no animation */
-    .typewriter-line.no-animation {
-      width: auto;
-      border: none;
-    }
+    <!-- Load PT Sans from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
     
-    /* Animated state - only on first visit */
-    .typewriter-line.animate {
-      border-right: 0.15em solid #bdeafe;
-      width: 0;
-      animation: typing 2.5s steps(8, end) forwards, blink-caret 1s step-end infinite;
-    }
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.PNG" type="image/png" />
     
-    @keyframes typing {
-      from { width: 0; }
-      to   { width: 8.5ch; } /* "research" is 8 characters, adding buffer */
-    }
-    @keyframes blink-caret {
-      50% { border-color: transparent; }
-    }
-    
-    /* Ensure the cursor disappears after typing completes */
-    .typewriter-line.animate.typing-complete {
-      border-right: none;
-      animation: none;
-    }
-    
-    .fade-out {
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'PT Sans', sans-serif;
+            background-color: #241d18;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 2rem;
+            padding-top: 6rem; /* space for fixed header */
+            cursor: url("images/cursor_normal.cur") 0 0, auto;
+            overflow-x: hidden;
+        }
+        
+        /* ─── GLOWING CURSOR & SPARKLES ──────────────────── */
+        .cursor-glow {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 100, 0.5) 0%, rgba(255, 255, 150, 0.2) 60%, transparent 100%);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px rgba(255, 255, 100, 0.4);
+            animation: firefly-glow 2.5s ease-in-out infinite;
+        }
+        
+        .sparkle {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 255, 120, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            animation: sparkle-fade 1.2s ease-out forwards;
+        }
+        
+        @keyframes firefly-glow {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.15);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes sparkle-fade {
+            0% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+        }
 
-    /* ─── RIGHT SOCIAL ICONS ────────────────────────── */
-    .social-sidebar {
-      position: fixed;
-      top: 150px;
-      right: 37px;
-      height: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1px;
-      z-index: 10;
-    }
-    .social-sidebar img {
-      display: block;
-      transform: scale(0.4);
-      transform-origin: center center;
-    }
-    .social-sidebar a + a {
-      margin-top: 1px;
-    }
-    .social-sidebar a:hover img {
-      filter: brightness(1.2) drop-shadow(0 0 10px rgba(255,169,126,0.6));
-    }
+        /* ─── HEADER ────────────────────────────────────── */
+        header {
+            position: fixed;
+            top: 55px;
+            left: 55%;
+            transform: translateX(-50%);
+            display: inline-block;
+            border-radius: 2px;
+            z-index: 100;
+        }
+        header img.logo {
+            display: block;
+            margin: 0 auto;
+            width: 80%;
+            max-width: 80%;
+            transform: translateY(-10px);
+        }
+        /* Gradient overlay under header for fade effect */
+        .header-fade {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px; /* covers header + a bit of content */
+            background: linear-gradient(to bottom, #241d18 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 90;
+        }
 
-    /* ─── RESEARCH PAGE CONTENT ─────────────────────── */
-    .container {
-      max-width: 900px;
-      margin: 120px auto 0 auto; /* push content down so typewriter shows */
-    }
-    
-    /* Default state - content visible immediately */
-    .container.no-animation {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    /* Animated state - only on first visit */
-    .container.animate {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeIn 1s ease forwards;
-      animation-delay: 2.4s; /* wait for typewriter to finish */
-    }
-    
-    @keyframes fadeIn {
-      from {
-        opacity: 0; transform: translateY(20px);
-      }
-      to {
-        opacity: 1; transform: translateY(0);
-      }
-    }
-    
-    h1.page-title {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: #fff;
-      position: relative;
-      height: 3.5rem; /* Reserve space for typewriter */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    /* Orange line below page title */
-    h1.page-title + .divider {
-      width: 60px;
-      height: 2px;
-      margin: 0.5rem auto 2rem;
-      background: #ffa97e;
-    }
+        /* ─── HOME NAVIGATION ARROW ─────────────────────── */
+        .home-nav {
+            position: fixed;
+            top: 260px;
+            left: 80px;
+            z-index: 100;
+            background: rgba(112, 159, 211, 0.1);
+            border: 2px solid #709fd3;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .home-nav:hover {
+            background: rgba(112, 159, 211, 0.2);
+            border-color: #87ceeb;
+            box-shadow: 0 0 20px rgba(112, 159, 211, 0.4);
+            transform: translateX(-5px);
+        }
+        .home-nav::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-right: 12px solid #709fd3;
+            transition: border-right-color 0.3s ease;
+        }
+        .home-nav:hover::before {
+            border-right-color: #87ceeb;
+        }
 
-    /* Two-column layout (labs and awards) */
-    .main-content {
-      display: flex;
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-    .left-column, .right-column {
-      flex: 1;
-    }
-    @media (max-width: 700px) {
-      .main-content {
-        display: block;
-      }
-    }
-
-    /* Research section boxes */
-    .research-section {
-      margin-bottom: 1.2rem;
-      padding: 1rem;
-      background: rgba(255,255,255,0.03);
-      border-radius: 12px;
-      border: 1px solid rgba(255,169,126,0.2);
-      transition: 0.3s;
-    }
-    .research-section:hover {
-      transform: translateY(-3px);
-      border-color: rgba(255,169,126,0.4);
-      box-shadow: 0 8px 20px rgba(255,169,126,0.1);
-    }
-    .research-question {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-      color: #fff;
-      line-height: 1.4;
-    }
-    .research-question .highlight {
-      color: #ffa97e;
-      font-weight: 600;
-    }
-    .lab-info {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #ffa97e;
-      line-height: 1.3;
-    }
-    .lab-info a.lab-link {
-      color: #ffa97e;
-      font-weight: 600;
-      text-decoration: underline;
-      transition: color 0.3s;
-    }
-    .lab-info a.lab-link:hover {
-      color: #1e90ff;
-    }
-    .lab-info span.uni {
-      color: #fff;
-      font-weight: 400;
-      margin-left: 0.25rem;
-    }
-
-    /* Awards & Scholarships box (match height to research boxes) */
-    .awards-section {
-      padding: 1.5rem;
-      background: rgba(255,255,255,0.05);
-      border-radius: 12px;
-      border: 1px solid rgba(112,159,211,0.3);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .section-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #709fd3;
-      text-align: center;
-      margin-bottom: 1rem; /* spacing below heading */
-    }
-    .award-list {
-      list-style-type: disc;
-      margin-left: 1.5rem;
-    }
-    .award-list li {
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-
-    /* Publications section (full-width below both columns) */
-    .publications-section {
-      margin-top: 2rem;
-    }
-    .publications-section h2 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #709fd3;
-      text-align: center;
-      margin-bottom: 1rem; /* spacing below heading */
-    }
-    .publication-list {
-      list-style-type: none;
-      margin-left: 0;
-      padding-left: 0;
-    }
-    .publication-item {
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-    .publication-item .author-name {
-      font-weight: 700;
-      color: #ffa97e;
-    }
-    .publication-item .journal-name {
-      font-style: italic;
-      color: #709fd3;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 480px) {
-      .typewriter-line { font-size: 2rem; }
-      .research-question { font-size: 1rem; }
-      .lab-info, .award-list li, .publication-item { font-size: 0.9rem; }
-      .home-nav { left: 20px; width: 45px; height: 45px; }
-    }
-
-  /* ─────────────────────────────────────────────────────
-       SITE FOOTER
-       ───────────────────────────────────────────────────── */
-    .site-footer {
-      position: fixed;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.2);
-      display: inline-block;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-      z-index: 50;
-    }
-    .site-footer img {
-      max-height: 40px;
-      height: auto;
-      display: block;
-    }
-  </style>
+        /* ─── RIGHT SOCIAL ICONS ────────────────────────── */
+        .social-sidebar {
+            position: fixed;
+            top: 150px;
+            right: 37px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1px;
+            z-index: 10;
+        }
+        .social-sidebar img {
+            display: block;
+            transform: scale(0.4);
+            transform-origin: center center;
+        }
+        .social-sidebar a + a {
+            margin-top: 1px;
+        }
+        .social-sidebar a:hover img {
+            filter: brightness(1.2) drop-shadow(0 0 10px rgba(255,169,126,0.6));
+        }
+        
+        .page-header {
+            text-align: center;
+            margin: 110px 0 60px 0;
+            position: relative;
+        }
+        
+        .page-header h1 {
+            font-family: 'PT Sans', sans-serif;
+            font-size: 1.8rem;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            margin-bottom: 10px;
+            font-weight: 560;
+            position: relative;
+            height: 2.5rem; /* Reserve space for typewriter */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* ─── TYPEWRITER FOR "Scrapbook" ─────────────────── */
+        .typewriter-line {
+            display: inline-block;
+            font-family: 'PT Sans', sans-serif;
+            font-weight: 560;
+            font-size: 1.8rem;
+            color: white;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        /* Default state - text visible, no animation */
+        .typewriter-line.no-animation {
+            width: auto;
+            border: none;
+        }
+        
+        /* Animated state - only on first visit */
+        .typewriter-line.animate {
+            border-right: 0.1em solid #bdeafe;
+            width: 0;
+            animation: typing 2.25s steps(9, end) forwards, blink-caret 0.8s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 9ch; } /* "scrapbook" is 9 characters */
+        }
+        
+        @keyframes blink-caret {
+            50% { border-color: transparent; }
+        }
+        
+        .page-header p {
+            color: #ffa97e;
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+        
+        .portfolio-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            columns: 4;
+            column-gap: 20px;
+            position: relative;
+            z-index: 2;
+            padding: 0 100px; /* Match writing page spacing */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 2s ease forwards;
+            animation-delay: 2.4s; /* wait for typewriter to finish */
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0; 
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .portfolio-container {
+                columns: 3;
+                padding: 0 50px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-container {
+                columns: 2;
+                padding: 0 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .portfolio-container {
+                columns: 1;
+                padding: 0 10px;
+            }
+        }
+        
+        .portfolio-item {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Project Items */
+        .project-item {
+            padding: 24px;
+        }
+        
+        .project-item .title {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+        
+        .project-item .webtoon-image {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+        
+        .project-item .description {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 16px;
+        }
+        
+        .project-item .link {
+            color: #ffa97e;
+            text-decoration: none;
+            background: rgba(255, 169, 126, 0.1);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 169, 126, 0.2);
+        }
+        
+        .project-item .link:hover {
+            background: rgba(255, 169, 126, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        /* Artwork Items */
+        .artwork-item {
+            padding: 0;
+        }
+        
+        .artwork-item .artwork-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .artwork-item:hover .artwork-image {
+            transform: scale(1.02);
+        }
+        
+        .artwork-item .image-placeholder {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        /* Site footer matching homepage */
+        .site-footer {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            z-index: 50;
+        }
+        
+        .site-footer img {
+            max-height: 40px;
+            height: auto;
+            display: block;
+        }
+        
+        /* Image Modal Overlay */
+        .image-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+        
+        .image-modal.active {
+            display: flex;
+        }
+        
+        .image-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+    </style>
 </head>
-
 <body>
-  <!-- Glowing cursor effect -->
-  <div class="cursor-glow" id="cursor-glow"></div>
-  <!-- Gradient overlay for fade effect -->
-  <div class="header-fade"></div>
+    <!-- Glowing cursor effect -->
+    <div class="cursor-glow" id="cursor-glow"></div>
+    <!-- Gradient overlay for fade effect -->
+    <div class="header-fade"></div>
 
-  <!-- Fixed header (logo) -->
-  <header>
-    <img src="images/name.gif" alt="name logo" class="logo"/>
-  </header>
+    <!-- Fixed header (logo) -->
+    <header>
+        <img src="images/name.gif" alt="name logo" class="logo"/>
+    </header>
 
-  <!-- Home navigation arrow -->
-  <div class="home-nav" onclick="window.location.href='index.html'" title="Return to Home">
-  </div>
-
-  <!-- Right social icons -->
-  <aside class="social-sidebar">
-    <a href="https://www.linkedin.com/in/emily-xing-5663ab266/" target="_blank">
-      <img src="images/icon_linkedin.PNG" alt="LinkedIn icon">
-    </a>
-    <a href="mailto:emletxing@gmail.com">
-      <img src="images/icon_mail.PNG" alt="Email icon">
-    </a>
-    <a href="#">
-      <img src="images/icon_shooting_star.PNG" alt="Star icon">
-    </a>
-  </aside>
-
-  <!-- Research page content -->
-  <div class="container" id="main-container">
-    <h1 class="page-title">
-      <span id="research-typewriter" class="typewriter-line">research</span>
-    </h1>
-    <div class="divider"></div>
-
-    <div class="main-content">
-      <!-- LEFT COLUMN: Research Topics -->
-      <div class="left-column">
-        <div class="research-section">
-          <div class="research-question">
-            Are recent design changes on big social media actually improving user 
-            <span class="highlight">digital well-being</span>?
-          </div>
-          <div class="lab-info">
-            <a href="https://hsph.harvard.edu/research/health-happiness/" class="lab-link" target="_blank">
-              Viswanath Lab</a>
-            <span class="uni">@ Harvard T.H. Chan SPH</span>
-          </div>
-        </div>
-
-        <div class="research-section">
-          <div class="research-question">
-            How do we close 
-            <span class="highlight">tobacco control policy gaps</span> 
-            in media, packaging, and enforcement?
-          </div>
-          <div class="lab-info">
-            <a href="https://publichealth.jhu.edu/institute-for-global-tobacco-control" class="lab-link" target="_blank">
-              Institute for Global Tobacco Control</a>
-            <span class="uni">@ JHU Bloomberg SPH</span>
-          </div>
-        </div>
-
-        <div class="research-section">
-          <div class="research-question">
-            How can 
-            <span class="highlight">human-computer interaction</span> 
-            restore urban justice in New York's marginalized communities?
-          </div>
-          <div class="lab-info">
-            <a href="https://ceal.cs.columbia.edu/people/" class="lab-link" target="_blank">
-              Computer-Enabled Abilities Lab</a>
-            <span class="uni">@ Columbia SEAS</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT COLUMN: Awards & Scholarships -->
-      <div class="right-column">
-        <div class="awards-section">
-          <h2 class="section-title">Awards &amp; Scholarships</h2>
-          <ul class="award-list">
-            <li>2025 Columbia-Amazon Summer Research Undergraduate Experience (SURE) Fellow</li>
-            <li>2024 Harvard-China Project Summer Undergraduate Research Assistantship @ Tsinghua University</li>
-            <li>2024 Harvard Research Program Award</li>
-            <li>2023 Regeneron Talent Search Scholar</li>
-            <li>2023 Institute for Global Tobacco Control Distinguished Student Researcher</li>
-            <li>2023, 2022 NSF Research Experience & Mentoring (REM) Program Fellow @ Johns Hopkins University</li>
-          </ul>
-        </div>
-      </div>
+    <!-- Home navigation arrow -->
+    <div class="home-nav" onclick="window.location.href='index.html'" title="Return to Home">
     </div>
 
-    <!-- PUBLICATIONS SECTION (full-width below both columns) -->
-    <div class="publications-section">
-      <h2>Publications</h2>
-      <ul class="publication-list">
-        <li class="publication-item">
-          <span class="author-name">Xing, E.</span>, Dai, Z., Madar, A., Welding, K., Clegg Smith, K., Cohen, J. (2023). 
-          The problematic use of cultural symbols on Chinese cigarette packs. 
-          <span class="journal-name">Tobacco-Induced Diseases</span>.
-        </li>
-        <li class="publication-item">
-          <span class="author-name">Xing, E.</span>, Kim, S., Cohen, J., Tseng, T.Y. (2025). 
-          Content Analysis of Media Coverage on Smoke-Free Policy Implementation in Ten LMICs [Conference]. 
-          <span class="journal-name">World Conference on Tobacco Control</span>.
-        </li>
-        <li class="publication-item">
-          Liu, Y., <span class="author-name">Xing, E.</span>*, Huang, S.*, Kasisomayajula, V. (2025). 
-          The content, impact, and coverage of social media platform-led digital well-being design changes [Conference]. 
-          <span class="journal-name">International Conference on Computational Social Science</span>.
-        </li>
-        <li class="publication-item">
-          Nian, Q., Kennedy, R., Schotte, K., Gouda, H., Kataria, S., <span class="author-name">Xing, E.</span>, Welding, K. (2025). 
-          State of the evidence on economic impacts of smoke-free policies in the tourism sector: A narrative literature review. Under review @ 
-          <span class="journal-name">Tobacco-Induced Diseases</span>.
-        </li>
-        <li class="publication-item">
-          Lu, X., Yin, Z., Nielsen, C., Cui, R. Y., Ou, Y., <span class="author-name">Xing, E.</span>, Han, M., Shi, M., Ruan, Z>, Wang, J>, Su, Y>, Zhang, C>, Bian, S>, Zhou, W>, Li, J>, He, K>, McElroy, M. B. (2025). 
-          Mitigating Inequity Risks in China's Net-Zero Energy Transition via an Enhanced Renewable-Guided Industrial Spatial Reconfiguration. Under review @ 
-          <span class="journal-name">National Science Review</span>.
-        </li>
-        <li class="publication-item">
-          Wang, J>, Lu, X>, Wang, H>, Ou, Y>, Wang, J>, Tong, D>, Li, Y>, Ruan, Z>, Yin, Z>, Zhou, W>, McLellan, B>, <span class="author-name">Xing, E.</span>, MacLennan, A. M., Fan, J>, Zhang, X>, McElroy, M. B>, He, K> (2025). 
-          Reassessing Immediate Coal Phase-Out: Dual Imperatives of Capacity Control and Renewables Expansion in China's Carbon Neutral Strategy. Under review @ 
-          <span class="journal-name">Nexus</span>.
-        </li>
-      </ul>
+    <!-- Right social icons -->
+    <aside class="social-sidebar">
+        <a href="https://www.linkedin.com/in/emily-xing-5663ab266/" target="_blank">
+            <img src="images/icon_linkedin.PNG" alt="LinkedIn icon">
+        </a>
+        <a href="mailto:emletxing@gmail.com">
+            <img src="images/icon_mail.PNG" alt="Email icon">
+        </a>
+        <a href="#">
+            <img src="images/icon_shooting_star.PNG" alt="Star icon">
+        </a>
+    </aside>
+    
+    <div class="page-header">
+        <h1><span id="scrapbook-typewriter" class="typewriter-line">scrapbook</span></h1>
+        <p>i sometimes write, draw, film, compose; a collection of brainchildren & attempts at trying everything at least once</p>
     </div>
-  </div>
+    
+    <div class="portfolio-container">
+        <!-- Webtoon Project -->
+        <div class="portfolio-item project-item">
+            <div class="title">Our Place, Our Photo</div>
+            <img src="art/image_webtoon.png" alt="Our Place, Our Photo" class="webtoon-image">
+            <a href="https://www.webtoons.com/en/canvas/our-place-our-photo/list?title_no=1017911" class="link" target="_blank">read webtoon</a>
+        </div>
+        
+        <!-- YouTube -->
+        <div class="portfolio-item project-item">
+            <div class="title">silly YouTube chronicles</div>
+            <a href="https://www.youtube.com/@spark_emx" class="link" target="_blank">watch</a>
+        </div>
+        
+        <!-- Substack -->
+        <div class="portfolio-item project-item">
+            <a href="https://substack.com/@emxing" class="link" target="_blank">poetry on Substack</a>
+        </div>
+        
+        <!-- Magazine Feature -->
+        <div class="portfolio-item project-item">
+            <div class="description">featured in House House Magazine</div>
+            <a href="http://www.househousemagazine.com/" class="link" target="_blank">view publication</a>
+        </div>
+        
+        <!-- Artworks - Reordered -->
 
-  <!-- SITE FOOTER -->
-  <footer class="site-footer">
-    <img src="images/copyright.PNG" alt="Copyright ©" />
-  </footer>
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Cables, Casettes.jpg')">
+            <img src="art/Cables, Casettes.jpg" alt="Cables, Casettes" class="artwork-image">
+        </div>
+        
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Let\'s Explore, Tonight, Together.png')">
+            <img src="art/Let's Explore, Tonight, Together.png" alt="Let's Explore, Tonight, Together" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/The Bothriolepis and Me.png')">
+            <img src="art/The Bothriolepis and Me.png" alt="The Bothriolepis and Me" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/2012 Halloween.jpg')">
+            <img src="art/2012 Halloween.jpg" alt="2012 Halloween" class="artwork-image">
+        </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const cursorGlow = document.getElementById('cursor-glow');
-      const typewriter = document.getElementById('research-typewriter');
-      const container = document.getElementById('main-container');
-      let lastTime = 0;
-      const interval = 150;
-
-      // Always run animations on every page load
-      typewriter.classList.add('animate');
-      container.classList.add('animate');
-
-      // Sparkle trail on mouse move
-      document.addEventListener('mousemove', (e) => {
-        cursorGlow.style.left = e.clientX + 'px';
-        cursorGlow.style.top = e.clientY + 'px';
-
-        const now = Date.now();
-        if (now - lastTime > interval) {
-          const sparkle = document.createElement('div');
-          sparkle.className = 'sparkle';
-          const offsetX = (Math.random() - 0.5) * 20;
-          const offsetY = (Math.random() - 0.5) * 20;
-          sparkle.style.left = (e.clientX + offsetX) + 'px';
-          sparkle.style.top = (e.clientY + offsetY) + 'px';
-          document.body.appendChild(sparkle);
-          setTimeout(() => sparkle.remove(), 1200);
-          lastTime = now;
+        <div class="portfolio-item artwork-item" onclick="openImage('art/2. A Field of Wishes.JPG')">
+            <img src="art/2. A Field of Wishes.JPG" alt="A Field of Wishes" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Blossom.jpg')">
+            <img src="art/Blossom.jpg" alt="Blossom" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Feathers, Fly Freely!.png')">
+            <img src="art/Feathers, Fly Freely!.png" alt="Feathers, Fly Freely!" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Midwinter.png')">
+            <img src="art/Midwinter.png" alt="Midwinter" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Morning Reads.png')">
+            <img src="art/Morning Reads.png" alt="Morning Reads" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Mother.jpg')">
+            <img src="art/Mother.jpg" alt="Mother" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/My Grandpa, the Engineer.png')">
+            <img src="art/My Grandpa, the Engineer.png" alt="My Grandpa, the Engineer" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/My Guardian Reef.png')">
+            <img src="art/My Guardian Reef.png" alt="My Guardian Reef" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/My Mom\'s Childhood.jpg')">
+            <img src="art/My Mom's Childhood.jpg" alt="My Mom's Childhood" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/One Thousand Paper Cranes.png')">
+            <img src="art/One Thousand Paper Cranes.png" alt="One Thousand Paper Cranes" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Partners in Crime.png')">
+            <img src="art/Partners in Crime.png" alt="Partners in Crime" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Spring, I Love You.png')">
+            <img src="art/Spring, I Love You.png" alt="Spring, I Love You" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Sundays in the Kitchen.png')">
+            <img src="art/Sundays in the Kitchen.png" alt="Sundays in the Kitchen" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Two Flowers.png')">
+            <img src="art/Two Flowers.png" alt="Two Flowers" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/An Old Neighborhood.jpg')">
+            <img src="art/An Old Neighborhood.jpg" alt="An Old Neighborhood" class="artwork-image">
+        </div>
+        
+        <div class="portfolio-item artwork-item" onclick="openImage('art/Astronomy Dreams.jpg')">
+            <img src="art/Astronomy Dreams.jpg" alt="Astronomy Dreams" class="artwork-image">
+        </div>
+    </div>
+    
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal" onclick="closeModal()">
+        <img id="modalImage" src="" alt="">
+    </div>
+    
+    <!-- SITE FOOTER -->
+    <footer class="site-footer">
+        <img src="images/copyright.PNG" alt="Copyright ©" />
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cursorGlow = document.getElementById('cursor-glow');
+            const typewriter = document.getElementById('scrapbook-typewriter');
+            let lastSparkleTime = 0;
+            const sparkleInterval = 150;
+            
+            // Always run typewriter animation
+            typewriter.classList.add('animate');
+            
+            // Cursor glow following mouse movement with sparkle trail (matching homepage)
+            document.addEventListener('mousemove', (e) => {
+                cursorGlow.style.left = e.clientX + 'px';
+                cursorGlow.style.top = e.clientY + 'px';
+                
+                const now = Date.now();
+                if (now - lastSparkleTime > sparkleInterval) {
+                    createSparkle(e.clientX, e.clientY);
+                    lastSparkleTime = now;
+                }
+            });
+            
+            function createSparkle(x, y) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                
+                const offsetX = (Math.random() - 0.5) * 20;
+                const offsetY = (Math.random() - 0.5) * 20;
+                
+                sparkle.style.left = (x + offsetX) + 'px';
+                sparkle.style.top = (y + offsetY) + 'px';
+                
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    if (sparkle.parentNode) {
+                        sparkle.parentNode.removeChild(sparkle);
+                    }
+                }, 1200);
+            }
+            
+            // Add gentle hover effects
+            document.querySelectorAll('.portfolio-item').forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    item.style.transform = 'translateY(-3px)';
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    item.style.transform = 'translateY(0)';
+                });
+            });
+        });
+        
+        // Function to open images in modal overlay
+        function openImage(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            
+            modalImage.src = imageSrc;
+            modal.classList.add('active');
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
         }
-      });
-
-      // Fade out the "Research" title on scroll
-      window.addEventListener('scroll', () => {
-        const titleRect = typewriter.getBoundingClientRect();
-        if (titleRect.top <= 100) {
-          typewriter.classList.add('fade-out');
-        } else {
-          typewriter.classList.remove('fade-out');
+        
+        // Function to close modal
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            
+            // Restore body scroll
+            document.body.style.overflow = 'auto';
         }
-      });
-    });
-  </script>
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
