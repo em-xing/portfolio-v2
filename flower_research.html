@@ -218,7 +218,7 @@
       opacity: 0;
       transform: translateY(20px);
       animation: fadeIn 1s ease forwards;
-      animation-delay: 2.8s; /* wait for typewriter to finish */
+      animation-delay: 2.4s; /* wait for typewriter to finish */
     }
     
     @keyframes fadeIn {
@@ -410,7 +410,7 @@
   </header>
 
   <!-- Home navigation arrow -->
-  <div class="home-nav" onclick="markPageVisited(); window.location.href='index.html'" title="Return to Home">
+  <div class="home-nav" onclick="window.location.href='index.html'" title="Return to Home">
   </div>
 
   <!-- Right social icons -->
@@ -535,30 +535,6 @@
   </footer>
 
   <script>
-    // Function to mark page as visited
-    function markPageVisited() {
-      const visited = JSON.stringify({ visited: true, timestamp: Date.now() });
-      document.cookie = `research_page_visited=${visited}; path=/; max-age=86400`; // 24 hours
-    }
-    
-    // Function to check if page was visited
-    function hasVisited() {
-      const cookies = document.cookie.split(';');
-      for (let cookie of cookies) {
-        const [name, value] = cookie.trim().split('=');
-        if (name === 'research_page_visited') {
-          try {
-            const data = JSON.parse(value);
-            // Check if visit was within last 24 hours
-            return data.visited && (Date.now() - data.timestamp < 86400000);
-          } catch (e) {
-            return false;
-          }
-        }
-      }
-      return false;
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
       const cursorGlow = document.getElementById('cursor-glow');
       const typewriter = document.getElementById('research-typewriter');
@@ -566,28 +542,9 @@
       let lastTime = 0;
       const interval = 150;
 
-      // Check if this is a return visit
-      const isReturnVisit = hasVisited();
-      
-      if (isReturnVisit) {
-        // Skip animations - show everything immediately
-        typewriter.classList.add('no-animation');
-        container.classList.add('no-animation');
-      } else {
-        // First visit - run animations
-        typewriter.classList.add('animate');
-        container.classList.add('animate');
-        
-        // Remove the blinking cursor after typing completes
-        setTimeout(() => {
-          typewriter.classList.add('typing-complete');
-        }, 2500); // Match the typing animation duration
-        
-        // Mark as visited after animations complete
-        setTimeout(() => {
-          markPageVisited();
-        }, 4000); // after typewriter (2.5s) + content fade delay (2.8s) + fade duration (1s)
-      }
+      // Always run animations on every page load
+      typewriter.classList.add('animate');
+      container.classList.add('animate');
 
       // Sparkle trail on mouse move
       document.addEventListener('mousemove', (e) => {
