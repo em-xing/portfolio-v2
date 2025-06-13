@@ -1,749 +1,822 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emily Xing</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Writing – Emily Xing</title>
+
+  <!-- Load PT Sans and Courier New from Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Courier+Prime:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/favicon.PNG" type="image/png" />
+
+  <style>
+    /* ─── RESET & BASE ───────────────────────────────── */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      background: #241d18;
+      color: #fff;
+      font-family: 'PT Sans', sans-serif;
+      line-height: 1.6;
+      cursor: url("images/cursor_normal.cur") 0 0, auto;
+      padding: 2rem;
+      padding-top: 6rem; /* space for fixed header */
+      min-height: 120vh;
+      overflow-x: hidden;
+    }
+    a {
+      text-decoration: none;
+    }
+
+    /* ─── GLOWING CURSOR & SPARKLES ──────────────────── */
+    .cursor-glow {
+      position: fixed;
+      width: 15px; height: 15px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,100,0.5) 0%, rgba(255,255,150,0.2) 60%, transparent 100%);
+      pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+      box-shadow: 0 0 15px rgba(255,255,100,0.4);
+      animation: firefly-glow 2.5s ease-in-out infinite;
+    }
+    .sparkle {
+      position: fixed; width: 3px; height: 3px; background: rgba(255,255,120,0.8);
+      border-radius: 50%; pointer-events: none; z-index: 9998;
+      animation: sparkle-fade 1.2s ease-out forwards;
+    }
+    @keyframes firefly-glow {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.15);
+        opacity: 1;
+      }
+    }
+    @keyframes sparkle-fade {
+      0% {
+        opacity: 0.8;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+    }
+
+    /* ─── HEADER ────────────────────────────────────── */
+    header {
+      position: fixed;
+      top: 55px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-block;
+      border-radius: 2px;
+      z-index: 100;
+      width: 90%;
+      max-width: 400px;
+    }
+    header img.logo {
+      display: block;
+      margin: 0 auto;
+      width: 80%;
+      max-width: 80%;
+      transform: translateY(-10px);
+    }
+    /* Gradient overlay under header for fade effect */
+    .header-fade {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 200px; /* covers header + a bit of content */
+      background: linear-gradient(to bottom, #241d18 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 90;
+    }
+
+    /* ─── HOME NAVIGATION ARROW ─────────────────────── */
+    .home-nav {
+      position: fixed;
+      top: 260px;
+      left: 80px;
+      z-index: 100;
+      background: rgba(112, 159, 211, 0.1);
+      border: 2px solid #709fd3;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    .home-nav:hover {
+      background: rgba(112, 159, 211, 0.2);
+      border-color: #87ceeb;
+      box-shadow: 0 0 20px rgba(112, 159, 211, 0.4);
+      transform: translateX(-5px);
+    }
+    .home-nav::before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-right: 12px solid #709fd3;
+      transition: border-right-color 0.3s ease;
+    }
+    .home-nav:hover::before {
+      border-right-color: #87ceeb;
+    }
+
+    /* ─── RIGHT SOCIAL ICONS - REMOVED ────────────────────────── */
+    .social-sidebar {
+      display: none !important; /* Completely hidden everywhere */
+    }
+
+   .page-header {
+      text-align: center;
+      margin: 110px 0 60px 0;
+      position: relative;
+    }
+    .page-header h1 {
+      font-family: 'PT Sans', sans-serif;
+      font-size: 1.8rem;
+      color: #ffffff;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+      margin-bottom: 10px;
+      font-weight: 560;
+      height: 2.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .typewriter-line {
+      display: inline-block;
+      font-family: 'PT Sans', sans-serif;
+      font-weight: 560;
+      font-size: 1.8rem;
+      color: white;
+      overflow: hidden;
+      white-space: nowrap;
+    }
     
-    <!-- Load PT Sans from Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+    /* Default state - text visible, no animation */
+    .typewriter-line.no-animation {
+      width: auto;
+      border: none;
+    }
     
-    <!-- Favicon -->
-    <link rel="icon" href="images/favicon.PNG" type="image/png" />
+    /* Animated state - with typewriter */
+    .typewriter-line.animate {
+      border-right: 0.1em solid #bdeafe;
+      width: 0;
+      animation: typing 3.75s steps(16, end) forwards, blink-caret 0.8s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 16ch; } /* "selected writings" is 16 characters */
+    }
+    @keyframes blink-caret {
+      50% { border-color: transparent; }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 10px auto 0 auto;
+      padding: 0 50px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 3.5s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+        
+    /* ─── WRITING PAGE CONTENT ─────────────────────── */
     
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'PT Sans', sans-serif;
-            background-color: #241d18;
-            color: #ffffff;
-            min-height: 100vh;
-            padding: 2rem;
-            padding-top: 6rem; /* space for fixed header */
-            cursor: url("images/cursor_normal.cur") 0 0, auto;
-            overflow-x: hidden;
-        }
-        
-        /* ─── GLOWING CURSOR & SPARKLES ──────────────────── */
-        .cursor-glow {
-            position: fixed;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 255, 100, 0.5) 0%, rgba(255, 255, 150, 0.2) 60%, transparent 100%);
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 15px rgba(255, 255, 100, 0.4);
-            animation: firefly-glow 2.5s ease-in-out infinite;
-        }
-        
-        .sparkle {
-            position: fixed;
-            width: 3px;
-            height: 3px;
-            background: rgba(255, 255, 120, 0.8);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            animation: sparkle-fade 1.2s ease-out forwards;
-        }
-        
-        @keyframes firefly-glow {
-            0%, 100% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 0.8;
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.15);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes sparkle-fade {
-            0% {
-                opacity: 0.8;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0.3);
-            }
-        }
+    h1.page-title {
+      text-align: center;
+      margin-bottom: 1.3rem;
+      color: #fff;
+      position: relative;
+      height: 2.8rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    /* Orange line below page title */
+    h1.page-title + .container .divider {
+      width: 60px;
+      height: 2px;
+      margin: 0rem auto 0rem auto;
+      background: #ffa97e;
+      display: block;
+    }
 
-        /* ─── HEADER ────────────────────────────────────── */
-        header {
-            position: fixed;
-            top: 55px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: inline-block;
-            border-radius: 2px;
-            z-index: 100;
-            width: 90%;
-            max-width: 400px;
-        }
-        header img.logo {
-            display: block;
-            margin: 0 auto;
-            width: 80%;
-            max-width: 80%;
-            transform: translateY(-10px);
-        }
-        /* Gradient overlay under header for fade effect */
-        .header-fade {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 200px; /* covers header + a bit of content */
-            background: linear-gradient(to bottom, #241d18 0%, transparent 100%);
-            pointer-events: none;
-            z-index: 90;
-        }
+    /* Main content layout */
+    .main-content {
+      margin-bottom: 0rem;
+    }
 
-        /* ─── HOME NAVIGATION ARROW ─────────────────────── */
-        .home-nav {
-            position: fixed;
-            top: 260px;
-            left: 80px;
-            z-index: 100;
-            background: rgba(112, 159, 211, 0.1);
-            border: 2px solid #709fd3;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        .home-nav:hover {
-            background: rgba(112, 159, 211, 0.2);
-            border-color: #87ceeb;
-            box-shadow: 0 0 20px rgba(112, 159, 211, 0.4);
-            transform: translateX(-5px);
-        }
-        .home-nav::before {
-            content: '';
-            width: 0;
-            height: 0;
-            border-top: 8px solid transparent;
-            border-bottom: 8px solid transparent;
-            border-right: 12px solid #709fd3;
-            transition: border-right-color 0.3s ease;
-        }
-        .home-nav:hover::before {
-            border-right-color: #87ceeb;
-        }
+    /* Blog section - enhanced firefly glow effects */
+    .blog-section {
+      position: relative;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, 
+        rgba(112,159,211,0.08) 0%, 
+        rgba(135,206,235,0.05) 25%,
+        rgba(255,169,126,0.05) 75%,
+        rgba(112,159,211,0.08) 100%);
+      border: 1px solid rgba(135,206,235,0.15);
+      border-radius: 16px;
+      color: #fff;
+      text-align: center;
+      margin: 0 auto 2.5rem auto;
+      max-width: 500px;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(8px);
+      background-size: 200% 200%;
+      animation: gradientFlow 15s ease infinite;
+      overflow: hidden;
+    }
+    
+    /* Enhanced firefly glow effects */
+    .blog-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 70%, rgba(255,255,100,0.15) 0%, transparent 20%),
+                  radial-gradient(circle at 80% 20%, rgba(135,206,235,0.12) 0%, transparent 25%),
+                  radial-gradient(circle at 20% 30%, rgba(255,169,126,0.1) 0%, transparent 15%),
+                  radial-gradient(circle at 70% 80%, rgba(255,255,150,0.08) 0%, transparent 30%);
+      animation: firefly-dance 20s ease-in-out infinite;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    @keyframes firefly-dance {
+      0%, 100% {
+        transform: translate(0%, 0%) rotate(0deg);
+        opacity: 0.6;
+      }
+      25% {
+        transform: translate(-10%, 15%) rotate(90deg);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translate(15%, -10%) rotate(180deg);
+        opacity: 1;
+      }
+      75% {
+        transform: translate(-5%, -15%) rotate(270deg);
+        opacity: 0.7;
+      }
+    }
+    
+    /* Additional floating firefly dots */
+    .firefly-dot {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,120,0.8);
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      box-shadow: 0 0 8px rgba(255,255,120,0.6);
+    }
+    
+    .blog-section:hover .firefly-dot {
+      opacity: 1;
+      animation: firefly-float 6s ease-in-out infinite;
+    }
+    
+    .firefly-1 { 
+      top: 20%; left: 15%; 
+      animation-delay: 0s; 
+    }
+    .firefly-2 { 
+      top: 60%; right: 20%; 
+      animation-delay: 1s; 
+    }
+    .firefly-3 { 
+      bottom: 30%; left: 25%; 
+      animation-delay: 2s; 
+    }
+    .firefly-4 { 
+      top: 40%; right: 30%; 
+      animation-delay: 3s; 
+    }
+    .firefly-5 { 
+      bottom: 20%; right: 40%; 
+      animation-delay: 0.5s; 
+    }
+    
+    @keyframes firefly-float {
+      0%, 100% { 
+        transform: translateY(0px) scale(1);
+        opacity: 0.6;
+      }
+      25% { 
+        transform: translateY(-15px) scale(1.3);
+        opacity: 1;
+      }
+      50% { 
+        transform: translateY(-8px) scale(0.8);
+        opacity: 0.8;
+      }
+      75% { 
+        transform: translateY(-20px) scale(1.1);
+        opacity: 0.9;
+      }
+    }
+    
+    @keyframes gradientFlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    .blog-section:hover {
+      transform: translateY(-4px);
+      border-color: rgba(135,206,235,0.4);
+      box-shadow: 0 12px 40px rgba(135,206,235,0.15);
+      background: linear-gradient(135deg, 
+        rgba(112,159,211,0.12) 0%, 
+        rgba(135,206,235,0.08) 25%,
+        rgba(255,169,126,0.08) 75%,
+        rgba(112,159,211,0.12) 100%);
+    }
+    
+    .blog-title {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 0.4rem;
+      position: relative;
+      opacity: 0.8;
+    }
+        
+    .blog-description {
+      font-size: 0.9rem;
+      color: #fff;
+      line-height: 1.5;
+      opacity: 0.6;
+      font-style: italic;
+    }
 
-        /* ─── RIGHT SOCIAL ICONS - REMOVED ────────────────────────── */
-        .social-sidebar {
-            display: none !important; /* Completely hidden everywhere */
-        }
-        
-        .page-header {
-            text-align: center;
-            margin: 110px 0 60px 0;
-            position: relative;
-        }
-        
-        .page-header h1 {
-            font-family: 'PT Sans', sans-serif;
-            font-size: 1.8rem;
-            color: #ffffff;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-            margin-bottom: 10px;
-            font-weight: 560;
-            position: relative;
-            height: 2.5rem; /* Reserve space for typewriter */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        /* ─── TYPEWRITER FOR "Scrapbook" ─────────────────── */
-        .typewriter-line {
-            display: inline-block;
-            font-family: 'PT Sans', sans-serif;
-            font-weight: 560;
-            font-size: 1.8rem;
-            color: white;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        
-        /* Default state - text visible, no animation */
-        .typewriter-line.no-animation {
-            width: auto;
-            border: none;
-        }
-        
-        /* Animated state - only on first visit */
-        .typewriter-line.animate {
-            border-right: 0.1em solid #bdeafe;
-            width: 0;
-            animation: typing 2.25s steps(9, end) forwards, blink-caret 0.8s step-end infinite;
-        }
-        
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 9ch; } /* "scrapbook" is 9 characters */
-        }
-        
-        @keyframes blink-caret {
-            50% { border-color: transparent; }
-        }
-        
-        .page-header p {
-            color: #ffa97e;
-            font-size: 1.1rem;
-            font-weight: 300;
-            opacity: 0.8;
-        }
-        
-        .portfolio-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            columns: 4;
-            column-gap: 20px;
-            position: relative;
-            z-index: 2;
-            padding: 0 100px; /* Match writing page spacing */
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 2s ease forwards;
-            animation-delay: 2.4s; /* wait for typewriter to finish */
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0; 
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1; 
-                transform: translateY(0);
-            }
-        }
-        
-        @media (max-width: 1024px) {
-            .portfolio-container {
-                columns: 3;
-                padding: 0 50px;
-            }
-        }
-        
-        .portfolio-item {
-            break-inside: avoid;
-            margin-bottom: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding: 0;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .portfolio-item:hover {
-            transform: translateY(-2px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Project Items */
-        .project-item {
-            padding: 24px;
-        }
-        
-        .project-item .title {
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-            color: #ffffff;
-            font-weight: 500;
-        }
-        
-        .project-item .webtoon-image {
-            width: 100%;
-            height: auto;
-            border-radius: 6px;
-            margin-bottom: 16px;
-        }
-        
-        .project-item .description {
-            font-size: 0.9rem;
-            line-height: 1.5;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 16px;
-        }
-        
-        .project-item .link {
-            color: #ffa97e;
-            text-decoration: none;
-            background: rgba(255, 169, 126, 0.1);
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            display: inline-block;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 169, 126, 0.2);
-        }
-        
-        .project-item .link:hover {
-            background: rgba(255, 169, 126, 0.2);
-            transform: translateY(-1px);
-        }
-        
-        /* Artwork Items */
-        .artwork-item {
-            padding: 0;
-        }
-        
-        .artwork-item .artwork-image {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            display: block;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .artwork-item:hover .artwork-image {
-            transform: scale(1.02);
-        }
-        
-        .artwork-item .image-placeholder {
-            width: 100%;
-            height: 220px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px dashed rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 0.9rem;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        /* Site footer matching homepage */
-        .site-footer {
-            position: fixed;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.2);
-            display: inline-block;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            z-index: 50;
-        }
-        
-        .site-footer img {
-            max-height: 40px;
-            height: auto;
-            display: block;
-        }
-        
-        /* Image Modal Overlay */
-        .image-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            cursor: pointer;
-            backdrop-filter: blur(5px);
-        }
-        
-        .image-modal.active {
-            display: flex;
-        }
-        
-        .image-modal img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-        }
+    /* Writing section */
+    .writing-section {
+      margin-bottom: 1.5rem;
+    }
+    
+    /* Single column layout for writing pieces */
+    .writing-grid {
+      display: grid;
+      gap: 2rem;
+    }
+    
+    .writing-item {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 1.5rem;
+      padding: 0;
+      background: none;
+      border: none;
+      border-radius: 0;
+      align-items: start;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .writing-item:hover {
+      transform: translateY(-2px);
+    }
+    
+    /* Photo container */
+    .article-photo {
+      width: 150px;
+      height: 100px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(255,169,126,0.2) 0%, rgba(112,159,211,0.2) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .article-photo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(255,169,126,0.3);
+    }
+    
+    .article-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* Placeholder when no image */
+    .photo-placeholder {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: rgba(255,169,126,0.3);
+      border: 2px solid rgba(255,169,126,0.5);
+    }
+    
+    /* Article content */
+    .article-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100px;
+    }
+    
+    .writing-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.4;
+      margin-bottom: 0.6rem;
+    }
+    
+    .writing-title .highlight {
+      color: #fff;
+      font-weight: 600;
+    }
+    
+    .publication-info {
+      font-size: 0.95rem;
+      color: #fff;
+      line-height: 1.3;
+      font-weight: 400;
+    }
+    
+    .publication-info em {
+      color: #ffa97e;
+      font-style: italic;
+    }
+    
+    .publication-info .year {
+      color: #fff;
+      font-weight: 400;
+    }
 
-        /* ─────────────────────────────────────────────────────
-           MOBILE & TABLET RESPONSIVE STYLES
-           ───────────────────────────────────────────────────── */
-        
-        /* Tablets */
-        @media screen and (max-width: 1024px) {
-            .home-nav {
-                left: 40px;
-                width: 45px;
-                height: 45px;
-            }
-            
-            .typewriter-line {
-                font-size: 1.6rem;
-            }
-            
-            .portfolio-container {
-                columns: 3;
-                padding: 0 50px;
-            }
-        }
-        
-        /* Mobile devices */
-        @media screen and (max-width: 768px) {
-            body {
-                padding: 1rem;
-                padding-top: 4rem;
-            }
-            
-            /* Hide cursor effects on mobile for performance */
-            .cursor-glow,
-            .sparkle {
-                display: none;
-            }
-            
-            /* Mobile header with full-width background */
-            header {
-                background: linear-gradient(to bottom, rgba(36, 29, 24, 0.98) 0%, rgba(36, 29, 24, 0.85) 40%, rgba(36, 29, 24, 0.3) 80%, transparent 100%);
-                padding: 10px;
-                padding-top: 20px;
-                border-radius: 0;
-                width: 100vw;
-                max-width: none;
-                left: 0;
-                top: 0;
-                transform: none;
-                display: flex;
-                justify-content: center;
-                height: 120px;
-                align-items: center;
-            }
-            
-            /* Home button positioned to avoid header collision */
-            .home-nav {
-                top: 30px;
-                left: 15px;
-                width: 40px;
-                height: 40px;
-                z-index: 150;
-            }
-            .home-nav::before {
-                border-top: 6px solid transparent;
-                border-bottom: 6px solid transparent;
-                border-right: 10px solid #709fd3;
-            }
-            
-            /* Remove typewriter effect on mobile only and make font bigger */
-            .typewriter-line {
-                font-size: 1.8rem;
-                animation: none !important;
-                border: none !important;
-                width: auto !important;
-            }
-            
-            .page-header {
-                margin: 80px 0 40px 0;
-            }
-            
-            .page-header p {
-                font-size: 1rem;
-                padding: 0 20px;
-            }
-            
-            /* Content appears immediately on mobile */
-            .portfolio-container {
-                columns: 2;
-                padding: 0 20px;
-                opacity: 1 !important;
-                transform: none !important;
-                animation: none !important;
-            }
-            
-            /* Remove header fade on mobile */
-            .header-fade {
-                display: none;
-            }
-        }
-        
-        /* Small mobile devices */
-        @media screen and (max-width: 480px) {
-            .typewriter-line {
-                font-size: 1.6rem;
-            }
-            
-            .page-header p {
-                font-size: 0.9rem;
-            }
-            
-            .portfolio-container {
-                columns: 1;
-                padding: 0 10px;
-            }
-            
-            .home-nav {
-                width: 35px;
-                height: 35px;
-                left: 15px;
-                top: 25px;
-            }
-        }
-        
-        /* Landscape mobile orientation */
-        @media screen and (max-height: 500px) and (orientation: landscape) {
-            .page-header {
-                margin: 60px 0 30px 0;
-            }
-            
-            .typewriter-line {
-                font-size: 1.4rem;
-            }
-        }
-    </style>
+    /* ─── SITE FOOTER ───────────────────────────────── */
+    .site-footer {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.2);
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      z-index: 50;
+    }
+    .site-footer img {
+      max-height: 40px;
+      height: auto;
+      display: block;
+    }
+
+    /* ─────────────────────────────────────────────────────
+       MOBILE & TABLET RESPONSIVE STYLES
+       ───────────────────────────────────────────────────── */
+    
+    /* Tablets */
+    @media screen and (max-width: 1024px) {
+      .home-nav {
+        left: 40px;
+        width: 45px;
+        height: 45px;
+      }
+      
+      .typewriter-line {
+        font-size: 1.6rem;
+      }
+      
+      .container {
+        padding: 0 30px;
+      }
+    }
+    
+    /* Mobile devices */
+    @media screen and (max-width: 768px) {
+      body {
+        padding: 1rem;
+        padding-top: 4rem;
+      }
+      
+      /* Hide cursor effects on mobile for performance */
+      .cursor-glow,
+      .sparkle {
+        display: none;
+      }
+      
+      /* Mobile header with consistent positioning */
+      header {
+        background: linear-gradient(to bottom, rgba(36, 29, 24, 0.98) 0%, rgba(36, 29, 24, 0.85) 40%, rgba(36, 29, 24, 0.3) 80%, transparent 100%);
+        padding: 10px;
+        padding-top: 20px;
+        border-radius: 0;
+        width: 100vw;
+        max-width: none;
+        left: 0;
+        top: 0;
+        transform: none;
+        display: flex;
+        justify-content: center;
+        height: 120px;
+        align-items: center;
+      }
+      
+      /* Home button positioned to avoid header collision */
+      .home-nav {
+        top: 30px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        z-index: 150;
+      }
+      .home-nav::before {
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-right: 10px solid #709fd3;
+      }
+      
+      /* Keep typewriter effect on mobile - make font bigger */
+      .typewriter-line {
+        font-size: 1.8rem;
+      }
+      
+      .page-header {
+        margin: 80px 0 40px 0;
+      }
+      
+      /* Content appears immediately on mobile */
+      .container {
+        padding: 0 20px;
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+      }
+      
+      .writing-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        text-align: center;
+      }
+      
+      .article-photo {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+      }
+      
+      .blog-section {
+        padding: 1.2rem;
+      }
+      
+      /* Remove header fade on mobile */
+      .header-fade {
+        display: none;
+      }
+    }
+    
+    /* Small mobile devices */
+    @media screen and (max-width: 480px) {
+      .typewriter-line {
+        font-size: 1.6rem;
+      }
+      
+      .writing-title { 
+        font-size: 1rem; 
+      }
+      
+      .publication-info { 
+        font-size: 0.85rem; 
+      }
+      
+      .home-nav { 
+        width: 35px; 
+        height: 35px;
+        left: 15px;
+        top: 25px;
+      }
+      
+      .container { 
+        max-width: 100%; 
+        padding: 0 1rem; 
+      }
+    }
+    
+    /* Landscape mobile orientation */
+    @media screen and (max-height: 500px) and (orientation: landscape) {
+      .page-header {
+        margin: 60px 0 30px 0;
+      }
+      
+      .typewriter-line {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Glowing cursor effect -->
-    <div class="cursor-glow" id="cursor-glow"></div>
-    <!-- Gradient overlay for fade effect -->
-    <div class="header-fade"></div>
+  <!-- Glowing cursor effect -->
+  <div class="cursor-glow" id="cursor-glow"></div>
+  <!-- Gradient overlay for fade effect -->
+  <div class="header-fade"></div>
 
-    <!-- Fixed header (logo) -->
-    <header>
-        <img src="images/name.gif" alt="name logo" class="logo"/>
-    </header>
+  <!-- Fixed header (logo) -->
+  <header>
+    <img src="images/name.gif" alt="name logo" class="logo"/>
+  </header>
 
-    <!-- Home navigation arrow -->
-    <div class="home-nav" onclick="window.location.href='index.html'" title="Return to Home">
+  <!-- Home navigation arrow -->
+  <div class="home-nav" onclick="window.location.href='index.html'" title="Return to Home">
+  </div>
+
+  <!-- RIGHT SOCIAL ICONS - REMOVED -->
+  <!-- Social icons completely removed from writing page -->
+
+  <!-- Writing page content -->
+ <div class="page-header">
+        <h1><span id="scrapbook-typewriter" class="typewriter-line">selected writings</span></h1>
     </div>
+  <div class="container" id="main-container">
+    
+    <div class="divider"></div>
 
-    <!-- RIGHT SOCIAL ICONS - REMOVED -->
-    <!-- Social icons completely removed from scrapbook page -->
-    
-    <div class="page-header">
-        <h1><span id="scrapbook-typewriter" class="typewriter-line">scrapbook</span></h1>
-        <p>i sometimes write, draw, film; a collection of brainchildren & attempts at trying everything at least once</p>
-    </div>
-    
-    <div class="portfolio-container">
-        <!-- Webtoon Project -->
-        <div class="portfolio-item project-item">
-            <div class="title">Our Place, Our Photo</div>
-            <img src="art/image_webtoon.png" alt="Our Place, Our Photo" class="webtoon-image">
-            <a href="https://www.webtoons.com/en/canvas/our-place-our-photo/list?title_no=1017911" class="link" target="_blank">read webtoon</a>
-        </div>
+    <div class="main-content">
+      <!-- Blog Section - No easter egg functionality -->
+      <div class="blog-section">
+        <div class="firefly-dot firefly-1"></div>
+        <div class="firefly-dot firefly-2"></div>
+        <div class="firefly-dot firefly-3"></div>
+        <div class="firefly-dot firefly-4"></div>
+        <div class="firefly-dot firefly-5"></div>
         
-        <!-- YouTube -->
-        <div class="portfolio-item project-item">
-            <div class="title">silly YouTube chronicles</div>
-            <a href="https://www.youtube.com/@spark_emx" class="link" target="_blank">watch</a>
-        </div>
-        
-        <!-- Substack -->
-        <div class="portfolio-item project-item">
-            <a href="https://substack.com/@emxing" class="link" target="_blank">poetry on Substack</a>
-        </div>
-        
-        <!-- Magazine Feature -->
-        <div class="portfolio-item project-item">
-            <div class="description">featured in House House Magazine</div>
-            <a href="http://www.househousemagazine.com/" class="link" target="_blank">view publication</a>
-        </div>
-        
-        <!-- Artworks - Reordered -->
+        <h2 class="blog-title">currently blog-building!</h2>
+        <p class="blog-description">
+          come back soon for ramblings
+        </p>
+      </div>
 
-        <div class="portfolio-item artwork-item" onclick="openImage('art/Cables, Casettes.jpg')">
-            <img src="art/Cables, Casettes.jpg" alt="Cables, Casettes" class="artwork-image">
-        </div>
-        
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/Let\'s Explore, Tonight, Together.png')">
-            <img src="art/Let's Explore, Tonight, Together.png" alt="Let's Explore, Tonight, Together" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/The Bothriolepis and Me.png')">
-            <img src="art/The Bothriolepis and Me.png" alt="The Bothriolepis and Me" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/2012 Halloween.jpg')">
-            <img src="art/2012 Halloween.jpg" alt="2012 Halloween" class="artwork-image">
-        </div>
+      <!-- Selected Writing Section -->
+      <div class="writing-section">
+        <div class="writing-grid">
+          <div class="writing-item" onclick="window.open('https://www.huusl.org/bulletin/sketches-of-a-re-imagined-mass-and-cass', '_blank')">
+            <div class="article-photo">
+              <img src="writing/write_HUUSL.jpg" alt="Mass and Cass article">
+            </div>
+            <div class="article-content">
+              <div class="writing-title">
+                Sketches of a Re-Imagined Mass. and Cass
+              </div>
+              <div class="publication-info">
+                <em>Harvard Undergraduate Urban Sustainability Lab</em>, 2025
+              </div>
+            </div>
+          </div>
 
-        <div class="portfolio-item artwork-item" onclick="openImage('art/2. A Field of Wishes.JPG')">
-            <img src="art/2. A Field of Wishes.JPG" alt="A Field of Wishes" class="artwork-image">
+          <div class="writing-item" onclick="window.open('https://www.thecrimson.com/article/2024/2/13/clarity-24kgoldn-music-review/', '_blank')">
+            <div class="article-photo">
+              <img src="writing/write_Crimson.jpg" alt="24kGoldn review">
+            </div>
+            <div class="article-content">
+              <div class="writing-title">
+                'Clarity' Single Review: Notes on Introspection and Living From 24kGoldn
+              </div>
+              <div class="publication-info">
+                <em>Harvard Crimson Arts Magazine</em>, 2024
+              </div>
+            </div>
+          </div>
+
+          <div class="writing-item" onclick="window.open('https://mdme.ai/blog/2024/09/18/marias-story', '_blank')">
+            <div class="article-photo">
+              <img src="writing/write_MDandMe.jpg" alt="Maria's Story article">
+            </div>
+            <div class="article-content">
+              <div class="writing-title">
+                Maria's Story: In a household where doctors visits are unaffordable luxuries, AI steps up
+              </div>
+              <div class="publication-info">
+                <em>MDandMe</em>, 2024
+              </div>
+            </div>
+          </div>
+
+          <div class="writing-item" onclick="window.open('https://bowseat.org/news/climate-change-and-effective-altruism-a-cause-worth-fighting-for/', '_blank')">
+            <div class="article-photo">
+              <img src="writing/write_BowSeat.jpg" alt="Climate Change and Effective Altruism">
+            </div>
+            <div class="article-content">
+              <div class="writing-title">
+                Climate Change and Effective Altruism: A Cause Worth Fighting For
+              </div>
+              <div class="publication-info">
+                <em>Bow Seat Ocean Awareness Programs</em>, 2023
+              </div>
+            </div>
+          </div>
+
+          <div class="writing-item" onclick="window.open('https://www.nytimes.com/2022/05/11/learning/from-addiction-to-aviation-tobacco-an-unexpected-fuel-for-the-future.html', '_blank')">
+            <div class="article-photo">
+              <img src="writing/write_NewYorkTimes.jpg" alt="Tobacco aviation fuel article">
+            </div>
+            <div class="article-content">
+              <div class="writing-title">
+                From Addiction to … Aviation? Tobacco, an Unexpected Fuel for the Future
+              </div>
+              <div class="publication-info">
+                <em>New York Times</em>, 2022
+              </div>
+            </div>
+          </div>
+
+          </div>
         </div>
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/Blossom.jpg')">
-            <img src="art/Blossom.jpg" alt="Blossom" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/Feathers, Fly Freely!.png')">
-            <img src="art/Feathers, Fly Freely!.png" alt="Feathers, Fly Freely!" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/Midwinter.png')">
-            <img src="art/Midwinter.png" alt="Midwinter" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/Morning Reads.png')">
-            <img src="art/Morning Reads.png" alt="Morning Reads" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/Mother.jpg')">
-            <img src="art/Mother.jpg" alt="Mother" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/My Grandpa, the Engineer.png')">
-            <img src="art/My Grandpa, the Engineer.png" alt="My Grandpa, the Engineer" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/My Guardian Reef.png')">
-            <img src="art/My Guardian Reef.png" alt="My Guardian Reef" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/My Mom\'s Childhood.jpg')">
-            <img src="art/My Mom's Childhood.jpg" alt="My Mom's Childhood" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/One Thousand Paper Cranes.png')">
-            <img src="art/One Thousand Paper Cranes.png" alt="One Thousand Paper Cranes" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/Partners in Crime.png')">
-            <img src="art/Partners in Crime.png" alt="Partners in Crime" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/Spring, I Love You.png')">
-            <img src="art/Spring, I Love You.png" alt="Spring, I Love You" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/Sundays in the Kitchen.png')">
-            <img src="art/Sundays in the Kitchen.png" alt="Sundays in the Kitchen" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/Two Flowers.png')">
-            <img src="art/Two Flowers.png" alt="Two Flowers" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/An Old Neighborhood.jpg')">
-            <img src="art/An Old Neighborhood.jpg" alt="An Old Neighborhood" class="artwork-image">
-        </div>
-        
-        <div class="portfolio-item artwork-item" onclick="openImage('art/Astronomy Dreams.jpg')">
-            <img src="art/Astronomy Dreams.jpg" alt="Astronomy Dreams" class="artwork-image">
-        </div>
+      </div>
     </div>
-    
-    <!-- Image Modal -->
-    <div class="image-modal" id="imageModal" onclick="closeModal()">
-        <img id="modalImage" src="" alt="">
-    </div>
-    
-    <!-- SITE FOOTER -->
-    <footer class="site-footer">
-        <img src="images/copyright.PNG" alt="Copyright ©" />
-    </footer>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const cursorGlow = document.getElementById('cursor-glow');
-            const typewriter = document.getElementById('scrapbook-typewriter');
-            let lastSparkleTime = 0;
-            const sparkleInterval = 150;
-            
-            // Always run typewriter animation (desktop and mobile)
-            if (typewriter) {
-                typewriter.classList.add('animate');
-            }
-            
-            // Cursor glow following mouse movement with sparkle trail (only on desktop)
-            if (window.innerWidth > 768) {
-                document.addEventListener('mousemove', (e) => {
-                    cursorGlow.style.left = e.clientX + 'px';
-                    cursorGlow.style.top = e.clientY + 'px';
-                    
-                    const now = Date.now();
-                    if (now - lastSparkleTime > sparkleInterval) {
-                        createSparkle(e.clientX, e.clientY);
-                        lastSparkleTime = now;
-                    }
-                });
-            }
-            
-            function createSparkle(x, y) {
-                const sparkle = document.createElement('div');
-                sparkle.className = 'sparkle';
-                
-                const offsetX = (Math.random() - 0.5) * 20;
-                const offsetY = (Math.random() - 0.5) * 20;
-                
-                sparkle.style.left = (x + offsetX) + 'px';
-                sparkle.style.top = (y + offsetY) + 'px';
-                
-                document.body.appendChild(sparkle);
-                
-                setTimeout(() => {
-                    if (sparkle.parentNode) {
-                        sparkle.parentNode.removeChild(sparkle);
-                    }
-                }, 1200);
-            }
-            
-            // Add gentle hover effects (only on desktop)
-            if (window.innerWidth > 768) {
-                document.querySelectorAll('.portfolio-item').forEach(item => {
-                    item.addEventListener('mouseenter', () => {
-                        item.style.transform = 'translateY(-3px)';
-                    });
-                    
-                    item.addEventListener('mouseleave', () => {
-                        item.style.transform = 'translateY(0)';
-                    });
-                });
-            }
+  </div>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <img src="images/copyright.PNG" alt="Copyright ©" />
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cursorGlow = document.getElementById('cursor-glow');
+      const typewriter = document.getElementById('scrapbook-typewriter');
+      let lastTime = 0;
+      const interval = 150;
+
+      // Always run typewriter animation (desktop and mobile)
+      if (typewriter) {
+        typewriter.classList.add('animate');
+      }
+
+      // Sparkle trail on mouse move (only on desktop)
+      if (window.innerWidth > 768) {
+        document.addEventListener('mousemove', (e) => {
+          cursorGlow.style.left = e.clientX + 'px';
+          cursorGlow.style.top = e.clientY + 'px';
+
+          const now = Date.now();
+          if (now - lastTime > interval) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            const offsetX = (Math.random() - 0.5) * 20;
+            const offsetY = (Math.random() - 0.5) * 20;
+            sparkle.style.left = (e.clientX + offsetX) + 'px';
+            sparkle.style.top = (e.clientY + offsetY) + 'px';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 1200);
+            lastTime = now;
+          }
         });
-        
-        // Function to open images in modal overlay
-        function openImage(imageSrc) {
-            const modal = document.getElementById('imageModal');
-            const modalImage = document.getElementById('modalImage');
-            
-            modalImage.src = imageSrc;
-            modal.classList.add('active');
-            
-            // Prevent body scroll when modal is open
-            document.body.style.overflow = 'hidden';
-        }
-        
-        // Function to close modal
-        function closeModal() {
-            const modal = document.getElementById('imageModal');
-            modal.classList.remove('active');
-            
-            // Restore body scroll
-            document.body.style.overflow = 'auto';
-        }
-        
-        // Close modal with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeModal();
+
+        // Remove the cursor after typing animation completes (desktop only)
+        setTimeout(() => {
+          if (typewriter) {
+            typewriter.classList.add('typing-complete');
+          }
+        }, 4000);
+
+        // Fade out the "Writing" title on scroll (desktop only)
+        window.addEventListener('scroll', () => {
+          if (typewriter) {
+            const titleRect = typewriter.getBoundingClientRect();
+            if (titleRect.top <= 100) {
+              typewriter.classList.add('fade-out');
+            } else {
+              typewriter.classList.remove('fade-out');
             }
+          }
         });
-    </script>
+      }
+    });
+  </script>
 </body>
 </html>
