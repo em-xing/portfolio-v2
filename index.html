@@ -510,14 +510,14 @@
       
       .social-sidebar {
         position: absolute;
-        top: calc(85vh + 120px); /* Way closer to flowers */
+        top: calc(85vh + 80px); /* Start higher for vertical layout */
         left: 50%;
         transform: translateX(-50%);
-        flex-direction: row;
+        flex-direction: column; /* Vertical line down middle */
         height: auto;
         width: auto;
         justify-content: center;
-        gap: 0; /* No gap at all */
+        gap: 8px; /* Small gap for vertical spacing */
         z-index: 600; /* Above flowers */
       }
       .social-sidebar a {
@@ -527,7 +527,34 @@
         transform: scale(0.3); /* Slightly bigger for bottom placement */
       }
       
-      /* Mobile fade background overlay instead of text fade */
+      /* Alternative mobile fade options - choose one: */
+      
+      /* OPTION 1: Blur fade instead of opacity */
+      .intro-text.fade-blur {
+        filter: blur(2px);
+        opacity: 0.7;
+      }
+      
+      /* OPTION 2: Scale down fade */
+      .intro-text.fade-scale {
+        transform: translate(-50%, -50%) scale(0.95);
+        opacity: 0.8;
+      }
+      
+      /* OPTION 3: Text shadow fade */
+      .intro-text.fade-shadow {
+        text-shadow: 0 0 20px rgba(36, 29, 24, 0.8);
+        opacity: 0.9;
+      }
+      
+      /* OPTION 4: Margin push fade (moves text up) - ACTIVE */
+      .intro-text.fade-push {
+        transform: translate(-50%, -60%) !important;
+        opacity: 0.85 !important;
+        transition: all 0.5s ease !important;
+      }
+      
+      /* Current: Background overlay fade */
       .intro-text::before {
         content: '';
         position: fixed;
@@ -897,12 +924,12 @@
         const isMobile = window.innerWidth <= 768;
         
         if (isMobile) {
-          // On mobile: add background fade instead of text fade
+          // On mobile: add push fade instead of text fade
           const fadeThreshold = 350;
           if (introRect.top <= fadeThreshold) {
-            introContainer.classList.add('fade-background');
+            introContainer.classList.add('fade-push');
           } else {
-            introContainer.classList.remove('fade-background');
+            introContainer.classList.remove('fade-push');
           }
         } else {
           // On desktop: keep original text fade
