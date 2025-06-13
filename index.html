@@ -145,7 +145,7 @@
     }
 
     /* ─────────────────────────────────────────────────────
-       HEADER WITH GRADIENT PROTECTION
+       HEADER
        ───────────────────────────────────────────────────── */
     header {
       position: fixed;
@@ -164,20 +164,6 @@
       width: 80%;
       max-width: 80%;
       transform: translateY(-10px);
-    }
-    
-    /* Gradient protection under header */
-    header::after {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120%;
-      height: 80px;
-      background: linear-gradient(to bottom, rgba(36, 29, 24, 0.9) 0%, rgba(36, 29, 24, 0.7) 40%, transparent 100%);
-      pointer-events: none;
-      z-index: 99;
     }
 
     /* ─────────────────────────────────────────────────────
@@ -509,6 +495,19 @@
         display: none;
       }
       
+      /* Mobile-only gradient protection under header */
+      header::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 150px; /* Higher coverage */
+        background: linear-gradient(to bottom, rgba(36, 29, 24, 0.95) 0%, rgba(36, 29, 24, 0.8) 60%, transparent 100%);
+        pointer-events: none;
+        z-index: 99;
+      }
+      
       .social-sidebar {
         position: absolute;
         top: calc(85vh + 120px); /* Way closer to flowers */
@@ -518,7 +517,7 @@
         height: auto;
         width: auto;
         justify-content: center;
-        gap: 2px; /* Only 2px apart */
+        gap: 0; /* No gap at all */
         z-index: 600; /* Above flowers */
       }
       .social-sidebar a {
