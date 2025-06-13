@@ -495,17 +495,21 @@
         display: none;
       }
       
-      /* Mobile-only gradient protection under header */
-      header::after {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 150px; /* Higher coverage */
-        background: linear-gradient(to bottom, rgba(36, 29, 24, 0.95) 0%, rgba(36, 29, 24, 0.8) 60%, transparent 100%);
-        pointer-events: none;
-        z-index: 99;
+      /* Simple header background for mobile - full width from top */
+      header {
+        background: linear-gradient(to bottom, rgba(36, 29, 24, 0.98) 0%, rgba(36, 29, 24, 0.95) 70%, rgba(36, 29, 24, 0.85) 100%);
+        padding: 10px;
+        padding-top: 20px; /* Extra padding from top */
+        border-radius: 0; /* Remove border radius for full width */
+        width: 100vw; /* Full screen width */
+        max-width: none; /* Remove max-width constraint */
+        left: 0; /* Align to left edge */
+        top: 0; /* Start from very top */
+        transform: none; /* Remove centering transform */
+        display: flex;
+        justify-content: center; /* Center the logo inside */
+        height: 120px; /* Set specific height for gradient effect */
+        align-items: center; /* Center logo vertically */
       }
       
       .social-sidebar {
@@ -517,11 +521,15 @@
         height: auto;
         width: auto;
         justify-content: center;
-        gap: 8px; /* Small gap for vertical spacing */
+        gap: 0; /* Reset gap to 0 */
         z-index: 600; /* Above flowers */
       }
       .social-sidebar a {
         margin: 0 !important;
+        margin-top: -15px !important; /* Negative margin for overlap */
+      }
+      .social-sidebar a:first-child {
+        margin-top: 0 !important; /* First icon has no negative margin */
       }
       .social-sidebar img {
         transform: scale(0.3); /* Slightly bigger for bottom placement */
@@ -551,7 +559,6 @@
       .intro-text.fade-push {
         transform: translate(-50%, -60%) !important;
         opacity: 0.85 !important;
-        transition: all 0.5s ease !important;
       }
       
       /* Current: Background overlay fade */
@@ -573,18 +580,21 @@
         opacity: 1;
       }
       
-      /* Remove text fade on mobile */
+      /* Remove text fade on mobile - keep text always visible */
       .intro-text {
         top: 45%;
         font-size: 1.1rem;
         width: 95%;
         padding: 0 15px;
         opacity: 1 !important; /* Always visible on mobile */
-        transition: none !important; /* No fade transition */
+        transform: translate(-50%, -50%) !important; /* Always centered */
+        transition: all 0.5s ease !important; /* Enable transitions */
       }
       
-      .intro-text.fade-out {
-        opacity: 1 !important; /* Override fade-out on mobile */
+      /* OPTION 4: Push fade effect for mobile */
+      .intro-text.fade-push {
+        transform: translate(-50%, -60%) !important;
+        opacity: 0.85 !important;
       }
       
       .typewriter-line {
