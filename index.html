@@ -27,7 +27,7 @@
       /* Make room for the fixed header's height */
       padding-top: 6rem;
       /* Adjust height so scrolling naturally stops when flowers are at 500px */
-      min-height: 140vh; /* More space at bottom */
+      min-height: 110vh; /* Less bottom space */
       overflow-x: hidden; /* Prevent horizontal scroll */
     }
 
@@ -497,16 +497,15 @@
       
       .social-sidebar {
         position: absolute;
-        top: calc(85vh + 140px); /* Even closer to flowers */
+        top: calc(85vh + 120px); /* Way closer to flowers */
         left: 50%;
         transform: translateX(-50%);
         flex-direction: row;
         height: auto;
         width: auto;
         justify-content: center;
-        gap: 10px; /* Closer together */
+        gap: 5px; /* Much closer together */
         z-index: 600; /* Above flowers */
-        margin-bottom: 100px; /* Add space below social icons */
       }
       .social-sidebar a {
         margin: 0 !important;
@@ -515,17 +514,37 @@
         transform: scale(0.3); /* Slightly bigger for bottom placement */
       }
       
+      /* Mobile fade background overlay instead of text fade */
+      .intro-text::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(transparent 0%, transparent 60%, rgba(36, 29, 24, 0.8) 90%, rgba(36, 29, 24, 0.95) 100%);
+        pointer-events: none;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+      
+      .intro-text.fade-background::before {
+        opacity: 1;
+      }
+      
+      /* Remove text fade on mobile */
       .intro-text {
         top: 45%;
         font-size: 1.1rem;
         width: 95%;
         padding: 0 15px;
-        opacity: 1;
-        transition: opacity 0.5s ease !important;
+        opacity: 1 !important; /* Always visible on mobile */
+        transition: none !important; /* No fade transition */
       }
       
       .intro-text.fade-out {
-        opacity: 0 !important;
+        opacity: 1 !important; /* Override fade-out on mobile */
       }
       
       .typewriter-line {
@@ -862,16 +881,24 @@
         const scrollY = window.scrollY;
         const introRect = introContainer.getBoundingClientRect();
         const flowersRect = flowersRow.getBoundingClientRect();
-        
-        // Different fade thresholds for mobile vs desktop
         const isMobile = window.innerWidth <= 768;
-        const fadeThreshold = isMobile ? 350 : 200;
         
-        // Intro text: fade out when it reaches the threshold
-        if (introRect.top <= fadeThreshold) {
-          fadeOutIntro();
+        if (isMobile) {
+          // On mobile: add background fade instead of text fade
+          const fadeThreshold = 350;
+          if (introRect.top <= fadeThreshold) {
+            introContainer.classList.add('fade-background');
+          } else {
+            introContainer.classList.remove('fade-background');
+          }
         } else {
-          fadeInIntro();
+          // On desktop: keep original text fade
+          const fadeThreshold = 200;
+          if (introRect.top <= fadeThreshold) {
+            fadeOutIntro();
+          } else {
+            fadeInIntro();
+          }
         }
 
         // Flowers row & title: fade in when they come into view
