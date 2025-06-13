@@ -158,42 +158,57 @@
       }
     }
     
-    /* Improved fireflies - simpler up and down float */
+    /* Free-flowing glowy fireflies */
     .firefly {
       position: absolute;
-      width: 6px;
-      height: 6px;
-      background: radial-gradient(circle, rgba(255, 230, 120, 1) 0%, rgba(255, 200, 100, 0.8) 60%, transparent 90%);
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(circle, rgba(255, 240, 150, 1) 0%, rgba(255, 220, 120, 0.9) 40%, rgba(255, 200, 100, 0.6) 70%, transparent 100%);
       border-radius: 50%;
       opacity: 0;
-      box-shadow: 0 0 12px rgba(255, 230, 120, 0.8), 0 0 24px rgba(255, 200, 100, 0.4);
-      z-index: 2; /* Above aurora, below main content */
+      box-shadow: 
+        0 0 15px rgba(255, 240, 150, 0.9), 
+        0 0 30px rgba(255, 220, 120, 0.6),
+        0 0 45px rgba(255, 200, 100, 0.3);
+      z-index: 2;
     }
     
     .firefly.active {
-      animation: fireflyFloat 2.5s ease-in-out forwards;
+      animation: fireflyDance 3s ease-in-out forwards;
     }
     
-    @keyframes fireflyFloat {
+    @keyframes fireflyDance {
       0% {
         opacity: 0;
-        transform: translateY(0px) translateX(0px);
+        transform: translateY(0px) translateX(0px) scale(0.3);
       }
-      20% {
+      10% {
+        opacity: 0.7;
+        transform: translateY(-80px) translateX(25px) scale(0.8);
+      }
+      25% {
         opacity: 1;
-        transform: translateY(-120px) translateX(10px);
+        transform: translateY(-160px) translateX(-15px) scale(1);
       }
-      50% {
+      40% {
+        opacity: 0.9;
+        transform: translateY(-220px) translateX(40px) scale(1.1);
+      }
+      55% {
         opacity: 1;
-        transform: translateY(-200px) translateX(-5px);
+        transform: translateY(-180px) translateX(-10px) scale(0.9);
       }
-      80% {
+      70% {
         opacity: 0.8;
-        transform: translateY(-100px) translateX(15px);
+        transform: translateY(-240px) translateX(20px) scale(1);
+      }
+      85% {
+        opacity: 0.6;
+        transform: translateY(-120px) translateX(-25px) scale(0.7);
       }
       100% {
         opacity: 0;
-        transform: translateY(0px) translateX(0px);
+        transform: translateY(-50px) translateX(10px) scale(0.2);
       }
     }
 
@@ -276,14 +291,10 @@
       transform: translate(-50%, -3px);
     }
 
-    /* ─────────────────────────────────────────────────────
-       FIXED TYPEWRITER EFFECT - DEBUGGING SECTION
-       ───────────────────────────────────────────────────── */
-    
-    /* DEBUG: First let's make sure the container is visible */
+    /* CLEAN TYPEWRITER EFFECT - NO DEBUG STYLES */
     .intro-line {
       margin-bottom: 1rem;
-      display: block; /* Changed from inline-block to block for better debugging */
+      display: block;
     }
     
     .typewriter-line {
@@ -293,7 +304,7 @@
       color: white;
       overflow: hidden;
       white-space: nowrap;
-      display: inline-block; /* Keep this inline-block for width animation */
+      display: inline-block;
       vertical-align: top;
     }
     
@@ -303,33 +314,24 @@
       border: none;
     }
     
-    /* Animated state - DEBUGGING THE TYPEWRITER */
+    /* Animated state */
     .typewriter-line.animate {
       width: 0;
       border-right: 2px solid #bdeafe;
       animation: 
         typing 2.5s steps(14, end) forwards,
         blink-caret 1s step-end infinite;
-      animation-delay: 0.5s; /* Small delay to ensure DOM is ready */
+      animation-delay: 0.5s;
     }
     
-    /* Character count: h-i-,-space-i-'-m-space-e-m-i-l-y-! = 14 characters */
     @keyframes typing {
-      0% { 
-        width: 0; 
-      }
-      100% { 
-        width: 14ch; /* 14 characters exactly */
-      }
+      0% { width: 0; }
+      100% { width: 14ch; }
     }
     
     @keyframes blink-caret {
-      0%, 50% { 
-        border-color: #bdeafe; 
-      }
-      51%, 100% { 
-        border-color: transparent; 
-      }
+      0%, 50% { border-color: #bdeafe; }
+      51%, 100% { border-color: transparent; }
     }
 
     /* ─────────────────────────────────────────────────────
@@ -714,12 +716,6 @@
         width: 30%;
       }
     }
-
-    /* DEBUG STYLES - Remove these after debugging */
-    .debug-typewriter {
-      border: 1px solid red;
-      background: rgba(255, 0, 0, 0.1);
-    }
   </style>
 </head>
 
@@ -798,17 +794,11 @@
   </footer>
 
   <script>
-    // DEBUG: Add console logs to track what's happening
-    console.log('🔍 DEBUGGING: Script starting...');
-    
-    // Function to mark page as visited
     function markPageVisited() {
       const visited = JSON.stringify({ visited: true, timestamp: Date.now() });
       document.cookie = `homepage_visited=${visited}; path=/; max-age=86400`;
-      console.log('📝 Page marked as visited');
     }
     
-    // Function to check if page was visited
     function hasVisited() {
       const cookies = document.cookie.split(';');
       for (let cookie of cookies) {
@@ -816,22 +806,16 @@
         if (name === 'homepage_visited') {
           try {
             const data = JSON.parse(value);
-            const hasVisited = data.visited && (Date.now() - data.timestamp < 86400000);
-            console.log('🍪 Has visited before:', hasVisited);
-            return hasVisited;
+            return data.visited && (Date.now() - data.timestamp < 86400000);
           } catch (e) {
-            console.log('🍪 Cookie parse error:', e);
             return false;
           }
         }
       }
-      console.log('🍪 No visit cookie found');
       return false;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      console.log('🚀 DOM loaded, initializing...');
-      
       const introContainer = document.getElementById('intro-text-container');
       const flowersRow     = document.querySelector('.flowers-row');
       const flowersTitle   = document.getElementById('flowers-title');
@@ -842,52 +826,25 @@
       const shootingStarBtn = document.getElementById('shooting-star-btn');
       const auroraOverlay  = document.getElementById('aurora-overlay');
       
-      // DEBUG: Check if elements exist
-      console.log('🔍 Elements found:', {
-        typewriterText: !!typewriterText,
-        fadeinText: !!fadeinText,
-        scrollArrow: !!scrollArrow
-      });
-      
       // Check if this is a return visit
       const isReturnVisit = hasVisited();
-      console.log('🔄 Is return visit:', isReturnVisit);
       
       if (isReturnVisit) {
-        console.log('⏭️ Skipping animations for return visit');
         // Skip animations - show everything immediately
         typewriterText?.classList.add('no-animation');
         fadeinText?.classList.add('no-animation');
         scrollArrow?.classList.add('no-animation');
       } else {
-        console.log('✨ First visit - starting animations');
         // First visit - run animations
-        
-        // DEBUG: Add visual indicator that animation is starting
-        typewriterText?.classList.add('debug-typewriter');
-        
-        // Force clear any existing classes first
-        typewriterText?.classList.remove('no-animation', 'animate');
-        fadeinText?.classList.remove('no-animation', 'animate');
-        scrollArrow?.classList.remove('no-animation', 'animate');
-        
-        // Add animation classes with small delay to ensure DOM is ready
         setTimeout(() => {
-          console.log('🎬 Adding animation classes...');
           typewriterText?.classList.add('animate');
           fadeinText?.classList.add('animate');
           scrollArrow?.classList.add('animate');
-          
-          // DEBUG: Log the classes applied
-          console.log('🎭 Typewriter classes:', typewriterText?.className);
-          console.log('📝 Text content:', typewriterText?.textContent);
-          console.log('📏 Text length:', typewriterText?.textContent?.length);
         }, 100);
         
         // Mark as visited after animations complete
         setTimeout(() => {
           markPageVisited();
-          typewriterText?.classList.remove('debug-typewriter');
         }, 4000);
       }
       
@@ -920,60 +877,67 @@
       // Aurora and fireflies effect
       shootingStarBtn?.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log('🌟 Aurora effect triggered');
         startAuroraEffect();
       });
       
+      startAuroraEffect();
+      
       function startAuroraEffect() {
-        console.log('🌈 Starting aurora effect...');
         auroraOverlay.classList.add('active');
         
-        // Create fireflies emerging from bottom with simpler timing
-        const numFireflies = 5;
+        // Create free-flowing fireflies with varied timing and paths
+        const numFireflies = 7;
         for (let i = 0; i < numFireflies; i++) {
           setTimeout(() => {
-            createFirefly();
-          }, i * 300); // Slower, more spaced out
+            createFirefly(i);
+          }, i * 200 + Math.random() * 300); // Staggered + random timing
         }
         
-        // End the effect after 3 seconds
+        // End the effect after 3.5 seconds
         setTimeout(() => {
-          console.log('🌈 Ending aurora effect');
           auroraOverlay.classList.remove('active');
-          // Clean up fireflies
           const fireflies = auroraOverlay.querySelectorAll('.firefly');
           fireflies.forEach(firefly => firefly.remove());
-        }, 3000);
+        }, 3500);
       }
       
-      function createFirefly() {
+      function createFirefly(index = 0) {
         const firefly = document.createElement('div');
         firefly.className = 'firefly';
         
-        // Start from bottom of screen at random horizontal position
-        const startX = Math.random() * (window.innerWidth - 100) + 50; // Keep away from edges
-        const startY = window.innerHeight - 30; // Start near bottom
+        // More varied starting positions
+        const startX = Math.random() * (window.innerWidth - 200) + 100;
+        const startY = window.innerHeight - 20 - Math.random() * 50; // Varied bottom start
         
         firefly.style.left = startX + 'px';
         firefly.style.top = startY + 'px';
         
-        auroraOverlay.appendChild(firefly);
-        console.log('🪲 Created firefly at:', startX, startY);
+        // Add unique animation variations per firefly
+        const duration = 2.5 + Math.random() * 1; // 2.5-3.5s duration
+        const delay = Math.random() * 0.5; // 0-0.5s delay
         
-        // Start animation immediately
+        firefly.style.animationDuration = duration + 's';
+        firefly.style.animationDelay = delay + 's';
+        
+        // Random scale variation for organic feel
+        const scale = 0.8 + Math.random() * 0.4; // 0.8-1.2 scale
+        firefly.style.transform = `scale(${scale})`;
+        
+        auroraOverlay.appendChild(firefly);
+        
+        // Start animation
         firefly.classList.add('active');
         
-        // Remove firefly after animation
+        // Remove after animation + buffer
         setTimeout(() => {
           if (firefly.parentNode) {
             firefly.parentNode.removeChild(firefly);
           }
-        }, 2600);
+        }, (duration + delay + 0.5) * 1000);
       }
       
       // Close aurora when clicking the overlay
       auroraOverlay?.addEventListener('click', () => {
-        console.log('🌈 Aurora clicked - closing');
         auroraOverlay.classList.remove('active');
         const fireflies = auroraOverlay.querySelectorAll('.firefly');
         fireflies.forEach(firefly => firefly.remove());
