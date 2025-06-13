@@ -27,7 +27,7 @@
       /* Make room for the fixed header's height */
       padding-top: 6rem;
       /* Adjust height so scrolling naturally stops when flowers are at 500px */
-      min-height: 120vh;
+      min-height: 140vh; /* More space at bottom */
       overflow-x: hidden; /* Prevent horizontal scroll */
     }
 
@@ -300,7 +300,7 @@
     .sidebar {
       position: fixed;
       top: 10px;
-      left: 8px;
+      left: -20px; /* Move further left */
       width: 200px;
       z-index: 10;
     }
@@ -443,7 +443,7 @@
     @media screen and (max-width: 1024px) {
       .sidebar {
         width: 150px;
-        left: 5px;
+        left: -15px; /* Also move left on tablets */
       }
       .sidebar img {
         max-width: 500%;
@@ -497,15 +497,16 @@
       
       .social-sidebar {
         position: absolute;
-        top: calc(85vh + 220px); /* Position below flowers */
+        top: calc(85vh + 140px); /* Even closer to flowers */
         left: 50%;
         transform: translateX(-50%);
         flex-direction: row;
         height: auto;
         width: auto;
         justify-content: center;
-        gap: 15px;
+        gap: 10px; /* Closer together */
         z-index: 600; /* Above flowers */
+        margin-bottom: 100px; /* Add space below social icons */
       }
       .social-sidebar a {
         margin: 0 !important;
