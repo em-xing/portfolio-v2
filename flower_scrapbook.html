@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creative Works - Emily Xing</title>
+    <title>Emily Xing</title>
     
     <!-- Load PT Sans from Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
@@ -80,11 +80,13 @@
         header {
             position: fixed;
             top: 55px;
-            left: 55%;
+            left: 50%;
             transform: translateX(-50%);
             display: inline-block;
             border-radius: 2px;
             z-index: 100;
+            width: 90%;
+            max-width: 400px;
         }
         header img.logo {
             display: block;
@@ -142,28 +144,9 @@
             border-right-color: #87ceeb;
         }
 
-        /* ─── RIGHT SOCIAL ICONS ────────────────────────── */
+        /* ─── RIGHT SOCIAL ICONS - REMOVED ────────────────────────── */
         .social-sidebar {
-            position: fixed;
-            top: 150px;
-            right: 37px;
-            height: 400px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1px;
-            z-index: 10;
-        }
-        .social-sidebar img {
-            display: block;
-            transform: scale(0.4);
-            transform-origin: center center;
-        }
-        .social-sidebar a + a {
-            margin-top: 1px;
-        }
-        .social-sidebar a:hover img {
-            filter: brightness(1.2) drop-shadow(0 0 10px rgba(255,169,126,0.6));
+            display: none !important; /* Completely hidden everywhere */
         }
         
         .page-header {
@@ -255,20 +238,6 @@
             .portfolio-container {
                 columns: 3;
                 padding: 0 50px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .portfolio-container {
-                columns: 2;
-                padding: 0 20px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .portfolio-container {
-                columns: 1;
-                padding: 0 10px;
             }
         }
         
@@ -413,6 +382,138 @@
             border-radius: 8px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
+
+        /* ─────────────────────────────────────────────────────
+           MOBILE & TABLET RESPONSIVE STYLES
+           ───────────────────────────────────────────────────── */
+        
+        /* Tablets */
+        @media screen and (max-width: 1024px) {
+            .home-nav {
+                left: 40px;
+                width: 45px;
+                height: 45px;
+            }
+            
+            .typewriter-line {
+                font-size: 1.6rem;
+            }
+            
+            .portfolio-container {
+                columns: 3;
+                padding: 0 50px;
+            }
+        }
+        
+        /* Mobile devices */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 1rem;
+                padding-top: 4rem;
+            }
+            
+            /* Hide cursor effects on mobile for performance */
+            .cursor-glow,
+            .sparkle {
+                display: none;
+            }
+            
+            /* Mobile header with full-width background */
+            header {
+                background: linear-gradient(to bottom, rgba(36, 29, 24, 0.98) 0%, rgba(36, 29, 24, 0.85) 40%, rgba(36, 29, 24, 0.3) 80%, transparent 100%);
+                padding: 10px;
+                padding-top: 20px;
+                border-radius: 0;
+                width: 100vw;
+                max-width: none;
+                left: 0;
+                top: 0;
+                transform: none;
+                display: flex;
+                justify-content: center;
+                height: 120px;
+                align-items: center;
+            }
+            
+            /* Home button positioned to avoid header collision */
+            .home-nav {
+                top: 30px;
+                left: 15px;
+                width: 40px;
+                height: 40px;
+                z-index: 150;
+            }
+            .home-nav::before {
+                border-top: 6px solid transparent;
+                border-bottom: 6px solid transparent;
+                border-right: 10px solid #709fd3;
+            }
+            
+            /* Remove typewriter effect on mobile only and make font bigger */
+            .typewriter-line {
+                font-size: 1.8rem;
+                animation: none !important;
+                border: none !important;
+                width: auto !important;
+            }
+            
+            .page-header {
+                margin: 80px 0 40px 0;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+            
+            /* Content appears immediately on mobile */
+            .portfolio-container {
+                columns: 2;
+                padding: 0 20px;
+                opacity: 1 !important;
+                transform: none !important;
+                animation: none !important;
+            }
+            
+            /* Remove header fade on mobile */
+            .header-fade {
+                display: none;
+            }
+        }
+        
+        /* Small mobile devices */
+        @media screen and (max-width: 480px) {
+            .typewriter-line {
+                font-size: 1.6rem;
+            }
+            
+            .page-header p {
+                font-size: 0.9rem;
+            }
+            
+            .portfolio-container {
+                columns: 1;
+                padding: 0 10px;
+            }
+            
+            .home-nav {
+                width: 35px;
+                height: 35px;
+                left: 15px;
+                top: 25px;
+            }
+        }
+        
+        /* Landscape mobile orientation */
+        @media screen and (max-height: 500px) and (orientation: landscape) {
+            .page-header {
+                margin: 60px 0 30px 0;
+            }
+            
+            .typewriter-line {
+                font-size: 1.4rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -430,18 +531,8 @@
     <div class="home-nav" onclick="window.location.href='index.html'" title="Return to Home">
     </div>
 
-    <!-- Right social icons -->
-    <aside class="social-sidebar">
-        <a href="https://www.linkedin.com/in/emily-xing-5663ab266/" target="_blank">
-            <img src="images/icon_linkedin.PNG" alt="LinkedIn icon">
-        </a>
-        <a href="mailto:emletxing@gmail.com">
-            <img src="images/icon_mail.PNG" alt="Email icon">
-        </a>
-        <a href="#">
-            <img src="images/icon_shooting_star.PNG" alt="Star icon">
-        </a>
-    </aside>
+    <!-- RIGHT SOCIAL ICONS - REMOVED -->
+    <!-- Social icons completely removed from scrapbook page -->
     
     <div class="page-header">
         <h1><span id="scrapbook-typewriter" class="typewriter-line">scrapbook</span></h1>
@@ -574,20 +665,24 @@
             let lastSparkleTime = 0;
             const sparkleInterval = 150;
             
-            // Always run typewriter animation
-            typewriter.classList.add('animate');
+            // Always run typewriter animation (desktop and mobile)
+            if (typewriter) {
+                typewriter.classList.add('animate');
+            }
             
-            // Cursor glow following mouse movement with sparkle trail (matching homepage)
-            document.addEventListener('mousemove', (e) => {
-                cursorGlow.style.left = e.clientX + 'px';
-                cursorGlow.style.top = e.clientY + 'px';
-                
-                const now = Date.now();
-                if (now - lastSparkleTime > sparkleInterval) {
-                    createSparkle(e.clientX, e.clientY);
-                    lastSparkleTime = now;
-                }
-            });
+            // Cursor glow following mouse movement with sparkle trail (only on desktop)
+            if (window.innerWidth > 768) {
+                document.addEventListener('mousemove', (e) => {
+                    cursorGlow.style.left = e.clientX + 'px';
+                    cursorGlow.style.top = e.clientY + 'px';
+                    
+                    const now = Date.now();
+                    if (now - lastSparkleTime > sparkleInterval) {
+                        createSparkle(e.clientX, e.clientY);
+                        lastSparkleTime = now;
+                    }
+                });
+            }
             
             function createSparkle(x, y) {
                 const sparkle = document.createElement('div');
@@ -608,16 +703,18 @@
                 }, 1200);
             }
             
-            // Add gentle hover effects
-            document.querySelectorAll('.portfolio-item').forEach(item => {
-                item.addEventListener('mouseenter', () => {
-                    item.style.transform = 'translateY(-3px)';
+            // Add gentle hover effects (only on desktop)
+            if (window.innerWidth > 768) {
+                document.querySelectorAll('.portfolio-item').forEach(item => {
+                    item.addEventListener('mouseenter', () => {
+                        item.style.transform = 'translateY(-3px)';
+                    });
+                    
+                    item.addEventListener('mouseleave', () => {
+                        item.style.transform = 'translateY(0)';
+                    });
                 });
-                
-                item.addEventListener('mouseleave', () => {
-                    item.style.transform = 'translateY(0)';
-                });
-            });
+            }
         });
         
         // Function to open images in modal overlay
