@@ -179,17 +179,13 @@
         opacity: 0;
         transform: translateY(0px);
       }
-      30% {
-        opacity: 1;
-        transform: translateY(-150px);
-      }
-      70% {
+      50% {
         opacity: 1;
         transform: translateY(-200px);
       }
       100% {
         opacity: 0;
-        transform: translateY(-50px);
+        transform: translateY(0px);
       }
     }
 
@@ -866,12 +862,10 @@
       function startAuroraEffect() {
         auroraOverlay.classList.add('active');
         
-        // Create simple fireflies that float up then down
+        // Create fireflies all at once - no stagger
         const numFireflies = 6;
         for (let i = 0; i < numFireflies; i++) {
-          setTimeout(() => {
-            createFirefly();
-          }, i * 250); // Simple staggered timing
+          createFirefly();
         }
         
         // End the effect after 3 seconds
