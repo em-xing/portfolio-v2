@@ -82,7 +82,7 @@
     }
 
     /* ─────────────────────────────────────────────────────
-       AURORA AND FIREFLIES EFFECT
+       IMPROVED AURORA AND FIREFLIES EFFECT
        ───────────────────────────────────────────────────── */
     .aurora-overlay {
       position: fixed;
@@ -90,8 +90,8 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.2);
-      z-index: 10000;
+      background: rgba(0, 0, 0, 0.1); /* Much more subtle overlay */
+      z-index: 1; /* Behind most content */
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
@@ -102,7 +102,7 @@
       pointer-events: auto;
     }
     
-    /* Aurora background - full page natural effect */
+    /* Subtle aurora background - much more toned down */
     .aurora {
       position: absolute;
       top: 0;
@@ -111,12 +111,11 @@
       height: 100%;
       background: linear-gradient(
         45deg,
-        rgba(0, 255, 127, 0.1) 0%,
-        rgba(64, 224, 208, 0.15) 20%,
-        rgba(135, 206, 235, 0.12) 40%,
-        rgba(147, 112, 219, 0.18) 60%,
-        rgba(255, 20, 147, 0.1) 80%,
-        rgba(0, 191, 255, 0.13) 100%
+        rgba(100, 150, 200, 0.03) 0%,
+        rgba(120, 180, 160, 0.04) 25%,
+        rgba(140, 120, 200, 0.03) 50%,
+        rgba(180, 140, 160, 0.04) 75%,
+        rgba(160, 180, 220, 0.03) 100%
       );
       opacity: 0;
       animation: auroraShow 2s ease-in-out forwards;
@@ -125,51 +124,33 @@
     .aurora::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 150%;
-      height: 150%;
-      background: linear-gradient(
-        135deg,
-        rgba(50, 205, 50, 0.08) 0%,
-        rgba(0, 206, 209, 0.12) 25%,
-        rgba(138, 43, 226, 0.1) 50%,
-        rgba(255, 105, 180, 0.14) 75%,
-        rgba(30, 144, 255, 0.09) 100%
-      );
-      animation: auroraFlow 2s ease-in-out infinite;
-      transform-origin: center;
-    }
-    
-    .aurora::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 120%;
-      height: 120%;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
       background: radial-gradient(
-        ellipse at 30% 70%, 
-        rgba(127, 255, 212, 0.15) 0%, 
-        transparent 40%
-      ),
-      radial-gradient(
-        ellipse at 80% 20%, 
-        rgba(218, 112, 214, 0.12) 0%, 
-        transparent 50%
-      ),
-      radial-gradient(
         ellipse at 20% 30%, 
-        rgba(70, 130, 180, 0.1) 0%, 
-        transparent 45%
+        rgba(150, 200, 255, 0.05) 0%, 
+        transparent 30%
+      ),
+      radial-gradient(
+        ellipse at 80% 70%, 
+        rgba(200, 150, 255, 0.04) 0%, 
+        transparent 35%
+      ),
+      radial-gradient(
+        ellipse at 50% 50%, 
+        rgba(180, 220, 180, 0.03) 0%, 
+        transparent 40%
       );
-      animation: auroraShift 2s ease-in-out infinite;
+      animation: auroraFlow 3s ease-in-out infinite;
+      transform-origin: center;
     }
     
     @keyframes auroraShow {
       0% {
         opacity: 0;
-        transform: scale(0.8);
+        transform: scale(0.9);
       }
       100% {
         opacity: 1;
@@ -179,65 +160,55 @@
     
     @keyframes auroraFlow {
       0%, 100% {
-        transform: translateX(-10%) translateY(-10%) rotate(0deg) scale(1);
-        opacity: 0.6;
+        transform: translateX(-5%) translateY(-5%) rotate(0deg);
+        opacity: 0.4;
       }
       50% {
-        transform: translateX(5%) translateY(5%) rotate(2deg) scale(1.1);
-        opacity: 0.9;
-      }
-    }
-    
-    @keyframes auroraShift {
-      0%, 100% {
-        transform: translateX(0%) translateY(0%) scale(1);
-        opacity: 0.8;
-      }
-      33% {
-        transform: translateX(-5%) translateY(3%) scale(1.05);
-        opacity: 1;
-      }
-      67% {
-        transform: translateX(3%) translateY(-2%) scale(0.95);
+        transform: translateX(3%) translateY(3%) rotate(1deg);
         opacity: 0.7;
       }
     }
     
-    /* Fireflies - floating up and back down */
+    /* Natural floating fireflies */
     .firefly {
       position: absolute;
-      width: 5px;
-      height: 5px;
-      background: radial-gradient(circle, rgba(255, 255, 150, 1) 0%, rgba(255, 255, 120, 0.8) 40%, transparent 70%);
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(circle, rgba(255, 220, 120, 0.9) 0%, rgba(255, 200, 100, 0.6) 50%, transparent 80%);
       border-radius: 50%;
       opacity: 0;
-      box-shadow: 0 0 10px rgba(255, 255, 120, 0.9), 0 0 20px rgba(255, 255, 150, 0.5);
+      box-shadow: 0 0 8px rgba(255, 220, 120, 0.6);
+      z-index: 2; /* Above aurora, below main content */
     }
     
     .firefly.active {
-      animation: fireflyUpDown 2s ease-in-out forwards;
+      animation: fireflyFloat 2s ease-in-out forwards;
     }
     
-    @keyframes fireflyUpDown {
+    @keyframes fireflyFloat {
       0% {
         opacity: 0;
-        transform: translateY(0px) translateX(0px) scale(0.3);
+        transform: translateY(0px) translateX(0px) scale(0.5);
       }
-      20% {
-        opacity: 1;
-        transform: translateY(-150px) translateX(15px) scale(1);
-      }
-      50% {
-        opacity: 1;
-        transform: translateY(-300px) translateX(-10px) scale(1.2);
-      }
-      80% {
+      15% {
         opacity: 0.8;
-        transform: translateY(-150px) translateX(20px) scale(0.9);
+        transform: translateY(-100px) translateX(10px) scale(1);
+      }
+      40% {
+        opacity: 1;
+        transform: translateY(-220px) translateX(-15px) scale(1.1);
+      }
+      65% {
+        opacity: 0.9;
+        transform: translateY(-180px) translateX(25px) scale(0.9);
+      }
+      85% {
+        opacity: 0.6;
+        transform: translateY(-80px) translateX(-5px) scale(0.8);
       }
       100% {
         opacity: 0;
-        transform: translateY(0px) translateX(5px) scale(0.3);
+        transform: translateY(20px) translateX(10px) scale(0.3);
       }
     }
 
@@ -321,7 +292,7 @@
     }
 
     /* ─────────────────────────────────────────────────────
-       TYPEWRITER EFFECT ON THE FIRST LINE
+       FIXED TYPEWRITER EFFECT ON THE FIRST LINE
        ───────────────────────────────────────────────────── */
     .typewriter-line {
       display: inline-block;
@@ -344,13 +315,14 @@
       border-right: 0.1em solid #bdeafe;
       width: 0;
       animation:
-        typing 2.25s steps(13, end) forwards,
+        typing 2.25s steps(14, end) forwards,
         blink-caret 0.8s step-end infinite;
     }
     
+    /* Fixed character count - "hi, i'm emily!" = 14 characters */
     @keyframes typing {
       from { width: 0; }
-      to   { width: 13ch; } /* adjust length to match "hi, i'm emily!" */
+      to   { width: 14ch; }
     }
     @keyframes blink-caret {
       50% { border-color: transparent; }
@@ -957,11 +929,11 @@
       function startAuroraEffect() {
         auroraOverlay.classList.add('active');
         
-        // Create fireflies emerging from bottom with staggered timing
-        for (let i = 0; i < 8; i++) {
+        // Create fireflies emerging from bottom with staggered timing and random positions
+        for (let i = 0; i < 6; i++) {
           setTimeout(() => {
             createFirefly();
-          }, i * 150);
+          }, i * 200);
         }
         
         // End the effect after 2 seconds
@@ -970,7 +942,7 @@
           // Clean up fireflies
           const fireflies = auroraOverlay.querySelectorAll('.firefly');
           fireflies.forEach(firefly => firefly.remove());
-        }, 2000);
+        }, 2500);
       }
       
       function createFirefly() {
@@ -984,13 +956,9 @@
         firefly.style.left = startX + 'px';
         firefly.style.top = startY + 'px';
         
-        // Add slight size and color variation
-        const scale = 0.8 + Math.random() * 0.4; // 0.8-1.2 scale
-        const hue = 50 + Math.random() * 15; // Yellow variations
-        
-        firefly.style.transform = `scale(${scale})`;
-        firefly.style.background = `radial-gradient(circle, hsla(${hue}, 100%, 85%, 1) 0%, hsla(${hue}, 100%, 75%, 0.8) 40%, transparent 70%)`;
-        firefly.style.boxShadow = `0 0 10px hsla(${hue}, 100%, 75%, 0.9), 0 0 20px hsla(${hue}, 100%, 85%, 0.5)`;
+        // Add variation in movement by adding random transform styles
+        const randomDrift = Math.random() * 60 - 30; // -30 to +30 px drift
+        firefly.style.setProperty('--drift', randomDrift + 'px');
         
         auroraOverlay.appendChild(firefly);
         
