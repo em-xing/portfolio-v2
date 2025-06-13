@@ -28,6 +28,7 @@
       padding: 2rem;
       padding-top: 6rem; /* space for fixed header */
       min-height: 120vh;
+      overflow-x: hidden;
     }
     a {
       text-decoration: none;
@@ -72,11 +73,13 @@
     header {
       position: fixed;
       top: 55px;
-      left: 55%;
+      left: 50%;
       transform: translateX(-50%);
       display: inline-block;
       border-radius: 2px;
       z-index: 100;
+      width: 90%;
+      max-width: 400px;
     }
     header img.logo {
       display: block;
@@ -134,6 +137,11 @@
       border-right-color: #87ceeb;
     }
 
+    /* ─── RIGHT SOCIAL ICONS - REMOVED ────────────────────────── */
+    .social-sidebar {
+      display: none !important; /* Completely hidden everywhere */
+    }
+
    .page-header {
       text-align: center;
       margin: 110px 0 60px 0;
@@ -160,6 +168,14 @@
       overflow: hidden;
       white-space: nowrap;
     }
+    
+    /* Default state - text visible, no animation */
+    .typewriter-line.no-animation {
+      width: auto;
+      border: none;
+    }
+    
+    /* Animated state - with typewriter */
     .typewriter-line.animate {
       border-right: 0.1em solid #bdeafe;
       width: 0;
@@ -167,7 +183,7 @@
     }
     @keyframes typing {
       from { width: 0; }
-      to { width: 15ch; }
+      to { width: 16ch; } /* "selected writings" is 16 characters */
     }
     @keyframes blink-caret {
       50% { border-color: transparent; }
@@ -180,42 +196,14 @@
       opacity: 0;
       transform: translateY(20px);
       animation: fadeIn 1s ease forwards;
-
       animation-delay: 3.5s;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    
         
-    /* ─── RIGHT SOCIAL ICONS ────────────────────────── */
-    .social-sidebar {
-      position: fixed;
-      top: 150px;
-      right: 37px;
-      height: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1px;
-      z-index: 10;
-    }
-    .social-sidebar img {
-      display: block;
-      transform: scale(0.4);
-      transform-origin: center center;
-    }
-    .social-sidebar a + a {
-      margin-top: 1px;
-    }
-    .social-sidebar a:hover img {
-      filter: brightness(1.2) drop-shadow(0 0 10px rgba(255,169,126,0.6));
-    }
-
     /* ─── WRITING PAGE CONTENT ─────────────────────── */
-    
     
     h1.page-title {
       text-align: center;
@@ -490,39 +478,6 @@
       font-weight: 400;
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .writing-item {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        text-align: center;
-      }
-      
-      .article-photo {
-        width: 100%;
-        max-width: 250px;
-        margin: 0 auto;
-      }
-      
-      .blog-section {
-        padding: 1.2rem;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .typewriter-line { 
-        font-size: 1.5rem;
-        margin-top: 250px;
-      }
-      .container {
-        margin-top: 270px;
-      }
-      .writing-title { font-size: 1rem; }
-      .publication-info { font-size: 0.85rem; }
-      .home-nav { left: 20px; width: 45px; height: 45px; }
-      .container { max-width: 100%; padding: 0 1rem; }
-    }
-
     /* ─── SITE FOOTER ───────────────────────────────── */
     .site-footer {
       position: fixed;
@@ -539,6 +494,148 @@
       max-height: 40px;
       height: auto;
       display: block;
+    }
+
+    /* ─────────────────────────────────────────────────────
+       MOBILE & TABLET RESPONSIVE STYLES
+       ───────────────────────────────────────────────────── */
+    
+    /* Tablets */
+    @media screen and (max-width: 1024px) {
+      .home-nav {
+        left: 40px;
+        width: 45px;
+        height: 45px;
+      }
+      
+      .typewriter-line {
+        font-size: 1.6rem;
+      }
+      
+      .container {
+        padding: 0 30px;
+      }
+    }
+    
+    /* Mobile devices */
+    @media screen and (max-width: 768px) {
+      body {
+        padding: 1rem;
+        padding-top: 4rem;
+      }
+      
+      /* Hide cursor effects on mobile for performance */
+      .cursor-glow,
+      .sparkle {
+        display: none;
+      }
+      
+      /* Mobile header with consistent positioning */
+      header {
+        background: linear-gradient(to bottom, rgba(36, 29, 24, 0.98) 0%, rgba(36, 29, 24, 0.85) 40%, rgba(36, 29, 24, 0.3) 80%, transparent 100%);
+        padding: 10px;
+        padding-top: 20px;
+        border-radius: 0;
+        width: 100vw;
+        max-width: none;
+        left: 0;
+        top: 0;
+        transform: none;
+        display: flex;
+        justify-content: center;
+        height: 120px;
+        align-items: center;
+      }
+      
+      /* Home button positioned to avoid header collision */
+      .home-nav {
+        top: 30px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        z-index: 150;
+      }
+      .home-nav::before {
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-right: 10px solid #709fd3;
+      }
+      
+      /* Keep typewriter effect on mobile - make font bigger */
+      .typewriter-line {
+        font-size: 1.8rem;
+      }
+      
+      .page-header {
+        margin: 80px 0 40px 0;
+      }
+      
+      /* Content appears immediately on mobile */
+      .container {
+        padding: 0 20px;
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+      }
+      
+      .writing-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        text-align: center;
+      }
+      
+      .article-photo {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+      }
+      
+      .blog-section {
+        padding: 1.2rem;
+      }
+      
+      /* Remove header fade on mobile */
+      .header-fade {
+        display: none;
+      }
+    }
+    
+    /* Small mobile devices */
+    @media screen and (max-width: 480px) {
+      .typewriter-line {
+        font-size: 1.6rem;
+      }
+      
+      .writing-title { 
+        font-size: 1rem; 
+      }
+      
+      .publication-info { 
+        font-size: 0.85rem; 
+      }
+      
+      .home-nav { 
+        width: 35px; 
+        height: 35px;
+        left: 15px;
+        top: 25px;
+      }
+      
+      .container { 
+        max-width: 100%; 
+        padding: 0 1rem; 
+      }
+    }
+    
+    /* Landscape mobile orientation */
+    @media screen and (max-height: 500px) and (orientation: landscape) {
+      .page-header {
+        margin: 60px 0 30px 0;
+      }
+      
+      .typewriter-line {
+        font-size: 1.4rem;
+      }
     }
   </style>
 </head>
@@ -558,18 +655,8 @@
   <div class="home-nav" onclick="window.location.href='index.html'" title="Return to Home">
   </div>
 
-  <!-- Right social icons -->
-  <aside class="social-sidebar">
-    <a href="https://www.linkedin.com/in/emily-xing-5663ab266/" target="_blank">
-      <img src="images/icon_linkedin.PNG" alt="LinkedIn icon">
-    </a>
-    <a href="mailto:emletxing@gmail.com">
-      <img src="images/icon_mail.PNG" alt="Email icon">
-    </a>
-    <a href="#">
-      <img src="images/icon_shooting_star.PNG" alt="Star icon">
-    </a>
-  </aside>
+  <!-- RIGHT SOCIAL ICONS - REMOVED -->
+  <!-- Social icons completely removed from writing page -->
 
   <!-- Writing page content -->
  <div class="page-header">
@@ -685,41 +772,50 @@
       let lastTime = 0;
       const interval = 150;
 
-      typewriter.classList.add('animate');
+      // Always run typewriter animation (desktop and mobile)
+      if (typewriter) {
+        typewriter.classList.add('animate');
+      }
 
-      // Sparkle trail on mouse move
-      document.addEventListener('mousemove', (e) => {
-        cursorGlow.style.left = e.clientX + 'px';
-        cursorGlow.style.top = e.clientY + 'px';
+      // Sparkle trail on mouse move (only on desktop)
+      if (window.innerWidth > 768) {
+        document.addEventListener('mousemove', (e) => {
+          cursorGlow.style.left = e.clientX + 'px';
+          cursorGlow.style.top = e.clientY + 'px';
 
-        const now = Date.now();
-        if (now - lastTime > interval) {
-          const sparkle = document.createElement('div');
-          sparkle.className = 'sparkle';
-          const offsetX = (Math.random() - 0.5) * 20;
-          const offsetY = (Math.random() - 0.5) * 20;
-          sparkle.style.left = (e.clientX + offsetX) + 'px';
-          sparkle.style.top = (e.clientY + offsetY) + 'px';
-          document.body.appendChild(sparkle);
-          setTimeout(() => sparkle.remove(), 1200);
-          lastTime = now;
-        }
-      });
+          const now = Date.now();
+          if (now - lastTime > interval) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            const offsetX = (Math.random() - 0.5) * 20;
+            const offsetY = (Math.random() - 0.5) * 20;
+            sparkle.style.left = (e.clientX + offsetX) + 'px';
+            sparkle.style.top = (e.clientY + offsetY) + 'px';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 1200);
+            lastTime = now;
+          }
+        });
 
-      // Remove the cursor after typing animation completes
-      setTimeout(() => {
-        typewriter.classList.add('typing-complete');
-      }, 4000);
+        // Remove the cursor after typing animation completes (desktop only)
+        setTimeout(() => {
+          if (typewriter) {
+            typewriter.classList.add('typing-complete');
+          }
+        }, 4000);
 
-      // Fade out the "Writing" title on scroll
-      window.addEventListener('scroll', () => {
-        const titleRect = typewriter.getBoundingClientRect();
-        if (titleRect.top <= 100) {
-          typewriter.classList.add('fade-out');
-        } else {
-          typewriter.classList.remove('fade-out');
-        }
-      });
+        // Fade out the "Writing" title on scroll (desktop only)
+        window.addEventListener('scroll', () => {
+          if (typewriter) {
+            const titleRect = typewriter.getBoundingClientRect();
+            if (titleRect.top <= 100) {
+              typewriter.classList.add('fade-out');
+            } else {
+              typewriter.classList.remove('fade-out');
+            }
+          }
+        });
+      }
     });
   </script>
 </body>
