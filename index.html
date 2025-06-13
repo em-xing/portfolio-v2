@@ -180,8 +180,8 @@
       z-index: 5;
       opacity: 1;
       transition: opacity 0.5s ease;
-      width: 85%;
-      max-width: 800px;
+      width: 60%; /* Narrower on desktop to avoid sidebar */
+      max-width: 650px; /* Smaller max-width */
       padding: 0 20px;
       box-sizing: border-box;
     }
@@ -459,7 +459,8 @@
       
       .intro-text {
         font-size: 1.2rem;
-        width: 90%;
+        width: 70%; /* Slightly wider on tablets */
+        max-width: 700px;
       }
       
       .typewriter-line {
@@ -495,20 +496,22 @@
       }
       
       .social-sidebar {
-        position: fixed;
-        top: 30px;
-        right: 15px;
-        flex-direction: column;
+        position: absolute;
+        top: calc(85vh + 220px); /* Position below flowers */
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: row;
         height: auto;
         width: auto;
-        justify-content: flex-start;
-        gap: 8px;
+        justify-content: center;
+        gap: 15px;
+        z-index: 600; /* Above flowers */
       }
       .social-sidebar a {
         margin: 0 !important;
       }
       .social-sidebar img {
-        transform: scale(0.25); /* Much smaller icons */
+        transform: scale(0.3); /* Slightly bigger for bottom placement */
       }
       
       .intro-text {
@@ -516,6 +519,12 @@
         font-size: 1.1rem;
         width: 95%;
         padding: 0 15px;
+        opacity: 1;
+        transition: opacity 0.5s ease !important;
+      }
+      
+      .intro-text.fade-out {
+        opacity: 0 !important;
       }
       
       .typewriter-line {
@@ -853,9 +862,11 @@
         const introRect = introContainer.getBoundingClientRect();
         const flowersRect = flowersRow.getBoundingClientRect();
         
-        // Intro text: fade out when it reaches higher up on mobile
-        const fadeThreshold = window.innerWidth <= 768 ? 350 : 200;
+        // Different fade thresholds for mobile vs desktop
+        const isMobile = window.innerWidth <= 768;
+        const fadeThreshold = isMobile ? 350 : 200;
         
+        // Intro text: fade out when it reaches the threshold
         if (introRect.top <= fadeThreshold) {
           fadeOutIntro();
         } else {
