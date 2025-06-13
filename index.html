@@ -82,7 +82,7 @@
     }
 
     /* ─────────────────────────────────────────────────────
-       IMPROVED AURORA AND FIREFLIES EFFECT
+       ENHANCED AURORA AND FIREFLIES EFFECT
        ───────────────────────────────────────────────────── */
     .aurora-overlay {
       position: fixed;
@@ -90,11 +90,11 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.1); /* Much more subtle overlay */
-      z-index: 1; /* Behind most content */
+      background: rgba(0, 0, 0, 0.3); /* More visible overlay */
+      z-index: 1; /* Behind most content but visible */
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.5s ease;
     }
     
     .aurora-overlay.active {
@@ -102,7 +102,7 @@
       pointer-events: auto;
     }
     
-    /* Subtle aurora background - much more toned down */
+    /* More visible aurora background */
     .aurora {
       position: absolute;
       top: 0;
@@ -111,46 +111,35 @@
       height: 100%;
       background: linear-gradient(
         45deg,
-        rgba(100, 150, 200, 0.03) 0%,
-        rgba(120, 180, 160, 0.04) 25%,
-        rgba(140, 120, 200, 0.03) 50%,
-        rgba(180, 140, 160, 0.04) 75%,
-        rgba(160, 180, 220, 0.03) 100%
+        rgba(100, 200, 255, 0.12) 0%,
+        rgba(150, 255, 200, 0.15) 25%,
+        rgba(200, 150, 255, 0.13) 50%,
+        rgba(255, 180, 200, 0.14) 75%,
+        rgba(150, 220, 255, 0.12) 100%
       );
       opacity: 0;
-      animation: auroraShow 2s ease-in-out forwards;
+      animation: auroraShow 1s ease-in-out forwards;
     }
     
     .aurora::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(
-        ellipse at 20% 30%, 
-        rgba(150, 200, 255, 0.05) 0%, 
-        transparent 30%
-      ),
-      radial-gradient(
-        ellipse at 80% 70%, 
-        rgba(200, 150, 255, 0.04) 0%, 
-        transparent 35%
-      ),
-      radial-gradient(
-        ellipse at 50% 50%, 
-        rgba(180, 220, 180, 0.03) 0%, 
-        transparent 40%
-      );
-      animation: auroraFlow 3s ease-in-out infinite;
+      top: -25%;
+      left: -25%;
+      width: 150%;
+      height: 150%;
+      background: 
+        radial-gradient(ellipse at 30% 20%, rgba(100, 255, 200, 0.2) 0%, transparent 40%),
+        radial-gradient(ellipse at 70% 80%, rgba(255, 150, 255, 0.18) 0%, transparent 45%),
+        radial-gradient(ellipse at 20% 70%, rgba(150, 200, 255, 0.15) 0%, transparent 50%);
+      animation: auroraFlow 4s ease-in-out infinite;
       transform-origin: center;
     }
     
     @keyframes auroraShow {
       0% {
         opacity: 0;
-        transform: scale(0.9);
+        transform: scale(0.8);
       }
       100% {
         opacity: 1;
@@ -160,55 +149,51 @@
     
     @keyframes auroraFlow {
       0%, 100% {
-        transform: translateX(-5%) translateY(-5%) rotate(0deg);
-        opacity: 0.4;
+        transform: translateX(-8%) translateY(-5%) rotate(-1deg);
+        opacity: 0.6;
       }
       50% {
-        transform: translateX(3%) translateY(3%) rotate(1deg);
-        opacity: 0.7;
+        transform: translateX(5%) translateY(8%) rotate(1deg);
+        opacity: 1;
       }
     }
     
-    /* Natural floating fireflies */
+    /* Improved fireflies - simpler up and down float */
     .firefly {
       position: absolute;
-      width: 4px;
-      height: 4px;
-      background: radial-gradient(circle, rgba(255, 220, 120, 0.9) 0%, rgba(255, 200, 100, 0.6) 50%, transparent 80%);
+      width: 6px;
+      height: 6px;
+      background: radial-gradient(circle, rgba(255, 230, 120, 1) 0%, rgba(255, 200, 100, 0.8) 60%, transparent 90%);
       border-radius: 50%;
       opacity: 0;
-      box-shadow: 0 0 8px rgba(255, 220, 120, 0.6);
+      box-shadow: 0 0 12px rgba(255, 230, 120, 0.8), 0 0 24px rgba(255, 200, 100, 0.4);
       z-index: 2; /* Above aurora, below main content */
     }
     
     .firefly.active {
-      animation: fireflyFloat 2s ease-in-out forwards;
+      animation: fireflyFloat 2.5s ease-in-out forwards;
     }
     
     @keyframes fireflyFloat {
       0% {
         opacity: 0;
-        transform: translateY(0px) translateX(0px) scale(0.5);
+        transform: translateY(0px) translateX(0px);
       }
-      15% {
-        opacity: 0.8;
-        transform: translateY(-100px) translateX(10px) scale(1);
-      }
-      40% {
+      20% {
         opacity: 1;
-        transform: translateY(-220px) translateX(-15px) scale(1.1);
+        transform: translateY(-120px) translateX(10px);
       }
-      65% {
-        opacity: 0.9;
-        transform: translateY(-180px) translateX(25px) scale(0.9);
+      50% {
+        opacity: 1;
+        transform: translateY(-200px) translateX(-5px);
       }
-      85% {
-        opacity: 0.6;
-        transform: translateY(-80px) translateX(-5px) scale(0.8);
+      80% {
+        opacity: 0.8;
+        transform: translateY(-100px) translateX(15px);
       }
       100% {
         opacity: 0;
-        transform: translateY(20px) translateX(10px) scale(0.3);
+        transform: translateY(0px) translateX(0px);
       }
     }
 
@@ -292,16 +277,24 @@
     }
 
     /* ─────────────────────────────────────────────────────
-       FIXED TYPEWRITER EFFECT ON THE FIRST LINE
+       FIXED TYPEWRITER EFFECT - DEBUGGING SECTION
        ───────────────────────────────────────────────────── */
+    
+    /* DEBUG: First let's make sure the container is visible */
+    .intro-line {
+      margin-bottom: 1rem;
+      display: block; /* Changed from inline-block to block for better debugging */
+    }
+    
     .typewriter-line {
-      display: inline-block;
       font-family: 'PT Sans', sans-serif;
       font-weight: 560;
       font-size: 1.8rem;
       color: white;
       overflow: hidden;
       white-space: nowrap;
+      display: inline-block; /* Keep this inline-block for width animation */
+      vertical-align: top;
     }
     
     /* Default state - text visible, no animation */
@@ -310,33 +303,44 @@
       border: none;
     }
     
-    /* Animated state - only on first visit */
+    /* Animated state - DEBUGGING THE TYPEWRITER */
     .typewriter-line.animate {
-      border-right: 0.1em solid #bdeafe;
       width: 0;
-      animation:
-        typing 2.25s steps(14, end) forwards,
-        blink-caret 0.8s step-end infinite;
+      border-right: 2px solid #bdeafe;
+      animation: 
+        typing 2.5s steps(14, end) forwards,
+        blink-caret 1s step-end infinite;
+      animation-delay: 0.5s; /* Small delay to ensure DOM is ready */
     }
     
-    /* Fixed character count - "hi, i'm emily!" = 14 characters */
+    /* Character count: h-i-,-space-i-'-m-space-e-m-i-l-y-! = 14 characters */
     @keyframes typing {
-      from { width: 0; }
-      to   { width: 14ch; }
+      0% { 
+        width: 0; 
+      }
+      100% { 
+        width: 14ch; /* 14 characters exactly */
+      }
     }
+    
     @keyframes blink-caret {
-      50% { border-color: transparent; }
+      0%, 50% { 
+        border-color: #bdeafe; 
+      }
+      51%, 100% { 
+        border-color: transparent; 
+      }
     }
 
     /* ─────────────────────────────────────────────────────
        FADE-IN FOR THE SECOND LINE (only on page load; no scroll fade)
        ───────────────────────────────────────────────────── */
     .fadein-line {
-      display: inline-block;
       font-family: 'PT Sans', sans-serif;
       font-weight: 400;
       font-size: 1.3rem;
       color: #ffffff;
+      display: block;
     }
     
     /* Default state - text visible, no animation */
@@ -347,8 +351,8 @@
     /* Animated state - only on first visit */
     .fadein-line.animate {
       opacity: 0;
-      animation: fadeIn 1s ease-in-out forwards;
-      animation-delay: 2.5s; /* wait until typing animation finishes */
+      animation: fadeIn 1.5s ease-in-out forwards;
+      animation-delay: 3s; /* wait until typing animation finishes */
     }
     
     @keyframes fadeIn {
@@ -512,7 +516,7 @@
     @media screen and (max-width: 1024px) {
       .sidebar {
         width: 150px;
-        left: -15px; /* Also move left on tablets */
+        left: -15px;
       }
       .sidebar img {
         max-width: 500%;
@@ -528,7 +532,7 @@
       
       .intro-text {
         font-size: 1.2rem;
-        width: 70%; /* Slightly wider on tablets */
+        width: 70%;
         max-width: 700px;
       }
       
@@ -557,110 +561,59 @@
         top: 30px;
         width: 95%;
         max-width: 300px;
+        background: linear-gradient(to bottom, rgba(36, 29, 24, 0.98) 0%, rgba(36, 29, 24, 0.85) 40%, rgba(36, 29, 24, 0.3) 80%, transparent 100%);
+        padding: 10px;
+        padding-top: 20px;
+        border-radius: 0;
+        width: 100vw;
+        max-width: none;
+        left: 0;
+        top: 0;
+        transform: none;
+        display: flex;
+        justify-content: center;
+        height: 120px;
+        align-items: center;
       }
       
-      /* Hide sidebar art on mobile - remove completely */
+      /* Hide sidebar art on mobile */
       .sidebar {
         display: none;
       }
       
-      /* Simple header background for mobile - full width from top */
-      header {
-        background: linear-gradient(to bottom, rgba(36, 29, 24, 0.98) 0%, rgba(36, 29, 24, 0.85) 40%, rgba(36, 29, 24, 0.3) 80%, transparent 100%);
-        padding: 10px;
-        padding-top: 20px; /* Extra padding from top */
-        border-radius: 0; /* Remove border radius for full width */
-        width: 100vw; /* Full screen width */
-        max-width: none; /* Remove max-width constraint */
-        left: 0; /* Align to left edge */
-        top: 0; /* Start from very top */
-        transform: none; /* Remove centering transform */
-        display: flex;
-        justify-content: center; /* Center the logo inside */
-        height: 120px; /* Set specific height for gradient effect */
-        align-items: center; /* Center logo vertically */
-      }
-      
       .social-sidebar {
         position: absolute;
-        top: calc(85vh + 80px); /* Start higher for vertical layout */
+        top: calc(85vh + 80px);
         left: 50%;
         transform: translateX(-50%);
-        flex-direction: column; /* Vertical line down middle */
+        flex-direction: column;
         height: auto;
         width: auto;
         justify-content: center;
-        gap: 0; /* Reset gap to 0 */
-        z-index: 600; /* Above flowers */
+        gap: 0;
+        z-index: 600;
       }
       .social-sidebar a {
         margin: 0 !important;
-        margin-top: -40px !important; /* Much more overlap - 40px */
+        margin-top: -40px !important;
       }
       .social-sidebar a:first-child {
-        margin-top: 0 !important; /* First icon has no negative margin */
+        margin-top: 0 !important;
       }
       .social-sidebar img {
-        transform: scale(0.3); /* Slightly bigger for bottom placement */
+        transform: scale(0.3);
       }
       
-      /* Alternative mobile fade options - choose one: */
-      
-      /* OPTION 1: Blur fade instead of opacity */
-      .intro-text.fade-blur {
-        filter: blur(2px);
-        opacity: 0.7;
-      }
-      
-      /* OPTION 2: Scale down fade */
-      .intro-text.fade-scale {
-        transform: translate(-50%, -50%) scale(0.95);
-        opacity: 0.8;
-      }
-      
-      /* OPTION 3: Text shadow fade */
-      .intro-text.fade-shadow {
-        text-shadow: 0 0 20px rgba(36, 29, 24, 0.8);
-        opacity: 0.9;
-      }
-      
-      /* OPTION 4: Margin push fade (moves text up) - ACTIVE */
-      .intro-text.fade-push {
-        transform: translate(-50%, -60%) !important;
-        opacity: 0.85 !important;
-      }
-      
-      /* Current: Background overlay fade */
-      .intro-text::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: linear-gradient(transparent 0%, transparent 60%, rgba(36, 29, 24, 0.8) 90%, rgba(36, 29, 24, 0.95) 100%);
-        pointer-events: none;
-        z-index: -1;
-        opacity: 0;
-        transition: opacity 0.5s ease;
-      }
-      
-      .intro-text.fade-background::before {
-        opacity: 1;
-      }
-      
-      /* Remove text fade on mobile - keep text always visible */
       .intro-text {
         top: 45%;
         font-size: 1.1rem;
         width: 95%;
         padding: 0 15px;
-        opacity: 1 !important; /* Always visible on mobile */
-        transform: translate(-50%, -50%) !important; /* Always centered */
-        transition: all 0.5s ease !important; /* Enable transitions */
+        opacity: 1 !important;
+        transform: translate(-50%, -50%) !important;
+        transition: all 0.5s ease !important;
       }
       
-      /* OPTION 4: Push fade effect for mobile */
       .intro-text.fade-push {
         transform: translate(-50%, -60%) !important;
         opacity: 0.85 !important;
@@ -686,20 +639,20 @@
       
       .flowers-row {
         top: 85vh;
-        flex-direction: row; /* Keep flowers in a row */
+        flex-direction: row;
         align-items: center;
         width: 95%;
-        gap: 5px; /* Smaller gap between flowers */
+        gap: 5px;
       }
       
       .flowers-row a {
         margin: 0;
-        width: 30%; /* Smaller flower buttons */
-        max-width: 120px; /* Much smaller max width */
+        width: 30%;
+        max-width: 120px;
       }
       
       .flowers-row img {
-        transform: scale(0.5); /* Much smaller flowers */
+        transform: scale(0.5);
       }
       
       .flowers-row a:nth-child(1) img,
@@ -760,6 +713,12 @@
       .flowers-row a {
         width: 30%;
       }
+    }
+
+    /* DEBUG STYLES - Remove these after debugging */
+    .debug-typewriter {
+      border: 1px solid red;
+      background: rgba(255, 0, 0, 0.1);
     }
   </style>
 </head>
@@ -839,10 +798,14 @@
   </footer>
 
   <script>
+    // DEBUG: Add console logs to track what's happening
+    console.log('🔍 DEBUGGING: Script starting...');
+    
     // Function to mark page as visited
     function markPageVisited() {
       const visited = JSON.stringify({ visited: true, timestamp: Date.now() });
-      document.cookie = `homepage_visited=${visited}; path=/; max-age=86400`; // 24 hours
+      document.cookie = `homepage_visited=${visited}; path=/; max-age=86400`;
+      console.log('📝 Page marked as visited');
     }
     
     // Function to check if page was visited
@@ -853,17 +816,22 @@
         if (name === 'homepage_visited') {
           try {
             const data = JSON.parse(value);
-            // Check if visit was within last 24 hours
-            return data.visited && (Date.now() - data.timestamp < 86400000);
+            const hasVisited = data.visited && (Date.now() - data.timestamp < 86400000);
+            console.log('🍪 Has visited before:', hasVisited);
+            return hasVisited;
           } catch (e) {
+            console.log('🍪 Cookie parse error:', e);
             return false;
           }
         }
       }
+      console.log('🍪 No visit cookie found');
       return false;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      console.log('🚀 DOM loaded, initializing...');
+      
       const introContainer = document.getElementById('intro-text-container');
       const flowersRow     = document.querySelector('.flowers-row');
       const flowersTitle   = document.getElementById('flowers-title');
@@ -874,23 +842,52 @@
       const shootingStarBtn = document.getElementById('shooting-star-btn');
       const auroraOverlay  = document.getElementById('aurora-overlay');
       
+      // DEBUG: Check if elements exist
+      console.log('🔍 Elements found:', {
+        typewriterText: !!typewriterText,
+        fadeinText: !!fadeinText,
+        scrollArrow: !!scrollArrow
+      });
+      
       // Check if this is a return visit
       const isReturnVisit = hasVisited();
+      console.log('🔄 Is return visit:', isReturnVisit);
       
       if (isReturnVisit) {
+        console.log('⏭️ Skipping animations for return visit');
         // Skip animations - show everything immediately
-        typewriterText.classList.add('no-animation');
-        fadeinText.classList.add('no-animation');
-        scrollArrow.classList.add('no-animation');
+        typewriterText?.classList.add('no-animation');
+        fadeinText?.classList.add('no-animation');
+        scrollArrow?.classList.add('no-animation');
       } else {
+        console.log('✨ First visit - starting animations');
         // First visit - run animations
-        typewriterText.classList.add('animate');
-        fadeinText.classList.add('animate');
-        scrollArrow.classList.add('animate');
+        
+        // DEBUG: Add visual indicator that animation is starting
+        typewriterText?.classList.add('debug-typewriter');
+        
+        // Force clear any existing classes first
+        typewriterText?.classList.remove('no-animation', 'animate');
+        fadeinText?.classList.remove('no-animation', 'animate');
+        scrollArrow?.classList.remove('no-animation', 'animate');
+        
+        // Add animation classes with small delay to ensure DOM is ready
+        setTimeout(() => {
+          console.log('🎬 Adding animation classes...');
+          typewriterText?.classList.add('animate');
+          fadeinText?.classList.add('animate');
+          scrollArrow?.classList.add('animate');
+          
+          // DEBUG: Log the classes applied
+          console.log('🎭 Typewriter classes:', typewriterText?.className);
+          console.log('📝 Text content:', typewriterText?.textContent);
+          console.log('📏 Text length:', typewriterText?.textContent?.length);
+        }, 100);
         
         // Mark as visited after animations complete
         setTimeout(() => {
           markPageVisited();
+          typewriterText?.classList.remove('debug-typewriter');
         }, 4000);
       }
       
@@ -913,7 +910,7 @@
       }
       
       // Smooth scroll to flowers when arrow is clicked
-      scrollArrow.addEventListener('click', () => {
+      scrollArrow?.addEventListener('click', () => {
         flowersRow.scrollIntoView({ 
           behavior: 'smooth',
           block: 'center'
@@ -921,28 +918,32 @@
       });
       
       // Aurora and fireflies effect
-      shootingStarBtn.addEventListener('click', (e) => {
+      shootingStarBtn?.addEventListener('click', (e) => {
         e.preventDefault();
+        console.log('🌟 Aurora effect triggered');
         startAuroraEffect();
       });
       
       function startAuroraEffect() {
+        console.log('🌈 Starting aurora effect...');
         auroraOverlay.classList.add('active');
         
-        // Create fireflies emerging from bottom with staggered timing and random positions
-        for (let i = 0; i < 6; i++) {
+        // Create fireflies emerging from bottom with simpler timing
+        const numFireflies = 5;
+        for (let i = 0; i < numFireflies; i++) {
           setTimeout(() => {
             createFirefly();
-          }, i * 200);
+          }, i * 300); // Slower, more spaced out
         }
         
-        // End the effect after 2 seconds
+        // End the effect after 3 seconds
         setTimeout(() => {
+          console.log('🌈 Ending aurora effect');
           auroraOverlay.classList.remove('active');
           // Clean up fireflies
           const fireflies = auroraOverlay.querySelectorAll('.firefly');
           fireflies.forEach(firefly => firefly.remove());
-        }, 2500);
+        }, 3000);
       }
       
       function createFirefly() {
@@ -950,17 +951,14 @@
         firefly.className = 'firefly';
         
         // Start from bottom of screen at random horizontal position
-        const startX = Math.random() * window.innerWidth;
-        const startY = window.innerHeight - 50; // Start near bottom
+        const startX = Math.random() * (window.innerWidth - 100) + 50; // Keep away from edges
+        const startY = window.innerHeight - 30; // Start near bottom
         
         firefly.style.left = startX + 'px';
         firefly.style.top = startY + 'px';
         
-        // Add variation in movement by adding random transform styles
-        const randomDrift = Math.random() * 60 - 30; // -30 to +30 px drift
-        firefly.style.setProperty('--drift', randomDrift + 'px');
-        
         auroraOverlay.appendChild(firefly);
+        console.log('🪲 Created firefly at:', startX, startY);
         
         // Start animation immediately
         firefly.classList.add('active');
@@ -970,11 +968,12 @@
           if (firefly.parentNode) {
             firefly.parentNode.removeChild(firefly);
           }
-        }, 2100);
+        }, 2600);
       }
       
       // Close aurora when clicking the overlay
-      auroraOverlay.addEventListener('click', () => {
+      auroraOverlay?.addEventListener('click', () => {
+        console.log('🌈 Aurora clicked - closing');
         auroraOverlay.classList.remove('active');
         const fireflies = auroraOverlay.querySelectorAll('.firefly');
         fireflies.forEach(firefly => firefly.remove());
@@ -1042,6 +1041,21 @@
           flowersTitle.classList.remove('visible');
         }
       });
+      
+      // DEBUG: Force trigger animation for testing (remove in production)
+      window.debugTypewriter = () => {
+        console.log('🧪 DEBUG: Forcing typewriter animation');
+        typewriterText?.classList.remove('no-animation', 'animate');
+        setTimeout(() => {
+          typewriterText?.classList.add('animate');
+        }, 100);
+      };
+      
+      // DEBUG: Test aurora effect (remove in production)  
+      window.debugAurora = () => {
+        console.log('🧪 DEBUG: Forcing aurora effect');
+        startAuroraEffect();
+      };
     });
   </script>
 </body>
