@@ -496,15 +496,13 @@
       
       .social-sidebar {
         position: fixed;
-        top: auto;
-        bottom: 80px;
-        right: 50%;
-        transform: translateX(50%);
-        flex-direction: row;
+        top: 30px;
+        right: 15px;
+        flex-direction: column;
         height: auto;
-        width: 90%;
-        justify-content: center;
-        gap: 15px;
+        width: auto;
+        justify-content: flex-start;
+        gap: 8px;
       }
       .social-sidebar a {
         margin: 0 !important;
@@ -540,20 +538,20 @@
       
       .flowers-row {
         top: 85vh;
-        flex-direction: column;
+        flex-direction: row; /* Keep flowers in a row */
         align-items: center;
         width: 95%;
-        gap: 20px;
+        gap: 5px; /* Smaller gap between flowers */
       }
       
       .flowers-row a {
         margin: 0;
-        width: 80%;
-        max-width: 200px;
+        width: 30%; /* Smaller flower buttons */
+        max-width: 120px; /* Much smaller max width */
       }
       
       .flowers-row img {
-        transform: scale(0.8);
+        transform: scale(0.5); /* Much smaller flowers */
       }
       
       .flowers-row a:nth-child(1) img,
@@ -630,7 +628,7 @@
     <img src="images/name.gif" alt="name logo" class="logo"/>
   </header>
 
-  <!-- LEFT SIDEBAR -->
+  <!-- LEFT SIDEBAR (removed on mobile) -->
   <aside class="sidebar">
     <img src="images/sidebar_art.PNG" alt="sidebar art"/>
   </aside>
@@ -855,8 +853,10 @@
         const introRect = introContainer.getBoundingClientRect();
         const flowersRect = flowersRow.getBoundingClientRect();
         
-        // Intro text: fade out when it reaches near the top of viewport
-        if (introRect.top <= 200) {
+        // Intro text: fade out when it reaches higher up on mobile
+        const fadeThreshold = window.innerWidth <= 768 ? 350 : 200;
+        
+        if (introRect.top <= fadeThreshold) {
           fadeOutIntro();
         } else {
           fadeInIntro();
