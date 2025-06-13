@@ -862,18 +862,20 @@
       function startAuroraEffect() {
         auroraOverlay.classList.add('active');
         
-        // Create fireflies all at once - no stagger
+        // Create fireflies with staggered timing for up/down motion
         const numFireflies = 6;
         for (let i = 0; i < numFireflies; i++) {
-          createFirefly();
+          setTimeout(() => {
+            createFirefly();
+          }, i * 300); // Stagger when each one starts its up/down motion
         }
         
-        // End the effect after 3 seconds
+        // End the effect after 4 seconds (longer to account for staggered starts)
         setTimeout(() => {
           auroraOverlay.classList.remove('active');
           const fireflies = auroraOverlay.querySelectorAll('.firefly');
           fireflies.forEach(firefly => firefly.remove());
-        }, 3000);
+        }, 4000);
       }
       
       function createFirefly() {
