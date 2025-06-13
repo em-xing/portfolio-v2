@@ -28,6 +28,7 @@
       padding: 2rem;
       padding-top: 6rem; /* space for fixed header */
       min-height: 120vh;
+      overflow-x: hidden;
     }
     a {
       text-decoration: none;
@@ -72,11 +73,13 @@
     header {
       position: fixed;
       top: 55px;
-      left: 55%;
+      left: 50%;
       transform: translateX(-50%);
       display: inline-block;
       border-radius: 2px;
       z-index: 100;
+      width: 90%;
+      max-width: 400px;
     }
     header img.logo {
       display: block;
@@ -147,16 +150,10 @@
         }
         
         /* Default state - text visible, no animation */
-        .typewriter-line.no-animation {
+        .typewriter-line {
             width: auto;
             border: none;
-        }
-        
-        /* Animated state - only on first visit */
-        .typewriter-line.animate {
-            border-right: 0.1em solid #bdeafe;
-            width: 0;
-            animation: typing 2.25s steps(9, end) forwards, blink-caret 0.8s step-end infinite;
+            animation: none; /* Remove typewriter animation */
         }
         
         @keyframes typing {
@@ -196,11 +193,9 @@
     /* ─── RESEARCH PAGE CONTENT ─────────────────────── */
     .container {
       max-width: 900px;
-      margin: 130px auto 0 auto; /* Increased from 200px to 300px */
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeIn 1s ease forwards;
-      animation-delay: 2.4s; /* wait for typewriter to finish */
+      margin: 130px auto 0 auto;
+      opacity: 1; /* Remove fade-in animation */
+      transform: none; /* Remove transform animation */
     }
     
     @keyframes fadeIn {
@@ -240,11 +235,6 @@
     }
     .left-column, .right-column {
       flex: 1;
-    }
-    @media (max-width: 700px) {
-      .main-content {
-        display: block;
-      }
     }
 
     /* Research section boxes */
@@ -351,21 +341,7 @@
       color: #709fd3;
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 480px) {
-      .typewriter-line { 
-        font-size: 1.5rem; 
-        margin-top: 250px; /* Adjusted for mobile */
-      }
-      .container {
-        margin-top: 270px; /* Adjusted for mobile */
-      }
-      .research-question { font-size: 1rem; }
-      .lab-info, .award-list li, .publication-item { font-size: 0.9rem; }
-      .home-nav { left: 20px; width: 45px; height: 45px; }
-    }
-
-  /* ─────────────────────────────────────────────────────
+    /* ─────────────────────────────────────────────────────
        SITE FOOTER
        ───────────────────────────────────────────────────── */
     .site-footer {
@@ -383,6 +359,199 @@
       max-height: 40px;
       height: auto;
       display: block;
+    }
+
+    /* ─────────────────────────────────────────────────────
+       MOBILE & TABLET RESPONSIVE STYLES
+       ───────────────────────────────────────────────────── */
+    
+    /* Tablets */
+    @media screen and (max-width: 1024px) {
+      .social-sidebar {
+        right: 20px;
+        top: 120px;
+      }
+      .social-sidebar img {
+        transform: scale(0.35);
+      }
+      
+      .home-nav {
+        left: 40px;
+        width: 45px;
+        height: 45px;
+      }
+      
+      .typewriter-line {
+        font-size: 1.6rem;
+      }
+      
+      .research-question {
+        font-size: 1.1rem;
+      }
+      
+      .main-content {
+        gap: 1.5rem;
+      }
+    }
+    
+    /* Mobile devices */
+    @media screen and (max-width: 768px) {
+      body {
+        padding: 1rem;
+        padding-top: 4rem;
+      }
+      
+      /* Hide cursor effects on mobile for performance */
+      .cursor-glow,
+      .sparkle {
+        display: none;
+      }
+      
+      /* Mobile header with full-width background */
+      header {
+        background: linear-gradient(to bottom, rgba(36, 29, 24, 0.98) 0%, rgba(36, 29, 24, 0.85) 40%, rgba(36, 29, 24, 0.3) 80%, transparent 100%);
+        padding: 10px;
+        padding-top: 20px;
+        border-radius: 0;
+        width: 100vw;
+        max-width: none;
+        left: 0;
+        top: 0;
+        transform: none;
+        display: flex;
+        justify-content: center;
+        height: 120px;
+        align-items: center;
+      }
+      
+      /* Home button in top left on mobile */
+      .home-nav {
+        top: 30px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        z-index: 150; /* Above header */
+      }
+      .home-nav::before {
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-right: 10px solid #709fd3;
+      }
+      
+      /* Social icons at absolute bottom with heavy overlap */
+      .social-sidebar {
+        position: fixed;
+        bottom: 20px; /* Absolute bottom positioning */
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: column;
+        height: auto;
+        width: auto;
+        justify-content: center;
+        gap: 0;
+        z-index: 600;
+      }
+      .social-sidebar a {
+        margin: 0 !important;
+        margin-top: -70px !important; /* Heavy overlap */
+      }
+      .social-sidebar a:first-child {
+        margin-top: 0 !important;
+      }
+      .social-sidebar img {
+        transform: scale(0.3);
+      }
+      
+      /* Adjust typewriter and content positioning - reduced spacing */
+      .typewriter-line { 
+        font-size: 1.4rem; 
+        margin-top: 140px; /* Reduced from 180px */
+      }
+      
+      .container {
+        margin-top: 160px; /* Reduced from 200px */
+        padding: 0 10px;
+      }
+      
+      /* Stack columns on mobile */
+      .main-content {
+        display: block;
+        gap: 0;
+      }
+      
+      .left-column, .right-column {
+        margin-bottom: 2rem;
+      }
+      
+      /* Adjust text sizes for mobile */
+      .research-question { 
+        font-size: 1rem; 
+      }
+      
+      .lab-info, .award-list li, .publication-item { 
+        font-size: 0.9rem; 
+      }
+      
+      .section-title {
+        font-size: 1.5rem;
+      }
+      
+      .publications-section h2 {
+        font-size: 1.5rem;
+      }
+      
+      /* Remove header fade on mobile */
+      .header-fade {
+        display: none;
+      }
+    }
+    
+    /* Small mobile devices */
+    @media screen and (max-width: 480px) {
+      .typewriter-line { 
+        font-size: 1.2rem; 
+        margin-top: 160px;
+      }
+      
+      .container {
+        margin-top: 180px;
+        padding: 0 5px;
+      }
+      
+      .research-question { 
+        font-size: 0.95rem; 
+      }
+      
+      .lab-info, .award-list li, .publication-item { 
+        font-size: 0.85rem; 
+      }
+      
+      .home-nav {
+        width: 35px;
+        height: 35px;
+        left: 15px;
+        top: 25px;
+      }
+      
+      .social-sidebar a {
+        margin-top: -60px !important; /* Slightly less overlap on very small screens */
+      }
+    }
+    
+    /* Landscape mobile orientation */
+    @media screen and (max-height: 500px) and (orientation: landscape) {
+      .typewriter-line {
+        margin-top: 120px;
+        font-size: 1.1rem;
+      }
+      
+      .container {
+        margin-top: 140px;
+      }
+      
+      .social-sidebar {
+        bottom: 15px; /* Stay at absolute bottom on small screens */
+      }
     }
   </style>
 </head>
@@ -527,46 +696,29 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const cursorGlow = document.getElementById('cursor-glow');
-      const typewriter = document.getElementById('research-typewriter');
       let lastTime = 0;
       const interval = 150;
 
-      // Always trigger the typewriter animation
-      typewriter.classList.add('animate');
+      // Sparkle trail on mouse move (only on desktop)
+      if (window.innerWidth > 768) {
+        document.addEventListener('mousemove', (e) => {
+          cursorGlow.style.left = e.clientX + 'px';
+          cursorGlow.style.top = e.clientY + 'px';
 
-      // Sparkle trail on mouse move
-      document.addEventListener('mousemove', (e) => {
-        cursorGlow.style.left = e.clientX + 'px';
-        cursorGlow.style.top = e.clientY + 'px';
-
-        const now = Date.now();
-        if (now - lastTime > interval) {
-          const sparkle = document.createElement('div');
-          sparkle.className = 'sparkle';
-          const offsetX = (Math.random() - 0.5) * 20;
-          const offsetY = (Math.random() - 0.5) * 20;
-          sparkle.style.left = (e.clientX + offsetX) + 'px';
-          sparkle.style.top = (e.clientY + offsetY) + 'px';
-          document.body.appendChild(sparkle);
-          setTimeout(() => sparkle.remove(), 1200);
-          lastTime = now;
-        }
-      });
-
-      // Remove the cursor after typing animation completes
-      setTimeout(() => {
-        typewriter.classList.add('typing-complete');
-      }, 2500);
-
-      // Fade out the "Research" title on scroll
-      window.addEventListener('scroll', () => {
-        const titleRect = typewriter.getBoundingClientRect();
-        if (titleRect.top <= 100) {
-          typewriter.classList.add('fade-out');
-        } else {
-          typewriter.classList.remove('fade-out');
-        }
-      });
+          const now = Date.now();
+          if (now - lastTime > interval) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            const offsetX = (Math.random() - 0.5) * 20;
+            const offsetY = (Math.random() - 0.5) * 20;
+            sparkle.style.left = (e.clientX + offsetX) + 'px';
+            sparkle.style.top = (e.clientY + offsetY) + 'px';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 1200);
+            lastTime = now;
+          }
+        });
+      }
     });
   </script>
 </body>
