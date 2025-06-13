@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Research – Emily Xing</title>
+  <title>Emily Xing</title>
 
   <!-- Load PT Sans and Courier Prime from Google Fonts -->
   <link
@@ -401,7 +401,7 @@
         display: none;
       }
       
-      /* Mobile header with full-width background */
+      /* Mobile header with consistent positioning */
       header {
         background: linear-gradient(to bottom, rgba(36, 29, 24, 0.98) 0%, rgba(36, 29, 24, 0.85) 40%, rgba(36, 29, 24, 0.3) 80%, transparent 100%);
         padding: 10px;
@@ -681,12 +681,11 @@
     document.addEventListener('DOMContentLoaded', () => {
       const cursorGlow = document.getElementById('cursor-glow');
       const typewriter = document.getElementById('research-typewriter');
-      const isMobile = window.innerWidth <= 768;
       let lastTime = 0;
       const interval = 150;
 
-      // Only trigger typewriter animation on desktop
-      if (!isMobile && typewriter) {
+      // Always trigger typewriter animation (desktop and mobile)
+      if (typewriter) {
         typewriter.classList.add('animate');
       }
 
