@@ -142,18 +142,24 @@
             display: inline-block;
             font-family: 'PT Sans', sans-serif;
             font-weight: 560;
-            font-size: 1.8rem;
-            margin: 220px auto 0 auto; /* Increased from 180px to 280px */
+            font-size: 1.8rem; /* Same as homepage */
+            margin: 220px auto 0 auto;
             color: white;
             overflow: hidden;
             white-space: nowrap;
         }
         
         /* Default state - text visible, no animation */
-        .typewriter-line {
+        .typewriter-line.no-animation {
             width: auto;
             border: none;
-            animation: none; /* Remove typewriter animation */
+        }
+        
+        /* Animated state - only on first visit */
+        .typewriter-line.animate {
+            border-right: 0.1em solid #bdeafe;
+            width: 0;
+            animation: typing 2.25s steps(9, end) forwards, blink-caret 0.8s step-end infinite;
         }
         
         @keyframes typing {
@@ -166,36 +172,19 @@
         }
         
 
-    /* ─── RIGHT SOCIAL ICONS ────────────────────────── */
+    /* ─── RIGHT SOCIAL ICONS - REMOVED ────────────────────────── */
     .social-sidebar {
-      position: fixed;
-      top: 150px;
-      right: 37px;
-      height: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1px;
-      z-index: 10;
-    }
-    .social-sidebar img {
-      display: block;
-      transform: scale(0.4);
-      transform-origin: center center;
-    }
-    .social-sidebar a + a {
-      margin-top: 1px;
-    }
-    .social-sidebar a:hover img {
-      filter: brightness(1.2) drop-shadow(0 0 10px rgba(255,169,126,0.6));
+      display: none !important; /* Completely hidden everywhere */
     }
 
     /* ─── RESEARCH PAGE CONTENT ─────────────────────── */
     .container {
       max-width: 900px;
       margin: 130px auto 0 auto;
-      opacity: 1; /* Remove fade-in animation */
-      transform: none; /* Remove transform animation */
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 2.4s; /* wait for typewriter to finish */
     }
     
     @keyframes fadeIn {
@@ -209,7 +198,7 @@
     
     h1.page-title {
       text-align: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.5rem; /* Reduced from 1.5rem */
       color: #fff;
       position: relative;
       height: 2.8rem;
@@ -222,7 +211,7 @@
     h1.page-title + .container .divider {
       width: 60px;
       height: 2px;
-      margin: 1rem auto 2rem auto; /* Added more top margin and ensured centering */
+      margin: 0.5rem auto 1rem auto; /* Reduced top and bottom margins */
       background: #ffa97e;
       display: block; /* Ensure it displays */
     }
@@ -314,6 +303,11 @@
     /* Publications section (full-width below both columns) */
     .publications-section {
       margin-top: 2rem;
+    }
+    
+    /* Hide mobile social wrapper on desktop */
+    .mobile-social-wrapper {
+      display: none;
     }
     .publications-section h2 {
       font-size: 1.8rem;
@@ -424,10 +418,10 @@
         align-items: center;
       }
       
-      /* Home button in top left on mobile */
+      /* Home button positioned to avoid header collision */
       .home-nav {
         top: 30px;
-        left: 20px;
+        left: 15px; /* Moved further left */
         width: 40px;
         height: 40px;
         z-index: 150; /* Above header */
@@ -451,15 +445,15 @@
         gap: 0;
         z-index: 600;
       }
-      .social-sidebar a {
+      .social-sidebar.mobile-only a {
         margin: 0 !important;
-        margin-top: -70px !important; /* Heavy overlap */
+        margin-top: -70px !important; /* Same heavy overlap as homepage */
       }
-      .social-sidebar a:first-child {
-        margin-top: 0 !important;
+      .social-sidebar.mobile-only a:first-child {
+        margin-top: 0 !important; /* First icon has no negative margin */
       }
-      .social-sidebar img {
-        transform: scale(0.3);
+      .social-sidebar.mobile-only img {
+        transform: scale(0.3); /* Same scale as homepage */
       }
       
       /* Adjust typewriter and content positioning - reduced spacing */
@@ -509,7 +503,7 @@
     /* Small mobile devices */
     @media screen and (max-width: 480px) {
       .typewriter-line { 
-        font-size: 1.2rem; 
+        font-size: 1.6rem; /* Bigger on small mobile too */
         margin-top: 160px;
       }
       
@@ -571,18 +565,8 @@
   <div class="home-nav" onclick="window.location.href='index.html'" title="Return to Home">
   </div>
 
-  <!-- Right social icons -->
-  <aside class="social-sidebar">
-    <a href="https://www.linkedin.com/in/emily-xing-5663ab266/" target="_blank">
-      <img src="images/icon_linkedin.PNG" alt="LinkedIn icon">
-    </a>
-    <a href="mailto:emletxing@gmail.com">
-      <img src="images/icon_mail.PNG" alt="Email icon">
-    </a>
-    <a href="#">
-      <img src="images/icon_shooting_star.PNG" alt="Star icon">
-    </a>
-  </aside>
+  <!-- RIGHT SOCIAL ICONS - REMOVED -->
+  <!-- Social icons completely removed from research page -->
 
   <!-- Research page content -->
   <h1 class="page-title">
@@ -696,8 +680,15 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const cursorGlow = document.getElementById('cursor-glow');
+      const typewriter = document.getElementById('research-typewriter');
+      const isMobile = window.innerWidth <= 768;
       let lastTime = 0;
       const interval = 150;
+
+      // Only trigger typewriter animation on desktop
+      if (!isMobile && typewriter) {
+        typewriter.classList.add('animate');
+      }
 
       // Sparkle trail on mouse move (only on desktop)
       if (window.innerWidth > 768) {
@@ -716,6 +707,25 @@
             document.body.appendChild(sparkle);
             setTimeout(() => sparkle.remove(), 1200);
             lastTime = now;
+          }
+        });
+
+        // Remove the cursor after typing animation completes (desktop only)
+        setTimeout(() => {
+          if (typewriter) {
+            typewriter.classList.add('typing-complete');
+          }
+        }, 2500);
+
+        // Fade out the "Research" title on scroll (desktop only)
+        window.addEventListener('scroll', () => {
+          if (typewriter) {
+            const titleRect = typewriter.getBoundingClientRect();
+            if (titleRect.top <= 100) {
+              typewriter.classList.add('fade-out');
+            } else {
+              typewriter.classList.remove('fade-out');
+            }
           }
         });
       }
