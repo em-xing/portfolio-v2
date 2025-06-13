@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Research – Emily Xing</title>
+  <title>Emily Xing</title>
 
-  <!-- Load PT Sans and Courier Prime from Google Fonts -->
+  <!-- Load PT Sans from Google Fonts -->
   <link
-    href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Courier+Prime:wght@400;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap"
     rel="stylesheet"
   />
 
@@ -15,39 +15,50 @@
   <link rel="icon" href="images/favicon.PNG" type="image/png" />
 
   <style>
-    /* ─── RESET & BASE ───────────────────────────────── */
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
+    /* ─────────────────────────────────────────────────────
+       RESET + BODY (use PT Sans everywhere by default)
+       ───────────────────────────────────────────────────── */
     body {
-      background: #241d18;
-      color: #fff;
+      background-color: #241d18;
+      margin: 0;
       font-family: 'PT Sans', sans-serif;
-      line-height: 1.6;
+      color: #ffffff;
       cursor: url("images/cursor_normal.cur") 0 0, auto;
-      padding: 2rem;
-      padding-top: 6rem; /* space for fixed header */
-      min-height: 120vh;
-      overflow-x: hidden;
-    }
-    a {
-      text-decoration: none;
+      /* Make room for the fixed header's height */
+      padding-top: 6rem;
+      /* Adjust height so scrolling naturally stops when flowers are at 500px */
+      min-height: 110vh; /* Less bottom space */
+      overflow-x: hidden; /* Prevent horizontal scroll */
     }
 
-    /* ─── GLOWING CURSOR & SPARKLES ──────────────────── */
+    /* ─────────────────────────────────────────────────────
+       GLOWING CURSOR CIRCLE (FIREFLY EFFECT) + SPARKLE TRAIL
+       ───────────────────────────────────────────────────── */
     .cursor-glow {
       position: fixed;
-      width: 15px; height: 15px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,100,0.5) 0%, rgba(255,255,150,0.2) 60%, transparent 100%);
-      pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
-      box-shadow: 0 0 15px rgba(255,255,100,0.4);
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 100, 0.5) 0%, rgba(255, 255, 150, 0.2) 60%, transparent 100%);
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: left 0.1s ease-out, top 0.1s ease-out;
+      box-shadow: 0 0 15px rgba(255, 255, 100, 0.4);
       animation: firefly-glow 2.5s ease-in-out infinite;
     }
+    
     .sparkle {
-      position: fixed; width: 3px; height: 3px; background: rgba(255,255,120,0.8);
-      border-radius: 50%; pointer-events: none; z-index: 9998;
+      position: fixed;
+      width: 3px;
+      height: 3px;
+      background: rgba(255, 255, 120, 0.8);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
       animation: sparkle-fade 1.2s ease-out forwards;
     }
+    
     @keyframes firefly-glow {
       0%, 100% {
         transform: translate(-50%, -50%) scale(1);
@@ -58,6 +69,7 @@
         opacity: 1;
       }
     }
+    
     @keyframes sparkle-fade {
       0% {
         opacity: 0.8;
@@ -69,7 +81,72 @@
       }
     }
 
-    /* ─── HEADER ────────────────────────────────────── */
+    /* ─────────────────────────────────────────────────────
+       SHOOTING STAR METEOR SHOWER EFFECT
+       ───────────────────────────────────────────────────── */
+    .meteor-shower-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    
+    .meteor-shower-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .shooting-star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(circle, #fff 0%, #87ceeb 70%, transparent 100%);
+      border-radius: 50%;
+      opacity: 0;
+      animation: shootingStar 1.5s ease-out forwards;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.9), 0 0 24px rgba(135, 206, 235, 0.6);
+    }
+    
+    .shooting-star::before {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 30%, rgba(255, 255, 255, 0) 100%);
+      transform: rotate(-45deg);
+      transform-origin: 0 0;
+    }
+    
+    @keyframes shootingStar {
+      0% {
+        opacity: 0;
+        transform: translateX(-50px) translateY(-50px) scale(0.5);
+      }
+      20% {
+        opacity: 1;
+        transform: translateX(0) translateY(0) scale(1);
+      }
+      80% {
+        opacity: 1;
+        transform: translateX(400px) translateY(400px) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(450px) translateY(450px) scale(0.8);
+      }
+    }
+
+    /* ─────────────────────────────────────────────────────
+       HEADER
+       ───────────────────────────────────────────────────── */
     header {
       position: fixed;
       top: 55px;
@@ -88,251 +165,254 @@
       max-width: 80%;
       transform: translateY(-10px);
     }
-    /* Gradient overlay under header for fade effect */
-    .header-fade {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 200px; /* covers header + a bit of content */
-      background: linear-gradient(to bottom, #241d18 0%, transparent 100%);
-      pointer-events: none;
-      z-index: 90;
-    }
 
-    /* ─── HOME NAVIGATION ARROW ─────────────────────── */
-    .home-nav {
-      position: fixed;
-      top: 260px;
-      left: 80px;
-      z-index: 100;
-      background: rgba(112, 159, 211, 0.1);
-      border: 2px solid #709fd3;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
+    /* ─────────────────────────────────────────────────────
+       INTRO TEXT CONTAINER (responsive centered)
+       ───────────────────────────────────────────────────── */
+    .intro-text {
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-size: 1.3rem;
+      line-height: 1.5;
+      z-index: 5;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+      width: 60%; /* Narrower on desktop to avoid sidebar */
+      max-width: 650px; /* Smaller max-width */
+      padding: 0 20px;
+      box-sizing: border-box;
     }
-    .home-nav:hover {
-      background: rgba(112, 159, 211, 0.2);
-      border-color: #87ceeb;
-      box-shadow: 0 0 20px rgba(112, 159, 211, 0.4);
-      transform: translateX(-5px);
-    }
-    .home-nav::before {
-      content: '';
-      width: 0;
-      height: 0;
-      border-top: 8px solid transparent;
-      border-bottom: 8px solid transparent;
-      border-right: 12px solid #709fd3;
-      transition: border-right-color 0.3s ease;
-    }
-    .home-nav:hover::before {
-      border-right-color: #87ceeb;
-    }
-
-    /* ─── TYPEWRITER FOR "Research" ─────────────────── */
-     .typewriter-line {
-            display: inline-block;
-            font-family: 'PT Sans', sans-serif;
-            font-weight: 560;
-            font-size: 1.8rem; /* Same as homepage */
-            margin: 220px auto 0 auto;
-            color: white;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        
-        /* Default state - text visible, no animation */
-        .typewriter-line.no-animation {
-            width: auto;
-            border: none;
-        }
-        
-        /* Animated state - only on first visit */
-        .typewriter-line.animate {
-            border-right: 0.1em solid #bdeafe;
-            width: 0;
-            animation: typing 2.25s steps(9, end) forwards, blink-caret 0.8s step-end infinite;
-        }
-        
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 7ch; } /* "research" is 8 characters */
-        }
-        
-        @keyframes blink-caret {
-            50% { border-color: transparent; }
-        }
-        
-
-    /* ─── RIGHT SOCIAL ICONS - REMOVED ────────────────────────── */
-    .social-sidebar {
-      display: none !important; /* Completely hidden everywhere */
-    }
-
-    /* ─── RESEARCH PAGE CONTENT ─────────────────────── */
-    .container {
-      max-width: 900px;
-      margin: 130px auto 0 auto;
+    /* When this class is added, intro text fades out */
+    .fade-out {
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeIn 1s ease forwards;
-      animation-delay: 2.4s; /* wait for typewriter to finish */
+    }
+
+    /* ─────────────────────────────────────────────────────
+       SCROLL ARROW (positioned below intro text, responsive)
+       ───────────────────────────────────────────────────── */
+    .scroll-arrow {
+      position: absolute;
+      top: calc(52% + 180px);
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: #709fd3;
+      font-size: 1.8rem;
+      z-index: 5;
+      cursor: pointer;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    
+    /* Show scroll arrow immediately if animations are skipped */
+    .scroll-arrow.no-animation {
+      opacity: 1;
+    }
+    
+    /* Only animate if first visit */
+    .scroll-arrow.animate {
+      animation: fadeIn 1s ease-in-out forwards;
+      animation-delay: 3.5s;
+    }
+    
+    .scroll-arrow:hover {
+      color: #ffb896;
+      transform: translate(-50%, -3px);
+    }
+
+    /* ─────────────────────────────────────────────────────
+       TYPEWRITER EFFECT ON THE FIRST LINE
+       ───────────────────────────────────────────────────── */
+    .typewriter-line {
+      display: inline-block;
+      font-family: 'PT Sans', sans-serif;
+      font-weight: 560;
+      font-size: 1.8rem;
+      color: white;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    
+    /* Default state - text visible, no animation */
+    .typewriter-line.no-animation {
+      width: auto;
+      border: none;
+    }
+    
+    /* Animated state - only on first visit */
+    .typewriter-line.animate {
+      border-right: 0.1em solid #bdeafe;
+      width: 0;
+      animation:
+        typing 2.25s steps(13, end) forwards,
+        blink-caret 0.8s step-end infinite;
+    }
+    
+    @keyframes typing {
+      from { width: 0; }
+      to   { width: 13ch; } /* adjust length to match "hi, i'm emily!" */
+    }
+    @keyframes blink-caret {
+      50% { border-color: transparent; }
+    }
+
+    /* ─────────────────────────────────────────────────────
+       FADE-IN FOR THE SECOND LINE (only on page load; no scroll fade)
+       ───────────────────────────────────────────────────── */
+    .fadein-line {
+      display: inline-block;
+      font-family: 'PT Sans', sans-serif;
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: #ffffff;
+    }
+    
+    /* Default state - text visible, no animation */
+    .fadein-line.no-animation {
+      opacity: 1;
+    }
+    
+    /* Animated state - only on first visit */
+    .fadein-line.animate {
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+      animation-delay: 2.5s; /* wait until typing animation finishes */
     }
     
     @keyframes fadeIn {
-      from {
-        opacity: 0; transform: translateY(20px);
-      }
-      to {
-        opacity: 1; transform: translateY(0);
-      }
-    }
-    
-    h1.page-title {
-      text-align: center;
-      margin-bottom: 0.5rem; /* Reduced from 1.5rem */
-      color: #fff;
-      position: relative;
-      height: 2.8rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    /* Orange line below page title - FIXED */
-    h1.page-title + .container .divider {
-      width: 60px;
-      height: 2px;
-      margin: 0.5rem auto 1rem auto; /* Reduced top and bottom margins */
-      background: #ffa97e;
-      display: block; /* Ensure it displays */
+      from { opacity: 0; }
+      to   { opacity: 1; }
     }
 
-    /* Two-column layout (labs and awards) */
-    .main-content {
-      display: flex;
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-    .left-column, .right-column {
-      flex: 1;
+    /* ─────────────────────────────────────────────────────
+       HIGHLIGHTED PHRASES IN ORANGE
+       ───────────────────────────────────────────────────── */
+    .highlight {
+      color: #ffa97e;
     }
 
-    /* Research section boxes */
-    .research-section {
-      margin-bottom: 1.2rem;
-      padding: 1rem;
-      background: rgba(255,255,255,0.03);
-      border-radius: 12px;
-      border: 1px solid rgba(255,169,126,0.2);
-      transition: 0.3s;
+    /* ─────────────────────────────────────────────────────
+       SIDEBAR, SOCIAL ICONS, HOVER STYLES (responsive)
+       ───────────────────────────────────────────────────── */
+    .sidebar {
+      position: fixed;
+      top: 10px;
+      left: -20px; /* Move further left */
+      width: 200px;
+      z-index: 10;
     }
-    .research-section:hover {
-      transform: translateY(-3px);
-      border-color: rgba(255,169,126,0.4);
-      box-shadow: 0 8px 20px rgba(255,169,126,0.1);
-    }
-    .research-question {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-      color: #fff;
-      line-height: 1.4;
-    }
-    .research-question .highlight {
-      color: #ffa97e;
-      font-weight: 600;
-    }
-    .lab-info {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #ffa97e;
-      line-height: 1.3;
-    }
-    .lab-info a.lab-link {
-      color: #ffa97e;
-      font-weight: 600;
-      text-decoration: underline;
-      transition: color 0.3s;
-    }
-    .lab-info a.lab-link:hover {
-      color: #1e90ff;
-    }
-    .lab-info span.uni {
-      color: #fff;
-      font-weight: 400;
-      margin-left: 0.25rem;
+    .sidebar img {
+      display: block;
+      max-width: 600%;
+      height: auto;
     }
 
-    /* Awards & Scholarships box (match height to research boxes) */
-    .awards-section {
-      padding: 1.5rem;
-      background: rgba(255,255,255,0.05);
-      border-radius: 12px;
-      border: 1px solid rgba(112,159,211,0.3);
-      color: #fff;
+    .social-sidebar {
+      position: fixed;
+      top: 150px;
+      right: 37px;
+      height: 400px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      align-items: center;
+      gap: 1px;
+      z-index: 10;
     }
-    .section-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #709fd3;
-      text-align: center;
-      margin-bottom: 1rem; /* spacing below heading */
+    .social-sidebar img {
+      display: block;
+      transform: scale(0.4);
+      transform-origin: center center;
     }
-    .award-list {
-      list-style-type: disc;
-      margin-left: 1.5rem;
+    .social-sidebar a + a {
+      margin-top: 1px;
     }
-    .award-list li {
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
-      line-height: 1.4;
+    .social-sidebar a:hover img {
+      filter: brightness(1.2) drop-shadow(0 0 10px rgba(255,169,126,0.6));
     }
 
-    /* Publications section (full-width below both columns) */
-    .publications-section {
-      margin-top: 2rem;
+    /* ─────────────────────────────────────────────────────
+       FLOWERS SECTION TITLE (responsive)
+       ───────────────────────────────────────────────────── */
+    .flowers-title {
+      position: absolute;
+      top: calc(90vh - 28px);
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-family: 'PT Sans', sans-serif;
+      font-size: 1.4rem;
+      color: #ffffff;
+      z-index: 50;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      width: 90%;
+    }
+    .flowers-title.visible {
+      opacity: 1;
+    }
+
+    /* ─────────────────────────────────────────────────────
+       FLOWER BUTTONS ROW WITH GLOW EFFECTS (responsive)
+       ───────────────────────────────────────────────────── */
+    .flowers-row {
+      position: absolute;
+      top: 90vh;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 1rem;
+      pointer-events: auto;
+      z-index: 500;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      width: 90%;
+      max-width: 800px;
+      box-sizing: border-box;
     }
     
-    /* Hide mobile social wrapper on desktop */
-    .mobile-social-wrapper {
-      display: none;
+    .visible {
+      opacity: 1;
     }
-    .publications-section h2 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #709fd3;
-      text-align: center;
-      margin-bottom: 1rem; /* spacing below heading */
+    .flowers-row a {
+      display: block;
+      position: relative;
+      transition: all 0.3s ease;
+      border-radius: 50px;
+      flex: 1;
+      margin: 0 10px;
     }
-    .publication-list {
-      list-style-type: none;
-      margin-left: 0;
-      padding-left: 0;
+    .flowers-row img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 200px;
+      transform: scale(0.65);
+      transition: all 0.3s ease;
+      filter: brightness(1);
     }
-    .publication-item {
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
-      line-height: 1.4;
+    
+    /* Hover effects for flower buttons */
+    .flowers-row a:hover {
+      transform: translateY(-5px);
     }
-    .publication-item .author-name {
-      font-weight: 700;
-      color: #ffa97e;
+    .flowers-row a:hover img {
+      filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 169, 126, 0.6));
+      transform: scale(0.7);
     }
-    .publication-item .journal-name {
-      font-style: italic;
-      color: #709fd3;
+    
+    .flowers-row a:nth-child(1) img {
+      margin-top: 20px;
+    }
+    .flowers-row a:nth-child(2) img {
+      margin-top: 0;
+    }
+    .flowers-row a:nth-child(3) img {
+      margin-top: 40px;
     }
 
     /* ─────────────────────────────────────────────────────
@@ -361,6 +441,14 @@
     
     /* Tablets */
     @media screen and (max-width: 1024px) {
+      .sidebar {
+        width: 150px;
+        left: -15px; /* Also move left on tablets */
+      }
+      .sidebar img {
+        max-width: 500%;
+      }
+      
       .social-sidebar {
         right: 20px;
         top: 120px;
@@ -369,29 +457,24 @@
         transform: scale(0.35);
       }
       
-      .home-nav {
-        left: 40px;
-        width: 45px;
-        height: 45px;
+      .intro-text {
+        font-size: 1.2rem;
+        width: 70%; /* Slightly wider on tablets */
+        max-width: 700px;
       }
       
       .typewriter-line {
         font-size: 1.6rem;
       }
       
-      .research-question {
-        font-size: 1.1rem;
-      }
-      
-      .main-content {
-        gap: 1.5rem;
+      .fadein-line {
+        font-size: 1.2rem;
       }
     }
     
     /* Mobile devices */
     @media screen and (max-width: 768px) {
       body {
-        padding: 1rem;
         padding-top: 4rem;
       }
       
@@ -401,276 +484,283 @@
         display: none;
       }
       
-      /* Mobile header with full-width background */
+      header {
+        top: 30px;
+        width: 95%;
+        max-width: 300px;
+      }
+      
+      /* Hide sidebar art on mobile - remove completely */
+      .sidebar {
+        display: none;
+      }
+      
+      /* Simple header background for mobile - full width from top */
       header {
         background: linear-gradient(to bottom, rgba(36, 29, 24, 0.98) 0%, rgba(36, 29, 24, 0.85) 40%, rgba(36, 29, 24, 0.3) 80%, transparent 100%);
         padding: 10px;
-        padding-top: 20px;
-        border-radius: 0;
-        width: 100vw;
-        max-width: none;
-        left: 0;
-        top: 0;
-        transform: none;
+        padding-top: 20px; /* Extra padding from top */
+        border-radius: 0; /* Remove border radius for full width */
+        width: 100vw; /* Full screen width */
+        max-width: none; /* Remove max-width constraint */
+        left: 0; /* Align to left edge */
+        top: 0; /* Start from very top */
+        transform: none; /* Remove centering transform */
         display: flex;
-        justify-content: center;
-        height: 120px;
-        align-items: center;
+        justify-content: center; /* Center the logo inside */
+        height: 120px; /* Set specific height for gradient effect */
+        align-items: center; /* Center logo vertically */
       }
       
-      /* Home button positioned to avoid header collision */
-      .home-nav {
-        top: 30px;
-        left: 15px; /* Moved further left */
-        width: 40px;
-        height: 40px;
-        z-index: 150; /* Above header */
-      }
-      .home-nav::before {
-        border-top: 6px solid transparent;
-        border-bottom: 6px solid transparent;
-        border-right: 10px solid #709fd3;
-      }
-      
-      /* Social icons at absolute bottom with heavy overlap */
       .social-sidebar {
-        position: fixed;
-        bottom: 20px; /* Absolute bottom positioning */
+        position: absolute;
+        top: calc(85vh + 80px); /* Start higher for vertical layout */
         left: 50%;
         transform: translateX(-50%);
-        flex-direction: column;
+        flex-direction: column; /* Vertical line down middle */
         height: auto;
         width: auto;
         justify-content: center;
-        gap: 0;
-        z-index: 600;
+        gap: 0; /* Reset gap to 0 */
+        z-index: 600; /* Above flowers */
       }
-      .social-sidebar.mobile-only a {
+      .social-sidebar a {
         margin: 0 !important;
-        margin-top: -70px !important; /* Same heavy overlap as homepage */
+        margin-top: -70px !important; /* Much more overlap - 40px */
       }
-      .social-sidebar.mobile-only a:first-child {
+      .social-sidebar a:first-child {
         margin-top: 0 !important; /* First icon has no negative margin */
       }
-      .social-sidebar.mobile-only img {
-        transform: scale(0.3); /* Same scale as homepage */
+      .social-sidebar img {
+        transform: scale(0.3); /* Slightly bigger for bottom placement */
       }
       
-      /* Adjust typewriter and content positioning - reduced spacing */
-      .typewriter-line { 
-        font-size: 1.4rem; 
-        margin-top: 140px; /* Reduced from 180px */
+      /* Alternative mobile fade options - choose one: */
+      
+      /* OPTION 1: Blur fade instead of opacity */
+      .intro-text.fade-blur {
+        filter: blur(2px);
+        opacity: 0.7;
       }
       
-      .container {
-        margin-top: 160px; /* Reduced from 200px */
-        padding: 0 10px;
+      /* OPTION 2: Scale down fade */
+      .intro-text.fade-scale {
+        transform: translate(-50%, -50%) scale(0.95);
+        opacity: 0.8;
       }
       
-      /* Stack columns on mobile */
-      .main-content {
-        display: block;
-        gap: 0;
+      /* OPTION 3: Text shadow fade */
+      .intro-text.fade-shadow {
+        text-shadow: 0 0 20px rgba(36, 29, 24, 0.8);
+        opacity: 0.9;
       }
       
-      .left-column, .right-column {
-        margin-bottom: 2rem;
+      /* OPTION 4: Margin push fade (moves text up) - ACTIVE */
+      .intro-text.fade-push {
+        transform: translate(-50%, -60%) !important;
+        opacity: 0.85 !important;
       }
       
-      /* Adjust text sizes for mobile */
-      .research-question { 
-        font-size: 1rem; 
+      /* Current: Background overlay fade */
+      .intro-text::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(transparent 0%, transparent 60%, rgba(36, 29, 24, 0.8) 90%, rgba(36, 29, 24, 0.95) 100%);
+        pointer-events: none;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.5s ease;
       }
       
-      .lab-info, .award-list li, .publication-item { 
-        font-size: 0.9rem; 
+      .intro-text.fade-background::before {
+        opacity: 1;
       }
       
-      .section-title {
+      /* Remove text fade on mobile - keep text always visible */
+      .intro-text {
+        top: 45%;
+        font-size: 1.1rem;
+        width: 95%;
+        padding: 0 15px;
+        opacity: 1 !important; /* Always visible on mobile */
+        transform: translate(-50%, -50%) !important; /* Always centered */
+        transition: all 0.5s ease !important; /* Enable transitions */
+      }
+      
+      /* OPTION 4: Push fade effect for mobile */
+      .intro-text.fade-push {
+        transform: translate(-50%, -60%) !important;
+        opacity: 0.85 !important;
+      }
+      
+      .typewriter-line {
+        font-size: 1.4rem;
+      }
+      
+      .fadein-line {
+        font-size: 1.1rem;
+      }
+      
+      .scroll-arrow {
+        top: calc(45% + 200px);
         font-size: 1.5rem;
       }
       
-      .publications-section h2 {
-        font-size: 1.5rem;
+      .flowers-title {
+        font-size: 1.2rem;
+        top: calc(85vh - 28px);
       }
       
-      /* Remove header fade on mobile */
-      .header-fade {
-        display: none;
+      .flowers-row {
+        top: 85vh;
+        flex-direction: row; /* Keep flowers in a row */
+        align-items: center;
+        width: 95%;
+        gap: 5px; /* Smaller gap between flowers */
+      }
+      
+      .flowers-row a {
+        margin: 0;
+        width: 30%; /* Smaller flower buttons */
+        max-width: 120px; /* Much smaller max width */
+      }
+      
+      .flowers-row img {
+        transform: scale(0.5); /* Much smaller flowers */
+      }
+      
+      .flowers-row a:nth-child(1) img,
+      .flowers-row a:nth-child(2) img,
+      .flowers-row a:nth-child(3) img {
+        margin-top: 0;
       }
     }
     
     /* Small mobile devices */
     @media screen and (max-width: 480px) {
-      .typewriter-line { 
-        font-size: 1.6rem; /* Bigger on small mobile too */
-        margin-top: 160px;
+      .intro-text {
+        font-size: 1rem;
+        padding: 0 10px;
       }
       
-      .container {
-        margin-top: 180px;
-        padding: 0 5px;
+      .typewriter-line {
+        font-size: 1.2rem;
       }
       
-      .research-question { 
-        font-size: 0.95rem; 
+      .fadein-line {
+        font-size: 1rem;
       }
       
-      .lab-info, .award-list li, .publication-item { 
-        font-size: 0.85rem; 
+      .flowers-row a {
+        width: 90%;
       }
       
-      .home-nav {
-        width: 35px;
-        height: 35px;
-        left: 15px;
-        top: 25px;
-      }
-      
-      .social-sidebar a {
-        margin-top: -60px !important; /* Slightly less overlap on very small screens */
+      .flowers-row img {
+        transform: scale(0.9);
       }
     }
     
     /* Landscape mobile orientation */
     @media screen and (max-height: 500px) and (orientation: landscape) {
+      .intro-text {
+        top: 40%;
+        font-size: 0.9rem;
+      }
+      
       .typewriter-line {
-        margin-top: 120px;
         font-size: 1.1rem;
       }
       
-      .container {
-        margin-top: 140px;
+      .scroll-arrow {
+        top: calc(40% + 150px);
       }
       
-      .social-sidebar {
-        bottom: 15px; /* Stay at absolute bottom on small screens */
+      .flowers-title {
+        top: calc(80vh - 28px);
+      }
+      
+      .flowers-row {
+        top: 80vh;
+        flex-direction: row;
+      }
+      
+      .flowers-row a {
+        width: 30%;
       }
     }
   </style>
 </head>
 
 <body>
-  <!-- Glowing cursor effect -->
+  <!-- GLOWING CURSOR -->
   <div class="cursor-glow" id="cursor-glow"></div>
-  <!-- Gradient overlay for fade effect -->
-  <div class="header-fade"></div>
 
-  <!-- Fixed header (logo) -->
+  <!-- METEOR SHOWER OVERLAY -->
+  <div class="meteor-shower-overlay" id="meteor-shower-overlay"></div>
+
+  <!-- HEADER -->
   <header>
     <img src="images/name.gif" alt="name logo" class="logo"/>
   </header>
 
-  <!-- Home navigation arrow -->
-  <div class="home-nav" onclick="window.location.href='index.html'" title="Return to Home">
-  </div>
+  <!-- LEFT SIDEBAR (removed on mobile) -->
+  <aside class="sidebar">
+    <img src="images/sidebar_art.PNG" alt="sidebar art"/>
+  </aside>
 
-  <!-- RIGHT SOCIAL ICONS - REMOVED -->
-  <!-- Social icons completely removed from research page -->
+  <!-- RIGHT SOCIAL ICONS -->
+  <aside class="social-sidebar">
+    <a href="https://www.linkedin.com/in/emily-xing-5663ab266/" target="_blank">
+      <img src="images/icon_linkedin.PNG" alt="LinkedIn icon">
+    </a>
+    <a href="mailto:emletxing@gmail.com">
+      <img src="images/icon_mail.PNG" alt="Email icon">
+    </a>
+    <a href="#" id="shooting-star-btn">
+      <img src="images/icon_shooting_star.PNG" alt="Star icon">
+    </a>
+  </aside>
 
-  <!-- Research page content -->
-  <h1 class="page-title">
-      <span id="research-typewriter" class="typewriter-line">research</span>
-    </h1>
-  <div class="container" id="main-container">
-    
-    <div class="divider"></div>
-
-    <div class="main-content">
-      <!-- LEFT COLUMN: Research Topics -->
-      <div class="left-column">
-        <div class="research-section">
-          <div class="research-question">
-            Are recent design changes on big social media actually improving user 
-            <span class="highlight">digital well-being</span>?
-          </div>
-          <div class="lab-info">
-            <a href="https://hsph.harvard.edu/research/health-happiness/" class="lab-link" target="_blank">
-              Viswanath Lab</a>
-            <span class="uni">@ Harvard T.H. Chan SPH</span>
-          </div>
-        </div>
-
-        <div class="research-section">
-          <div class="research-question">
-            How do we close 
-            <span class="highlight">tobacco control policy gaps</span> 
-            in media, packaging, and enforcement?
-          </div>
-          <div class="lab-info">
-            <a href="https://publichealth.jhu.edu/institute-for-global-tobacco-control" class="lab-link" target="_blank">
-              Institute for Global Tobacco Control</a>
-            <span class="uni">@ JHU Bloomberg SPH</span>
-          </div>
-        </div>
-
-        <div class="research-section">
-          <div class="research-question">
-            How can 
-            <span class="highlight">human-computer interaction</span> 
-            restore urban justice in New York's marginalized communities?
-          </div>
-          <div class="lab-info">
-            <a href="https://ceal.cs.columbia.edu/people/" class="lab-link" target="_blank">
-              Computer-Enabled Abilities Lab</a>
-            <span class="uni">@ Columbia SEAS</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT COLUMN: Awards & Scholarships -->
-      <div class="right-column">
-        <div class="awards-section">
-          <h2 class="section-title">Awards &amp; Scholarships</h2>
-          <ul class="award-list">
-            <li>2025 Columbia-Amazon Summer Research Undergraduate Experience (SURE) Fellow</li>
-            <li>2024 Harvard-China Project Summer Undergraduate Research Assistantship @ Tsinghua University</li>
-            <li>2024 Harvard Research Program Award</li>
-            <li>2023 Regeneron Talent Search Scholar</li>
-            <li>2023 Institute for Global Tobacco Control Distinguished Student Researcher</li>
-            <li>2023, 2022 NSF Research Experience & Mentoring (REM) Program Fellow @ Johns Hopkins University</li>
-          </ul>
-        </div>
-      </div>
+  <!-- INTRO TEXT (with typewriter + fade-in on page load on second line) -->
+  <div id="intro-text-container" class="intro-text">
+    <div id="typewriter-text" class="intro-line typewriter-line">
+      hi, i'm emily!
     </div>
-
-    <!-- PUBLICATIONS SECTION (full-width below both columns) -->
-    <div class="publications-section">
-      <h2>Publications</h2>
-      <ul class="publication-list">
-        <li class="publication-item">
-          <span class="author-name">Xing, E.</span>, Dai, Z., Madar, A., Welding, K., Clegg Smith, K., Cohen, J. (2023). 
-          The problematic use of cultural symbols on Chinese cigarette packs. 
-          <span class="journal-name">Tobacco-Induced Diseases</span>.
-        </li>
-        <li class="publication-item">
-          <span class="author-name">Xing, E.</span>, Kim, S., Cohen, J., Tseng, T.Y. (2025). 
-          Content analysis of media coverage on smoke-free policy implementation in ten LMICs [Conference]. 
-          <span class="journal-name">World Conference on Tobacco Control</span>.
-        </li>
-        <li class="publication-item">
-          Liu, Y., <span class="author-name">Xing, E.</span>*, Huang, S.*, Kasisomayajula, V. (2025). 
-          The content, impact, and coverage of social media platform-led digital well-being design changes [Conference]. 
-          <span class="journal-name">International Conference on Computational Social Science; Trust and Safety Research Conference; The Society for Personality and Social Psychology's Annual Convention</span>.
-        </li>
-        <li class="publication-item">
-          Nian, Q., Kennedy, R., Schotte, K., Gouda, H., Kataria, S., <span class="author-name">Xing, E.</span>, Welding, K. (2025). 
-          State of the evidence on economic impacts of smoke-free policies in the tourism sector: A narrative literature review. Under review @ 
-          <span class="journal-name">Tobacco-Induced Diseases</span>.
-        </li>
-        <li class="publication-item">
-          Lu, X., Yin, Z., Nielsen, C., Cui, R. Y., Ou, Y., <span class="author-name">Xing, E.</span>, Han, M., Shi, M., Ruan, Z., Wang, J., Su, Y., Zhang, C., Bian, S., Zhou, W., Li, J., He, K., McElroy, M. B. (2025). 
-          Mitigating inequity risks in China's net-zero energy transition via an enhanced renewable-guided industrial spatial reconfiguration. Under review @ 
-          <span class="journal-name">National Science Review</span>.
-        </li>
-        <li class="publication-item">
-          Wang, J., Lu, X., Wang, H., Ou, Y., Wang, J., Tong, D., Li, Y., Ruan, Z., Yin, Z., Zhou, W., McLellan, B., <span class="author-name">Xing, E.</span>, MacLennan, A. M., Fan, J., Zhang, X., McElroy, M. B., He, K. (2025). 
-          Reassessing immediate coal phase-out: Dual imperatives of capacity control and renewables expansion in China's carbon neutral strategy. Under review @ 
-          <span class="journal-name">Nexus</span>.
-        </li>
-      </ul>
+    <div id="fadein-text" class="intro-line fadein-line">
+      i'm a student @ harvard studying 
+      <span class="highlight">applied math &amp; global health</span>. 
+      beyond <span class="highlight">health justice,</span> i spend my time exploring 
+      <span class="highlight">things we've built</span>—urban &amp; digital spaces, social infrastructure, art.<br><br>
+      <span class="highlight">tell me about:</span> your matcha &amp; music recs, fave chess gambits, takes on "making impact" &amp; "being human."
     </div>
   </div>
+
+  <!-- SCROLL ARROW -->
+  <div class="scroll-arrow" id="scroll-arrow" title="Scroll to explore">
+    ↓
+  </div>
+
+  <!-- FLOWERS SECTION TITLE -->
+  <div class="flowers-title" id="flowers-title">
+    flowers i'm growing ❀༉‧₊˚
+  </div>
+
+  <!-- FLOWER BUTTONS ROW -->
+  <section class="flowers-row">
+    <a href="flower_research.html" onclick="markPageVisited(); console.log('Research flower clicked!'); return true;">
+      <img src="images/flower_research.PNG" alt="Flower Research">
+    </a>
+    <a href="flower_writing.html" onclick="markPageVisited();">
+      <img src="images/flower_writing.PNG" alt="Flower Writing">
+    </a>
+    <a href="flower_scrapbook.html" onclick="markPageVisited();">
+      <img src="images/flower_scrapbook.PNG" alt="Flower Scrapbook">
+    </a>
+  </section>
 
   <!-- SITE FOOTER -->
   <footer class="site-footer">
@@ -678,57 +768,198 @@
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const cursorGlow = document.getElementById('cursor-glow');
-      const typewriter = document.getElementById('research-typewriter');
-      const isMobile = window.innerWidth <= 768;
-      let lastTime = 0;
-      const interval = 150;
-
-      // Only trigger typewriter animation on desktop
-      if (!isMobile && typewriter) {
-        typewriter.classList.add('animate');
+    // Function to mark page as visited
+    function markPageVisited() {
+      const visited = JSON.stringify({ visited: true, timestamp: Date.now() });
+      document.cookie = `homepage_visited=${visited}; path=/; max-age=86400`; // 24 hours
+    }
+    
+    // Function to check if page was visited
+    function hasVisited() {
+      const cookies = document.cookie.split(';');
+      for (let cookie of cookies) {
+        const [name, value] = cookie.trim().split('=');
+        if (name === 'homepage_visited') {
+          try {
+            const data = JSON.parse(value);
+            // Check if visit was within last 24 hours
+            return data.visited && (Date.now() - data.timestamp < 86400000);
+          } catch (e) {
+            return false;
+          }
+        }
       }
+      return false;
+    }
 
-      // Sparkle trail on mouse move (only on desktop)
+    document.addEventListener('DOMContentLoaded', () => {
+      const introContainer = document.getElementById('intro-text-container');
+      const flowersRow     = document.querySelector('.flowers-row');
+      const flowersTitle   = document.getElementById('flowers-title');
+      const cursorGlow     = document.getElementById('cursor-glow');
+      const scrollArrow    = document.getElementById('scroll-arrow');
+      const typewriterText = document.getElementById('typewriter-text');
+      const fadeinText     = document.getElementById('fadein-text');
+      const shootingStarBtn = document.getElementById('shooting-star-btn');
+      const meteorOverlay  = document.getElementById('meteor-shower-overlay');
+      
+      // Check if this is a return visit
+      const isReturnVisit = hasVisited();
+      
+      if (isReturnVisit) {
+        // Skip animations - show everything immediately
+        typewriterText.classList.add('no-animation');
+        fadeinText.classList.add('no-animation');
+        scrollArrow.classList.add('no-animation');
+      } else {
+        // First visit - run animations
+        typewriterText.classList.add('animate');
+        fadeinText.classList.add('animate');
+        scrollArrow.classList.add('animate');
+        
+        // Mark as visited after animations complete
+        setTimeout(() => {
+          markPageVisited();
+        }, 4000);
+      }
+      
+      let lastSparkleTime = 0;
+      const sparkleInterval = 150; // milliseconds between sparkles
+      
+      // Cursor glow following mouse movement with sparkle trail (only on desktop)
       if (window.innerWidth > 768) {
         document.addEventListener('mousemove', (e) => {
           cursorGlow.style.left = e.clientX + 'px';
           cursorGlow.style.top = e.clientY + 'px';
-
+          
+          // Create sparkle trail - but not too frequently
           const now = Date.now();
-          if (now - lastTime > interval) {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sparkle';
-            const offsetX = (Math.random() - 0.5) * 20;
-            const offsetY = (Math.random() - 0.5) * 20;
-            sparkle.style.left = (e.clientX + offsetX) + 'px';
-            sparkle.style.top = (e.clientY + offsetY) + 'px';
-            document.body.appendChild(sparkle);
-            setTimeout(() => sparkle.remove(), 1200);
-            lastTime = now;
-          }
-        });
-
-        // Remove the cursor after typing animation completes (desktop only)
-        setTimeout(() => {
-          if (typewriter) {
-            typewriter.classList.add('typing-complete');
-          }
-        }, 2500);
-
-        // Fade out the "Research" title on scroll (desktop only)
-        window.addEventListener('scroll', () => {
-          if (typewriter) {
-            const titleRect = typewriter.getBoundingClientRect();
-            if (titleRect.top <= 100) {
-              typewriter.classList.add('fade-out');
-            } else {
-              typewriter.classList.remove('fade-out');
-            }
+          if (now - lastSparkleTime > sparkleInterval) {
+            createSparkle(e.clientX, e.clientY);
+            lastSparkleTime = now;
           }
         });
       }
+      
+      // Smooth scroll to flowers when arrow is clicked
+      scrollArrow.addEventListener('click', () => {
+        flowersRow.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'center'
+        });
+      });
+      
+      // Shooting star meteor shower effect
+      shootingStarBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        startMeteorShower();
+      });
+      
+      function startMeteorShower() {
+        meteorOverlay.classList.add('active');
+        
+        // Create just one elegant shooting star
+        createShootingStar();
+        
+        // End the effect after 2 seconds
+        setTimeout(() => {
+          meteorOverlay.classList.remove('active');
+          // Clean up the shooting star
+          const stars = meteorOverlay.querySelectorAll('.shooting-star');
+          stars.forEach(star => star.remove());
+        }, 2000);
+      }
+      
+      function createShootingStar() {
+        const star = document.createElement('div');
+        star.className = 'shooting-star';
+        
+        // Start from top-left area
+        const startX = Math.random() * 200; // top-left quadrant
+        const startY = Math.random() * 200;
+        
+        star.style.left = startX + 'px';
+        star.style.top = startY + 'px';
+        
+        meteorOverlay.appendChild(star);
+        
+        // Remove star after animation (1.5s + buffer)
+        setTimeout(() => {
+          if (star.parentNode) {
+            star.parentNode.removeChild(star);
+          }
+        }, 1600);
+      }
+      
+      // Close meteor shower when clicking the overlay
+      meteorOverlay.addEventListener('click', () => {
+        meteorOverlay.classList.remove('active');
+        const stars = meteorOverlay.querySelectorAll('.shooting-star');
+        stars.forEach(star => star.remove());
+      });
+      
+      function createSparkle(x, y) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        
+        // Add slight random offset so sparkles don't all appear in exact same spot
+        const offsetX = (Math.random() - 0.5) * 20;
+        const offsetY = (Math.random() - 0.5) * 20;
+        
+        sparkle.style.left = (x + offsetX) + 'px';
+        sparkle.style.top = (y + offsetY) + 'px';
+        
+        document.body.appendChild(sparkle);
+        
+        // Remove sparkle after animation completes
+        setTimeout(() => {
+          if (sparkle.parentNode) {
+            sparkle.parentNode.removeChild(sparkle);
+          }
+        }, 1200);
+      }
+      
+      function fadeOutIntro() {
+        introContainer.classList.add('fade-out');
+      }
+
+      function fadeInIntro() {
+        introContainer.classList.remove('fade-out');
+      }
+
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const introRect = introContainer.getBoundingClientRect();
+        const flowersRect = flowersRow.getBoundingClientRect();
+        const isMobile = window.innerWidth <= 768;
+        
+        if (isMobile) {
+          // On mobile: add push fade instead of text fade
+          const fadeThreshold = 350;
+          if (introRect.top <= fadeThreshold) {
+            introContainer.classList.add('fade-push');
+          } else {
+            introContainer.classList.remove('fade-push');
+          }
+        } else {
+          // On desktop: keep original text fade
+          const fadeThreshold = 200;
+          if (introRect.top <= fadeThreshold) {
+            fadeOutIntro();
+          } else {
+            fadeInIntro();
+          }
+        }
+
+        // Flowers row & title: fade in when they come into view
+        if (flowersRect.top <= window.innerHeight * 0.8) {
+          flowersRow.classList.add('visible');
+          flowersTitle.classList.add('visible');
+        } else {
+          flowersRow.classList.remove('visible');
+          flowersTitle.classList.remove('visible');
+        }
+      });
     });
   </script>
 </body>
