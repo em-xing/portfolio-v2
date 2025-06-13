@@ -171,7 +171,7 @@
     }
     
     .firefly.active {
-      animation: fireflyUpDown 2.5s ease-in-out forwards;
+      animation: fireflyUpDown 1.8s ease-in-out forwards;
     }
     
     @keyframes fireflyUpDown {
@@ -870,12 +870,12 @@
           }, i * 300); // Stagger when each one starts its up/down motion
         }
         
-        // End the effect after 4 seconds (longer to account for staggered starts)
+        // End the effect after 3 seconds (shorter duration)
         setTimeout(() => {
           auroraOverlay.classList.remove('active');
           const fireflies = auroraOverlay.querySelectorAll('.firefly');
           fireflies.forEach(firefly => firefly.remove());
-        }, 4000);
+        }, 3000);
       }
       
       function createFirefly() {
@@ -899,7 +899,7 @@
           if (firefly.parentNode) {
             firefly.parentNode.removeChild(firefly);
           }
-        }, 2600);
+        }, 2000);
       }
       
       // Close aurora when clicking the overlay
