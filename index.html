@@ -86,24 +86,27 @@
        ───────────────────────────────────────────────────── */
     .wip-message {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       background: rgba(36, 29, 24, 0.95);
       color: #ffffff;
       font-family: 'PT Sans', sans-serif;
       font-size: 1.2rem;
-      padding: 20px 30px;
+      padding: 15px 20px;
       border-radius: 10px;
       border: 2px solid #ffa97e;
       z-index: 10000;
       text-align: center;
-      display: none;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.3s ease;
       box-shadow: 0 0 30px rgba(255, 169, 126, 0.3);
+      pointer-events: none;
+      white-space: nowrap;
     }
     
     .wip-message.show {
-      display: block;
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
     }
 
     /* ─────────────────────────────────────────────────────
@@ -486,15 +489,14 @@
         height: auto;
         width: 95%;
         max-width: 800px;
-        justify-content: space-between;
-        gap: 0;
+        justify-content: center;
+        gap: -60px;
         z-index: 600;
         padding: 1rem;
         box-sizing: border-box;
       }
       .social-sidebar a {
-        margin: 0 !important;
-        flex: 1;
+        margin: 0 -60px !important;
         display: flex;
         justify-content: center;
       }
@@ -773,16 +775,21 @@
       // Show work in progress message when star is clicked
       shootingStarBtn?.addEventListener('click', (e) => {
         e.preventDefault();
-        showWipMessage();
+        showWipMessage(e.target);
       });
       
-      function showWipMessage() {
+      function showWipMessage(iconElement) {
+        // Position the message to the left of the clicked icon
+        const iconRect = iconElement.getBoundingClientRect();
+        wipMessage.style.top = (iconRect.top + iconRect.height / 2 - wipMessage.offsetHeight / 2) + 'px';
+        wipMessage.style.left = (iconRect.left - wipMessage.offsetWidth - 15) + 'px';
+        
         wipMessage.classList.add('show');
         
-        // Hide message after 2 seconds
+        // Hide message after 2.5 seconds
         setTimeout(() => {
           wipMessage.classList.remove('show');
-        }, 2000);
+        }, 2500);
       }
       
       // Hide message when clicking on it
