@@ -82,111 +82,28 @@
     }
 
     /* ─────────────────────────────────────────────────────
-       ENHANCED AURORA AND FIREFLIES EFFECT
+       WORK IN PROGRESS MESSAGE
        ───────────────────────────────────────────────────── */
-    .aurora-overlay {
+    .wip-message {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.3); /* More visible overlay */
-      z-index: 1; /* Behind most content but visible */
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(36, 29, 24, 0.95);
+      color: #ffffff;
+      font-family: 'PT Sans', sans-serif;
+      font-size: 1.2rem;
+      padding: 20px 30px;
+      border-radius: 10px;
+      border: 2px solid #ffa97e;
+      z-index: 10000;
+      text-align: center;
+      display: none;
+      box-shadow: 0 0 30px rgba(255, 169, 126, 0.3);
     }
     
-    .aurora-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    
-    /* More visible aurora background */
-    .aurora {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        45deg,
-        rgba(100, 200, 255, 0.12) 0%,
-        rgba(150, 255, 200, 0.15) 25%,
-        rgba(200, 150, 255, 0.13) 50%,
-        rgba(255, 180, 200, 0.14) 75%,
-        rgba(150, 220, 255, 0.12) 100%
-      );
-      opacity: 0;
-      animation: auroraShow 1s ease-in-out forwards;
-    }
-    
-    .aurora::before {
-      content: '';
-      position: absolute;
-      top: -25%;
-      left: -25%;
-      width: 150%;
-      height: 150%;
-      background: 
-        radial-gradient(ellipse at 30% 20%, rgba(100, 255, 200, 0.2) 0%, transparent 40%),
-        radial-gradient(ellipse at 70% 80%, rgba(255, 150, 255, 0.18) 0%, transparent 45%),
-        radial-gradient(ellipse at 20% 70%, rgba(150, 200, 255, 0.15) 0%, transparent 50%);
-      animation: auroraFlow 4s ease-in-out infinite;
-      transform-origin: center;
-    }
-    
-    @keyframes auroraShow {
-      0% {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-    
-    @keyframes auroraFlow {
-      0%, 100% {
-        transform: translateX(-8%) translateY(-5%) rotate(-1deg);
-        opacity: 0.6;
-      }
-      50% {
-        transform: translateX(5%) translateY(8%) rotate(1deg);
-        opacity: 1;
-      }
-    }
-    
-    /* Simple fireflies - just float up then down */
-    .firefly {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      background: radial-gradient(circle, rgba(255, 240, 150, 1) 0%, rgba(255, 220, 120, 0.8) 50%, transparent 80%);
-      border-radius: 50%;
-      opacity: 0;
-      box-shadow: 0 0 10px rgba(255, 240, 150, 0.8), 0 0 20px rgba(255, 220, 120, 0.4);
-      z-index: 2;
-    }
-    
-    .firefly.active {
-      animation: fireflyUpDown 1.8s ease-in-out forwards;
-    }
-    
-    @keyframes fireflyUpDown {
-      0% {
-        opacity: 0;
-        transform: translateY(0px);
-      }
-      50% {
-        opacity: 1;
-        transform: translateY(-200px);
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(0px);
-      }
+    .wip-message.show {
+      display: block;
     }
 
     /* ─────────────────────────────────────────────────────
@@ -565,19 +482,21 @@
         top: calc(85vh + 80px);
         left: 50%;
         transform: translateX(-50%);
-        flex-direction: column;
+        flex-direction: row;
         height: auto;
-        width: auto;
-        justify-content: center;
+        width: 95%;
+        max-width: 800px;
+        justify-content: space-between;
         gap: 0;
         z-index: 600;
+        padding: 1rem;
+        box-sizing: border-box;
       }
       .social-sidebar a {
         margin: 0 !important;
-        margin-top: -40px !important;
-      }
-      .social-sidebar a:first-child {
-        margin-top: 0 !important;
+        flex: 1;
+        display: flex;
+        justify-content: center;
       }
       .social-sidebar img {
         transform: scale(0.3);
@@ -700,9 +619,9 @@
   <!-- GLOWING CURSOR -->
   <div class="cursor-glow" id="cursor-glow"></div>
 
-  <!-- AURORA AND FIREFLIES OVERLAY -->
-  <div class="aurora-overlay" id="aurora-overlay">
-    <div class="aurora"></div>
+  <!-- WORK IN PROGRESS MESSAGE -->
+  <div class="wip-message" id="wip-message">
+    work in progress :)
   </div>
 
   <!-- HEADER -->
@@ -801,7 +720,7 @@
       const typewriterText = document.getElementById('typewriter-text');
       const fadeinText     = document.getElementById('fadein-text');
       const shootingStarBtn = document.getElementById('shooting-star-btn');
-      const auroraOverlay  = document.getElementById('aurora-overlay');
+      const wipMessage     = document.getElementById('wip-message');
       
       // Check if this is a return visit
       const isReturnVisit = hasVisited();
@@ -851,62 +770,24 @@
         });
       });
       
-      // Aurora and fireflies effect
+      // Show work in progress message when star is clicked
       shootingStarBtn?.addEventListener('click', (e) => {
         e.preventDefault();
-        startAuroraEffect();
+        showWipMessage();
       });
       
-      startAuroraEffect();
-      
-      function startAuroraEffect() {
-        auroraOverlay.classList.add('active');
+      function showWipMessage() {
+        wipMessage.classList.add('show');
         
-        // Create fireflies with staggered timing for up/down motion
-        const numFireflies = 6;
-        for (let i = 0; i < numFireflies; i++) {
-          setTimeout(() => {
-            createFirefly();
-          }, i * 300); // Stagger when each one starts its up/down motion
-        }
-        
-        // End the effect after 3 seconds (shorter duration)
+        // Hide message after 2 seconds
         setTimeout(() => {
-          auroraOverlay.classList.remove('active');
-          const fireflies = auroraOverlay.querySelectorAll('.firefly');
-          fireflies.forEach(firefly => firefly.remove());
-        }, 3000);
-      }
-      
-      function createFirefly() {
-        const firefly = document.createElement('div');
-        firefly.className = 'firefly';
-        
-        // Random horizontal position across screen
-        const startX = Math.random() * (window.innerWidth - 100) + 50;
-        const startY = window.innerHeight - 30; // Start from bottom
-        
-        firefly.style.left = startX + 'px';
-        firefly.style.top = startY + 'px';
-        
-        auroraOverlay.appendChild(firefly);
-        
-        // Start animation
-        firefly.classList.add('active');
-        
-        // Remove after animation
-        setTimeout(() => {
-          if (firefly.parentNode) {
-            firefly.parentNode.removeChild(firefly);
-          }
+          wipMessage.classList.remove('show');
         }, 2000);
       }
       
-      // Close aurora when clicking the overlay
-      auroraOverlay?.addEventListener('click', () => {
-        auroraOverlay.classList.remove('active');
-        const fireflies = auroraOverlay.querySelectorAll('.firefly');
-        fireflies.forEach(firefly => firefly.remove());
+      // Hide message when clicking on it
+      wipMessage?.addEventListener('click', () => {
+        wipMessage.classList.remove('show');
       });
       
       function createSparkle(x, y) {
@@ -971,21 +852,6 @@
           flowersTitle.classList.remove('visible');
         }
       });
-      
-      // DEBUG: Force trigger animation for testing (remove in production)
-      window.debugTypewriter = () => {
-        console.log('🧪 DEBUG: Forcing typewriter animation');
-        typewriterText?.classList.remove('no-animation', 'animate');
-        setTimeout(() => {
-          typewriterText?.classList.add('animate');
-        }, 100);
-      };
-      
-      // DEBUG: Test aurora effect (remove in production)  
-      window.debugAurora = () => {
-        console.log('🧪 DEBUG: Forcing aurora effect');
-        startAuroraEffect();
-      };
     });
   </script>
 </body>
