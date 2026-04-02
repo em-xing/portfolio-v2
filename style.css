@@ -387,6 +387,27 @@ a.read:hover { opacity: 1; }
 
 .hero-meta { font-variation-settings: 'MONO' 1,'CASL' 0,'wght' 380,'slnt' 0; font-size: 7.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--mid); margin-top: 14px; padding-top: 12px; border-top: var(--bd); display: flex; flex-wrap: wrap; gap: 4px 10px; }
 .byline    { font-variation-settings: 'MONO' 1,'CASL' 0,'wght' 380,'slnt' 0; font-size: 7.5px; letter-spacing: 0.15em; color: var(--mid); text-transform: uppercase; margin-top: 20px; padding-top: 10px; border-top: var(--bd); display: flex; gap: 10px; flex-wrap: wrap; }
+/* Override Leaflet tiles to feel film-like in dark mode */
+#map { filter: saturate(0.7) brightness(0.85) sepia(0.15); }
+body.light #map { filter: saturate(0.8) brightness(1.0) sepia(0.08); }
+.leaflet-popup-content-wrapper {
+  background: var(--bg2);
+  border: var(--bds);
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--ink);
+  font-family: 'Recursive', sans-serif;
+  font-size: 12px;
+}
+.leaflet-popup-tip { background: var(--bg2); }
+.leaflet-popup-content { margin: 10px 14px; line-height: 1.6; }
+.leaflet-popup-content strong { color: var(--teal2); font-size: 13px; }
+.leaflet-popup-content p { color: var(--mid); font-size: 11.5px; margin: 2px 0 0; }
+.leaflet-control-zoom a {
+  background: var(--bg2) !important;
+  color: var(--mid) !important;
+  border-color: var(--bds) !important;
+}
 
 /* footer */
 .pal-row { display: flex; border-top: var(--bds); }
