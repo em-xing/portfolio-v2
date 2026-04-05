@@ -4,11 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Emily Xing</title>
+  <link rel="icon" href="images/favicon.PNG" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;1,9..144,200;1,9..144,300;1,9..144,400&family=Recursive:slnt,wght,CASL,MONO@-15..0,300..800,0..1,0..1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<!-- firefly cursor from old site -->
+<div class="cursor-glow" id="cursor-glow"></div>
 
 <div id="hburg">
   <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -30,7 +34,7 @@
   <canvas id="star-c" class="cam"></canvas>
   <button class="mode-btn" id="mode-btn" title="Toggle light / dark">
     <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    <svg class="icon-sun"  viewBox="0 0 24 24">
+    <svg class="icon-sun" viewBox="0 0 24 24">
       <circle cx="12" cy="12" r="5"/>
       <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
       <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
@@ -64,14 +68,26 @@
 <!-- ═══ MAIN ═══ -->
 <div id="main">
 
-  <!-- 01 · INTRODUCTION -->
+  <!-- ══════════════════════════════════
+       01 · INTRODUCTION
+  ══════════════════════════════════ -->
   <div class="frame" id="s1">
     <div class="c-br"></div><div class="c-bl"></div>
     <div class="fstripe ft"></div>
     <div class="fid mono">Frame 001 · Introduction</div>
     <div class="slbl mono">Portfolio · Vol. I</div>
-    <h1>Emily Xing (WIP RN)</h1>
-    <p style="max-width:560px; margin-bottom:10px;">Hi! I'm a student at Harvard studying <span class="hl-teal">Statistics</span>, <span class="hl-teal">Data Science</span>, and <span class="hl-teal">Global Health Policy</span>. On the methods side, I am interested in developing interpretable <span class="hl-teal">clinical (trial) estimators</span> and software. On the applied side, I am interested in how <span class="hl-teal">media</span> can support <span class="hl-teal">public health surveillance</span> and industry regulation.</p>
+    <h1>Emily Xing</h1>
+    <p style="max-width:560px; margin-bottom:10px;">
+      Hi! I'm a student at Harvard studying
+      <span class="hl-teal">Statistics</span>,
+      <span class="hl-teal">Data Science</span>, and
+      <span class="hl-teal">Global Health Policy</span>.
+      On the methods side, I am interested in developing interpretable
+      <span class="hl-teal">clinical (trial) estimators</span> and software.
+      On the applied side, I am interested in how
+      <span class="hl-teal">media</span> can support
+      <span class="hl-teal">public health surveillance</span> and industry regulation.
+    </p>
     <div>
       <span class="tag tt">A.M./A.B. Statistics</span>
       <span class="tag ts">Harvard</span>
@@ -80,45 +96,121 @@
       <span class="tag tc">Baltimore, MD</span>
     </div>
     <div class="hero-meta">
-      <span>I'm joining the Stat Programming Team at Alexion - AstraZeneca this summer! Let's chat if you're around Boston :)</span>
+      <span>Joining the Stat Programming Team at Alexion · AstraZeneca this summer — let's chat if you're around Boston :)</span>
     </div>
     <div class="exif mono"><span>Kodachrome 64</span><span>f/1.8</span><span class="et">——</span></div>
   </div>
 
-  <!-- 02 · RESEARCH -->
+  <!-- ══════════════════════════════════
+       02 · RESEARCH
+       Left  → research project cards
+       Right → Currently · Education · Honours
+  ══════════════════════════════════ -->
   <div class="frame" id="s2">
     <div class="c-br"></div><div class="c-bl"></div>
     <div class="fstripe fs"></div>
     <div class="fid mono">Frame 002 · Research</div>
-    <div class="slbl mono">Research</div>
-    <h2>Research</h2>
-    <div class="grid g3 gb" style="margin-top:18px;">
-      <div class="ci at">
-        <div class="slbl mono" style="margin-bottom:8px;">DFCI · HSPH</div>
-        <h3>Biostatistics methods</h3>
-        <p>I am working with Dr. Uno on and Dr. .</p>
-        <div style="margin-top:8px;"><span class="tag tt">G-formula</span><span class="tag ts">Python</span></div>
-        <a class="read" href="#">View →</a>
+
+    <div class="grid g2 gb" style="margin-top:0;">
+
+      <!-- LEFT: research projects -->
+      <div class="ci at" style="display:flex; flex-direction:column; gap:0;">
+        <div class="slbl mono" style="margin-bottom:14px;">Research</div>
+        <h2 style="margin-bottom:20px;">Research</h2>
+
+        <div style="padding-bottom:18px; border-bottom:var(--bd); margin-bottom:18px;">
+          <div class="slbl mono" style="margin-bottom:6px;">CAUSALab · HSPH</div>
+          <h3>Causal inference &amp; software</h3>
+          <p>Python implementation of the parametric g-formula for time-varying treatments and exposures. Developing clinical trial estimators with interpretable survival endpoints.</p>
+          <div style="margin-top:8px;"><span class="tag tt">G-formula</span><span class="tag ts">Python</span><span class="tag tpu">AIPW</span></div>
+          <a class="read" href="flower_research.html">View →</a>
+        </div>
+
+        <div style="padding-bottom:18px; border-bottom:var(--bd); margin-bottom:18px;">
+          <div class="slbl mono" style="margin-bottom:6px;">Uno1Lab · DFCI</div>
+          <h3>Average hazard regression</h3>
+          <p><em>stah</em> &amp; <em>stahreg</em>: Stata commands for IPCW-weighted survival analysis. Under review at The Stata Journal.</p>
+          <div style="margin-top:8px;"><span class="tag ts">Stata/Mata</span><span class="tag tpu">IPCW</span><span class="tag tt">Survival</span></div>
+          <a class="read" href="flower_research.html">View →</a>
+        </div>
+
+        <div style="padding-bottom:18px; border-bottom:var(--bd); margin-bottom:18px;">
+          <div class="slbl mono" style="margin-bottom:6px;">Lotter Lab · HMS</div>
+          <h3>Computational pathology</h3>
+          <p>AutoStainer library for automated histology pipelines. GAN-based synthetic data generation for chest X-ray classification.</p>
+          <div style="margin-top:8px;"><span class="tag tpu">PyTorch</span><span class="tag tm">GANs</span><span class="tag ts">Imaging</span></div>
+          <a class="read" href="flower_research.html">View →</a>
+        </div>
+
+        <div>
+          <div class="slbl mono" style="margin-bottom:6px;">Neely Center · Harvard</div>
+          <h3>Media &amp; public health</h3>
+          <p>Substance use trends across NFHS waves 3–5. Media exposure effects on health behaviour using survey-weighted logistic regression.</p>
+          <div style="margin-top:8px;"><span class="tag tm">Stata</span><span class="tag tc">NFHS</span><span class="tag ts">India</span></div>
+          <a class="read" href="flower_research.html">View →</a>
+        </div>
       </div>
-      <div class="ci as">
-        <div class="slbl mono" style="margin-bottom:8px;">Uno1Lab · DFCI</div>
-        <h3>Global health surveillance</h3>
-        <p>stah & stahreg Stata commands for IPCW-weighted survival analysis. Under review at The Stata Journal.</p>
-        <div style="margin-top:8px;"><span class="tag ts">Stata</span><span class="tag tpu">IPCW</span></div>
-        <a class="read" href="#">View →</a>
-      </div>
-      <div class="ci ap">
-        <div class="slbl mono" style="margin-bottom:8px;">Lotter Lab · HMS</div>
-        <h3>Technology & digital well-being</h3>
-        <p>AutoStainer library for histology pipelines. GAN-based medical imaging for chest X-ray classification.</p>
-        <div style="margin-top:8px;"><span class="tag tpu">PyTorch</span><span class="tag tm">GANs</span></div>
-        <a class="read" href="#">View →</a>
+
+      <!-- RIGHT: currently · education · honours -->
+      <div class="ci as" style="display:flex; flex-direction:column; gap:18px;">
+
+        <div>
+          <div class="slbl mono" style="margin-bottom:6px;">Currently</div>
+          <p style="font-size:12.5px; color:var(--ink); line-height:1.9;">
+            Teaching Fellow · <em>Stat 111: Statistical Inference</em><br>
+            Joining <em>Alexion · AstraZeneca</em> Statistical Programming, Boston · Summer 2025
+          </p>
+        </div>
+
+        <div style="border-top:var(--bd); padding-top:16px;">
+          <div class="slbl mono" style="margin-bottom:6px;">Education</div>
+          <p style="font-size:12.5px; color:var(--ink);">A.M. / A.B. Statistics, Data Science Track</p>
+          <p style="font-size:11px; color:var(--mid); font-style:italic; margin-top:2px;">Harvard University · Concurrent · Expected May 2027</p>
+          <p style="font-size:11px; color:var(--mid); margin-top:6px;">GPA 3.96 · John Harvard Scholar</p>
+        </div>
+
+        <div style="border-top:var(--bd); padding-top:16px;">
+          <div class="slbl mono" style="margin-bottom:10px;">Honours &amp; Recognition</div>
+          <div class="aw">
+            <div class="aw-dot" style="background:var(--teal);"></div>
+            <div><div class="aw-t">John Harvard Scholar</div><div class="aw-s">Harvard · Academic Excellence</div></div>
+          </div>
+          <div class="aw">
+            <div class="aw-dot" style="background:var(--purple);"></div>
+            <div><div class="aw-t">Neely Academic Fellow</div><div class="aw-s">Neely Center for Ethical Leadership</div></div>
+          </div>
+          <div class="aw">
+            <div class="aw-dot" style="background:var(--mauve);"></div>
+            <div><div class="aw-t">CHI · Stanford Trust &amp; Safety · ISCSS</div><div class="aw-s">Conference Presentations · 2024</div></div>
+          </div>
+          <div class="aw">
+            <div class="aw-dot" style="background:var(--slate);"></div>
+            <div><div class="aw-t">Stat 220 · Bayesian Inference</div><div class="aw-s">Graduate coursework · Spring 2025</div></div>
+          </div>
+        </div>
+
+        <div style="border-top:var(--bd); padding-top:16px;">
+          <div class="slbl mono" style="margin-bottom:8px;">Methods</div>
+          <div style="display:flex; flex-wrap:wrap; gap:4px;">
+            <span class="tag tt">Survival Analysis</span>
+            <span class="tag ts">Causal Inference</span>
+            <span class="tag tpu">Bayesian Methods</span>
+            <span class="tag tm">Survey-weighted</span>
+            <span class="tag tc">R</span>
+            <span class="tag ts">Python</span>
+            <span class="tag tt">Stata/Mata</span>
+            <span class="tag tpu">LaTeX</span>
+          </div>
+        </div>
+
       </div>
     </div>
     <div class="exif mono"><span>Tri-X 400</span><span>f/2.8</span><span class="et">——</span></div>
   </div>
 
-  <!-- 03 · WRITING -->
+  <!-- ══════════════════════════════════
+       03 · WRITING
+  ══════════════════════════════════ -->
   <div class="frame" id="s3">
     <div class="c-br"></div><div class="c-bl"></div>
     <div class="fstripe fp"></div>
@@ -126,94 +218,163 @@
     <div class="slbl mono">Writing &amp; Publications</div>
     <h2>Published Work</h2>
     <div class="pub-list" style="margin-top:18px;">
-      <div class="pub"><div class="pub-yr mono">2025</div><div class="pub-body"><div class="pub-title"><em>stah</em> and <em>stahreg</em>: Stata commands for average hazard regression with IPCW weights.</div><div class="pub-venue mono">Under Review · The Stata Journal</div></div></div>
-      <div class="pub"><div class="pub-yr mono">2024</div><div class="pub-body"><div class="pub-title">pygformula: A Python implementation of the parametric g-formula for causal inference.</div><div class="pub-venue mono">CAUSALab · Harvard T.H. Chan School of Public Health</div></div></div>
-      <div class="pub"><div class="pub-yr mono">2024</div><div class="pub-body"><div class="pub-title">Social media platform usage and perceived agency among health information seekers.</div><div class="pub-venue mono">Presentation · CHI · Stanford Trust &amp; Safety · ISCSS</div></div></div>
-      <div class="pub"><div class="pub-yr mono">2024</div><div class="pub-body"><div class="pub-title">Substance use trends across NFHS Waves 3–5: state-level patterns and disparities.</div><div class="pub-venue mono">Neely Center for Ethical Leadership · Harvard</div></div></div>
+      <div class="pub">
+        <div class="pub-yr mono">2025</div>
+        <div class="pub-body">
+          <div class="pub-title"><em>stah</em> and <em>stahreg</em>: Stata commands for average hazard regression with IPCW weights.</div>
+          <div class="pub-venue mono">Under Review · The Stata Journal</div>
+        </div>
+      </div>
+      <div class="pub">
+        <div class="pub-yr mono">2024</div>
+        <div class="pub-body">
+          <div class="pub-title">pygformula: A Python implementation of the parametric g-formula for causal inference.</div>
+          <div class="pub-venue mono">CAUSALab · Harvard T.H. Chan School of Public Health</div>
+        </div>
+      </div>
+      <div class="pub">
+        <div class="pub-yr mono">2024</div>
+        <div class="pub-body">
+          <div class="pub-title">Social media platform usage and perceived agency among health information seekers.</div>
+          <div class="pub-venue mono">Presentation · CHI · Stanford Trust &amp; Safety · ISCSS</div>
+        </div>
+      </div>
+      <div class="pub">
+        <div class="pub-yr mono">2024</div>
+        <div class="pub-body">
+          <div class="pub-title">Substance use trends across NFHS Waves 3–5: state-level patterns and disparities.</div>
+          <div class="pub-venue mono">Neely Center for Ethical Leadership · Harvard</div>
+        </div>
+      </div>
     </div>
+    <a class="read" href="flower_writing.html" style="margin-top:16px;">All writing →</a>
     <div class="exif mono"><span>Ektar 100</span><span>f/4.0</span><span class="et">——</span></div>
   </div>
 
-  <!-- 04 · SCRAPBOOK -->
-<!-- 04 · MAP -->
+  <!-- ══════════════════════════════════
+       04 · SCRAPBOOK — art gallery
+       Uses images/ from old site
+  ══════════════════════════════════ -->
   <div class="frame" id="s4">
     <div class="c-br"></div><div class="c-bl"></div>
     <div class="fstripe ft"></div>
-    <div class="fid mono">Frame 004 · Places</div>
-    <div class="slbl mono">Places</div>
-    <h2>Where I've <em>Been</em></h2>
-    <p style="max-width:440px; margin-bottom:22px;">Cities that have shaped how I think.</p>
-  
-    <div id="map" style="width:100%; height:420px; border:var(--bds); position:relative; z-index:1;"></div>
-  
-    <div class="exif mono"><span>35mm</span><span>f/8.0</span><span class="et">——</span></div>
+    <div class="fid mono">Frame 004 · Scrapbook</div>
+    <div class="slbl mono">Scrapbook</div>
+    <h2>Things I'm <em>growing</em></h2>
+    <p style="max-width:480px; margin-bottom:28px;">Art, fragments, ideas not yet finished — too important to leave out.</p>
+
+    <div class="art-grid">
+
+      <a href="flower_research.html" class="art-cell ac-tall">
+        <img src="images/flower_research.PNG" alt="Research" loading="lazy">
+        <div class="art-meta">
+          <span class="art-lbl mono">Research · ongoing</span>
+          <span class="art-title">flowers i'm growing ❀</span>
+        </div>
+      </a>
+
+      <a href="flower_writing.html" class="art-cell">
+        <img src="images/flower_writing.PNG" alt="Writing" loading="lazy">
+        <div class="art-meta">
+          <span class="art-lbl mono">Writing · 2024–25</span>
+          <span class="art-title">words &amp; work</span>
+        </div>
+      </a>
+
+      <a href="flower_scrapbook.html" class="art-cell">
+        <img src="images/flower_scrapbook.PNG" alt="Scrapbook" loading="lazy">
+        <div class="art-meta">
+          <span class="art-lbl mono">Scrapbook · mixed</span>
+          <span class="art-title">collected things</span>
+        </div>
+      </a>
+
+      <div class="art-cell ac-wide">
+        <img src="images/sidebar_art.PNG" alt="Illustration" loading="lazy">
+        <div class="art-meta">
+          <span class="art-lbl mono">Illustration · ongoing</span>
+          <span class="art-title">sidebar art</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="exif mono"><span>HP5 Plus</span><span>f/1.4</span><span class="et">——</span></div>
   </div>
 
-  <!-- 05 · ABOUT & CV -->
+  <!-- ══════════════════════════════════
+       05 · ABOUT & CV
+       Left  → bio
+       Right → CV iframe
+  ══════════════════════════════════ -->
   <div class="frame" id="s5">
     <div class="c-br"></div><div class="c-bl"></div>
     <div class="fstripe fm"></div>
     <div class="fid mono">Frame 005 · About &amp; CV</div>
-    <div class="slbl mono">About &amp; Curriculum Vitae</div>
 
-    <div class="grid g3 gb" style="margin-bottom:1px;">
+    <div class="grid g2 gb" style="margin-bottom:1px;">
+
+      <!-- bio -->
       <div class="ci">
-        <h2>asdasdsa</h2>
-        <p>I'm a concurrent Master's and Bachelor's student in Statistics (Data Science Track) at Harvard University, expected May 2027. I hope to pursue a PhD in Biostatistics/Statistics and My work spans survival analysis, causal inference, Bayesian methods, and computational pathology across four research labs.</p>
-        <p>I care about building tools that make rigorous methods accessible.</p>
-        <div class="byline"><span>Emily Xing</span><span>·</span><span>Harvard University</span><span>·</span><span>Cambridge, MA</span></div>
+        <div class="slbl mono" style="margin-bottom:14px;">About &amp; Curriculum Vitae</div>
+        <h2>About</h2>
+        <p style="margin-top:12px;">
+          I'm a concurrent Master's and Bachelor's student in Statistics (Data Science Track) at Harvard University, expected May 2027. My work spans survival analysis, causal inference, Bayesian methods, and computational pathology across four research labs.
+        </p>
+        <p>
+          Beyond academics I dance, write, and work as a barista. I grew up between Baltimore, Boston, Beijing, and Shanghai — cities that show up in how I think about data, systems, and people.
+        </p>
+        <p>
+          I care about building tools that make rigorous methods accessible, and about asking questions that don't fit neatly into one discipline.
+        </p>
+        <p style="margin-top:14px; font-size:12px; color:var(--mid);">
+          Tell me about: your matcha &amp; music recs, favourite chess gambits, takes on "making impact" &amp; "being human."
+        </p>
+        <div class="byline" style="margin-top:20px;">
+          <span>Emily Xing</span><span>·</span><span>Harvard University</span><span>·</span><span>Cambridge, MA</span>
+        </div>
       </div>
-      <div class="ci" style="display:flex; flex-direction:column; gap:14px;">
-        <div>
-          <div class="slbl mono" style="margin-bottom:5px;">Currently</div>
-          <p style="font-size:12px; color:var(--ink);">TFing Stat 111: Statisticsl Inference; </p>
-        </div>
-        <div style="border-top:var(--bd); padding-top:12px;">
-          <div class="slbl mono" style="margin-bottom:5px;">Education</div>
-          <p style="font-size:12px; color:var(--ink);">A.M. / A.B. Statistics, Data Science · Harvard</p>
-          <p style="font-size:11px; color:var(--mid); font-style:italic; margin-top:2px;">Concurrent · Expected May 2027 · GPA 3.96</p>
-        </div>
-        <div style="border-top:var(--bd); padding-top:12px;">
-          <div class="slbl mono" style="margin-bottom:5px;">Honours</div>
-          <div class="aw"><div class="aw-dot" style="background:var(--teal);"></div><div><div class="aw-t">John Harvard Scholar</div><div class="aw-s">Harvard · Academic Excellence</div></div></div>
-          <div class="aw"><div class="aw-dot" style="background:var(--purple);"></div><div><div class="aw-t">Neely Academic Fellow</div><div class="aw-s">Neely Center for Ethical Leadership</div></div></div>
-          <div class="aw"><div class="aw-dot" style="background:var(--mauve);"></div><div><div class="aw-t">CHI · Stanford · ISCSS</div><div class="aw-s">Conference Presentations · 2024</div></div></div>
-        </div>
-       <div class="ci" style="display:flex; flex-direction:column; gap:14px;">
-  <div>
-    <div class="slbl mono" style="margin-bottom:5px;">Currently</div>
-    <p style="font-size:12px; color:var(--ink);">TFing Stat 111: Statistical Inference</p>
-  </div>
-  <div style="border-top:var(--bd); padding-top:12px;">
-    <div class="slbl mono" style="margin-bottom:5px;">Education</div>
-    <p style="font-size:12px; color:var(--ink);">A.M. / A.B. Statistics, Data Science · Harvard</p>
-    <p style="font-size:11px; color:var(--mid); font-style:italic; margin-top:2px;">Concurrent · Expected May 2027 · GPA 3.96</p>
-  </div>
-  <div style="border-top:var(--bd); padding-top:12px;">
-    <div class="slbl mono" style="margin-bottom:5px;">Honours</div>
-    <div class="aw"><div class="aw-dot" style="background:var(--teal);"></div><div><div class="aw-t">John Harvard Scholar</div><div class="aw-s">Harvard · Academic Excellence</div></div></div>
-    <div class="aw"><div class="aw-dot" style="background:var(--purple);"></div><div><div class="aw-t">Neely Academic Fellow</div><div class="aw-s">Neely Center for Ethical Leadership</div></div></div>
-    <div class="aw"><div class="aw-dot" style="background:var(--mauve);"></div><div><div class="aw-t">CHI · Stanford · ISCSS</div><div class="aw-s">Conference Presentations · 2024</div></div></div>
-  </div>
-</div>
+
+      <!-- CV iframe -->
+      <div class="ci" style="padding:0; overflow:hidden; min-height:560px;">
+        <iframe
+          src="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/em-xing/portfolio-v2/main/exing-cv.pdf&embedded=true"
+          style="width:100%; height:100%; min-height:560px; border:none; display:block;"
+          title="Emily Xing CV"
+        ></iframe>
       </div>
+
     </div>
   </div>
 
-  <!-- 06 · CONTACT -->
+  <!-- ══════════════════════════════════
+       06 · CONTACT
+  ══════════════════════════════════ -->
   <div class="frame" id="s6">
     <div class="c-br"></div><div class="c-bl"></div>
     <div class="fstripe fc"></div>
     <div class="fid mono">Frame 006 · Contact</div>
     <div class="slbl mono">Contact</div>
     <h2>Let's keep in touch!</h2>
-    <p style="max-width:500px;">I'm always looking for an overly-sweet coffee, chess puzzle, or airplane neighbor to have conversations with :)</p>
+    <p style="max-width:500px;">
+      I'm always looking for an overly-sweet coffee, chess puzzle, or airplane neighbor to have conversations with :)
+    </p>
     <div class="ct-links">
-      <a class="ct-icon" href="mailto:emily@example.com" title="Email"><svg viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
-      <a class="ct-icon" href="#" target="_blank" title="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-      <a class="ct-icon" href="#" target="_blank" title="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
-      <a class="ct-icon" href="#" title="Download CV"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM12 17l-4-4h2.5v-3h3v3H16l-4 4z"/></svg></a>
-      <a class="ct-icon" href="#" title="Google Scholar"><svg viewBox="0 0 24 24"><path d="M5.242 13.769 0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg></a>
+      <a class="ct-icon" href="mailto:emletxing@gmail.com" title="Email">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </a>
+      <a class="ct-icon" href="https://www.linkedin.com/in/emily-xing-5663ab266/" target="_blank" title="LinkedIn">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a class="ct-icon" href="https://github.com/em-xing" target="_blank" title="GitHub">
+        <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      <a class="ct-icon" href="https://raw.githubusercontent.com/em-xing/portfolio-v2/main/exing-cv.pdf" target="_blank" title="Download CV">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM12 17l-4-4h2.5v-3h3v3H16l-4 4z"/></svg>
+      </a>
+      <a class="ct-icon" href="#" title="Google Scholar">
+        <svg viewBox="0 0 24 24"><path d="M5.242 13.769 0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+      </a>
     </div>
     <div class="exif mono"><span>FP4 Plus</span><span>f/5.6</span><span class="et">——</span></div>
   </div>
@@ -233,8 +394,6 @@
   </div>
 
 </div><!-- /#main -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script src="script.js"></script>
 </body>
