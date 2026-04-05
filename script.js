@@ -102,39 +102,14 @@ function draw(ts) {
   requestAnimationFrame(draw);
 }
 requestAnimationFrame(draw);
-/* ── Map ── */
-const map = L.map('map', {
-  center: [30, 105],
-  zoom: 3,
-  scrollWheelZoom: false,
-  zoomControl: true,
-});
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-  attribution: '© OpenStreetMap © CARTO',
-  subdomains: 'abcd', maxZoom: 19
-}).addTo(map);
-
-const dotIcon = L.divIcon({
-  className: '',
-  html: `<div style="
-    width:9px; height:9px; border-radius:50%;
-    background:var(--teal2); border:1.5px solid var(--ink);
-    box-shadow:0 0 6px rgba(90,180,160,0.5);
-  "></div>`,
-  iconSize: [9,9], iconAnchor: [4,4], popupAnchor: [0,-8]
-});
-
-const places = [
-  { coords: [31.2304, 121.4737], name: 'Shanghai',   note: 'Home.' },
-  { coords: [39.9042, 116.4074], name: 'Beijing',    note: 'Where I grew up spending summers.' },
-  { coords: [39.2904, -76.6122], name: 'Baltimore',  note: 'Johns Hopkins &amp; early research.' },
-  { coords: [42.3601, -71.0589], name: 'Boston',     note: 'Harvard. Home now.' },
-  { coords: [40.7128, -74.0060], name: 'New York',   note: 'Always a reason to visit.' },
-];
-
-places.forEach(p => {
-  L.marker(p.coords, { icon: dotIcon })
-   .addTo(map)
-   .bindPopup(`<strong>${p.name}</strong><p>${p.note}</p>`);
-});
+/* ── Firefly cursor (from old site, recoloured to teal) ── */
+if (window.innerWidth > 768) {
+  const glow = document.getElementById('cursor-glow');
+  if (glow) {
+    document.addEventListener('mousemove', e => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top  = e.clientY + 'px';
+    });
+  }
+}
