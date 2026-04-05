@@ -12,7 +12,6 @@ function tick() {
   const yy = String(n.getFullYear()).slice(2);
   const ts = `${hh}:${mm}:${ss}`;
   const ds = `${yy}.${mo}.${dd}`;
-
   document.getElementById('top-t').textContent  = ts;
   document.getElementById('top-d').textContent  = ds;
   document.getElementById('sb-clk').textContent = `${hh}:${mm}`;
@@ -24,23 +23,20 @@ tick();
 setInterval(tick, 1000);
 
 /* ── Scroll: progress bar + TOC + frame counter ── */
-const SECS = ['s1','s2','s3','s4','s5','s6'];
-const NUMS  = { s1:'001', s2:'002', s3:'003', s4:'004', s5:'005', s6:'006' };
+const SECS = ['s1','s2','s3','s4','s5'];
+const NUMS  = { s1:'001', s2:'002', s3:'003', s4:'004', s5:'005' };
 
 function onScroll() {
   const st  = window.scrollY;
   const max = document.documentElement.scrollHeight - window.innerHeight;
   const pct = max > 0 ? Math.round((st / max) * 100) : 0;
-
   document.getElementById('top-pct').textContent = pct + '%';
   document.getElementById('prog-f').style.width  = pct + '%';
-
   let cur = SECS[0];
   for (const id of SECS) {
     const el = document.getElementById(id);
     if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.42) cur = id;
   }
-
   const fr = `Frame ${NUMS[cur]}`;
   document.getElementById('top-frame').textContent = fr;
   document.getElementById('sb-frame').textContent  = fr;
@@ -59,10 +55,9 @@ document.getElementById('hburg').addEventListener('click', () => {
   document.getElementById('sb').classList.toggle('open');
 });
 
-/* ── Star canvas: warm teal-tinted twinkle ── */
+/* ── Star canvas ── */
 const cv = document.getElementById('star-c');
 const cx = cv.getContext('2d');
-
 function rz() {
   cv.width  = cv.offsetWidth  * devicePixelRatio;
   cv.height = cv.offsetHeight * devicePixelRatio;
@@ -70,27 +65,21 @@ function rz() {
 }
 rz();
 window.addEventListener('resize', rz);
-
 const W  = () => cv.offsetWidth;
 const H  = () => cv.offsetHeight;
 const ST = Array.from({ length: 18 }, () => ({
-  x:  Math.random(),
-  y:  Math.random(),
-  r:  Math.random() * 0.55 + 0.15,
-  a:  Math.random() * 0.25 + 0.06,
+  x: Math.random(), y: Math.random(),
+  r: Math.random() * 0.55 + 0.15,
+  a: Math.random() * 0.25 + 0.06,
   ph: Math.random() * Math.PI * 2,
   sp: 0.2 + Math.random() * 0.5,
 }));
-
 function draw(ts) {
-  const w  = W(), h = H();
-  const t  = ts * 0.001;
+  const w = W(), h = H(), t = ts * 0.001;
   const lm = document.body.classList.contains('light');
-
   cx.clearRect(0, 0, w, h);
   cx.fillStyle = lm ? 'rgba(208,202,232,1)' : 'rgba(6,5,3,1)';
   cx.fillRect(0, 0, w, h);
-
   ST.forEach(s => {
     const a = s.a * (0.4 + 0.6 * Math.sin(t * s.sp + s.ph));
     cx.beginPath();
@@ -98,12 +87,11 @@ function draw(ts) {
     cx.fillStyle = `rgba(138,184,176,${a})`;
     cx.fill();
   });
-
   requestAnimationFrame(draw);
 }
 requestAnimationFrame(draw);
 
-/* ── Firefly cursor (from old site, recoloured to teal) ── */
+/* ── Firefly cursor ── */
 if (window.innerWidth > 768) {
   const glow = document.getElementById('cursor-glow');
   if (glow) {
