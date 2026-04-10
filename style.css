@@ -317,5 +317,5 @@ body.light .cursor-glow {
   transition: color 0.15s;
 }
 .lab-link:hover { color: var(--teal2); }
-.lab-link span { border-bottom: 1px solid var(--teal); opacity: 0.85; transition: color 0.15s, border-color 0.15s, opacity 0.15s; }
-.lab-link:hover span { color: var(--teal2); border-bottom-color: var(--teal2); opacity: 1; }
+.lab-link span { opacity: 0.85; transition: color 0.15s, opacity 0.15s; }
+.lab-link:hover span { color: var(--teal2); opacity: 1; }
