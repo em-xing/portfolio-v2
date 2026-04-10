@@ -301,14 +301,16 @@ body.light .cursor-glow {
   50%      { transform: translate(-50%,-50%) scale(1.2); opacity: 1;   }
 }
 @media (max-width: 768px) { .cursor-glow { display: none; } }
+
 .lab-link {
   color: var(--ink);
   text-decoration: none;
-  border-bottom: 1px solid var(--ghost);
-  transition: color 0.15s, border-color 0.15s;
+  transition: color 0.15s;
 }
 .lab-link:hover {
   color: var(--teal2);
+}
+.lab-link:hover span {
   border-bottom-color: var(--teal);
 }
 
