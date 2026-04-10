@@ -302,18 +302,6 @@ body.light .cursor-glow {
 }
 @media (max-width: 768px) { .cursor-glow { display: none; } }
 
-.lab-link {
-  color: var(--ink);
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.lab-link:hover {
-  color: var(--teal2);
-}
-.lab-link:hover span {
-  border-bottom-color: var(--teal);
-}
-
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) { .grid.g3 { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 640px) {
@@ -321,3 +309,13 @@ body.light .cursor-glow {
   .frame { padding: 32px 20px 44px; }
   .pin-board { height: 320px; }
 }
+
+/* ── Lab links ── */
+.lab-link {
+  color: var(--teal);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.lab-link:hover { color: var(--teal2); }
+.lab-link span { border-bottom: 1px solid var(--teal); opacity: 0.85; transition: color 0.15s, border-color 0.15s, opacity 0.15s; }
+.lab-link:hover span { color: var(--teal2); border-bottom-color: var(--teal2); opacity: 1; }
