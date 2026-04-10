@@ -383,3 +383,7 @@ body.light .cursor-glow {
 }
 .scrap-tab:hover { color: var(--mid); }
 .scrap-tab.active { color: var(--teal2); border-bottom-color: var(--teal); }
+
+.scrap-panel { max-height: 480px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--ghost) transparent; }
+.scrap-panel::-webkit-scrollbar { width: 3px; }
+.scrap-panel::-webkit-scrollbar-thumb { background: var(--ghost); border-radius: 2px; }
