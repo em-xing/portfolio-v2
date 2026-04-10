@@ -319,3 +319,27 @@ body.light .cursor-glow {
 .lab-link:hover { color: var(--teal2); }
 .lab-link span { opacity: 0.85; transition: color 0.15s, opacity 0.15s; }
 .lab-link:hover span { color: var(--teal2); opacity: 1; }
+
+/* ── Writing rows (scrapbook) ── */
+.writing-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 16px;
+  align-items: center;
+  text-decoration: none;
+  border: var(--bds);
+  padding: 14px;
+  background: var(--bg2);
+  transition: border-color 0.15s, background 0.15s;
+}
+.writing-row:hover { border-color: var(--teal); background: var(--bg3); }
+.writing-img { width: 130px; height: 86px; overflow: hidden; flex-shrink: 0; }
+.writing-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+.writing-row:hover .writing-img img { transform: scale(1.04); }
+.writing-ttl { font-size: 12.5px; color: var(--ink); line-height: 1.5; margin-bottom: 5px; }
+.writing-pub { font-size: 7.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+
+@media (max-width: 640px) {
+  .writing-row { grid-template-columns: 1fr; }
+  .writing-img { width: 100%; height: 120px; }
+}
