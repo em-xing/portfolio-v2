@@ -101,3 +101,15 @@ if (window.innerWidth > 768) {
     });
   }
 }
+/* ── Scrapbook modal ── */
+function openScrapModal(src) {
+  const m = document.getElementById('scrap-modal');
+  document.getElementById('scrap-modal-img').src = src;
+  m.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeScrapModal() {
+  document.getElementById('scrap-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeScrapModal(); });
