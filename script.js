@@ -126,3 +126,21 @@ function switchScrapTab(tab) {
   document.getElementById('scrap-writing').style.display = tab === 'writing' ? 'flex' : 'none';
   document.getElementById('scrap-art').style.display     = tab === 'art'     ? 'block' : 'none';
 }
+
+function switchScrapTab(tab) {
+  document.querySelectorAll('.scrap-tab').forEach(t =>
+    t.classList.toggle('active', t.dataset.tab === tab));
+  document.getElementById('scrap-writing').style.display = tab === 'writing' ? 'flex' : 'none';
+  document.getElementById('scrap-art').style.display     = tab === 'art'     ? 'block' : 'none';
+}
+function openScrapModal(src) {
+  const m = document.getElementById('scrap-modal');
+  document.getElementById('scrap-modal-img').src = src;
+  m.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeScrapModal() {
+  document.getElementById('scrap-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeScrapModal(); });
