@@ -144,3 +144,10 @@ function closeScrapModal() {
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeScrapModal(); });
+
+function switchScrapTab(tab) {
+  document.querySelectorAll('.scrap-tab').forEach(t =>
+    t.classList.toggle('active', t.dataset.tab === tab));
+  document.getElementById('scrap-writing').style.display = tab === 'writing' ? 'flex' : 'none';
+  document.getElementById('scrap-art').style.display     = tab === 'art'     ? 'block' : 'none';
+}
